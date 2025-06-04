@@ -28,7 +28,7 @@ body {
 
 :root {
   --bs-heading-color: #0c112e;
-  --bs-primary: #d2a023;
+  --bs-primary: #D2A528;
   --bs-primary-shade-80: #0c112e;
   --bs-primary-shade-60: #17235d;
   --bs-primary-shade-40: #23348b;
@@ -54,7 +54,7 @@ body {
 }
 :root .theme-color-blue {
   --bs-heading-color: #0c112e;
-  --bs-blue: #d2a023;
+  --bs-blue: #D2A528;
   --bs-blue-shade-80: #0c112e;
   --bs-blue-shade-60: #17235d;
   --bs-blue-shade-40: #23348b;
@@ -236,7 +236,7 @@ body {
 }
 :root .theme-color-gray {
   --bs-heading-color: #0c112e;
-  --bs-blue: #d2a023;
+  --bs-blue: #D2A528;
   --bs-blue-shade-80: #0c112e;
   --bs-blue-shade-60: #17235d;
   --bs-blue-shade-40: #23348b;
@@ -418,7 +418,7 @@ body {
 }
 :root .theme-color-red {
   --bs-heading-color: #0c112e;
-  --bs-blue: #d2a023;
+  --bs-blue: #D2A528;
   --bs-blue-shade-80: #0c112e;
   --bs-blue-shade-60: #17235d;
   --bs-blue-shade-40: #23348b;
@@ -600,7 +600,7 @@ body {
 }
 :root .theme-color-yellow {
   --bs-heading-color: #0c112e;
-  --bs-blue: #d2a023;
+  --bs-blue: #D2A528;
   --bs-blue-shade-80: #0c112e;
   --bs-blue-shade-60: #17235d;
   --bs-blue-shade-40: #23348b;
@@ -782,7 +782,7 @@ body {
 }
 :root .theme-color-pink {
   --bs-heading-color: #0c112e;
-  --bs-blue: #d2a023;
+  --bs-blue: #D2A528;
   --bs-blue-shade-80: #0c112e;
   --bs-blue-shade-60: #17235d;
   --bs-blue-shade-40: #23348b;

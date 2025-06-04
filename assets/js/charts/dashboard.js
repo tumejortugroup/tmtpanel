@@ -7,7 +7,7 @@ if (document.querySelectorAll('#myChart').length) {
     height: 230,
     type: 'radialBar',
   },
-  colors: ["#4bc7d2", "#d2a023"],
+  colors: ["#4bc7d2", "#D2A528"],
   plotOptions: {
     radialBar: {
       hollow: {
@@ -52,7 +52,7 @@ if (document.querySelectorAll('#d-activity').length) {
             show:false
           }
       },
-      colors: ["#d2a023", "#4bc7d2"],
+      colors: ["#D2A528", "#4bc7d2"],
       plotOptions: {
         bar: {
           horizontal: false,
@@ -78,7 +78,7 @@ if (document.querySelectorAll('#d-activity').length) {
           minHeight:20,
           maxHeight:20,
           style: {
-            colors: "#8A92A6",
+            colors: "#8a92a6",
           },
         }
       },
@@ -90,7 +90,7 @@ if (document.querySelectorAll('#d-activity').length) {
             minWidth: 19,
             maxWidth: 19,
             style: {
-              colors: "#8A92A6",
+              colors: "#8a92a6",
             },
         }
       },
@@ -133,7 +133,7 @@ if (document.querySelectorAll('#d-main').length) {
               enabled: false,
           },
       },
-      colors: ["#d2a023", "#4bc7d2"],
+      colors: ["#D2A528", "#4bc7d2"],
       dataLabels: {
           enabled: false
       },
@@ -148,7 +148,7 @@ if (document.querySelectorAll('#d-main').length) {
           minWidth: 19,
           maxWidth: 19,
           style: {
-            colors: "#8A92A6",
+            colors: "#8a92a6",
           },
           offsetX: -5,
         },
@@ -162,7 +162,7 @@ if (document.querySelectorAll('#d-main').length) {
               maxHeight:22,
               show: true,
               style: {
-                colors: "#8A92A6",
+                colors: "#8a92a6",
               },
           },
           lines: {
@@ -184,7 +184,7 @@ if (document.querySelectorAll('#d-main').length) {
               opacityFrom: .4,
               opacityTo: .1,
               stops: [0, 50, 80],
-              colors: ["#d2a023", "#4bc7d2"]
+              colors: ["#D2A528", "#4bc7d2"]
           }
       },
       tooltip: {
