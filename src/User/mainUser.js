@@ -1,8 +1,8 @@
 import { initCreateUserForm } from './createUser.js';
+import { initUserList } from './listUser.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     initCreateUserForm();
-    // Aquí podrías llamar más inicializadores si lo necesitas, como:
-    // initUserList();
+    initUserList();
     // initRoleBasedNavbar();
 });
