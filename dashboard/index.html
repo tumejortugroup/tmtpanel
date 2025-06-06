@@ -32,10 +32,18 @@
 
       <!-- Boostrap Icons -->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
+    
+      <script src="../src/Auth/check.js"> </script>
       
   </head>
   <body class="  ">
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () =>{
+            checkSession();
+        })
+    </script>
+
     <!-- loader Start -->
     <div id="loading">
       <div class="loader simple-loader">
@@ -1286,7 +1294,7 @@
                     <li><a class="dropdown-item" href="../dashboard/app/user-profile.html">Profile</a></li>
                     <li><a class="dropdown-item" href="../dashboard/app/user-privacy-setting.html">Privacy Setting</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="../dashboard/auth/sign-in.html">Logout</a></li>
+                    <li><a id="logout" class="dropdown-item" href="../dashboard/auth/sign-in.html">Logout</a></li>
                   </ul>
                 </li>
               </ul>
@@ -1449,9 +1457,9 @@
                      <div id="myChart" class="col-md-8 col-lg-8 myChart"></div>
                      <div class="d-grid gap col-md-4 col-lg-4">
                         <div class="d-flex align-items-start">
-                           <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#D2A528">
+                           <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#d2a023">
                               <g>
-                                 <circle cx="12" cy="12" r="8" fill="#D2A528"></circle>
+                                 <circle cx="12" cy="12" r="8" fill="#d2a023"></circle>
                               </g>
                            </svg>
                            <div class="ms-3">
@@ -1557,7 +1565,7 @@
                               <td>
                                  <div class="d-flex align-items-center">
                                     <img class="rounded bg-soft-primary img-fluid avatar-40 me-3" src="../assets/images/shapes/05.png" alt="profile">
-                                    <h6>Cristina Muntane</h6>
+                                    <h6>Cristina MunGRAMC</h6>
                                  </div>
                               </td>
                               <td>
@@ -2042,6 +2050,9 @@
     
     <!-- App Script -->
     <script src="../assets/js/hope-ui.js" defer></script>
+    <script src="../src/Auth/logout.js"></script>
+    
+    
     
   </body>
 </html>
