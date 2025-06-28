@@ -17,8 +17,11 @@ export function parseJwt(token) {
 
 export function getUserInfoFromToken(token) {
     const payload = parseJwt(token);
-    console.log(parseJwt(token));
-    if (!payload) return null;
+    if (!payload || !payload.nombre || !payload.rol) {
+        console.error('Token inválido o sin información de usuario');
+        return null;
+    }
+   
 
     return {
         nombre:  payload.nombre || '',

@@ -5,7 +5,7 @@ import { getUserInfoFromToken } from './modules/jwt.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const path = window.location.pathname;
-    console.log('📄 DOMContentLoaded. Path actual:', path);
+   
 
     if (path.includes('/auth/sign-in.html')) {
         initAuth();
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (path.includes('/dashboard')) {
-        console.log('✅ Página de dashboard detectada');
+       
 
         let asideRendered = false;
 
@@ -31,12 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(res => res.text())
             .then(html => {
                 document.querySelector('nav').innerHTML = html;
-                console.log('✅ NAVBAR cargado');
+
             });
 
         // 3. Esperamos ambos y luego actualizamos
         Promise.all([asideLoaded, navbarLoaded]).then(async () => {
-            console.log('✅ NAVBAR + ASIDE terminados');
 
             const token = await checkSession();
             if (!token) return;
@@ -46,25 +45,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const { nombre, rol } = user;
 
-            console.log('👤 Usuario decodificado:', user);
 
             localStorage.setItem('nombre', nombre);
             localStorage.setItem('rol', rol);
 
-            // ⚠️ Esperamos 100ms para que aside.innerHTML haya rendereado completamente
             setTimeout(() => {
                 const nombreElems = document.querySelectorAll('.nombre-usuario');
                 const rolElems = document.querySelectorAll('.rol-usuario');
-
-                console.log('🔎 nombreElems:', nombreElems);
-                console.log('🔎 rolElems:', rolElems);
+                if (nombreElems.length === 0 || rolElems.length === 0) {
+                    console.error('No se encontraron elementos para actualizar el nombre y rol');
+                    return;
+                }
 
                 nombreElems.forEach(el => el.textContent = nombre);
                 rolElems.forEach(el => el.textContent = rol);
 
-                console.log('✅ Nombres y roles aplicados correctamente');
-            }, 100); // ← esta espera garantiza que el DOM ya fue pintado
-
+            }, 100);
             initLogout();
         });
     }
