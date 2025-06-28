@@ -37,25 +37,7 @@
       
   </head>
   <body class="  ">
-    <script>
-
-        document.addEventListener('DOMContentLoaded', () =>{
-            checkSession();
-        })
-        fetch('aside.html')
-        .then(response => response.text())
-        .then(data => {
-            document.querySelector('aside').innerHTML = data;  // Reemplaza el contenido del <aside>
-        });
-
-        fetch('navbar.html')
-        .then(response => response.text())
-        .then(data => {
-            document.querySelector('nav').innerHTML = data;  // Reemplaza el contenido del <aside>
-        });
-
-    </script>
-
+    
     <!-- loader Start -->
     <div id="loading">
       <div class="loader simple-loader">
@@ -821,8 +803,8 @@
     
     <!-- App Script -->
     <script src="../assets/js/hope-ui.js" defer></script>
-    <script src="../src/Auth/logout.js"></script>
-    <script src="../src/Auth/ocultar.js"></script>
+    <script type="module" src="/src/Auth/main.js"></script>
+
     
     
     

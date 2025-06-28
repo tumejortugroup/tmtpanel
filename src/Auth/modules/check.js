@@ -43,7 +43,8 @@ export async function checkSession() {
 
         if (data.message === 'OK') {
             console.log('Sesión válida');
-            mostrarContenidoPorRol(token); // 👈 Aquí se llama la función de visibilidad
+            mostrarContenidoPorRol(token);
+            return token // 👈 Aquí se llama la función de visibilidad
         } else {
             console.log('Token inválido según el servidor');
             window.location.href = '/dashboard/auth/sign-in.html';
