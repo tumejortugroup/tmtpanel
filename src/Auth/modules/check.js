@@ -1,7 +1,6 @@
 import { mostrarContenidoPorRol } from './ocultar.js';
 
 export async function checkSession() {
-    console.log('Función checkSession ejecutada');
 
     let token;
     try {
@@ -17,10 +16,9 @@ export async function checkSession() {
         return;
     }
 
-    console.log('Token obtenido:', token);
+
 
     if (!/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/.test(token)) {
-        console.log('Token con formato inválido');
         window.location.href = '/dashboard/auth/sign-in.html';
         return;
     }
@@ -42,11 +40,10 @@ export async function checkSession() {
         const data = await response.json();
 
         if (data.message === 'OK') {
-            console.log('Sesión válida');
+   
             mostrarContenidoPorRol(token);
             return token // 👈 Aquí se llama la función de visibilidad
         } else {
-            console.log('Token inválido según el servidor');
             window.location.href = '/dashboard/auth/sign-in.html';
         }
 

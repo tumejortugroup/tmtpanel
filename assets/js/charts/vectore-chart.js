@@ -90,42 +90,42 @@
       tileLayer.addTo(map);
   
     var cloudy = L.icon({
-      iconUrl: '../../assets/images/vectormap/cloudy.png',
+      iconUrl: '/assets/images/vectormap/cloudy.png',
       iconSize:     [70, 70], // size of the icon
       iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
       popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
   
     var day = L.icon({
-      iconUrl: '../../assets/images/vectormap/day.png',
+      iconUrl: '/assets/images/vectormap/day.png',
       iconSize:     [70, 70], // size of the icon
       iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
       popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
   
     var rainy = L.icon({
-      iconUrl: '../../assets/images/vectormap/rainy-1.png',
+      iconUrl: '/assets/images/vectormap/rainy-1.png',
       iconSize:     [70, 70], // size of the icon
       iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
       popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
   
     var snowy = L.icon({
-      iconUrl: '../../assets/images/vectormap/snowy-6.png',
+      iconUrl: '/assets/images/vectormap/snowy-6.png',
       iconSize:     [70, 70], // size of the icon
       iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
       popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
   
     var cloudy22 = L.icon({
-      iconUrl: '../../assets/images/vectormap/cloudy-day-1.png',
+      iconUrl: '/assets/images/vectormap/cloudy-day-1.png',
       iconSize:     [70, 70], // size of the icon
       iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
       popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
   
     var thunder = L.icon({
-      iconUrl: '../../assets/images/vectormap/thunder.png',
+      iconUrl: '/assets/images/vectormap/thunder.png',
       iconSize:     [70, 70], // size of the icon
       iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
       popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor

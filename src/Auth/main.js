@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(html => {
                 document.querySelector('aside').innerHTML = html;
                 asideRendered = true;
-                console.log('✅ ASIDE cargado');
             });
 
         // 2. Cargar NAVBAR
@@ -43,11 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const user = getUserInfoFromToken(token);
             if (!user) return;
 
-            const { nombre, rol } = user;
+            const { nombre, rol,centro_id } = user;
 
 
             localStorage.setItem('nombre', nombre);
             localStorage.setItem('rol', rol);
+            localStorage.setItem('centro_id', centro_id); 
 
             setTimeout(() => {
                 const nombreElems = document.querySelectorAll('.nombre-usuario');

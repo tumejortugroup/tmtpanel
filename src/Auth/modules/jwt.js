@@ -25,6 +25,7 @@ export function getUserInfoFromToken(token) {
 
     return {
         nombre:  payload.nombre || '',
-        rol: payload.rol || ''
+        rol: payload.rol || '',
+        centro_id: payload.centro_id || null        
     };
 }

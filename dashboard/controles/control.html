@@ -28,29 +28,10 @@
       
       <!-- RTL Css -->
       <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
-      <script src="../../src/Auth/check.js"> </script>
+      
       
   </head>
   <body class="  ">
-
-    <script>
-
-        document.addEventListener('DOMContentLoaded', () =>{
-            checkSession();
-        })
-        fetch('../aside.html')
-        .then(response => response.text())
-        .then(data => {
-            document.querySelector('aside').innerHTML = data;  // Reemplaza el contenido del <aside>
-        });
-
-        fetch('../navbar.html')
-        .then(response => response.text())
-        .then(data => {
-            document.querySelector('nav').innerHTML = data;  // Reemplaza el contenido del <aside>
-        });
-
-    </script>
     <!-- loader Start -->
     <div id="loading">
       <div class="loader simple-loader">
@@ -59,12 +40,12 @@
     <!-- loader END -->
     
     <aside class="sidebar sidebar-default sidebar-white sidebar-base navs-rounded-all ">
-        
+    
     </aside>    <main class="main-content">
       <div class="position-relative iq-banner">
         <!--Nav Start-->
         <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
-         
+       
         </nav>          <!-- Nav Header Component Start -->
           <div class="iq-navbar-header" style="height: 215px;">
               <div class="container-fluid iq-container">
@@ -72,7 +53,17 @@
                       <div class="col-md-12">
                           <div class="flex-wrap d-flex justify-content-between align-items-center">
                               <div>
-                                  <h1>Añadir Usuario</h1>
+                                  <h1>Hello Devs!</h1>
+                                  <p>We are on a mission to help developers like you build successful projects for FREE.</p>
+                              </div>
+                              <div>
+                                  <a href="" class="btn btn-link btn-soft-light">
+                                      <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path d="M11.8251 15.2171H12.1748C14.0987 15.2171 15.731 13.985 16.3054 12.2764C16.3887 12.0276 16.1979 11.7713 15.9334 11.7713H14.8562C14.5133 11.7713 14.2362 11.4977 14.2362 11.16C14.2362 10.8213 14.5133 10.5467 14.8562 10.5467H15.9005C16.2463 10.5467 16.5263 10.2703 16.5263 9.92875C16.5263 9.58722 16.2463 9.31075 15.9005 9.31075H14.8562C14.5133 9.31075 14.2362 9.03619 14.2362 8.69849C14.2362 8.35984 14.5133 8.08528 14.8562 8.08528H15.9005C16.2463 8.08528 16.5263 7.8088 16.5263 7.46728C16.5263 7.12575 16.2463 6.84928 15.9005 6.84928H14.8562C14.5133 6.84928 14.2362 6.57472 14.2362 6.23606C14.2362 5.89837 14.5133 5.62381 14.8562 5.62381H15.9886C16.2483 5.62381 16.4343 5.3789 16.3645 5.13113C15.8501 3.32401 14.1694 2 12.1748 2H11.8251C9.42172 2 7.47363 3.92287 7.47363 6.29729V10.9198C7.47363 13.2933 9.42172 15.2171 11.8251 15.2171Z" fill="currentColor"></path>
+                                          <path opacity="0.4" d="M19.5313 9.82568C18.9966 9.82568 18.5626 10.2533 18.5626 10.7823C18.5626 14.3554 15.6186 17.2627 12.0005 17.2627C8.38136 17.2627 5.43743 14.3554 5.43743 10.7823C5.43743 10.2533 5.00345 9.82568 4.46872 9.82568C3.93398 9.82568 3.5 10.2533 3.5 10.7823C3.5 15.0873 6.79945 18.6413 11.0318 19.1186V21.0434C11.0318 21.5715 11.4648 22.0001 12.0005 22.0001C12.5352 22.0001 12.9692 21.5715 12.9692 21.0434V19.1186C17.2006 18.6413 20.5 15.0873 20.5 10.7823C20.5 10.2533 20.066 9.82568 19.5313 9.82568Z" fill="currentColor"></path>
+                                      </svg>
+                                      Announcements
+                                  </a>
                               </div>
                           </div>
                       </div>
@@ -90,94 +81,59 @@
         <!--Nav End-->
       </div>
       <div class="conatiner-fluid content-inner mt-n5 py-0">
-      <div>
-         <div class="row">
-            
-            <div class="col-xl-9 col-lg-8">
-               <div class="card">
-                
-                  <div class="card-body">
-                     <div class="new-user-info">
-                        <form id="userForm">
-                           <div class="row">
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="fname">Nombre:</label>
-                                 <input type="text" class="form-control" id="fname" placeholder="Nombre">
-                              </div>
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="lname">Apellidos:</label>
-                                 <input type="text" class="form-control" id="lname" placeholder="Apellidos">
-                              </div>
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="mobno">Número de Teléfono:</label>
-                                 <input type="number" class="form-control" id="mobno" placeholder="Número de Teléfono">
-                              </div>
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="email">Email:</label>
-                                 <input type="email" class="form-control" id="email" placeholder="Email Personal">
-                              </div>
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="email">Fecha de nacimiento:</label>
-                                 <input type="date" class="form-control" id="birthday" placeholder="Fecha de nacimiento">
-                              </div>
-                              <div class="form-group col-md-6">
-                                    <label class="form-label">Rol:</label>
-                                    <select id="role" name="role" class="selectpicker form-control" data-style="py-0">
-                                        <option value="">Seleccionar</option>
-                                        <option value="Cliente">Cliente</option>
-                                        <option value="Preparador">Preparador</option>
-                                        <option value="Preparador">Propietario</option>
-                                        
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="estado">Estado:</label>
-                                    <select id="estado" class="form-control">
-                                        <option value="activo">Activo</option>
-                                        <option value="inactivo">Inactivo</option>
-                                    </select>
-                                </div>
-                                
-                            
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="add1">Dirección:</label>
-                                 <input type="text" class="form-control" id="add1" placeholder="Dirección del cliente">
-                              </div>
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="city">Ciudad:</label>
-                                 <input type="text" class="form-control" id="city" placeholder="Ciudad">
-                              </div>
-                              
-                              
-                             
-                            
-                              
-                           </div>
-                           <hr>
-                           <h5 class="mb-3">Seguridad</h5>
-                           <div class="row">
-                              <div class="form-group col-md-12">
-                                 <label class="form-label" for="uname">Nombre de usuario:</label>
-                                 <input type="text" class="form-control" id="uname" placeholder="Nombre de usuario/Email">
-                              </div>
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="pass">Contraseña:</label>
-                                 <input type="password" class="form-control" id="pass" placeholder="Contraseña">
-                              </div>
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="rpass">Repetir Contraseña:</label>
-                                 <input type="password" class="form-control" id="rpass" placeholder="Repetir Contraseña">
-                              </div>
-                           </div>
-                          
-                           <button type="submit" class="btn btn-primary">Crear</button>
-                        </form>
-                     </div>
-                  </div>
+     <div class="row">
+      <div class="col-sm-12">
+         <div class="card">
+            <div class="card-header d-flex justify-content-between">
+               <div class="header-title">
+                  <h4 class="card-title">Bootstrap Datatables</h4>
+               </div>
+            </div>
+            <div class="card-body">
+               <p>Images in Bootstrap are made responsive with <code>.img-fluid</code>. <code>max-width: 100%;</code> and <code>height: auto;</code> are applied to the image so that it scales with the parent element.</p>
+               <div class="table-responsive">
+                 <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Usuario 1</th>
+      <th>Usuario 2</th>
+      <th>Usuario 3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Nombre</th>
+      <td>Alice</td>
+      <td>Bob</td>
+      <td>Carlos</td>
+    </tr>
+    <tr>
+      <th>Edad</th>
+      <td>30</td>
+      <td>25</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <th>Correo</th>
+      <td>alice@example.com</td>
+      <td>bob@example.com</td>
+      <td>carlos@example.com</td>
+    </tr>
+    <tr>
+      <th>Teléfono</th>
+      <td>111</td>
+      <td>222</td>
+      <td>333</td>
+    </tr>
+  </tbody>
+</table>
+
                </div>
             </div>
          </div>
       </div>
+   </div>
       </div>
       <div class="btn-download">
           <a class="btn btn-success px-3 py-2" href="https://iqonic.design/product/admin-templates/hope-ui-admin-free-open-source-bootstrap-admin-template/" target="_blank" >
@@ -191,8 +147,8 @@
       <footer class="footer">
           <div class="footer-body">
               <ul class="left-panel list-inline mb-0 p-0">
-                  <li class="list-inline-item"><a href="..//dashboard/extra/privacy-policy.html">Política de Privacidad</a></li>
-                  <li class="list-inline-item"><a href="..//dashboard/extra/terms-of-service.html">Términos de Uso</a></li>
+                  <li class="list-inline-item"><a href="..//dashboard/extra/privacy-policy.html">Privacy Policy</a></li>
+                  <li class="list-inline-item"><a href="..//dashboard/extra/terms-of-service.html">Terms of Use</a></li>
               </ul>
               <div class="right-panel">
                   ©<script>document.write(new Date().getFullYear())</script> Hope UI, Made with
@@ -408,8 +364,7 @@
     
     <!-- App Script -->
     <script src="/assets/js/hope-ui.js" defer></script>
-    <script type="module" src="../../src/User/mainUser.js"></script>
-
+    <script type="module" src="/src/Auth/main.js"></script>
     
   </body>
 </html>
