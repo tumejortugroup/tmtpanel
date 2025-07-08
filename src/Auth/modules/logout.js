@@ -6,6 +6,7 @@ export function initLogout() {
         const token = localStorage.getItem('token');
         localStorage.removeItem('token');
         localStorage.removeItem('nombre');
+        localStorage.removeItem('id_usuario');
         localStorage.removeItem('rol');
         alert('Sesión cerrada');
         window.location.href = '/auth/sign-in.html';

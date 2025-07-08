@@ -42,10 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const user = getUserInfoFromToken(token);
             if (!user) return;
 
-            const { nombre, rol,centro_id } = user;
+            const { nombre, rol,centro_id, id_usuario} = user;
 
 
             localStorage.setItem('nombre', nombre);
+            localStorage.setItem('id_usuario', id_usuario);
             localStorage.setItem('rol', rol);
             localStorage.setItem('centro_id', centro_id); 
 

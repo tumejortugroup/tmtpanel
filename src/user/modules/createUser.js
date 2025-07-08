@@ -1,4 +1,4 @@
-import { parseJwt } from '../..Auth/modules/jwt.js';
+import { parseJwt } from '../../Auth/modules/jwt.js';
 
 export function initCreateUserForm() {
     const form = document.getElementById("userForm");
@@ -41,7 +41,7 @@ export function initCreateUserForm() {
             });
 
             if (response.ok) {
-                window.location.href = "../index.html";
+                window.location.href = "/dashboard/index.html";
             } else {
                 alert("Hubo un problema al crear el usuario.");
                 console.error("Respuesta no OK:", response.status, await response.text());

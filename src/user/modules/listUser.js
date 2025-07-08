@@ -56,7 +56,7 @@ console.log("Token:", localStorage.getItem("token"));
                     <td>${usuario.fecha_creacion}</td>
                     <td>
                         <div class="flex align-items-center list-user-action">
-                            <a class="btn btn-sm btn-icon btn-warning" data-bs-toggle="tooltip" title="Editar" href="#">
+                            <a class="btn btn-sm btn-icon btn-warning" data-bs-toggle="tooltip" title="Editar" href="/dashboard/user/user-update.html?id=${usuario.id_usuario}">
                                 <span class="btn-inner">✏️</span>
                             </a>
                             <a class="btn btn-sm btn-icon btn-danger btn-eliminar" data-nombre="${usuario.nombre}" data-bs-toggle="tooltip" title="Eliminar" href="#">

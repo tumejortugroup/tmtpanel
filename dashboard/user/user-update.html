@@ -33,7 +33,6 @@
   </head>
   <body class="  ">
 
-    
     <!-- loader Start -->
     <div id="loading">
       <div class="loader simple-loader">
@@ -55,7 +54,7 @@
                       <div class="col-md-12">
                           <div class="flex-wrap d-flex justify-content-between align-items-center">
                               <div>
-                                  <h1>Añadir Usuario</h1>
+                                  <h1>Datos usuario</h1>
                               </div>
                           </div>
                       </div>
@@ -83,77 +82,52 @@
                      <div class="new-user-info">
                         <form id="userForm">
                            <div class="row">
+                            <div class="form-group col-md-6">
+                                 <label class="form-label" for="fname">Username:</label>
+                                 <input type="text" class="form-control" id="UnameU" placeholder="Username">
+                              </div>
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="fname">Nombre:</label>
-                                 <input type="text" class="form-control" id="fname" placeholder="Nombre">
+                                 <input type="text" class="form-control" id="fnameU" placeholder="Nombre">
                               </div>
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="lname">Apellidos:</label>
-                                 <input type="text" class="form-control" id="lname" placeholder="Apellidos">
+                                 <input type="text" class="form-control" id="lnameU" placeholder="Apellidos">
+                              </div>
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="lname">Contraseña</label>
+                                 <input type="text" class="form-control" id="passwordU" placeholder="Contraseña">
                               </div>
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="mobno">Número de Teléfono:</label>
-                                 <input type="number" class="form-control" id="mobno" placeholder="Número de Teléfono">
+                                 <input type="number" class="form-control" id="mobnoU" placeholder="Número de Teléfono">
                               </div>
+
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="email">Email:</label>
-                                 <input type="email" class="form-control" id="email" placeholder="Email Personal">
+                                 <input type="email" class="form-control" id="emailU" placeholder="Email Personal">
                               </div>
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="email">Fecha de nacimiento:</label>
-                                 <input type="date" class="form-control" id="birthday" placeholder="Fecha de nacimiento">
-                              </div>
-                              <div class="form-group col-md-6">
-                                    <label class="form-label">Rol:</label>
-                                    <select id="role" name="role" class="selectpicker form-control" data-style="py-0">
-                                        <option value="">Seleccionar</option>
-                                        <option value="Cliente">Cliente</option>
-                                        <option value="Preparador">Preparador</option>
-                                        <option value="Preparador">Propietario</option>
-                                        
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="estado">Estado:</label>
-                                    <select id="estado" class="form-control">
-                                        <option value="activo">Activo</option>
-                                        <option value="inactivo">Inactivo</option>
-                                    </select>
-                                </div>
+                             
+                             
                                 
-                            
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="add1">Dirección:</label>
-                                 <input type="text" class="form-control" id="add1" placeholder="Dirección del cliente">
-                              </div>
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="city">Ciudad:</label>
-                                 <input type="text" class="form-control" id="city" placeholder="Ciudad">
-                              </div>
-                              
+                        <div class="form-group col-md-6">
+   <label class="form-label" for="direccionU">Dirección:</label>
+   <input type="text" class="form-control" id="dir" placeholder="Dirección del cliente">
+
+</div>
+<div class="form-group col-md-6">
+   <label class="form-label" for="cityU">Ciudad:</label>
+   <input type="text" class="form-control" id="cit" placeholder="Ciudad">
+</div>
                               
                              
                             
                               
                            </div>
-                           <hr>
-                           <h5 class="mb-3">Seguridad</h5>
-                           <div class="row">
-                              <div class="form-group col-md-12">
-                                 <label class="form-label" for="uname">Nombre de usuario:</label>
-                                 <input type="text" class="form-control" id="uname" placeholder="Nombre de usuario/Email">
-                              </div>
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="pass">Contraseña:</label>
-                                 <input type="password" class="form-control" id="pass" placeholder="Contraseña">
-                              </div>
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="rpass">Repetir Contraseña:</label>
-                                 <input type="password" class="form-control" id="rpass" placeholder="Repetir Contraseña">
-                              </div>
-                           </div>
+                         
+
                           
-                           <button type="submit" class="btn btn-primary">Crear</button>
+                           <button type="submit" class="btn btn-primary">Actualizar</button>
                         </form>
                      </div>
                   </div>
@@ -391,10 +365,9 @@
     
     <!-- App Script -->
     <script src="/assets/js/hope-ui.js" defer></script>
-
-      <script type="module" src="/src/user/main.js"></script>
-
     <script type="module" src="/src/Auth/main.js"></script>
+    
+    <script type="module" src="/src/user/update.js"></script>
 
     
   </body>
