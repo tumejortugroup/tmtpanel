@@ -1,0 +1,18 @@
+.input-medidas{
+    border: none;
+}
+.tabla-controles {
+    width: auto;
+    border-collapse: collapse;
+}
+.parametros-medidas {
+    width: 150px;
+    word-break: break-word;    
+    white-space: normal;         
+}
+
+.controles {
+    width: 50px;
+    word-break: break-word;    
+    white-space: normal;         
+}
