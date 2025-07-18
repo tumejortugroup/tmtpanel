@@ -448,8 +448,8 @@ hr {
 .dark .dual-horizontal .nav {
   background-color: var(--bs-primary);
 }
-.dark .sidebar {
-  background-color: #222738;
+.sidebar {
+  background-color: #222738!important;
 }
 .dark .sidebar .navbar-brand .logo-title {
   color: #ffffff;
