@@ -102,198 +102,238 @@
 
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <th class="parametros-medidas">Edad</th>
-            <td class="controles"><input class="input-medidas"></input></td>
-        
-        </tr>
-        <tr>
-            <th class="parametros-medidas">Peso</th>
-            <td class="controles"><input class="input-medidas"></input></td>
-        </tr>
-        <tr>
-            <th class="parametros-medidas">Altura</th>
-            <td class="controles"><input class="input-medidas"></input></td>
-        </tr>
-        <tr>    
-            <th class="parametros-medidas">Genero</th>
-            <td class="controles"><select class="input-medidas">
-                    <option value="masculino">Hombre</option>
-                    <option value="femenino">Mujer</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <th class="parametros-medidas">Actividad</th>
-            <td class="controles"><select class="input-medidas">
-                    <option value="masculino">Inactiva</option>
-                    <option value="femenino">Baja</option>
-                    <option value="femenino">Ligera</option>
-                    <option value="femenino">Media</option>
-                    <option value="femenino">Alta</option>
-                    <option value="femenino">Muy alta</option>
-                    <option value="femenino">Alto grado</option>
-                    <option value="femenino">Extrema</option>        
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <th class="parametros-medidas">Objetivo</th>
-            <td class="controles">
-                <select class="input-medidas">
-                    <option value="masculino">Bajada de peso</option>
-                    <option value="femenino">Aumento de peso</option>
-                    <option value="femenino">Hipertrofia</option>
-                    <option value="femenino">Definicion</option>
-                    <option value="femenino">Restricción severa</option>
-                    <option value="femenino">Mantenimiento</option>
-                    <option value="femenino">Carga carbohidratos</option>                   
-                </select>
-            </td>
-        </tr>
-
-        <tr>
-            <th class="parametros-medidas">Cuello</th>
-            <td class="controles"><input class="input-medidas"></input></td>
-        </tr>
-        <tr>
-            <th class="parametros-medidas">Brazo</th>
-            <td class="controles"><input class="input-medidas"></input></td>
-        </tr>
-        <tr>
-            <th class="parametros-medidas">Cintura</th>
-            <td class="controles"><input class="input-medidas"></input></td>
-        </tr>
-    
-        <tr>
-            <th class="parametros-medidas">Abdomen</th>
-            <td class="controles"><input class="input-medidas"></input></td>
-        </tr>
-
-        <tr>
-            <th class="parametros-medidas">Cadera</th>
-            <td class="controles"><input class="input-medidas"></input></td>
-        
-        </tr>
-        <tr>
-            <th class="parametros-medidas">Muslo</th>
-            <td class="controles"><input class="input-medidas"></input></td>
-        </tr>
-        <tr>
-            <th class="parametros-medidas">Triceps</th>
-            <td class="controles"><input class="input-medidas"></input></td>
-        </tr>
-        <tr>
-            <th class="parametros-medidas">Pliegue subescapular</th>   
-            <td class="controles"><input class="input-medidas"></input></td>
-        </tr>
-        <tr>
-            <th class="parametros-medidas">Pliegue abdomen</th>
-            <td class="controles"><input class="input-medidas"></input></td>
-        </tr>
-        <tr>
-            <th class="parametros-medidas">Pliegue suprailiaco</th>
-            <td class="controles"><input class="input-medidas"></input></td>
-        </tr>
-        <tr>
-            <th class="parametros-medidas">Pliegue muslo</th>
-            <td class="controles"><input class="input-medidas"></input></td>
-        </tr>
-
-        <tr>
-            <th class="parametros-medidas">Suma pliegues</th>
-            <td class="controles"><input class="input-medidas"></input></td>
-        </tr>
-    
-        <tr>
-            <th class="parametros-medidas">Humero bicondileo</th>
-            <td class="controles"><input class="input-medidas"></input></td>   
-        </tr>
-
-        <tr>
-            <th class="parametros-medidas">Femur bicondileo</th>
-            <td class="controles"><input class="input-medidas"></input></td>
-        </tr>
-
-        <tr>
-            <th class="parametros-medidas">Muñeca bicondileo</th>
-            <td class="controles"><input class="input-medidas"></input></td>
-        </tr>
-
-        <tr>
-            <th class="parametros-medidas">Muñeca Circunferencia</th>
-            <td class="controles"><input class="input-medidas"></input></td>
-        </tr>
-
-        <tr>
-            <th class="parametros-medidas">Humero bicondileo</th>
-            <td class="controles"><input class="input-medidas"></input></td>   
-        </tr>
+   
+<tbody>
+    <!-- GENERALES -->
+    <tr>
+        <th colspan="2">GENERALES</th>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Edad</th>
+        <td class="controles">
+            <input id="edad" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Peso</th>
+        <td class="controles">
+            <input id="peso" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Altura</th>
+        <td class="controles">
+            <input id="altura" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Género</th>
+        <td class="controles">
+            <select id="genero" class="input-medidas">
+                <option value="hombre">Hombre</option>
+                <option value="mujer">Mujer</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Actividad</th>
+        <td class="controles">
+            <select id="actividad" class="input-medidas">
+                <option value="inactiva">Inactiva</option>
+                <option value="baja">Baja</option>
+                <option value="ligera">Ligera</option>
+                <option value="media">Media</option>
+                <option value="alta">Alta</option>
+                <option value="muy_alta">Muy alta</option>
+                <option value="alto_grado">Alto grado</option>
+                <option value="extrema">Extrema</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Objetivo</th>
+        <td class="controles">
+            <select id="objetivo" class="input-medidas">
+                <option value="bajada_peso">Bajada de peso</option>
+                <option value="aumento_peso">Aumento de peso</option>
+                <option value="hipertrofia">Hipertrofia</option>
+                <option value="definicion">Definición</option>
+                <option value="restriccion_severa">Restricción severa</option>
+                <option value="mantenimiento">Mantenimiento</option>
+                <option value="carga_carbohidratos">Carga carbohidratos</option>
+            </select>
+        </td>
+    </tr>
+    <!-- PERÍMETROS -->
+    <tr>
+        <th colspan="2">PERÍMETROS</th>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Cuello</th>
+        <td class="controles"><input id="cuello" class="input-medidas" /></td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Cintura</th>
+        <td class="controles"><input id="cintura" class="input-medidas" /></td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Cadera</th>
+        <td class="controles"><input id="cadera" class="input-medidas" /></td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Abdomen</th>
+        <td class="controles"><input id="abdomen" class="input-medidas" /></td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Brazo</th>
+        <td class="controles"><input id="brazo" class="input-medidas" /></td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Muslo</th>
+        <td class="controles"><input id="muslo" class="input-medidas" /></td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Tríceps</th>
+        <td class="controles"><input id="triceps" class="input-medidas" /></td>
+    </tr>
 
 
-        <tr>
-            <th class="parametros-medidas">Peso oseo rocha</th>
-            <td class="controles"><input class="input-medidas"></input></td>   
-        </tr>
+    <!-- PLIEGUES -->
+    <tr>
+        <th colspan="2">PLIEGUES</th>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Pliegue subescapular</th>
+        <td class="controles">
+            <input id="subescapular" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Pliegue abdomen</th>
+        <td class="controles">
+            <input id="abdomen_pliegue" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Pliegue suprailiaco</th>
+        <td class="controles">
+            <input id="supra_iliaco" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Pliegue muslo</th>
+        <td class="controles">
+            <input id="muslo_pliegue" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Suma pliegues</th>
+        <td class="controles">
+            <input id="suma_pliegues" class="input-medidas" readonly />
+        </td>
+    </tr>
 
+    <!-- HUESOS -->
+    <tr>
+        <th colspan="2">HUESOS</th>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Húmero bicondileo</th>
+        <td class="controles">
+            <input id="humero_bicondileo" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Fémur bicondileo</th>
+        <td class="controles">
+            <input id="femur_bicondileo" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Muñeca estiloideo</th>
+        <td class="controles">
+            <input id="muneca_estiloideo"  class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Muñeca circunferencia</th>
+        <td class="controles">
+            <input id="muneca_circunferencia" class="input-medidas" />
+        </td>
+    </tr>
 
-        <tr>
-            <th class="parametros-medidas">Peso residual</th>
-            <td class="controles"><input class="input-medidas"></input></td>   
-        </tr>
-        <tr>
-            <th class="parametros-medidas">Porcentaje residual</th>
-            <td class="controles"><input class="input-medidas"></input></td>   
-        </tr>
-        <tr>
-            <th class="parametros-medidas">Peso extracelular</th>
-            <td class="controles"><input class="input-medidas"></input></td>   
-        </tr>
+    <!-- COMPOSICIÓN CORPORAL -->
+    <tr>
+        <th colspan="2">COMPOSICIÓN CORPORAL</th>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Peso óseo Rocha</th>
+        <td class="controles">
+            <input id="peso_oseo_rocha" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Peso residual</th>
+        <td class="controles">
+            <input id="peso_residual" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Porcentaje residual</th>
+        <td class="controles">
+            <input id="porcentaje_residual" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Peso extracelular</th>
+        <td class="controles">
+            <input id="peso_extracelular" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Porcentaje extracelular</th>
+        <td class="controles">
+            <input id="porcentaje_extracelular" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Peso intracelular</th>
+        <td class="controles">
+            <input id="peso_intracelular" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Porcentaje intracelular</th>
+        <td class="controles">
+            <input id="porcentaje_intracelular" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">IMC</th>
+        <td class="controles">
+            <input id="imc" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">Complexión ósea</th>
+        <td class="controles">
+            <input id="complexion_osea" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">% graso perimetral</th>
+        <td class="controles">
+            <input id="grasa_perimetral" class="input-medidas" />
+        </td>
+    </tr>
+    <tr>
+        <th class="parametros-medidas">% graso pliegues</th>
+        <td class="controles">
+            <input id="grasa_pliegues" class="input-medidas" />
+        </td>
+    </tr>
+</tbody></td>
 
-        <tr>
-            <th class="parametros-medidas">Porcentaje extracelular</th>
-            <td class="controles"><input class="input-medidas"></input></td>   
-        </tr>
-
-        <tr>
-            <th class="parametros-medidas">Peso intracelular</th>
-            <td class="controles"><input class="input-medidas"></input></td>   
-        </tr>
-
-        <tr>
-            <th class="parametros-medidas">Porcentaje intracelular</th>
-            <td class="controles"><input class="input-medidas"></input></td>   
-        </tr>
-
-        <tr>
-            <th class="parametros-medidas">IMC</th>
-            <td class="controles"><input class="input-medidas"></input></td>   
-        </tr>
-
-        <tr>
-            <th class="parametros-medidas">Complexión osea</th>
-            <td class="controles"><input class="input-medidas"></input></td>   
-        </tr>
-
-        <tr>
-            <th class="parametros-medidas">Humero bicondileo</th>
-            <td class="controles"><input class="input-medidas"></input></td>   
-        </tr>
-
-        <tr>
-            <th class="parametros-medidas">% graso perimetral</th>
-            <td class="controles"><input class="input-medidas"></input></td>   
-        </tr>
-          <tr>
-            <th class="parametros-medidas">% graso perimetral</th>
-            <td class="controles"><input class="input-medidas"></input></td>   
-        </tr>
-
-
-
-
-    </tbody>
     </table>
 
                 </div>
@@ -532,6 +572,7 @@
         <!-- App Script -->
         <script src="/assets/js/hope-ui.js" defer></script>
         <script type="module" src="/src/Auth/main.js"></script>
+        <script type="module" src="/src/controles/main.js"></script>
         
     </body>
     </html>
