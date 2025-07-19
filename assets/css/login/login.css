@@ -1,0 +1,61 @@
+@font-face {
+    font-family: 'Montserrat-Bold';
+    src: 
+         url('/assets/fonts/Montserrat-Black.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat-Medium';
+    src: 
+         url('/assets/fonts/Montserrat-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+
+
+body{
+    color: #FFFAFA!important;
+    font-family: 'Montserrat-Bold', sans-serif !important;
+}
+
+h2{
+    color: rgb(211, 160, 34) ;
+}
+
+a,h1,h3,h4{
+  color:  #FFFAFA!important
+}
+
+.background-login{
+    background-color: black!important;
+}
+
+.logo-normal{
+    display: flex!important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding-bottom: 25px;
+}
+
+.letra-logo{
+    margin-top: auto;
+}
+
+input{
+     font-family: 'Montserrat-Medium', sans-serif !important;
+}
+
+/**FORM***/
+
+.form-group{
+    gap: 25px;
+}

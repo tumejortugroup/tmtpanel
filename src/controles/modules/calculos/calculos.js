@@ -25,93 +25,90 @@
     } from '../formulas/composicion.js';
     import { calcularTDEE, ajustarTDEE } from '../formulas/tdee.js';
     import { calcularMacronutrientes } from '../formulas/macros.js';
+export function calcularTodo(index = 0) {
+    const peso = getFloat('peso', index);
+    const altura = getFloat('altura', index);
+    const edad = getFloat('edad', index);
+    const genero = getSelectValue('genero', index).toLowerCase();
+    const actividad = getSelectValue('actividad', index);
+    const objetivo = getSelectValue('objetivo', index);
 
-    export function calcularTodo() {
-        const peso = getFloat('peso');
-        const altura = getFloat('altura');
-        const edad = getFloat('edad');
-        const genero = getSelectValue('genero').toLowerCase();
-        const actividad = getSelectValue('actividad');
-        const objetivo = getSelectValue('objetivo');
+    const grasaPerimetral = grasaPorPerimetros({
+        genero,
+        altura,
+        cuello: getFloat('cuello', index),
+        cintura: getFloat('cintura', index),
+        cadera: getFloat('cadera', index)
+    });
 
-  
+    const pliegues = {
+        subescapular: getFloat('subescapular', index),
+        abdomen_pliegue: getFloat('abdomen_pliegue', index),
+        supra_iliaco: getFloat('supra_iliaco', index),
+        muslo_pliegue: getFloat('muslo_pliegue', index)
+    };
 
-        const grasaPerimetral = grasaPorPerimetros({
-            genero,
-            altura,
-            cuello: getFloat('cuello'),
-            cintura: getFloat('cintura'),
-            cadera: getFloat('cadera')
-        });
+    const grasaPliegues = grasaPorPliegues({ genero, pliegues });
+    const suma = sumaPliegues(pliegues);
+    const porcentajeGraso = grasaPliegues || grasaPerimetral;
 
-        const pliegues = {
-            subescapular: getFloat('subescapular'),
-            abdomen_pliegue: getFloat('abdomen_pliegue'),
-            supra_iliaco: getFloat('supra_iliaco'),
-            muslo_pliegue: getFloat('muslo_pliegue')
-        };
+    const datos = { peso, altura, edad, genero, porcentajeGraso };
 
-        const grasaPliegues = grasaPorPliegues({ genero, pliegues });
-        const suma = sumaPliegues(pliegues);
-        const porcentajeGraso = grasaPliegues || grasaPerimetral;
+    // IMC
+    setValue('imc', calcularIMC(peso, altura), index);
 
-        const datos = { peso, altura, edad, genero, porcentajeGraso };
+    // Grasa corporal
+    setValue('grasa_perimetral', grasaPerimetral, index);
+    setValue('grasa_pliegues', grasaPliegues, index);
+    setValue('suma_pliegues', suma, index);
 
-        // IMC
-        setValue('imc', calcularIMC(peso, altura));
+    // BMR
+    setValue('bmr_mifflin', bmrMifflinStJeor(datos), index);
+    setValue('bmr_harris', bmrHarrisBenedict(datos), index);
+    setValue('bmr_fao', bmrFaoOmsUnu(datos), index);
+    setValue('bmr_katch', bmrKatchMcArdle(datos), index);
+    setValue('bmr_promedio', bmrPromedio(datos), index);
 
-        // Grasa corporal
-        setValue('grasa_perimetral', grasaPerimetral);
-        setValue('grasa_pliegues', grasaPliegues);
-        setValue('suma_pliegues', suma);
+    // Composición corporal
+    const pesoOseo = pesoOseoRocha({
+        altura,
+        muneca_estiloideo: getFloat('muneca_estiloideo', index),
+        femur_bicondileo: getFloat('femur_bicondileo', index)
+    });
+    console.log('peso oseo rocha:', pesoOseo);
+    setValue('peso_oseo_rocha', pesoOseo, index);
 
-        // BMR
-        setValue('bmr_mifflin', bmrMifflinStJeor(datos));
-        setValue('bmr_harris', bmrHarrisBenedict(datos));
-        setValue('bmr_fao', bmrFaoOmsUnu(datos));
-        setValue('bmr_katch', bmrKatchMcArdle(datos));
-        setValue('bmr_promedio', bmrPromedio(datos));
+    const { kg: pr, porcentaje: prPct } = pesoResidual(peso, genero);
+    setValue('peso_residual', pr, index);
+    setValue('porcentaje_residual', prPct * 100, index);
 
-        // Composición corporal
-        console.log('peso oseo rocha:', pesoOseoRocha({
-            altura,
-            muneca_estiloideo: getFloat('muneca_estiloideo'),
-            femur_bicondileo: getFloat('femur_bicondileo')
-            }));
-        setValue('peso_oseo_rocha', pesoOseoRocha({
-            altura,
-            muneca_estiloideo: getFloat('muneca_estiloideo'),
-            femur_bicondileo: getFloat('femur_bicondileo')
-        }));
+    const { ext, pExt, int, pInt } = pesoExtraIntracelular(peso, genero);
+    setValue('peso_extracelular', ext, index);
+    setValue('porcentaje_extracelular', pExt * 100, index);
+    setValue('peso_intracelular', int, index);
+    setValue('porcentaje_intracelular', pInt * 100, index);
 
-        const { kg: pr, porcentaje: prPct } = pesoResidual(peso, genero);
-        setValue('peso_residual', pr);
-        setValue('porcentaje_residual', prPct * 100);
+    const { masaMagra, grasa } = calcularMasaMagraYGrasa(peso, porcentajeGraso);
+    setValue('kg_masa_magra', masaMagra, index);
+    setValue('kg_grasa', grasa, index);
+    setValue('indice_masa_magra', indiceMasaMagra(masaMagra, altura), index);
 
-        const { ext, pExt, int, pInt } = pesoExtraIntracelular(peso, genero);
-        setValue('peso_extracelular', ext);
-        setValue('porcentaje_extracelular', pExt * 100);
-        setValue('peso_intracelular', int);
-        setValue('porcentaje_intracelular', pInt * 100);
+    const complexion = complexionOsea({
+        altura,
+        muñeca: getFloat('muneca_estiloideo', index)
+    });
+    console.log('complexion_osea', complexion);
+    setValue('complexion_osea', complexion, index);
 
-        const { masaMagra, grasa } = calcularMasaMagraYGrasa(peso, porcentajeGraso);
-        setValue('kg_masa_magra', masaMagra);
-        setValue('kg_grasa', grasa);
-        setValue('indice_masa_magra', indiceMasaMagra(masaMagra, altura));
-        console.log('complexion_osea', complexionOsea({ altura, muñeca: getFloat('muneca_estiloideo') }))
-        setValue('complexion_osea', complexionOsea({ altura, muñeca: getFloat('muneca_estiloideo') }));
+    // TDEE
+    const tdee = calcularTDEE(bmrPromedio(datos), actividad);
+    const tdeeAjustado = ajustarTDEE(tdee, objetivo);
+    setValue('tdee', tdee, index);
+    setValue('tdee_ajustado', tdeeAjustado, index);
 
-
-
-        // TDEE
-        const tdee = calcularTDEE(bmrPromedio(datos), actividad);
-        const tdeeAjustado = ajustarTDEE(tdee, objetivo);
-        setValue('tdee', tdee);
-        setValue('tdee_ajustado', tdeeAjustado);
-
-        // Macronutrientes
-        const macros = calcularMacronutrientes(tdeeAjustado);
-        setValue('gramos_proteinas', macros.proteinas);
-        setValue('gramos_grasas', macros.grasas);
-        setValue('gramos_carbohidratos', macros.carbohidratos);
-    }
+    // Macronutrientes
+    const macros = calcularMacronutrientes(tdeeAjustado);
+    setValue('gramos_proteinas', macros.proteinas, index);
+    setValue('gramos_grasas', macros.grasas, index);
+    setValue('gramos_carbohidratos', macros.carbohidratos, index);
+}

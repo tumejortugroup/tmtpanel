@@ -6,30 +6,24 @@
     *@return
     **
 */
-export function getFloat(id) {
-  const val = parseFloat(document.getElementById(id)?.value);
+export function getFloat(param, index = 1) {
+  const el = document.querySelector(`.${param}[data-index="${index}"]`);
+  const val = parseFloat(el?.value);
   return isNaN(val) ? 0 : val;
 }
 
-
-export function getSelectValue(id) {
-  return document.getElementById(id)?.value || '';
+export function getSelectValue(param, index = 1) {
+  const el = document.querySelector(`.${param}[data-index="${index}"]`);
+  return el?.value || '';
 }
 
-/**
- * Establece el valor de un elemento de entrada HTML por su id.
- *
- * @param {string} id - El id del elemento HTML al que se le asignará el valor.
- * @param {number} value - El valor numérico que se asignará al elemento. Si no es un número, se asigna una cadena vacía.
- * @return {void} No retorna ningún valor.
- */
-export function setValue(id, value, decimals = 2) {
-  const input = document.getElementById(id);
-  if (!input) return;
+export function setValue(param, value, index = 1, decimals = 2) {
+  const el = document.querySelector(`.${param}[data-index="${index}"]`);
+  if (!el) return;
 
   if (typeof value === 'number' && !isNaN(value)) {
-    input.value = value.toFixed(decimals);
+    el.value = value.toFixed(decimals);
   } else {
-    input.value = ''; // o input.value = 'N/A' si prefieres mostrar algo
+    el.value = '';
   }
 }
