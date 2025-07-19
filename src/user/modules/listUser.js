@@ -59,7 +59,7 @@ console.log("Token:", localStorage.getItem("token"));
                             <a class="btn btn-sm btn-icon " data-bs-toggle="tooltip" title="Editar" href="/dashboard/user/user-update.html?id=${usuario.id_usuario}">
                                 <span class="btn-inner">✏️</span>
                             </a>
-                            <a class="btn btn-sm btn-icon " data-bs-toggle="tooltip" title="Ver peso" href="/dashboard/pesos/peso-view.html?id=${usuario.id_usuario}">
+                            <a class="btn btn-sm btn-icon " data-bs-toggle="tooltip" title="Ver peso" href="/dashboard/controles/control.html?id=${usuario.id_usuario}">
     <span class="btn-inner">⚖️</span>
 </a>
 
