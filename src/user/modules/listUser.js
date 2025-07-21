@@ -10,7 +10,7 @@ export async function listUser() {
     }
 
 
-  const endpoint = `http://localhost:9000/api/v1/usuarios/centro`;
+  const endpoint = `http://localhost:9000/api/v1/usuarios/centro?id=${centro_id}`;
     console.log(`🔗 Endpoint de usuarios: ${endpoint}`);
 console.log("Token:", localStorage.getItem("token"));
     console.log("Centro ID:", centro_id);

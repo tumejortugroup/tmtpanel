@@ -23,7 +23,9 @@ body{
 }
 
 
-
+h4{
+    font-family: 'Montserrat-Bold' , sans-serif !important;
+}
 .sidebar-dark{
     background-color: #000!important;
 }
@@ -38,3 +40,12 @@ body{
 }
 
 
+/**PARTE CENTRAL*/
+
+.margen-index{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
