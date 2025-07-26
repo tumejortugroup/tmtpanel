@@ -18,31 +18,25 @@ export async function cargarControlesPrevios(idUsuario) {
     if (!result.success || !Array.isArray(result.data)) return;
 
     const controles = result.data;
-    if (controles.length === 0) return;
-
     const tabla = document.querySelector('table');
     const filas = tabla?.querySelectorAll('tbody tr');
     if (!tabla || filas.length === 0) return;
 
-    // 💾 Guardamos una copia de los inputs/selects originales por variable
     const plantillas = {};
-
     filas.forEach(fila => {
       const variable = fila.dataset.variable;
       if (!variable) return;
-
       const campo = fila.querySelector('input, select');
       if (campo) {
         plantillas[variable] = campo.cloneNode(true);
       }
     });
 
-    // ❌ Limpiar todas las celdas previas (menos los th)
+    // Limpiar las celdas de la tabla
     filas.forEach(fila => {
       fila.querySelectorAll('td').forEach(td => td.remove());
     });
 
-    // 🕒 Mostrar de más antiguo a más reciente
     controles.reverse();
 
     controles.forEach((control, index) => {
@@ -50,16 +44,25 @@ export async function cargarControlesPrevios(idUsuario) {
         const nuevaCelda = document.createElement('td');
         nuevaCelda.style.backgroundColor = 'white';
 
-        if (fila.classList.contains('fila-control-nombre')) {
-          // Mostrar el nombre real del control desde la base de datos
-          nuevaCelda.textContent = control.nombre ?? `Control-${index + 1}`;
-        } else {
-          const variable = fila.dataset.variable;
-          if (!variable || !(variable in plantillas)) return;
+        const variable = fila.dataset.variable;
 
-          const valor = control[variable] ?? '';
+        if (fila.classList.contains('fila-control-nombre')) {
+          const input = document.createElement('input');
+          input.className = 'nombre input-medidas';
+          input.setAttribute('data-index', index);
+          input.value = control.nombre ?? `Control-${index + 1}`;
+          nuevaCelda.appendChild(input);
+        } else if (variable === 'fecha') {
+          const input = document.createElement('input');
+          input.type = 'date';
+          input.className = 'fecha input-medidas';
+          input.setAttribute('data-index', index);
+          input.value = control.fecha ?? '';
+          nuevaCelda.appendChild(input);
+        } else {
+          if (!variable || !(variable in plantillas)) return;
           const campo = plantillas[variable].cloneNode(true);
-          campo.value = valor;
+          campo.value = control[variable] ?? '';
           campo.setAttribute('data-index', index);
           nuevaCelda.appendChild(campo);
         }
@@ -75,23 +78,21 @@ export async function cargarControlesPrevios(idUsuario) {
       const nuevaCelda = document.createElement('td');
       nuevaCelda.style.backgroundColor = '#f9f9f9';
 
+      const variable = fila.dataset.variable;
+
       if (fila.classList.contains('fila-control-nombre')) {
-        // Calcular el siguiente número a partir del mayor existente
-        const numeros = Array.from(fila.querySelectorAll('td'))
-          .map(td => {
-            const match = td.textContent?.match(/Control-(\d+)/);
-            return match ? parseInt(match[1], 10) : null;
-          })
-          .filter(n => n !== null);
-
-        const maxNumero = numeros.length > 0 ? Math.max(...numeros) : 0;
-        const siguienteNumero = maxNumero + 1;
-
-        nuevaCelda.textContent = `Control-${siguienteNumero}`;
+        const input = document.createElement('input');
+        input.className = 'nombre input-medidas';
+        input.setAttribute('data-index', nuevoIndex);
+        nuevaCelda.appendChild(input);
+      } else if (variable === 'fecha') {
+        const input = document.createElement('input');
+        input.type = 'date';
+        input.className = 'fecha input-medidas';
+        input.setAttribute('data-index', nuevoIndex);
+        nuevaCelda.appendChild(input);
       } else {
-        const variable = fila.dataset.variable;
         if (!variable || !(variable in plantillas)) return;
-
         const campo = plantillas[variable].cloneNode(true);
         campo.value = '';
         campo.setAttribute('data-index', nuevoIndex);
@@ -101,11 +102,37 @@ export async function cargarControlesPrevios(idUsuario) {
       fila.appendChild(nuevaCelda);
     });
 
-    // 🎯 Actualizar colspan
-    actualizarColspanTabla?.();
+    // Fila de acciones (guardar)
+    let filaAcciones = tabla.querySelector('tr.fila-acciones');
+    if (!filaAcciones) {
+      filaAcciones = document.createElement('tr');
+      filaAcciones.classList.add('fila-acciones');
+      const th = document.createElement('th');
+      th.textContent = 'Acciones';
+      th.style.backgroundColor = '#d4a321';
+      filaAcciones.appendChild(th);
+      tabla.querySelector('tbody').appendChild(filaAcciones);
+    }
 
-    console.log('Controles previos cargados correctamente.');
+    // Asegurar que haya suficientes celdas en la fila de acciones
+    const totalColumnas = controles.length + 1;
+    while (filaAcciones.children.length < totalColumnas + 1) {
+      const td = document.createElement('td');
+      td.style.backgroundColor = '#f9f9f9';
+      filaAcciones.appendChild(td);
+    }
+
+    // Botón guardar en la última columna
+    const ultimaCelda = filaAcciones.lastElementChild;
+    ultimaCelda.innerHTML = `
+      <button class="guardar-control" data-index="${nuevoIndex}">
+        Guardar
+      </button>
+    `;
+
+    actualizarColspanTabla?.();
+    console.log('✅ Controles previos cargados correctamente.');
   } catch (error) {
-    console.error('Error al cargar controles previos:', error);
+    console.error('❌ Error al cargar controles previos:', error);
   }
 }
