@@ -1,0 +1,122 @@
+@font-face {
+    font-family: 'Montserrat-Bold';
+    src: 
+         url('/assets/fonts/Montserrat-Black.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat-Medium';
+    src: 
+         url('/assets/fonts/Montserrat-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body{
+    color: #FFFAFA!important;
+    font-family: 'Montserrat-Medium', sans-serif !important;
+}
+
+
+.input-medidas{
+    border: none;
+   
+}
+.tabla-controles {
+    width: auto;
+    border-collapse: collapse;
+     border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+.parametros-medidas {
+    width: 150px;
+    word-break: break-word;    
+    white-space: normal; 
+    text-align: center;
+    color: #FFFAFA;
+    font-size: 14px;
+    font-weight: 200;
+
+}
+
+.controles {
+    width: 50px;
+    word-break: break-word;    
+    white-space: normal; 
+    background-color: #FFFAFA!important; 
+    color: #000 !important; 
+      border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);      
+}
+
+.apartado-controles{
+    background-color:rgb(211, 160, 34);
+}
+
+.apartado-controles th{
+    text-align: center;
+    color: #FFFAFA;
+}
+
+/**--COLORES NAVBAR HEADER---**/
+.sidebar-dark{
+    background-color: #000!important;
+}
+
+.navbar-dark{
+    background-color: #000!important;
+}
+
+.backside{
+    background-color: #FFFAFA!important;
+    border: none;
+}
+
+/*---TITULO HEADER----*/
+
+.header-controles{
+    margin-top: 10px;
+    padding: 25px 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+h3{
+     font-family: 'Montserrat-Bold', sans-serif !important;
+}
+
+.division-controles{
+     font-family: 'Montserrat-Bold', sans-serif !important;
+}
+
+.contenedor-controles {
+  display: flex;
+  flex-wrap: nowrap; /* o wrap si quieres que salten a la siguiente fila al desbordar */
+  gap: 20px; /* espacio entre bloques */
+  align-items: flex-start;
+  overflow-x: auto; /* permite scroll si hay muchos bloques */
+}
+.bloque-control {
+  display: table;
+  border-collapse: collapse;
+ 
+  min-width: 300px; /* ajusta según tu diseño */
+}
+.bloque-control th,
+.bloque-control td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+
+.header-controles{
+    display: flex;
+    flex-direction: row;
+}

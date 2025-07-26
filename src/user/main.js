@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     listUser();
     toggleStatus();
     initDeleteUser();
+
   
 
 });

@@ -5,6 +5,7 @@ import { agregarColumna } from './modules/ui/columns.js';
 import { obtenerIdUsuarioDesdeUrl } from './modules/utils/params.js';
 import { cargarControlesPrevios } from './modules/fetch/getControlTabla.js';
 import { guardarControl } from './modules/fetch/postControl.js';
+import { cargarListaControles } from './modules/fetch/listControles.js';
 
 // Inicializa botón para agregar columnas (una sola vez)
 agregarColumna();
@@ -62,5 +63,19 @@ document.addEventListener('click', (e) => {
   if (!isNaN(index)) {
     console.log('🖱️ Botón "Guardar" clicado. Index:', index);
     guardarControl(index);
+  }
+});
+
+
+/**GET CONTROLES DEL USUARIO INPUT */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const idUsuario = obtenerIdUsuarioDesdeUrl();
+
+  if (idUsuario) {
+    cargarControlesPrevios(idUsuario);
+    cargarListaControles(); // ✅ <-- Esta línea
+  } else {
+    console.warn('ID de usuario no encontrado en la URL');
   }
 });

@@ -1,6 +1,4 @@
-
-import { obtenerIdUsuarioDesdeUrl } from '../utils/params.js';
-
+import { obtenerIdUsuarioDesdeUrl } from '/src/controles/modules/utils/params.js';
 
 export async function cargarListaControles() {
   const idUsuario = obtenerIdUsuarioDesdeUrl();
@@ -24,15 +22,16 @@ export async function cargarListaControles() {
     }
 
     const lista = document.getElementById('lista-controles');
-    lista.innerHTML = ''; // Limpia la lista actual
+    lista.innerHTML = '';
 
     result.data.forEach(control => {
       const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.className = 'dropdown-item';
-      a.href = `/dashboard/user/control.html?id=${idUsuario}&nombre=${encodeURIComponent(control.nombre)}`;
-      a.textContent = control.nombre ?? '(Sin nombre)';
-      li.appendChild(a);
+      li.innerHTML = `
+        <label class="dropdown-item">
+          <input type="checkbox" class="control-checkbox" value="${control.nombre}">
+          ${control.nombre ?? '(Sin nombre)'}
+        </label>
+      `;
       lista.appendChild(li);
     });
 
