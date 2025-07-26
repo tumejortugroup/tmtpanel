@@ -1,6 +1,5 @@
 import { actualizarColspanTabla } from '../ui/columns.js';
 
-
 export async function cargarControlesPrevios(idUsuario) {
   const token = localStorage.getItem('token');
   if (!token) {
@@ -25,58 +24,87 @@ export async function cargarControlesPrevios(idUsuario) {
     const filas = tabla?.querySelectorAll('tbody tr');
     if (!tabla || filas.length === 0) return;
 
-    // Mostrar de más antiguo a más reciente
+    // 💾 Guardamos una copia de los inputs/selects originales por variable
+    const plantillas = {};
+
+    filas.forEach(fila => {
+      const variable = fila.dataset.variable;
+      if (!variable) return;
+
+      const campo = fila.querySelector('input, select');
+      if (campo) {
+        plantillas[variable] = campo.cloneNode(true);
+      }
+    });
+
+    // ❌ Limpiar todas las celdas previas (menos los th)
+    filas.forEach(fila => {
+      fila.querySelectorAll('td').forEach(td => td.remove());
+    });
+
+    // 🕒 Mostrar de más antiguo a más reciente
     controles.reverse();
 
     controles.forEach((control, index) => {
-      filas.forEach((fila) => {
+      filas.forEach(fila => {
         const nuevaCelda = document.createElement('td');
         nuevaCelda.style.backgroundColor = 'white';
 
         if (fila.classList.contains('fila-control-nombre')) {
-          nuevaCelda.textContent = `Control-${index + 1}`;
+          // Mostrar el nombre real del control desde la base de datos
+          nuevaCelda.textContent = control.nombre ?? `Control-${index + 1}`;
         } else {
           const variable = fila.dataset.variable;
-          if (!variable) return;
+          if (!variable || !(variable in plantillas)) return;
 
           const valor = control[variable] ?? '';
-          const input = document.createElement('input');
-          input.type = 'text';
-          input.value = valor;
-          input.setAttribute('data-index', index);
-          nuevaCelda.appendChild(input);
+          const campo = plantillas[variable].cloneNode(true);
+          campo.value = valor;
+          campo.setAttribute('data-index', index);
+          nuevaCelda.appendChild(campo);
         }
 
         fila.appendChild(nuevaCelda);
       });
     });
 
-    // ✅ Añadir columna vacía para nuevo control
+    // ➕ Añadir columna vacía para nuevo control
     const nuevoIndex = controles.length;
 
-    filas.forEach((fila) => {
+    filas.forEach(fila => {
       const nuevaCelda = document.createElement('td');
-      nuevaCelda.style.backgroundColor = 'white';
+      nuevaCelda.style.backgroundColor = '#f9f9f9';
 
       if (fila.classList.contains('fila-control-nombre')) {
-        nuevaCelda.textContent = `Control-${nuevoIndex + 1}`;
+        // Calcular el siguiente número a partir del mayor existente
+        const numeros = Array.from(fila.querySelectorAll('td'))
+          .map(td => {
+            const match = td.textContent?.match(/Control-(\d+)/);
+            return match ? parseInt(match[1], 10) : null;
+          })
+          .filter(n => n !== null);
+
+        const maxNumero = numeros.length > 0 ? Math.max(...numeros) : 0;
+        const siguienteNumero = maxNumero + 1;
+
+        nuevaCelda.textContent = `Control-${siguienteNumero}`;
       } else {
         const variable = fila.dataset.variable;
-        if (!variable) return;
+        if (!variable || !(variable in plantillas)) return;
 
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.value = '';
-        input.setAttribute('data-index', nuevoIndex);
-        nuevaCelda.appendChild(input);
+        const campo = plantillas[variable].cloneNode(true);
+        campo.value = '';
+        campo.setAttribute('data-index', nuevoIndex);
+        nuevaCelda.appendChild(campo);
       }
 
       fila.appendChild(nuevaCelda);
     });
 
-    // ✅ Ajustar colspan
+    // 🎯 Actualizar colspan
     actualizarColspanTabla?.();
 
+    console.log('Controles previos cargados correctamente.');
   } catch (error) {
     console.error('Error al cargar controles previos:', error);
   }

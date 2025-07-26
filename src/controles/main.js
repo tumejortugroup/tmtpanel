@@ -1,6 +1,9 @@
 // main.js
+// main.js
 import { calcularTodo } from './modules/calculos/calculos.js';
 import { agregarColumna } from './modules/ui/columns.js';
+import { obtenerIdUsuarioDesdeUrl } from './modules/utils/params.js';
+import { cargarControlesPrevios } from './modules/fetch/getControlTabla.js';
 
 // Inicializa botón para agregar columnas (una sola vez)
 agregarColumna();
@@ -28,5 +31,15 @@ document.addEventListener('input', (e) => {
     if (!isNaN(index)) {
       calcularTodo(index);
     }
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const idUsuario = obtenerIdUsuarioDesdeUrl();
+
+  if (idUsuario) {
+    cargarControlesPrevios(idUsuario);
+  } else {
+    console.warn('ID de usuario no encontrado en la URL');
   }
 });

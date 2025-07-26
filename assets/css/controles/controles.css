@@ -95,3 +95,22 @@ h3{
 .division-controles{
      font-family: 'Montserrat-Bold', sans-serif !important;
 }
+
+.contenedor-controles {
+  display: flex;
+  flex-wrap: nowrap; /* o wrap si quieres que salten a la siguiente fila al desbordar */
+  gap: 20px; /* espacio entre bloques */
+  align-items: flex-start;
+  overflow-x: auto; /* permite scroll si hay muchos bloques */
+}
+.bloque-control {
+  display: table;
+  border-collapse: collapse;
+ 
+  min-width: 300px; /* ajusta según tu diseño */
+}
+.bloque-control th,
+.bloque-control td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}

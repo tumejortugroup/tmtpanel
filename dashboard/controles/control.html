@@ -94,15 +94,15 @@
     
         <tbody>
             <tr class="apartado-controles division-controles">
-                <th colspan="2">CONTROL-</th>
+                <th colspan="2">INFORMACIÓN</th>
             </tr>
-            <tr class="apartado-controles fila-control-nombre">
+            <tr class="apartado-controles fila-control-nombre" data-variable="nombre">
                 <th class="parametros-medidas">Nº Control</th>
                 <td class="controles" id="control-cabecero">
-                    Control-100
+                    
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="fecha">
                 <th class="parametros-medidas">Fecha</th>
                     <td class="controles">
                     <input type="date" class="edad input-medidas" data-index ='1'/>
@@ -113,25 +113,25 @@
             <tr class="apartado-controles division-controles">
                 <th colspan="2">GENERALES</th>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="edad">
                 <th class="parametros-medidas">Edad</th>
                 <td class="controles">
                     <input class="edad input-medidas" data-index ='1'/>
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="peso">
                 <th class="parametros-medidas">Peso</th>
                 <td class="controles">
                     <input class="peso input-medidas" data-index ='1' />
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="altura">
                 <th class="parametros-medidas">Altura</th>
                 <td class="controles">
                     <input class="altura input-medidas" data-index ='1'/>
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="genero">
                 <th class="parametros-medidas">Género</th>
                 <td class="controles">
                     <select class="genero input-medidas" data-index ='1'>
@@ -140,7 +140,7 @@
                     </select>
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="grado_actividad">
                 <th class="parametros-medidas">Actividad</th>
                 <td class="controles">
                     <select class="actividad input-medidas" data-index ='1'>
@@ -155,7 +155,7 @@
                     </select>
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="objetivo">
                 <th class="parametros-medidas">Objetivo</th>
                 <td class="controles">
                     <select class="objetivo input-medidas" data-index ='1'>
@@ -173,40 +173,47 @@
             <tr class="apartado-controles division-controles">
                 <th colspan="2">PERÍMETROS</th>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="cuello">
                 <th class="parametros-medidas">Cuello</th>
                 <td class="controles"><input class="cuello input-medidas" data-index ='1' /></td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="cintura">
                 <th class="parametros-medidas">Cintura</th>
                 <td class="controles"><input class="cintura input-medidas" data-index ='1' /></td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="cadera">
                 <th class="parametros-medidas">Cadera</th>
                 <td class="controles"><input class="cadera input-medidas" data-index ='1' /></td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="abdomen">
                 <th class="parametros-medidas">Abdomen</th>
                 <td class="controles">
                     <input class="abdomen input-medidas" data-index ='1' />
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="brazo">
                 <th class="parametros-medidas">Brazo</th>
                 <td class="controles">
                     <input class="brazo input-medidas" data-index ='1' />
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="muslo">
                 <th class="parametros-medidas">Muslo</th>
                 <td class="controles">
                     <input class="muslo input-medidas" data-index ='1'/>
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="triceps">
                 <th class="parametros-medidas">Tríceps</th>
                 <td class="controles">
                     <input class="triceps input-medidas" data-index ='1'/>
+                </td>
+            </tr>
+
+            <tr class="apartado-controles" data-variable="porcentaje_graso_perimetros">
+                <th class="parametros-medidas">% graso perimetral</th>
+                <td class="controles">
+                    <input class="grasa_perimetral input-medidas" data-index ='1'/>
                 </td>
             </tr>
 
@@ -215,34 +222,41 @@
             <tr class="apartado-controles division-controles">
                 <th colspan="2">PLIEGUES</th>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="subescapular">
                 <th class="parametros-medidas"> Subescapular</th>
                 <td class="controles">
                     <input class="subescapular input-medidas" data-index ='1' />
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="abdomen_pliegue">
                 <th class="parametros-medidas">Abdomen</th>
                 <td class="controles">
                     <input class="abdomen_pliegue input-medidas" data-index ='1'/>
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="supra_iliaco">
                 <th class="parametros-medidas">Suprailiaco</th>
                 <td class="controles">
                     <input class="supra_iliaco input-medidas" data-index ='1'/>
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="muslo_pliegue">
                 <th class="parametros-medidas">Muslo</th>
                 <td class="controles">
                     <input class="muslo_pliegue input-medidas" data-index ='1'/>
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="suma_pliegues">
                 <th class="parametros-medidas">Suma total</th>
                 <td class="controles">
                     <input class="suma_pliegues input-medidas" readonly data-index ='1'/>
+                </td>
+            </tr>
+
+             <tr class="apartado-controles" data-variable="porcentaje_graso_estimado_pliegues">
+                <th class="parametros-medidas">% graso pliegues</th>
+                <td class="controles">
+                    <input class="grasa_pliegues input-medidas" data-index ='1' />
                 </td>
             </tr>
 
@@ -250,25 +264,25 @@
             <tr class="apartado-controles division-controles">
                 <th colspan="2">HUESOS</th>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="humero_biepicondileo">
                 <th class="parametros-medidas">Húmero bicondileo</th>
                 <td class="controles">
                     <input class="humero_bicondileo input-medidas" data-index ='1' />
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="femur_bicondileo">
                 <th class="parametros-medidas">Fémur bicondileo</th>
                 <td class="controles">
                     <input class="femur_bicondileo input-medidas" data-index ='1' />
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="muneca_estiloideo">
                 <th class="parametros-medidas">Muñeca estiloideo</th>
                 <td class="controles">
                     <input class="muneca_estiloideo input-medidas"  data-index ='1'/>
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="muneca_circunferencia">
                 <th class="parametros-medidas">Muñeca circunferencia</th>
                 <td class="controles">
                     <input class="muneca_circunferencia input-medidas" data-index ='1' />
@@ -279,102 +293,92 @@
             <tr class="apartado-controles division-controles">
                 <th colspan="2">COMPOSICIÓN CORPORAL</th>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="peso_oseo_rocha">
                 <th class="parametros-medidas">Peso óseo Rocha</th>
                 <td class="controles">
                     <input class="peso_oseo_rocha input-medidas"  data-index ='1'/>
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="peso_residual">
                 <th class="parametros-medidas">Peso residual</th>
                 <td class="controles">
                     <input class="peso_residual input-medidas" data-index ='1' />
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="porcentaje_residual">
                 <th class="parametros-medidas">Porcentaje residual</th>
                 <td class="controles">
                     <input class="porcentaje_residual input-medidas" data-index ='1'/>
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="peso_extracelular">
                 <th class="parametros-medidas">Peso extracelular</th>
                 <td class="controles">
                     <input class="peso_extracelular input-medidas" data-index ='1'/>
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="porcentaje_extracelular">
                 <th class="parametros-medidas">Porcentaje extracelular</th>
                 <td class="controles">
                     <input class="porcentaje_extracelular input-medidas" data-index ='1' />
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="peso_intracelular">
                 <th class="parametros-medidas">Peso intracelular</th>
                 <td class="controles">
                     <input class="peso_intracelular input-medidas" data-index ='1'/>
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="porcentaje_intracelular">
                 <th class="parametros-medidas">Porcentaje intracelular</th>
                 <td class="controles">
                     <input class="porcentaje_intracelular input-medidas" data-index ='1'/>
                 </td>
             </tr>
-            <tr class="apartado-controles"> 
+            <tr class="apartado-controles" data-variable="imc"> 
                 <th class="parametros-medidas">IMC</th>
                 <td class="controles">
                     <input class="imc input-medidas" data-index ='1' />
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="complex_osea">
                 <th class="parametros-medidas">Complexión ósea</th>
                 <td class="controles">
                     <input class="complexion_osea input-medidas" data-index ='1'/>
                 </td>
             </tr>
-            <tr class="apartado-controles">
-                <th class="parametros-medidas">% graso perimetral</th>
-                <td class="controles">
-                    <input class="grasa_perimetral input-medidas" data-index ='1'/>
-                </td>
-            </tr>
-            <tr class="apartado-controles">
-                <th class="parametros-medidas">% graso pliegues</th>
-                <td class="controles">
-                    <input class="grasa_pliegues input-medidas" data-index ='1' />
-                </td>
-            </tr>
+      
+           
 
             <!-- MACRONUTRIENTES -->
             <tr class="apartado-controles division-controles">
                 <th colspan="2">MACRONUTRIENTES</th>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="tdee">
                 <th class="parametros-medidas">TDEE</th>
                 <td class="controles">
                     <input class="tdee input-medidas" data-index ='1' />
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="calorias_datos">
                 <th class="parametros-medidas">TDEE ajustado</th>
                 <td class="controles">
                     <input class="tdee_ajustado input-medidas" data-index ='1'/>
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="proteinas_datos">
                 <th class="parametros-medidas">Gramos de proteínas</th>
                 <td class="controles">
                     <input class="gramos_proteinas input-medidas" data-index ='1'/>
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="grasas_datos">
             <th class="parametros-medidas">Gramos de grasas</th>
                 <td class="controles">
                     <input class="gramos_grasas input-medidas" data-index ='1'/>
                 </td>
             </tr>
-            <tr class="apartado-controles">
+            <tr class="apartado-controles" data-variable="carbohidratos_datos">
                 <th class="parametros-medidas">Gramos de carbohidratos</th>
                 <td class="controles">
                     <input class="gramos_carbohidratos input-medidas" data-index ='1' />
