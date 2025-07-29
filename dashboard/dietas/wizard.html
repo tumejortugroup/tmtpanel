@@ -1,0 +1,419 @@
+
+
+    <!doctype html>
+    <html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Crear dieta</title>
+        
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+        
+        <!-- Library / Plugin Css Build -->
+        <link rel="stylesheet" href="/assets/css/core/libs.min.css" />
+        
+        
+        <!-- Hope Ui Design System Css -->
+        <link rel="stylesheet" href="/assets/css/hope-ui.min.css?v=2.0.0" />
+        
+        <!-- Custom Css -->
+        <link rel="stylesheet" href="/assets/css/custom.min.css?v=2.0.0" />
+        
+        <!-- Dark Css -->
+        <link rel="stylesheet" href="/assets/css/dark.min.css"/>
+        
+        <!-- Customizer Css -->
+        <link rel="stylesheet" href="/assets/css/customizer.min.css" />
+        
+        <!-- RTL Css -->
+        <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
+        <link rel="stylesheet" href="/assets/css/user/controles.css"/>
+        
+          <style>
+
+       
+    .table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 8px;
+      text-align: center;
+      color: black;
+     
+    }
+    
+
+    table select{
+        border: none;
+        background: none;
+    }
+    
+    .table-wrapper{
+        margin: 50px;
+    }
+    .input-cantidad {
+      width: 50px;
+      text-align: center;
+      border: none;
+      background: none;
+    }
+
+     .header-dieta select {
+      color: white;
+      font-weight: bold;
+    }
+
+    .header-dieta select option {
+      color: black;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .table-dieta {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  border: 2px solid #000; /* Puedes cambiar el color */
+  border-radius: 12px;
+  overflow: hidden;
+}
+     .table-dieta thead {
+        background-color:rgb(211, 160, 34);
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }
+        .header-dieta{
+        background-color:rgb(211, 160, 34);
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        }
+
+/* Bordes redondeados en las esquinas de la tabla */
+.table-dieta thead tr:first-child th:first-child {
+  border-top-left-radius: 12px;
+}
+.table-dieta thead tr:first-child th:last-child {
+  border-top-right-radius: 12px;
+}
+.table-dieta tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 12px;
+}
+.table-dieta tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 12px;
+}
+
+/* Bordes de celdas */
+.table-dieta th{
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: center;
+    color: white;
+    font-weight: bold  ;
+}
+.table-dieta td {
+  border: 1px solid #000;
+  padding: 8px;
+  text-align: center;
+}
+.text-dieta {
+    width: 100%;
+    border: none;
+    text-decoration: none;
+    background: none;
+    text-align: center;
+}
+
+  </style>
+    </head>
+    <body class="  ">
+        <!-- loader Start -->
+        <div id="loading">
+        <div class="loader simple-loader">
+            <div class="loader-body"></div>
+        </div>    </div>
+        <!-- loader END -->
+        
+        <aside class="sidebar sidebar-default sidebar-white sidebar-base navs-rounded-all sidebar-dark">
+        
+        </aside>    <main class="main-content backside">
+        <div class="position-relative iq-banner">
+            <!--Nav Start-->
+            <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar navbar-dark">
+        
+            </nav>          <!-- Nav Header Component Start -->
+          
+        </div>
+        <div class="conatiner-fluid content-inner mt-n5 py-0">
+        <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                
+                </div>
+                <div class="card-body backside">
+                <div class="header-title header-controles">
+                    <div>
+                        <h3 class="card-title">Creación de dieta</h3>
+                    </div>
+
+                   
+                </div>
+                
+    
+                 <fieldset class="table-wrapper">
+                                <div class="form-card text-start">
+                                    <div class="row">
+                                    <div class="col-7">
+                                        <h6 class="mb-4">Selecciona usuario/control</h6>
+                                    </div>
+                                
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Usuario</label>
+                                            <input type="email" class="form-control" name="email" placeholder="Email Id" />
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <select name="" id="">Control</select>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next" >Next</button>
+                </fieldset>
+
+
+
+                             <fieldset class="table-wrapper">
+                                <div class="col-7">
+                                        <h3 class="mb-4">Auto-ajuste</h3>
+                                </div>
+                            </fieldset>
+
+
+
+                             <fieldset class="table-wrapper">
+                                 <div class="col-7">
+                                        <h3 class="mb-4">Asignar alimentos</h3>
+                                </div>
+                                    <div class="table-responsive">
+                                    <div id="tabla-container">
+                                    <div class="section">
+                                        <table class="table-dieta">
+                                        <thead class="header-dieta">
+                                            <tr>
+                                            <th colspan="8">
+                                                <select  name="tipo-comida">
+                                                <option>Desayuno</option>
+                                                <option>Almuerzo</option>
+                                                <option>Comida</option>
+                                                <option>Merienda</option>
+                                                <option>Pre-entreno</option>
+                                                <option>Post-entreno</option>
+                                                <option>Cena</option>
+                                                </select>
+                                            </th>
+                                            </tr>
+                                            <tr>
+                                            <th>MACRO</th>
+                                            <th>Familia</th>
+                                            <th>Alimento</th>
+                                            <th>Cantidad</th>
+                                            <th>Equivalente</th>
+                                            <th>Cantidad</th>
+                                            <th>Equivalente</th>
+                                            <th>Cantidad</th>
+                                            </tr>
+                                        
+                                        </thead>
+                                        <tbody>
+                                            <tr >
+                                            <td class="header-dieta">
+                                                    <select >
+                                                        <option>Proteina</option>
+                                                        <option>Grasa</option>
+                                                        <option>Carbohidratos</option>
+                                                    </select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td><input class="input-cantidad" type="text"></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            </tr>
+
+                                            <tr>
+                                            <td class="header-dieta">
+                                                    <select>
+                                                        <option>Proteina</option>
+                                                        <option>Grasa</option>
+                                                        <option>Carbohidratos</option>
+                                                    </select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td><input class="input-cantidad" type="text"></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            </tr>
+
+                                            <tr>
+                                            <td class="header-dieta">
+                                                    <select>
+                                                        <option>Proteina</option>
+                                                        <option>Grasa</option>
+                                                        <option>Carbohidratos</option>
+                                                    </select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td><input class="input-cantidad" type="text"></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td class="header-dieta">
+                                                        <select>
+                                                            <option>Proteina</option>
+                                                            <option>Grasa</option>
+                                                            <option>Carbohidratos</option>
+                                                        </select>
+                                                </td>
+                                                <td>
+                                                    <select><option>Select</option></select>
+                                                </td>
+                                                <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                                <td><input class="input-cantidad" type="text"></td>
+                                                <td><select><option>Select</option></td>
+                                                <td></td>
+                                                <td><select><option>Select</option></td>
+                                                <td></td>
+                                                
+                                            </tr>
+
+                                            <tr>
+                                                <td class="header-dieta">
+                                                      Observaciones
+                                                </td>
+                                                <td colspan="7"><textarea class="text-dieta"></textarea></td></tr>
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
+
+                                    <button onclick="duplicarTabla()">➕ Añadir Comida</button>
+
+
+                                </div>
+                                 
+                                
+                                <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next" >Next</button>
+                                <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-end me-1" value="Previous" >Previous</button>
+                            </fieldset>
+                </div>
+
+            
+                
+            </div>
+        </div>
+    </div>
+        </div>
+        
+        <!-- Footer Section Start -->
+        <footer class="footer">
+            <div class="footer-body">
+                <ul class="left-panel list-inline mb-0 p-0">
+                  
+                </ul>
+                <div class="right-panel">
+                   
+                    <span class="">
+                        
+                    </span><a href="https://iqonic.design/"><img src="/assets/images/dashboard/iconos/logo-footer.webp" width="220" height="60" alt=""></a>
+                </div>
+            </div>
+        </footer>
+
+        <template>
+
+        </template>
+        
+      
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Library Bundle Script -->
+        <script src="/assets/js/core/libs.min.js"></script>
+        
+        <!-- External Library Bundle Script -->
+        <script src="/assets/js/core/external.min.js"></script>
+        
+        <!-- Widgetchart Script -->
+        <script src="/assets/js/charts/widgetcharts.js"></script>
+        
+        <!-- mapchart Script -->
+        <script src="/assets/js/charts/vectore-chart.js"></script>
+        <script src="/assets/js/charts/dashboard.js" ></script>
+        
+        <!-- fslightbox Script -->
+        <script src="/assets/js/plugins/fslightbox.js"></script>
+        
+        <!-- Settings Script -->
+        <script src="/assets/js/plugins/setting.js"></script>
+        
+        <!-- Slider-tab Script -->
+        <script src="/assets/js/plugins/slider-tabs.js"></script>
+        
+        <!-- Form Wizard Script -->
+        <script src="/assets/js/plugins/form-wizard.js"></script>
+        
+        <!-- AOS Animation Plugin-->
+        
+        <!-- App Script -->
+        <script src="/assets/js/hope-ui.js" defer></script>
+        <script type="module" src="/src/Auth/main.js"></script>
+        <script type="module" src="/src/user/controlUser.js"></script>
+        
+    </body>
+    </html>
+
+    <script>
+  function duplicarTabla() {
+    const container = document.getElementById("tabla-container");
+    const original = container.querySelector(".section");
+    const clon = original.cloneNode(true); // Clona toda la sección con la tabla
+    container.appendChild(clon);
+  }
+</script>
