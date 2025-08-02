@@ -24,13 +24,13 @@ export async function cargarListaControles() {
     }
 
     const lista = document.getElementById('lista-controles');
-    lista.innerHTML = ''; // Limpia la lista actual
+    lista.innerHTML = ''; 
 
     result.data.forEach(control => {
       const li = document.createElement('li');
       const a = document.createElement('a');
       a.className = 'dropdown-item';
-      a.href = `/dashboard/user/control.html?id=${idUsuario}&nombre=${encodeURIComponent(control.nombre)}`;
+      a.href = `/dashboard/controles/vistaControles.html?id=${idUsuario}&nombre=${encodeURIComponent(control.nombre)}`;
       a.textContent = control.nombre ?? '(Sin nombre)';
       li.appendChild(a);
       lista.appendChild(li);

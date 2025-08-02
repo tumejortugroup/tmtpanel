@@ -49,3 +49,7 @@ h4{
     justify-content: center;
     width: 100%;
 }
+.nombre-usuario-navbar, .rol-usuario{
+    color: #FFFAFA;
+    margin-right: 10px;
+}

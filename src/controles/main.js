@@ -5,10 +5,13 @@ import { agregarColumna } from './modules/ui/columns.js';
 import { obtenerIdUsuarioDesdeUrl } from './modules/utils/params.js';
 import { cargarControlesPrevios } from './modules/fetch/getControlTabla.js';
 import { guardarControl } from './modules/fetch/postControl.js';
-import { cargarListaControles } from './modules/fetch/listControles.js';
+import { cargarListaUsers } from './modules/fetch/listUsers.js';
+import { mostrarNombreUsuario } from './modules/fetch/nombreUsuario.js';
 
 // Inicializa botón para agregar columnas (una sola vez)
 agregarColumna();
+mostrarNombreUsuario();
+cargarListaUsers();
 
 // Variable global para rastrear la columna activa
 let indiceActivo = 0;
@@ -68,14 +71,30 @@ document.addEventListener('click', (e) => {
 
 
 /**GET CONTROLES DEL USUARIO INPUT */
-
+/*
 document.addEventListener('DOMContentLoaded', () => {
   const idUsuario = obtenerIdUsuarioDesdeUrl();
 
   if (idUsuario) {
     cargarControlesPrevios(idUsuario);
-    cargarListaControles(); // ✅ <-- Esta línea
+    cargarListaControles(); 
   } else {
     console.warn('ID de usuario no encontrado en la URL');
   }
 });
+*/
+
+/***GET USERS INPUT */
+document.getElementById('btn-ver-controles').addEventListener('click', () => {
+  const idUsuario = obtenerIdUsuarioDesdeUrl(); // ✅ tu función existente
+
+  if (idUsuario) {
+    window.location.href = `/dashboard/controles/vistaControles.html?id=${idUsuario}`;
+  } else {
+    alert('❌ No se encontró el ID de usuario en la URL.');
+  }
+});
+
+
+
+

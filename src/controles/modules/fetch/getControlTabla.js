@@ -32,13 +32,14 @@ export async function cargarControlesPrevios(idUsuario) {
       }
     });
 
-    // Limpiar las celdas de la tabla
+    // Limpiar todas las celdas
     filas.forEach(fila => {
       fila.querySelectorAll('td').forEach(td => td.remove());
     });
 
     controles.reverse();
 
+    // 🔒 Crear columnas previas bloqueadas
     controles.forEach((control, index) => {
       filas.forEach(fila => {
         const nuevaCelda = document.createElement('td');
@@ -51,6 +52,7 @@ export async function cargarControlesPrevios(idUsuario) {
           input.className = 'nombre input-medidas';
           input.setAttribute('data-index', index);
           input.value = control.nombre ?? `Control-${index + 1}`;
+          input.readOnly = true;
           nuevaCelda.appendChild(input);
         } else if (variable === 'fecha') {
           const input = document.createElement('input');
@@ -58,12 +60,21 @@ export async function cargarControlesPrevios(idUsuario) {
           input.className = 'fecha input-medidas';
           input.setAttribute('data-index', index);
           input.value = control.fecha ?? '';
+          input.readOnly = true;
           nuevaCelda.appendChild(input);
         } else {
           if (!variable || !(variable in plantillas)) return;
           const campo = plantillas[variable].cloneNode(true);
           campo.value = control[variable] ?? '';
           campo.setAttribute('data-index', index);
+
+          // Desactivar campo según tipo
+          if (campo.tagName === 'SELECT') {
+            campo.disabled = true;
+          } else {
+            campo.readOnly = true;
+          }
+
           nuevaCelda.appendChild(campo);
         }
 
@@ -71,7 +82,7 @@ export async function cargarControlesPrevios(idUsuario) {
       });
     });
 
-    // ➕ Añadir columna vacía para nuevo control
+    // 🆕 Crear la última columna editable
     const nuevoIndex = controles.length;
 
     filas.forEach(fila => {
@@ -96,13 +107,15 @@ export async function cargarControlesPrevios(idUsuario) {
         const campo = plantillas[variable].cloneNode(true);
         campo.value = '';
         campo.setAttribute('data-index', nuevoIndex);
+        campo.disabled = false;
+        campo.readOnly = false;
         nuevaCelda.appendChild(campo);
       }
 
       fila.appendChild(nuevaCelda);
     });
 
-    // Fila de acciones (guardar)
+    // 🎯 Fila de acciones
     let filaAcciones = tabla.querySelector('tr.fila-acciones');
     if (!filaAcciones) {
       filaAcciones = document.createElement('tr');
@@ -114,7 +127,7 @@ export async function cargarControlesPrevios(idUsuario) {
       tabla.querySelector('tbody').appendChild(filaAcciones);
     }
 
-    // Asegurar que haya suficientes celdas en la fila de acciones
+    // Asegurar suficientes celdas en la fila de acciones
     const totalColumnas = controles.length + 1;
     while (filaAcciones.children.length < totalColumnas + 1) {
       const td = document.createElement('td');
@@ -122,7 +135,7 @@ export async function cargarControlesPrevios(idUsuario) {
       filaAcciones.appendChild(td);
     }
 
-    // Botón guardar en la última columna
+    // Botón Guardar en la última celda
     const ultimaCelda = filaAcciones.lastElementChild;
     ultimaCelda.innerHTML = `
       <button class="guardar-control" data-index="${nuevoIndex}">

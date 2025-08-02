@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('centro_id', centro_id); 
 
             setTimeout(() => {
-                const nombreElems = document.querySelectorAll('.nombre-usuario');
+                const nombreElems = document.querySelectorAll('.nombre-usuario-navbar');
                 const rolElems = document.querySelectorAll('.rol-usuario');
                 if (nombreElems.length === 0 || rolElems.length === 0) {
                     console.error('No se encontraron elementos para actualizar el nombre y rol');

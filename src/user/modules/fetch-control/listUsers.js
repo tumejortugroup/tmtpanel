@@ -32,7 +32,7 @@ export async function cargarListaUsers() {
       a.className = 'dropdown-item';
 
       // Usa "id_usuario" porque así lo devuelve tu API
-      a.href = `/dashboard/controles/control.html?id=${user.id_usuario}`;
+      a.href = `/dashboard/controles/vistaControles.html?id=${user.id_usuario}`;
       a.textContent = user.nombre ?? '(Sin nombre)';
       li.appendChild(a);
       lista.appendChild(li);

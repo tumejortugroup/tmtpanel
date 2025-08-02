@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Controles</title>
+        <title>Crear Control</title>
         
         <!-- Favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico" />
@@ -59,8 +59,18 @@
                 </div>
                 <div class="card-body backside">
                 <div class="header-title header-controles">
-                    <div>
-                        <h3 class="card-title">Elaboración de controles</h3>
+                    <div class="box-asignar-user">
+                        <h3 class="card-title">Creación de controles: </h3>
+                       <div class="btn-group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Usuario
+                            </button>
+                            <ul class="dropdown-menu" id="lista-users" aria-labelledby="btnGroupDrop1">
+                                <!-- Aquí se llenará la lista de usuarios -->
+                            </ul>
+                        </div>
+
+
                     </div>
 
                     <div>
@@ -70,20 +80,13 @@
                       
                         
                             <div>
-                                <button type="button" id ="agregarColumnaBtn" class="btn btn-primary"> Añadir control</button>
-                                
-                                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Usuario</button>
-                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">>
-                                    <li><a class="dropdown-item" href="#"> Dropdown link </a></li>
-                                    <li><a class="dropdown-item" href="#"> Dropdown link </a></li>
-                                </ul>
+                               
 
-                                 <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+
+                                 <button id="btn-ver-controles" type="button" class="btn btn-primary " aria-expanded="false">
                                     Controles
                                 </button>
-                                <ul class="dropdown-menu" id="lista-controles" aria-labelledby="btnGroupDrop1">
-                                    <!-- Aquí se insertarán dinámicamente los <li> -->
-                                </ul>
+                               
                             </div>
                         </div>
                     </div>
@@ -117,19 +120,19 @@
             <tr class="apartado-controles" data-variable="edad">
                 <th class="parametros-medidas">Edad</th>
                 <td class="controles">
-                    <input class="edad input-medidas" data-index ='1'/>
+                    <input type="number" class="edad input-medidas" data-index ='1'/>
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="peso">
                 <th class="parametros-medidas">Peso</th>
                 <td class="controles">
-                    <input class="peso input-medidas" data-index ='1' />
+                    <input type="number"  class="peso input-medidas" data-index ='1' />
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="altura">
                 <th class="parametros-medidas">Altura</th>
                 <td class="controles">
-                    <input class="altura input-medidas" data-index ='1'/>
+                    <input  type="number"  class="altura input-medidas" data-index ='1'/>
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="genero">
@@ -176,45 +179,45 @@
             </tr>
             <tr class="apartado-controles" data-variable="cuello">
                 <th class="parametros-medidas">Cuello</th>
-                <td class="controles"><input class="cuello input-medidas" data-index ='1' /></td>
+                <td class="controles"><input type="number"  class="cuello input-medidas" data-index ='1' /></td>
             </tr>
             <tr class="apartado-controles" data-variable="cintura">
                 <th class="parametros-medidas">Cintura</th>
-                <td class="controles"><input class="cintura input-medidas" data-index ='1' /></td>
+                <td class="controles"><input  type="number" class="cintura input-medidas" data-index ='1' /></td>
             </tr>
             <tr class="apartado-controles" data-variable="cadera">
                 <th class="parametros-medidas">Cadera</th>
-                <td class="controles"><input class="cadera input-medidas" data-index ='1' /></td>
+                <td class="controles"><input type="number" class="cadera input-medidas" data-index ='1' /></td>
             </tr>
             <tr class="apartado-controles" data-variable="abdomen">
                 <th class="parametros-medidas">Abdomen</th>
                 <td class="controles">
-                    <input class="abdomen input-medidas" data-index ='1' />
+                    <input  type="number"  class="abdomen input-medidas" data-index ='1' />
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="brazo">
                 <th class="parametros-medidas">Brazo</th>
                 <td class="controles">
-                    <input class="brazo input-medidas" data-index ='1' />
+                    <input type="number"  class="brazo input-medidas" data-index ='1' />
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="muslo">
                 <th class="parametros-medidas">Muslo</th>
                 <td class="controles">
-                    <input class="muslo input-medidas" data-index ='1'/>
+                    <input type="number"  class="muslo input-medidas" data-index ='1'/>
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="triceps">
                 <th class="parametros-medidas">Tríceps</th>
                 <td class="controles">
-                    <input class="triceps input-medidas" data-index ='1'/>
+                    <input  type="number" class="triceps input-medidas" data-index ='1'/>
                 </td>
             </tr>
 
             <tr class="apartado-controles" data-variable="porcentaje_graso_perimetros">
                 <th class="parametros-medidas">% graso perimetral</th>
                 <td class="controles">
-                    <input class="grasa_perimetral input-medidas" data-index ='1'/>
+                    <input type="number"  class="grasa_perimetral input-medidas" data-index ='1'/>
                 </td>
             </tr>
 
@@ -226,38 +229,38 @@
             <tr class="apartado-controles" data-variable="subescapular">
                 <th class="parametros-medidas"> Subescapular</th>
                 <td class="controles">
-                    <input class="subescapular input-medidas" data-index ='1' />
+                    <input type="number"  class="subescapular input-medidas" data-index ='1' />
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="abdomen_pliegue">
                 <th class="parametros-medidas">Abdomen</th>
                 <td class="controles">
-                    <input class="abdomen_pliegue input-medidas" data-index ='1'/>
+                    <input type="number"  class="abdomen_pliegue input-medidas" data-index ='1'/>
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="supra_iliaco">
                 <th class="parametros-medidas">Suprailiaco</th>
                 <td class="controles">
-                    <input class="supra_iliaco input-medidas" data-index ='1'/>
+                    <input type="number"  class="supra_iliaco input-medidas" data-index ='1'/>
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="muslo_pliegue">
                 <th class="parametros-medidas">Muslo</th>
                 <td class="controles">
-                    <input class="muslo_pliegue input-medidas" data-index ='1'/>
+                    <input type="number"  class="muslo_pliegue input-medidas" data-index ='1'/>
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="suma_pliegues">
                 <th class="parametros-medidas">Suma total</th>
                 <td class="controles">
-                    <input class="suma_pliegues input-medidas" readonly data-index ='1'/>
+                    <input type="number"  class="suma_pliegues input-medidas" readonly data-index ='1'/>
                 </td>
             </tr>
 
              <tr class="apartado-controles" data-variable="porcentaje_graso_estimado_pliegues">
                 <th class="parametros-medidas">% graso pliegues</th>
                 <td class="controles">
-                    <input class="grasa_pliegues input-medidas" data-index ='1' />
+                    <input type="number"  class="grasa_pliegues input-medidas" data-index ='1' />
                 </td>
             </tr>
 
@@ -268,25 +271,25 @@
             <tr class="apartado-controles" data-variable="humero_biepicondileo">
                 <th class="parametros-medidas">Húmero bicondileo</th>
                 <td class="controles">
-                    <input class="humero_bicondileo input-medidas" data-index ='1' />
+                    <input  type="number"  class="humero_bicondileo input-medidas" data-index ='1' />
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="femur_bicondileo">
                 <th class="parametros-medidas">Fémur bicondileo</th>
                 <td class="controles">
-                    <input class="femur_bicondileo input-medidas" data-index ='1' />
+                    <input type="number"  class="femur_bicondileo input-medidas" data-index ='1' />
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="muneca_estiloideo">
                 <th class="parametros-medidas">Muñeca estiloideo</th>
                 <td class="controles">
-                    <input class="muneca_estiloideo input-medidas"  data-index ='1'/>
+                    <input type="number"  class="muneca_estiloideo input-medidas"  data-index ='1'/>
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="muneca_circunferencia">
                 <th class="parametros-medidas">Muñeca circunferencia</th>
                 <td class="controles">
-                    <input class="muneca_circunferencia input-medidas" data-index ='1' />
+                    <input type="number"  class="muneca_circunferencia input-medidas" data-index ='1' />
                 </td>
             </tr>
 
@@ -297,55 +300,55 @@
             <tr class="apartado-controles" data-variable="peso_oseo_rocha">
                 <th class="parametros-medidas">Peso óseo Rocha</th>
                 <td class="controles">
-                    <input class="peso_oseo_rocha input-medidas"  data-index ='1'/>
+                    <input type="number"  class="peso_oseo_rocha input-medidas"  data-index ='1'/>
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="peso_residual">
                 <th class="parametros-medidas">Peso residual</th>
                 <td class="controles">
-                    <input class="peso_residual input-medidas" data-index ='1' />
+                    <input type="number"  class="peso_residual input-medidas" data-index ='1' />
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="porcentaje_residual">
                 <th class="parametros-medidas">Porcentaje residual</th>
                 <td class="controles">
-                    <input class="porcentaje_residual input-medidas" data-index ='1'/>
+                    <input type="number"  class="porcentaje_residual input-medidas" data-index ='1'/>
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="peso_extracelular">
                 <th class="parametros-medidas">Peso extracelular</th>
                 <td class="controles">
-                    <input class="peso_extracelular input-medidas" data-index ='1'/>
+                    <input type="number"  class="peso_extracelular input-medidas" data-index ='1'/>
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="porcentaje_extracelular">
                 <th class="parametros-medidas">Porcentaje extracelular</th>
                 <td class="controles">
-                    <input class="porcentaje_extracelular input-medidas" data-index ='1' />
+                    <input type="number"  class="porcentaje_extracelular input-medidas" data-index ='1' />
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="peso_intracelular">
                 <th class="parametros-medidas">Peso intracelular</th>
                 <td class="controles">
-                    <input class="peso_intracelular input-medidas" data-index ='1'/>
+                    <input type="number"  class="peso_intracelular input-medidas" data-index ='1'/>
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="porcentaje_intracelular">
                 <th class="parametros-medidas">Porcentaje intracelular</th>
                 <td class="controles">
-                    <input class="porcentaje_intracelular input-medidas" data-index ='1'/>
+                    <input type="number"  class="porcentaje_intracelular input-medidas" data-index ='1'/>
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="imc"> 
                 <th class="parametros-medidas">IMC</th>
                 <td class="controles">
-                    <input class="imc input-medidas" data-index ='1' />
+                    <input type="number"  class="imc input-medidas" data-index ='1' />
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="complex_osea">
                 <th class="parametros-medidas">Complexión ósea</th>
                 <td class="controles">
-                    <input class="complexion_osea input-medidas" data-index ='1'/>
+                    <input type="number"  class="complexion_osea input-medidas" data-index ='1'/>
                 </td>
             </tr>
       
@@ -358,31 +361,31 @@
             <tr class="apartado-controles" data-variable="tdee">
                 <th class="parametros-medidas">TDEE</th>
                 <td class="controles">
-                    <input class="tdee input-medidas" data-index ='1' />
+                    <input type="number"  class="tdee input-medidas" data-index ='1' />
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="calorias_datos">
                 <th class="parametros-medidas">TDEE ajustado</th>
                 <td class="controles">
-                    <input class="tdee_ajustado input-medidas" data-index ='1'/>
+                    <input type="number"  class="tdee_ajustado input-medidas" data-index ='1'/>
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="proteinas_datos">
                 <th class="parametros-medidas">Gramos de proteínas</th>
                 <td class="controles">
-                    <input class="gramos_proteinas input-medidas" data-index ='1'/>
+                    <input type="number"  class="gramos_proteinas input-medidas" data-index ='1'/>
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="grasas_datos">
             <th class="parametros-medidas">Gramos de grasas</th>
                 <td class="controles">
-                    <input class="gramos_grasas input-medidas" data-index ='1'/>
+                    <input type="number"  class="gramos_grasas input-medidas" data-index ='1'/>
                 </td>
             </tr>
             <tr class="apartado-controles" data-variable="carbohidratos_datos">
                 <th class="parametros-medidas">Gramos de carbohidratos</th>
                 <td class="controles">
-                    <input class="gramos_carbohidratos input-medidas" data-index ='1' />
+                    <input type="number"  class="gramos_carbohidratos input-medidas" data-index ='1' />
                 </td>
             </tr>
 

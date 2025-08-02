@@ -87,6 +87,7 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
 }
 h3{
      font-family: 'Montserrat-Bold', sans-serif !important;
@@ -98,10 +99,10 @@ h3{
 
 .contenedor-controles {
   display: flex;
-  flex-wrap: nowrap; /* o wrap si quieres que salten a la siguiente fila al desbordar */
-  gap: 20px; /* espacio entre bloques */
+  flex-wrap: nowrap; 
+  gap: 20px; 
   align-items: flex-start;
-  overflow-x: auto; /* permite scroll si hay muchos bloques */
+  overflow-x: auto; 
 }
 .bloque-control {
   display: table;
@@ -113,4 +114,33 @@ h3{
 .bloque-control td {
   border: 1px solid #ddd;
   padding: 8px;
+}
+
+
+
+/****CABECERA, TITULO NOMBRE Y BOTON DE CONTROLES*/
+.mis-controles-header-wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.seleccion-controles {
+  margin-left: auto; 
+}
+
+
+
+
+/***VISTA CREACION DE CONTROLES******/
+
+.box-asignar-user{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
 }

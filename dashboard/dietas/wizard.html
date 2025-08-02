@@ -156,40 +156,11 @@
                 </div>
                 <div class="card-body backside">
                 <div class="header-title header-controles">
-                    <div>
-                        <h3 class="card-title">Creación de dieta</h3>
-                    </div>
-
+                  
                    
                 </div>
                 
     
-                 <fieldset class="table-wrapper">
-                                <div class="form-card text-start">
-                                    <div class="row">
-                                    <div class="col-7">
-                                        <h6 class="mb-4">Selecciona usuario/control</h6>
-                                    </div>
-                                
-                                    </div>
-                                    <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label">Usuario</label>
-                                            <input type="email" class="form-control" name="email" placeholder="Email Id" />
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <select name="" id="">Control</select>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                                <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next" >Next</button>
-                </fieldset>
-
 
 
                              <fieldset class="table-wrapper">
@@ -207,6 +178,497 @@
                                     <div class="table-responsive">
                                     <div id="tabla-container">
                                     <div class="section">
+                                        <table class="table-dieta">
+                                        <thead class="header-dieta">
+                                            <tr>
+                                            <th colspan="8">
+                                                <select  name="tipo-comida">
+                                                <option>Desayuno</option>
+                                                <option>Almuerzo</option>
+                                                <option>Comida</option>
+                                                <option>Merienda</option>
+                                                <option>Pre-entreno</option>
+                                                <option>Post-entreno</option>
+                                                <option>Cena</option>
+                                                </select>
+                                            </th>
+                                            </tr>
+                                            <tr>
+                                            <th>MACRO</th>
+                                            <th>Familia</th>
+                                            <th>Alimento</th>
+                                            <th>Cantidad</th>
+                                            <th>Equivalente</th>
+                                            <th>Cantidad</th>
+                                            <th>Equivalente</th>
+                                            <th>Cantidad</th>
+                                            </tr>
+                                        
+                                        </thead>
+                                        <tbody>
+                                            <tr >
+                                            <td class="header-dieta">
+                                                    <select >
+                                                        <option>Proteina</option>
+                                                        <option>Grasa</option>
+                                                        <option>Carbohidratos</option>
+                                                    </select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td><input class="input-cantidad" type="text"></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            </tr>
+
+                                            <tr>
+                                            <td class="header-dieta">
+                                                    <select>
+                                                        <option>Proteina</option>
+                                                        <option>Grasa</option>
+                                                        <option>Carbohidratos</option>
+                                                    </select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td><input class="input-cantidad" type="text"></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            </tr>
+
+                                            <tr>
+                                            <td class="header-dieta">
+                                                    <select>
+                                                        <option>Proteina</option>
+                                                        <option>Grasa</option>
+                                                        <option>Carbohidratos</option>
+                                                    </select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td><input class="input-cantidad" type="text"></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td class="header-dieta">
+                                                        <select>
+                                                            <option>Proteina</option>
+                                                            <option>Grasa</option>
+                                                            <option>Carbohidratos</option>
+                                                        </select>
+                                                </td>
+                                                <td>
+                                                    <select><option>Select</option></select>
+                                                </td>
+                                                <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                                <td><input class="input-cantidad" type="text"></td>
+                                                <td><select><option>Select</option></td>
+                                                <td></td>
+                                                <td><select><option>Select</option></td>
+                                                <td></td>
+                                                
+                                            </tr>
+
+                                            <tr>
+                                                <td class="header-dieta">
+                                                      Observaciones
+                                                </td>
+                                                <td colspan="7"><textarea class="text-dieta"></textarea></td></tr>
+                                        </tbody>
+                                        </table>
+
+                                        <table class="table-dieta">
+                                        <thead class="header-dieta">
+                                            <tr>
+                                            <th colspan="8">
+                                                <select  name="tipo-comida">
+                                                <option>Desayuno</option>
+                                                <option>Almuerzo</option>
+                                                <option>Comida</option>
+                                                <option>Merienda</option>
+                                                <option>Pre-entreno</option>
+                                                <option>Post-entreno</option>
+                                                <option>Cena</option>
+                                                </select>
+                                            </th>
+                                            </tr>
+                                            <tr>
+                                            <th>MACRO</th>
+                                            <th>Familia</th>
+                                            <th>Alimento</th>
+                                            <th>Cantidad</th>
+                                            <th>Equivalente</th>
+                                            <th>Cantidad</th>
+                                            <th>Equivalente</th>
+                                            <th>Cantidad</th>
+                                            </tr>
+                                        
+                                        </thead>
+                                        <tbody>
+                                            <tr >
+                                            <td class="header-dieta">
+                                                    <select >
+                                                        <option>Proteina</option>
+                                                        <option>Grasa</option>
+                                                        <option>Carbohidratos</option>
+                                                    </select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td><input class="input-cantidad" type="text"></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            </tr>
+
+                                            <tr>
+                                            <td class="header-dieta">
+                                                    <select>
+                                                        <option>Proteina</option>
+                                                        <option>Grasa</option>
+                                                        <option>Carbohidratos</option>
+                                                    </select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td><input class="input-cantidad" type="text"></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            </tr>
+
+                                            <tr>
+                                            <td class="header-dieta">
+                                                    <select>
+                                                        <option>Proteina</option>
+                                                        <option>Grasa</option>
+                                                        <option>Carbohidratos</option>
+                                                    </select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td><input class="input-cantidad" type="text"></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td class="header-dieta">
+                                                        <select>
+                                                            <option>Proteina</option>
+                                                            <option>Grasa</option>
+                                                            <option>Carbohidratos</option>
+                                                        </select>
+                                                </td>
+                                                <td>
+                                                    <select><option>Select</option></select>
+                                                </td>
+                                                <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                                <td><input class="input-cantidad" type="text"></td>
+                                                <td><select><option>Select</option></td>
+                                                <td></td>
+                                                <td><select><option>Select</option></td>
+                                                <td></td>
+                                                
+                                            </tr>
+
+                                            <tr>
+                                                <td class="header-dieta">
+                                                      Observaciones
+                                                </td>
+                                                <td colspan="7"><textarea class="text-dieta"></textarea></td></tr>
+                                        </tbody>
+                                        </table>
+
+
+                                        <table class="table-dieta">
+                                        <thead class="header-dieta">
+                                            <tr>
+                                            <th colspan="8">
+                                                <select  name="tipo-comida">
+                                                <option>Desayuno</option>
+                                                <option>Almuerzo</option>
+                                                <option>Comida</option>
+                                                <option>Merienda</option>
+                                                <option>Pre-entreno</option>
+                                                <option>Post-entreno</option>
+                                                <option>Cena</option>
+                                                </select>
+                                            </th>
+                                            </tr>
+                                            <tr>
+                                            <th>MACRO</th>
+                                            <th>Familia</th>
+                                            <th>Alimento</th>
+                                            <th>Cantidad</th>
+                                            <th>Equivalente</th>
+                                            <th>Cantidad</th>
+                                            <th>Equivalente</th>
+                                            <th>Cantidad</th>
+                                            </tr>
+                                        
+                                        </thead>
+                                        <tbody>
+                                            <tr >
+                                            <td class="header-dieta">
+                                                    <select >
+                                                        <option>Proteina</option>
+                                                        <option>Grasa</option>
+                                                        <option>Carbohidratos</option>
+                                                    </select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td><input class="input-cantidad" type="text"></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            </tr>
+
+                                            <tr>
+                                            <td class="header-dieta">
+                                                    <select>
+                                                        <option>Proteina</option>
+                                                        <option>Grasa</option>
+                                                        <option>Carbohidratos</option>
+                                                    </select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td><input class="input-cantidad" type="text"></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            </tr>
+
+                                            <tr>
+                                            <td class="header-dieta">
+                                                    <select>
+                                                        <option>Proteina</option>
+                                                        <option>Grasa</option>
+                                                        <option>Carbohidratos</option>
+                                                    </select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td><input class="input-cantidad" type="text"></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td class="header-dieta">
+                                                        <select>
+                                                            <option>Proteina</option>
+                                                            <option>Grasa</option>
+                                                            <option>Carbohidratos</option>
+                                                        </select>
+                                                </td>
+                                                <td>
+                                                    <select><option>Select</option></select>
+                                                </td>
+                                                <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                                <td><input class="input-cantidad" type="text"></td>
+                                                <td><select><option>Select</option></td>
+                                                <td></td>
+                                                <td><select><option>Select</option></td>
+                                                <td></td>
+                                                
+                                            </tr>
+
+                                            <tr>
+                                                <td class="header-dieta">
+                                                      Observaciones
+                                                </td>
+                                                <td colspan="7"><textarea class="text-dieta"></textarea></td></tr>
+                                        </tbody>
+                                        </table>
+
+
+                                        <table class="table-dieta">
+                                        <thead class="header-dieta">
+                                            <tr>
+                                            <th colspan="8">
+                                                <select  name="tipo-comida">
+                                                <option>Desayuno</option>
+                                                <option>Almuerzo</option>
+                                                <option>Comida</option>
+                                                <option>Merienda</option>
+                                                <option>Pre-entreno</option>
+                                                <option>Post-entreno</option>
+                                                <option>Cena</option>
+                                                </select>
+                                            </th>
+                                            </tr>
+                                            <tr>
+                                            <th>MACRO</th>
+                                            <th>Familia</th>
+                                            <th>Alimento</th>
+                                            <th>Cantidad</th>
+                                            <th>Equivalente</th>
+                                            <th>Cantidad</th>
+                                            <th>Equivalente</th>
+                                            <th>Cantidad</th>
+                                            </tr>
+                                        
+                                        </thead>
+                                        <tbody>
+                                            <tr >
+                                            <td class="header-dieta">
+                                                    <select >
+                                                        <option>Proteina</option>
+                                                        <option>Grasa</option>
+                                                        <option>Carbohidratos</option>
+                                                    </select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td><input class="input-cantidad" type="text"></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            </tr>
+
+                                            <tr>
+                                            <td class="header-dieta">
+                                                    <select>
+                                                        <option>Proteina</option>
+                                                        <option>Grasa</option>
+                                                        <option>Carbohidratos</option>
+                                                    </select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td><input class="input-cantidad" type="text"></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            </tr>
+
+                                            <tr>
+                                            <td class="header-dieta">
+                                                    <select>
+                                                        <option>Proteina</option>
+                                                        <option>Grasa</option>
+                                                        <option>Carbohidratos</option>
+                                                    </select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                            <td><input class="input-cantidad" type="text"></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            <td><select><option>Select</option></td>
+                                            <td></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td class="header-dieta">
+                                                        <select>
+                                                            <option>Proteina</option>
+                                                            <option>Grasa</option>
+                                                            <option>Carbohidratos</option>
+                                                        </select>
+                                                </td>
+                                                <td>
+                                                    <select><option>Select</option></select>
+                                                </td>
+                                                <td>
+                                                <select><option>Select</option></select>
+                                            </td>
+                                                <td><input class="input-cantidad" type="text"></td>
+                                                <td><select><option>Select</option></td>
+                                                <td></td>
+                                                <td><select><option>Select</option></td>
+                                                <td></td>
+                                                
+                                            </tr>
+
+                                            <tr>
+                                                <td class="header-dieta">
+                                                      Observaciones
+                                                </td>
+                                                <td colspan="7"><textarea class="text-dieta"></textarea></td></tr>
+                                        </tbody>
+                                        </table>
+
+
                                         <table class="table-dieta">
                                         <thead class="header-dieta">
                                             <tr>
