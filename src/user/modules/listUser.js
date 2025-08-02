@@ -46,9 +46,8 @@ console.log("Token:", localStorage.getItem("token"));
 
                     <td>${usuario.telefono}</td>
                     <td>${usuario.correo}</td>
-                    <td>${usuario.rol}</td>
                     <td>
-                        <span class="badge ${usuario.estado === 'Activo' ? 'bg-success' : 'bg-secondary'} badge-estado" data-nombre="${usuario.nombre}">
+                        <span class="badge ${usuario.estado === 'Activo' ? 'bg-secondary':'bg-success' } badge-estado" data-nombre="${usuario.nombre}">
                             ${usuario.estado}
                         </span>
 
@@ -59,13 +58,23 @@ console.log("Token:", localStorage.getItem("token"));
                             <a class="btn btn-sm btn-icon " data-bs-toggle="tooltip" title="Editar" href="/dashboard/user/user-update.html?id=${usuario.id_usuario}">
                                 <span class="btn-inner">✏️</span>
                             </a>
-                            <a class="btn btn-sm btn-icon " data-bs-toggle="tooltip" title="Ver peso" href="/dashboard/controles/control.html?id=${usuario.id_usuario}">
-    <span class="btn-inner">⚖️</span>
-</a>
-
                             <a class="btn btn-sm btn-icon btn-danger " data-nombre="${usuario.nombre}" data-bs-toggle="tooltip" title="Eliminar" href="#">
                                 <span class="btn-inner">🗑️</span>
                             </a>
+                        </div>
+                    </td>
+
+                         <td>
+                        <div class="flex align-items-center list-user-action">
+
+                            <a class="btn btn-sm btn-icon " data-bs-toggle="tooltip" title="Control" href="/dashboard/controles/control.html?id=${usuario.id_usuario}">
+                                <span class="btn-inner">⚖️</span>
+                            </a>
+
+                              <a class="btn btn-sm btn-icon " data-bs-toggle="tooltip" title="Crear dieta" href="/dashboard/controles/control.html?id=${usuario.id_usuario}">
+                                  <span class="btn-inner">   <img src="/assets/images/dashboard/iconos/dieta.webp" alt="" width="20" height="15" ></span>
+                            </a>
+
                         </div>
                     </td>
                 </tr>

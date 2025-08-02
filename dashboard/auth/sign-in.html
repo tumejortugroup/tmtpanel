@@ -81,10 +81,24 @@
                                     </div>
                                  </div>
                                  <div class="col-lg-12">
-                                    <div class="form-group">
-                                       <label for="password" class="form-label">Contraseña</label>
+                              <div class="form-group">
+                                    <label for="password" class="form-label">Contraseña</label>
+                                    <div style="position: relative;">
                                        <input type="password" class="form-control" id="password" aria-describedby="password" placeholder=" ">
+                                       <button type="button" onclick="togglePassword()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none;">
+                                          👁️
+                                       </button>
                                     </div>
+                              </div>
+
+                              <script>
+                                 function togglePassword() {
+                                    const passwordInput = document.getElementById('password');
+                                    const currentType = passwordInput.getAttribute('type');
+                                    passwordInput.setAttribute('type', currentType === 'password' ? 'text' : 'password');
+                                 }
+                              </script>
+
                                  </div>
                                  <div class="col-lg-12 d-flex justify-content-between">
                                     
