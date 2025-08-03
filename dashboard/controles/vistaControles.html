@@ -70,18 +70,17 @@
         <h3 class="card-title">Historial controles:</h3>
 
         <!-- Botón Usuario -->
-        <div class="btn-group">
-          <button id="btnGroupDropNombre" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            Usuario
-          </button>
-          <ul class="dropdown-menu" id="lista-users" aria-labelledby="btnUserDrop">
-            <!-- Aquí se llenará la lista de usuarios -->
-          </ul>
+      <div class="btn-group">
+                            <select id="select-usuarios" class="form-select form-select-sm btn btn-primary" style="width: auto;">
+                            <option selected disabled>Seleccionar usuario</option>
+                            <!-- Opciones dinámicas -->
+                            </select>
+
         </div>
 
         <!-- Botón Controles alineado a la derecha -->
         <div class="dropdown seleccion-controles">
-          <button id="btnControlDrop" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          <button id="btnControlDrop" type="button" class="btn btn-primary dropdown-toggle btn-user-style" data-bs-toggle="dropdown" aria-expanded="false">
             Controles
           </button>
           <ul class="dropdown-menu" id="lista-controles" aria-labelledby="btnControlDrop">

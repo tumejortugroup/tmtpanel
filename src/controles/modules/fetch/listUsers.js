@@ -17,25 +17,27 @@ export async function cargarListaUsers() {
     const result = await res.json();
     console.log('📦 Respuesta del servidor:', result);
 
-    // ✅ Ahora verificamos directamente si result es un array
     if (!Array.isArray(result)) {
       console.warn('❌ La respuesta del servidor no es una lista de usuarios');
       return;
     }
 
-    const lista = document.getElementById('lista-users');
-    lista.innerHTML = ''; 
+    const select = document.getElementById('select-usuarios');
+    select.innerHTML = '<option disabled selected>Seleccionar usuario</option>';
 
     result.forEach(user => {
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.className = 'dropdown-item';
+      const option = document.createElement('option');
+      option.value = user.id_usuario;
+      option.textContent = user.nombre ?? '(Sin nombre)';
+      select.appendChild(option);
+    });
 
-      // Usa "id_usuario" porque así lo devuelve tu API
-      a.href = `/dashboard/controles/control.html?id=${user.id_usuario}`;
-      a.textContent = user.nombre ?? '(Sin nombre)';
-      li.appendChild(a);
-      lista.appendChild(li);
+    // ✅ Redirigir al seleccionar usuario
+    select.addEventListener('change', (e) => {
+      const idUsuario = e.target.value;
+      if (idUsuario) {
+        window.location.href = `/dashboard/controles/control.html?id=${idUsuario}`;
+      }
     });
 
     console.log('✅ Lista de usuarios cargada.');

@@ -30,104 +30,9 @@
         <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
         <link rel="stylesheet" href="/assets/css/user/controles.css"/>
         
-          <style>
-
-       
-    .table, th, td {
-      border: 1px solid black;
-      border-collapse: collapse;
-      padding: 8px;
-      text-align: center;
-      color: black;
      
-    }
-    
 
-    table select{
-        border: none;
-        background: none;
-    }
-    
-    .table-wrapper{
-        margin: 50px;
-    }
-    .input-cantidad {
-      width: 50px;
-      text-align: center;
-      border: none;
-      background: none;
-    }
-
-     .header-dieta select {
-      color: white;
-      font-weight: bold;
-    }
-
-    .header-dieta select option {
-      color: black;
-    }
-
-    .section {
-      margin-bottom: 20px;
-    }
-
-    .table-dieta {
-  border-collapse: separate;
-  border-spacing: 0;
-  width: 100%;
-  border: 2px solid #000; /* Puedes cambiar el color */
-  border-radius: 12px;
-  overflow: hidden;
-}
-     .table-dieta thead {
-        background-color:rgb(211, 160, 34);
-        color: white;
-        font-weight: bold;
-        text-align: center;
-    }
-        .header-dieta{
-        background-color:rgb(211, 160, 34);
-        color: white;
-        font-weight: bold;
-        text-align: center;
-        }
-
-/* Bordes redondeados en las esquinas de la tabla */
-.table-dieta thead tr:first-child th:first-child {
-  border-top-left-radius: 12px;
-}
-.table-dieta thead tr:first-child th:last-child {
-  border-top-right-radius: 12px;
-}
-.table-dieta tbody tr:last-child td:first-child {
-  border-bottom-left-radius: 12px;
-}
-.table-dieta tbody tr:last-child td:last-child {
-  border-bottom-right-radius: 12px;
-}
-
-/* Bordes de celdas */
-.table-dieta th{
-    border: 1px solid #000;
-    padding: 8px;
-    text-align: center;
-    color: white;
-    font-weight: bold  ;
-}
-.table-dieta td {
-  border: 1px solid #000;
-  padding: 8px;
-  text-align: center;
-}
-.text-dieta {
-    width: 100%;
-    border: none;
-    text-decoration: none;
-    background: none;
-    text-align: center;
-}
-
-  </style>
+   
     </head>
     <body class="  ">
         <!-- loader Start -->
@@ -166,17 +71,21 @@
     
                  <fieldset class="table-wrapper">
                      <div class="table-responsive">
-                            <table id="user-list-table" class="table table-striped" role="grid" data-bs-toggle="data-table">
+                            <table id="dieta-list-table" class="table table-striped" role="grid" data-bs-toggle="data-table">
                                 <thead>
                                     <tr class="ligth">
-                                    <th>Nombre</th>
-                                    <th>Apellidos</th>
-                                    <th>Telefono</th>
-                                    <th>Correo</th>
-                                    <th>Estado</th>
-                                    <th>Fecha alta</th>
-                                    <th style="min-width: 100px">Editar/Eliminar</th>
-                                    <th style="min-width: 100px">Control/Dieta</th>
+                                        <th>Nombre</th>
+                                        <th>Apellidos</th>
+                                        <th>Ultimo Control</th>
+                                        <th>Controles</th>
+                                        <th style="min-width: 100px">Crear</th>
+                                    </tr>
+                                    <tr>
+                                        <th><input class="input-dataTable" type="text" name="" id=""></th>
+                                        <th><input class="input-dataTable" type="text" name="" id=""></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -186,7 +95,7 @@
                             </table>
                      </div>
                              
-                                <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next" >Creación</button>
+                              
                 </fieldset>
 
 
@@ -249,7 +158,7 @@
         <!-- App Script -->
         <script src="/assets/js/hope-ui.js" defer></script>
         <script type="module" src="/src/Auth/main.js"></script>
-        <script type="module" src="/src/user/controlUser.js"></script>
+        <script type="module" src="/src/dietas/main.js"></script>
         
     </body>
     </html>

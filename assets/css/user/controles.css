@@ -120,3 +120,33 @@ h3{
     display: flex;
     flex-direction: row;
 }
+
+
+/*SELECT CONTROLES*/
+
+#btnGroupDrop1:hover,
+#btnGroupDrop1[aria-expanded="true"] {
+     background-color: white;
+  color: #d29c1a;
+  border: 1px solid #d29c1a;
+}
+
+
+
+
+#ver-controles:hover{
+   background-color: white;
+  color: #d29c1a;
+  border: 1px solid #d29c1a;
+}
+
+
+.input-dataTable{
+    width: 120px;
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    
+}

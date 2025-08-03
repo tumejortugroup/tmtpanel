@@ -7,6 +7,9 @@ export async function mostrarNombreUsuario() {
     return;
   }
 
+  const select = document.getElementById('select-usuarios');
+  if (!select) return;
+
   const token = localStorage.getItem('token');
 
   try {
@@ -17,14 +20,19 @@ export async function mostrarNombreUsuario() {
     });
 
     const data = await res.json();
-    
-
-    // Suponiendo que la API devuelve { id_usuario, nombre, ... }
     const nombre = data.nombre || data.username || 'Usuario';
 
-    // Coloca el nombre en el botón
-    const btn = document.getElementById('btnGroupDrop1');
-    if (btn) btn.textContent = nombre;
+    // Esperar un momento si el select aún no tiene opciones cargadas
+    const esperarOSeleccionar = () => {
+      const option = select.querySelector(`option[value="${id}"]`);
+      if (option) {
+        select.value = id;
+      } else {
+        setTimeout(esperarOSeleccionar, 100); // intenta de nuevo en 100ms
+      }
+    };
+
+    esperarOSeleccionar();
 
   } catch (err) {
     console.error('❌ Error al obtener usuario:', err);

@@ -144,3 +144,121 @@ h3{
     align-items: center;
     gap: 10px;
 }
+
+
+
+
+
+/****DATA-TABLE USERS***/
+
+.input-dataTable{
+      width: 80px;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+    
+}
+
+.input-dataTable-date{
+      width: 125px;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+    
+}
+
+
+
+.input-dataTable-check {
+  width: 28px;
+  height: 28px;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+.input-dataTable-check:checked {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.input-dataTable-check:checked::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 4px;
+  width: 6px;
+  height: 14px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.input-dataTable-check:hover {
+  transform: scale(1.07);
+  border-color: #28a745;
+}
+
+
+
+
+/****SELECTS DE ARRIBA CONTROLES, CREACION CONTROLES Y HISTORIAL*/
+
+/*SELECT USUARIOS*/
+#select-usuarios {
+  background-color: rgb(211, 160, 34);
+  color: #FFFAFA;
+  border: 1px solid rgb(211, 160, 34);
+  font-weight: bold;
+  appearance: none;            /* Standard */
+  -webkit-appearance: none;    /* Safari/Chrome */
+  -moz-appearance: none;       /* Firefox */
+  background-image: none;      /* Elimina imagen de flecha si se renderiza como tal */
+  padding-right: 1rem;    
+}
+
+#select-usuarios:focus {
+  background-color:#FFFAFA;
+  color: rgb(211, 160, 34);
+  border-color: rgb(211, 160, 34);
+  box-shadow: 0 0 5px rgb(211, 160, 34);
+}
+
+/* Estilo de las opciones del desplegable */
+#select-usuarios option {
+  background-color: #FFFAFA;
+  color: rgb(211, 160, 34);
+  font-weight: 500;
+}
+/*SELECT CONTROLES*/
+
+
+#btnControlDrop:hover,
+#btnControlDrop[aria-expanded="true"] {
+  background-color: white;
+  color: #d29c1a;
+  border: 1px solid #d29c1a;
+}
+
+#btn-ver-controles:hover{
+   background-color: white;
+  color: #d29c1a;
+  border: 1px solid #d29c1a;
+
+}
+
+
+#ver-controles:hover{
+   background-color: white;
+  color: #d29c1a;
+  border: 1px solid #d29c1a;
+}

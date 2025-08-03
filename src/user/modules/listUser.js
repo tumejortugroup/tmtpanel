@@ -2,7 +2,7 @@ export async function listUser() {
     const token = localStorage.getItem("token");
     const centro_id = localStorage.getItem("centro_id");
 
-    console.log("🔄 Intentando cargar la lista de usuarios...");
+    
 
     if (!token || !centro_id) {
         console.warn("⚠️ Faltan datos: token o centro_id no encontrados en localStorage.");
@@ -11,9 +11,8 @@ export async function listUser() {
 
 
   const endpoint = `http://localhost:9000/api/v1/usuarios/centro?id=${centro_id}`;
-    console.log(`🔗 Endpoint de usuarios: ${endpoint}`);
-console.log("Token:", localStorage.getItem("token"));
-    console.log("Centro ID:", centro_id);
+    
+
     try {
         const response = await fetch(endpoint, {
             method: "GET",
@@ -28,7 +27,7 @@ console.log("Token:", localStorage.getItem("token"));
         }
 
         const usuarios = await response.json();
-        console.log("✅ Usuarios recibidos:", usuarios);
+   
 
         const tbody = document.querySelector("tbody");
         if (!tbody) {
