@@ -29,105 +29,17 @@
         <!-- RTL Css -->
         <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
         <link rel="stylesheet" href="/assets/css/user/controles.css"/>
-        
+         <link rel="stylesheet" href="/assets/css/dieta/dieta.css"/>
+         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
           <style>
 
-       
-    .table, th, td {
-      border: 1px solid black;
-      border-collapse: collapse;
-      padding: 8px;
-      text-align: center;
-      color: black;
      
-    }
-    
-
-    table select{
-        border: none;
-        background: none;
-    }
-    
-    .table-wrapper{
-        margin: 50px;
-    }
-    .input-cantidad {
-      width: 50px;
-      text-align: center;
-      border: none;
-      background: none;
-    }
-
-     .header-dieta select {
-      color: white;
-      font-weight: bold;
-    }
-
-    .header-dieta select option {
-      color: black;
-    }
-
-    .section {
-      margin-bottom: 20px;
-    }
-
-    .table-dieta {
-  border-collapse: separate;
-  border-spacing: 0;
-  width: 100%;
-  border: 2px solid #000; /* Puedes cambiar el color */
-  border-radius: 12px;
-  overflow: hidden;
-}
-     .table-dieta thead {
-        background-color:rgb(211, 160, 34);
-        color: white;
-        font-weight: bold;
-        text-align: center;
-    }
-        .header-dieta{
-        background-color:rgb(211, 160, 34);
-        color: white;
-        font-weight: bold;
-        text-align: center;
-        }
-
-/* Bordes redondeados en las esquinas de la tabla */
-.table-dieta thead tr:first-child th:first-child {
-  border-top-left-radius: 12px;
-}
-.table-dieta thead tr:first-child th:last-child {
-  border-top-right-radius: 12px;
-}
-.table-dieta tbody tr:last-child td:first-child {
-  border-bottom-left-radius: 12px;
-}
-.table-dieta tbody tr:last-child td:last-child {
-  border-bottom-right-radius: 12px;
-}
-
-/* Bordes de celdas */
-.table-dieta th{
-    border: 1px solid #000;
-    padding: 8px;
-    text-align: center;
-    color: white;
-    font-weight: bold  ;
-}
-.table-dieta td {
-  border: 1px solid #000;
-  padding: 8px;
-  text-align: center;
-}
-.text-dieta {
-    width: 100%;
-    border: none;
-    text-decoration: none;
-    background: none;
-    text-align: center;
-}
 
   </style>
+ 
+
     </head>
     <body class="  ">
         <!-- loader Start -->
@@ -166,6 +78,87 @@
                              <fieldset class="table-wrapper">
                                 <div class="col-7">
                                         <h3 class="mb-4">Auto-ajuste</h3>
+
+                                        <div class="auto-ajuste-container">
+                                                <div style="width: 100%; max-width: 500px; margin: 2rem auto;">
+                                                    <canvas id="macroChart"  width="320" height="300"></canvas>
+                                                </div>
+
+                                                <div class="col-md-3 info-autoAjuste">
+
+                                                        
+                                                        <div>
+                                                            <div class="mb-3">
+                                                                <label class="d-block text-center title-autoAjuste">Proteínas/kg</label>
+                                                                <div class="d-flex justify-content-center">
+                                                                    <!-- Botón para disminuir proteínas -->
+                                                                    <button id="btn-decrease-protein" class=" btn-ajuste" type="button">-</button>
+                                                                    <!-- Valor de proteínas -->
+                                                                    <span id="protein-value" class="mx-3">-</span> g/Kg
+                                                                    <!-- Botón para aumentar proteínas -->
+                                                                    <button id="btn-increase-protein" class=" btn-ajuste" type="button">+</button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label class="d-block text-center title-autoAjuste">Grasas/kg</label>
+                                                                <div class="d-flex justify-content-center">
+                                                                    <!-- Botón para disminuir grasas -->
+                                                                    <button id="btn-decrease-fat" class="btn btn-ajuste" type="button">-</button>
+                                                                    <!-- Valor de grasas -->
+                                                                    <span id="fat-value" class="mx-3">-</span> g/Kg
+                                                                    <!-- Botón para aumentar grasas -->
+                                                                    <button id="btn-increase-fat" class="btn btn-ajuste" type="button">+</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                        
+                                                            <table class="table-ajuste" id="macrosTable">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th colspan="2">Macronutrientes</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr><th>Calorías</th><td id="table-calories">- kcal</td></tr>
+                                                                    <tr><th>Proteínas</th><td id="table-protein">- gr</td></tr>
+                                                                    <tr><th>Grasas</th><td id="table-fat">- gr</td></tr>
+                                                                    <tr><th>Hidratos</th><td id="table-carbs">- gr</td></tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
+                                                        <div>
+                                                            <table class="table-ajuste table-bordered text-center">
+                                                            <thead>
+                                                                <tr>
+                                                                <th colspan="2">Macronutriente</th>
+                                                                
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                <th>Proteínas</th>
+                                                                <td id="percent-protein">- %</td>
+                                                                </tr>
+                                                                <tr>
+                                                                <th>Grasas</th>
+                                                                <td id="percent-fat">- %</td>
+                                                                </tr>
+                                                                <tr>
+                                                                <th>Carbohidratos</th>
+                                                                <td id="percent-carbs">- %</td>
+                                                                </tr>
+                                                            </tbody>
+                                                            </table>
+                                                        </div>
+                                                 
+
+                                                      
+                                                </div>
+                                        </div>
+                                       
+
                                 </div>
                             </fieldset>
 
@@ -195,7 +188,6 @@
                                             </tr>
                                             <tr>
                                             <th>MACRO</th>
-                                            <th>Familia</th>
                                             <th>Alimento</th>
                                             <th>Cantidad</th>
                                             <th>Equivalente</th>
@@ -217,9 +209,6 @@
                                             <td>
                                                 <select><option>Select</option></select>
                                             </td>
-                                            <td>
-                                                <select><option>Select</option></select>
-                                            </td>
                                             <td><input class="input-cantidad" type="text"></td>
                                             <td><select><option>Select</option></td>
                                             <td></td>
@@ -238,9 +227,6 @@
                                             <td>
                                                 <select><option>Select</option></select>
                                             </td>
-                                            <td>
-                                                <select><option>Select</option></select>
-                                            </td>
                                             <td><input class="input-cantidad" type="text"></td>
                                             <td><select><option>Select</option></td>
                                             <td></td>
@@ -255,9 +241,6 @@
                                                         <option>Grasa</option>
                                                         <option>Carbohidratos</option>
                                                     </select>
-                                            </td>
-                                            <td>
-                                                <select><option>Select</option></select>
                                             </td>
                                             <td>
                                                 <select><option>Select</option></select>
@@ -277,9 +260,6 @@
                                                             <option>Grasa</option>
                                                             <option>Carbohidratos</option>
                                                         </select>
-                                                </td>
-                                                <td>
-                                                    <select><option>Select</option></select>
                                                 </td>
                                                 <td>
                                                 <select><option>Select</option></select>
@@ -317,7 +297,6 @@
                                             </tr>
                                             <tr>
                                             <th>MACRO</th>
-                                            <th>Familia</th>
                                             <th>Alimento</th>
                                             <th>Cantidad</th>
                                             <th>Equivalente</th>
@@ -339,9 +318,6 @@
                                             <td>
                                                 <select><option>Select</option></select>
                                             </td>
-                                            <td>
-                                                <select><option>Select</option></select>
-                                            </td>
                                             <td><input class="input-cantidad" type="text"></td>
                                             <td><select><option>Select</option></td>
                                             <td></td>
@@ -360,9 +336,6 @@
                                             <td>
                                                 <select><option>Select</option></select>
                                             </td>
-                                            <td>
-                                                <select><option>Select</option></select>
-                                            </td>
                                             <td><input class="input-cantidad" type="text"></td>
                                             <td><select><option>Select</option></td>
                                             <td></td>
@@ -377,9 +350,6 @@
                                                         <option>Grasa</option>
                                                         <option>Carbohidratos</option>
                                                     </select>
-                                            </td>
-                                            <td>
-                                                <select><option>Select</option></select>
                                             </td>
                                             <td>
                                                 <select><option>Select</option></select>
@@ -399,9 +369,6 @@
                                                             <option>Grasa</option>
                                                             <option>Carbohidratos</option>
                                                         </select>
-                                                </td>
-                                                <td>
-                                                    <select><option>Select</option></select>
                                                 </td>
                                                 <td>
                                                 <select><option>Select</option></select>
@@ -440,7 +407,6 @@
                                             </tr>
                                             <tr>
                                             <th>MACRO</th>
-                                            <th>Familia</th>
                                             <th>Alimento</th>
                                             <th>Cantidad</th>
                                             <th>Equivalente</th>
@@ -462,9 +428,6 @@
                                             <td>
                                                 <select><option>Select</option></select>
                                             </td>
-                                            <td>
-                                                <select><option>Select</option></select>
-                                            </td>
                                             <td><input class="input-cantidad" type="text"></td>
                                             <td><select><option>Select</option></td>
                                             <td></td>
@@ -483,9 +446,6 @@
                                             <td>
                                                 <select><option>Select</option></select>
                                             </td>
-                                            <td>
-                                                <select><option>Select</option></select>
-                                            </td>
                                             <td><input class="input-cantidad" type="text"></td>
                                             <td><select><option>Select</option></td>
                                             <td></td>
@@ -500,9 +460,6 @@
                                                         <option>Grasa</option>
                                                         <option>Carbohidratos</option>
                                                     </select>
-                                            </td>
-                                            <td>
-                                                <select><option>Select</option></select>
                                             </td>
                                             <td>
                                                 <select><option>Select</option></select>
@@ -522,9 +479,6 @@
                                                             <option>Grasa</option>
                                                             <option>Carbohidratos</option>
                                                         </select>
-                                                </td>
-                                                <td>
-                                                    <select><option>Select</option></select>
                                                 </td>
                                                 <td>
                                                 <select><option>Select</option></select>
@@ -563,7 +517,6 @@
                                             </tr>
                                             <tr>
                                             <th>MACRO</th>
-                                            <th>Familia</th>
                                             <th>Alimento</th>
                                             <th>Cantidad</th>
                                             <th>Equivalente</th>
@@ -585,9 +538,6 @@
                                             <td>
                                                 <select><option>Select</option></select>
                                             </td>
-                                            <td>
-                                                <select><option>Select</option></select>
-                                            </td>
                                             <td><input class="input-cantidad" type="text"></td>
                                             <td><select><option>Select</option></td>
                                             <td></td>
@@ -606,9 +556,6 @@
                                             <td>
                                                 <select><option>Select</option></select>
                                             </td>
-                                            <td>
-                                                <select><option>Select</option></select>
-                                            </td>
                                             <td><input class="input-cantidad" type="text"></td>
                                             <td><select><option>Select</option></td>
                                             <td></td>
@@ -623,9 +570,6 @@
                                                         <option>Grasa</option>
                                                         <option>Carbohidratos</option>
                                                     </select>
-                                            </td>
-                                            <td>
-                                                <select><option>Select</option></select>
                                             </td>
                                             <td>
                                                 <select><option>Select</option></select>
@@ -645,9 +589,6 @@
                                                             <option>Grasa</option>
                                                             <option>Carbohidratos</option>
                                                         </select>
-                                                </td>
-                                                <td>
-                                                    <select><option>Select</option></select>
                                                 </td>
                                                 <td>
                                                 <select><option>Select</option></select>
@@ -686,7 +627,6 @@
                                             </tr>
                                             <tr>
                                             <th>MACRO</th>
-                                            <th>Familia</th>
                                             <th>Alimento</th>
                                             <th>Cantidad</th>
                                             <th>Equivalente</th>
@@ -708,9 +648,6 @@
                                             <td>
                                                 <select><option>Select</option></select>
                                             </td>
-                                            <td>
-                                                <select><option>Select</option></select>
-                                            </td>
                                             <td><input class="input-cantidad" type="text"></td>
                                             <td><select><option>Select</option></td>
                                             <td></td>
@@ -729,9 +666,6 @@
                                             <td>
                                                 <select><option>Select</option></select>
                                             </td>
-                                            <td>
-                                                <select><option>Select</option></select>
-                                            </td>
                                             <td><input class="input-cantidad" type="text"></td>
                                             <td><select><option>Select</option></td>
                                             <td></td>
@@ -746,9 +680,6 @@
                                                         <option>Grasa</option>
                                                         <option>Carbohidratos</option>
                                                     </select>
-                                            </td>
-                                            <td>
-                                                <select><option>Select</option></select>
                                             </td>
                                             <td>
                                                 <select><option>Select</option></select>
@@ -768,9 +699,6 @@
                                                             <option>Grasa</option>
                                                             <option>Carbohidratos</option>
                                                         </select>
-                                                </td>
-                                                <td>
-                                                    <select><option>Select</option></select>
                                                 </td>
                                                 <td>
                                                 <select><option>Select</option></select>
@@ -866,7 +794,7 @@
         <!-- App Script -->
         <script src="/assets/js/hope-ui.js" defer></script>
         <script type="module" src="/src/Auth/main.js"></script>
-        <script type="module" src="/src/user/controlUser.js"></script>
+        <script type="module" src="/src/dietas/mainWizard.js"></script>
         
     </body>
     </html>

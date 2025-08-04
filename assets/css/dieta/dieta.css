@@ -1,0 +1,172 @@
+/***TABLA COMIDAS-ALIMENTO*****/
+  
+.table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 8px;
+      text-align: center;
+      color: black;
+     
+}
+    
+
+table select{
+        border: none;
+        background: none;
+}
+
+    
+.table-wrapper{
+        margin: 50px;
+}
+
+.input-cantidad {
+      width: 50px;
+      text-align: center;
+      border: none;
+      background: none;
+}
+
+.header-dieta select {
+      color: #FFFAFA;
+      font-weight: bold;
+}
+
+.header-dieta select option {
+      color: black;
+}
+
+.section {
+      margin-bottom: 20px;
+}
+
+.table-dieta {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    border: 2px solid #000; /* Puedes cambiar el color */
+    border-radius: 12px;
+    overflow: hidden;
+}
+.table-dieta thead {
+        background-color:rgb(211, 160, 34);
+        color: #FFFAFA;
+        font-weight: bold;
+        text-align: center;
+}
+
+.header-dieta{
+        background-color:rgb(211, 160, 34);
+        color: #FFFAFA;
+        font-weight: bold;
+        text-align: center;
+}
+
+/* Bordes redondeados en las esquinas de la tabla */
+.table-dieta thead tr:first-child th:first-child {
+    border-top-left-radius: 12px;
+}
+.table-dieta thead tr:first-child th:last-child {
+    border-top-right-radius: 12px;
+}
+.table-dieta tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+}
+.table-dieta tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+}
+
+/* Bordes de celdas */
+.table-dieta th{
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: center;
+    color: #FFFAFA;
+    font-weight: bold  ;
+}
+.table-dieta td {
+  border: 1px solid #000;
+  padding: 8px;
+  text-align: center;
+}
+.text-dieta {
+    width: 100%;
+    border: none;
+    text-decoration: none;
+    background: none;
+    text-align: center;
+}
+
+
+
+/***** AUTOAJUSTE *******/
+
+.auto-ajuste-container{
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
+.table-ajuste {
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem auto;
+  border-collapse: collapse;
+  font-size: 1rem;
+
+}
+
+.table-ajuste  th,
+.table-ajuste  td {
+  border: 1px solid rgb(211, 160, 34);
+  padding: 10px 14px;
+  text-align: center;
+}
+
+.table-ajuste  thead th {
+  background-color: rgb(211, 160, 34);
+  color: #FFFAFA;
+  font-size: 1.1rem;
+}
+
+.table-ajuste  tbody th {
+  background-color: rgb(211, 160, 34);
+  text-align: left;
+  color:#FFFAFA ;
+}
+
+.table-ajuste  tbody td {
+  background-color: #FFFAFA;
+  font-weight: 500;
+}
+
+
+.info-autoAjuste{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+
+.btn-ajuste {
+    background-color: #d8a900; /* Amarillo dorado */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.title-autoAjuste{
+    color: #000;
+}
+
+.mx-3{
+    color:black;
+}
