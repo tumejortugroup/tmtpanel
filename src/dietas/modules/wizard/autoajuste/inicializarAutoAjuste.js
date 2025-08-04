@@ -30,10 +30,6 @@ export async function inicializarAutoAjuste() {
     document.getElementById('protein-value').innerText = proteinasPorKg.toFixed(1);
     document.getElementById('fat-value').innerText = grasasPorKg.toFixed(1);
 
-    console.log(`✅ Peso: ${peso}kg`);
-    console.log(`✅ Proteínas: ${proteinasGr}g → ${proteinasPorKg.toFixed(1)} g/kg`);
-    console.log(`✅ Grasas: ${grasasGr}g → ${grasasPorKg.toFixed(1)} g/kg`);
-
   } catch (error) {
     console.error("❌ Error en inicializarAutoAjuste:", error);
   }

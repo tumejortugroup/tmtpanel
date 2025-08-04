@@ -42,11 +42,5 @@ export function actualizarGraficoMacronutrientes(calorias, proteinas, grasas, ca
   setText("percent-fat", `${percentG.toFixed(1)} %`);
   setText("percent-carbs", `${percentC.toFixed(1)} %`);
 
-  // 6. Debug log
-  console.log("📊 Macronutrientes actualizados:");
-  console.log(`🍗 Proteínas: ${p}g`);
-  console.log(`🥑 Grasas: ${g}g`);
-  console.log(`🍞 Carbohidratos: ${c}g`);
-  console.log(`🔥 Calorías totales: ${kcal.toFixed(2)} kcal`);
-  console.log(`📈 Porcentajes → P: ${percentP.toFixed(1)}%, G: ${percentG.toFixed(1)}%, C: ${percentC.toFixed(1)}%`);
+
 }

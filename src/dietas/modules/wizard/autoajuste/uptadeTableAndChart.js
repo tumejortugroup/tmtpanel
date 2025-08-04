@@ -20,13 +20,6 @@ export function updateTableAndChart() {
   const carbohidratos = Math.max((totalCalories - caloriasUsadas) / 4, 0);
   const kcalCarbos = carbohidratos * 4;
 
-  console.log("🔢 Cálculo de Macronutrientes:");
-  console.log(`🧍 Peso: ${peso} kg`);
-  console.log(`🍗 Proteínas/kg: ${proteinPerKg}, totales: ${proteinas.toFixed(1)} gr`);
-  console.log(`🥑 Grasas/kg: ${fatPerKg}, totales: ${grasas.toFixed(1)} gr`);
-  console.log(`🔥 Calorías totales: ${totalCalories} kcal`);
-  console.log(`📊 Calorías usadas: proteínas = ${kcalProteinas.toFixed(1)} kcal, grasas = ${kcalGrasas.toFixed(1)} kcal`);
-  console.log(`🍞 Carbohidratos = ${carbohidratos.toFixed(1)} gr`);
 
   // Actualizar tabla principal
   document.getElementById('table-protein').innerText = `${proteinas.toFixed(1)} gr`;

@@ -110,7 +110,7 @@ table select{
     flex-wrap: wrap;
 }
 
-
+/**TABLAS DE MACROS**/
 .table-ajuste {
   width: 100%;
   max-width: 400px;
@@ -169,4 +169,22 @@ table select{
 
 .mx-3{
     color:black;
+}
+
+
+/***PARTE DE NOMBRE Y DESCRIPCION***/
+
+.info-dieta{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/***Botones añadir comida***/
+.comida-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 10px;
 }

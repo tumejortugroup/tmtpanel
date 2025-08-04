@@ -72,7 +72,13 @@
                    
                 </div>
                 
-    
+                             <fieldset class="table-wrapper">
+                                <div class="col-7 info-dieta">
+                                        <input type="text" class="form-control" placeholder="Nombre de la dieta" id="nombre-dieta" name="nombre-dieta">
+                                        <textarea class="form-control" placeholder="Descripción de la dieta" id="descripcion-dieta" name="descripcion-dieta"></textarea>
+                                </div>
+                            </fieldset>
+
 
 
                              <fieldset class="table-wrapper">
@@ -103,11 +109,11 @@
                                                                 <label class="d-block text-center title-autoAjuste">Grasas/kg</label>
                                                                 <div class="d-flex justify-content-center">
                                                                     <!-- Botón para disminuir grasas -->
-                                                                    <button id="btn-decrease-fat" class="btn btn-ajuste" type="button">-</button>
+                                                                    <button id="btn-decrease-fat" class=" btn-ajuste" type="button">-</button>
                                                                     <!-- Valor de grasas -->
                                                                     <span id="fat-value" class="mx-3">-</span> g/Kg
                                                                     <!-- Botón para aumentar grasas -->
-                                                                    <button id="btn-increase-fat" class="btn btn-ajuste" type="button">+</button>
+                                                                    <button id="btn-increase-fat" class=" btn-ajuste" type="button">+</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -170,7 +176,7 @@
                                 </div>
                                     <div class="table-responsive">
                                     <div id="tabla-container">
-                                    <div class="section">
+                                    <div class="section" id="tabla-container">
                                         <table class="table-dieta">
                                         <thead class="header-dieta">
                                             <tr>
@@ -720,15 +726,20 @@
                                         </table>
                                     </div>
                                     </div>
+                                    <div class="comida-btns"> 
+                                         <button onclick="eliminarUltimaTabla()" class="btn-ajuste">-</button>
+                                                        <button onclick="duplicarUltimaTabla()" class="btn-ajuste"> +</button>
+                                                   
 
-                                    <button onclick="duplicarTabla()">➕ Añadir Comida</button>
+                                    </div>
+                           
 
 
                                 </div>
                                  
                                 
-                                <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next" >Next</button>
-                                <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-end me-1" value="Previous" >Previous</button>
+                                <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next" >Crear</button>
+                               
                             </fieldset>
                 </div>
 
@@ -800,10 +811,5 @@
     </html>
 
     <script>
-  function duplicarTabla() {
-    const container = document.getElementById("tabla-container");
-    const original = container.querySelector(".section");
-    const clon = original.cloneNode(true); // Clona toda la sección con la tabla
-    container.appendChild(clon);
-  }
+  
 </script>
