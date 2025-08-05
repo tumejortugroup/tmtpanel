@@ -1,0 +1,52 @@
+export async function getEquivalencia(idPrincipal, idEquivalente, categoria, cantidadBase) {
+    try {
+        const url = `http://localhost:9000/api/v1/equivalencias/calcular?id_alimento=${idPrincipal}&id_equivalente=${idEquivalente}&cantidad=${cantidadBase}&categoria=${categoria}`;
+        
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            console.error("❌ Respuesta HTTP no OK:", response.status);
+            throw new Error("Error al obtener equivalencia");
+        }
+
+        const data = await response.json();
+      
+
+        if (data.success && data.data?.equivalencia?.cantidad_equivalente !== undefined) {
+            console.log("✅ Equivalencia encontrada:", data.data.equivalencia.cantidad_equivalente);
+            return data.data.equivalencia.cantidad_equivalente;
+        } else {
+            console.warn("⚠️ No se recibió una equivalencia válida:", data);
+            return null;
+        }
+    } catch (error) {
+        console.error("❌ Error al calcular equivalencia:", error);
+        return null;
+    }
+}
+
+
+
+export async function getEquivalencia2(idPrincipal, idEquivalente, categoria, cantidadBase) {
+    try {
+        const url = `http://localhost:9000/api/v1/equivalencias/calcular?id_alimento=${idPrincipal}&id_equivalente=${idEquivalente}&cantidad=${cantidadBase}&categoria=${categoria}`;
+        console.log("📤 URL GET EQ 2:", url);
+
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Error al obtener equivalencia 2");
+
+        const data = await response.json();
+        console.log("✅ Respuesta 2:", data);
+
+        if (data.success && data.data?.equivalencia?.cantidad_equivalente !== undefined) {
+            return data.data.equivalencia.cantidad_equivalente;
+        } else {
+            console.warn("⚠️ No se recibió una equivalencia válida (2)");
+            return null;
+        }
+    } catch (error) {
+        console.error("❌ Error al calcular equivalencia (2):", error);
+        return null;
+    }
+}

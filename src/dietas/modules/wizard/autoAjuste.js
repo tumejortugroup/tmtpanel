@@ -2,7 +2,7 @@ import { obtenerDieta } from '/src/dietas/modules/wizard/fetch/getDieta.js';
 import { obtenerDetalleDato } from '/src/dietas/modules/wizard/fetch/getPeso.js';
 import { inicializarGrafico } from '/src/dietas/modules/wizard/ui/inicializarGrafico.js';
 import { actualizarGraficoMacronutrientes } from '/src/dietas/modules/wizard/ui/actualizarGrafico.js';
-import { inicializarAutoAjuste } from '/src/dietas/modules/wizard/autoajuste/inicializarAutoajuste.js';
+import { inicializarAutoAjuste } from '/src/dietas/modules/wizard/autoajuste/inicializarAutoAjuste.js';
 import { configurarBotones } from '/src/dietas/modules/wizard/utils/configurarBotones.js';
 
 export async function ejecutarAutoAjuste() {
