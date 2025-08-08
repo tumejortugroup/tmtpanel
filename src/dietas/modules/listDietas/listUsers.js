@@ -74,7 +74,7 @@ export async function listUser() {
           <td>
             <div class="flex align-items-center list-user-action">
               <a class="btn btn-sm btn-icon" href="#" title="Crear dieta">
-                <img src="/assets/images/dashboard/iconos/dieta.webp" alt="" width="30" height="15" class="img-fluid" style="cursor:pointer;">
+                <button class="btn btn-primary">Crear dieta</button>
               </a>
             </div>
           </td>
@@ -95,11 +95,12 @@ export async function listUser() {
 
 
 function asignarEventoCrearDieta(rowElement, usuario) {
-  const imgCrearDieta = rowElement.querySelector("a[title='Crear dieta'] img");
+  const botonCrearDieta = rowElement.querySelector("a[title='Crear dieta'] button");
+
   const selectControl = rowElement.querySelector("select[name='select-control']");
   const tdUltimoControl = rowElement.querySelector("td[data-id-dato]");
 
-  imgCrearDieta.addEventListener("click", async function (e) {
+  botonCrearDieta.addEventListener("click", async function (e) {
     e.preventDefault();
 
     const selectedIdDato = selectControl?.value;

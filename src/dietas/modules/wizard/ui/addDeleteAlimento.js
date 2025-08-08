@@ -1,29 +1,9 @@
+import { renderSelectAlimentos } from '/src/dietas/modules/wizard/ui/renderAlimentos.js';
 
-export function agregarAlimento() {
-    const tbody = document.querySelector(".table-dieta tbody");
-    
-    const plantilla = `
- 
-    <tr>
-        <td class="header-dieta">
-            <select>
-                <option>Proteina</option>
-                <option>Grasa</option>
-                <option>Carbohidratos</option>
-            </select>
-        </td>
-        <td><select><option>Select</option></select></td>
-        <td><input class="input-cantidad" type="text"></td>
-        <td><select><option>Select</option></select></td>
-        <td></td>
-        <td><select><option>Select</option></select></td>
-        <td></td>
-    </tr>`;
+import { renderTablaEquivalencias } from '/src/dietas/modules/wizard/ui/renderEquivalencias.js';
 
-    // Insertar antes de la fila de Observaciones
-    const observaciones = tbody.querySelector("tr:last-child");
-    observaciones.insertAdjacentHTML("beforebegin", plantilla);
-}
+
+
 
  export function quitarAlimento() {
     const tbody = document.querySelector(".table-dieta tbody");

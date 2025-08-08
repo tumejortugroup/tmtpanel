@@ -43,7 +43,7 @@ table select{
 .table-dieta {
     border-collapse: separate;
     border-spacing: 0;
-    width: 100%;
+    width: 85%;
     border: 2px solid #000; /* Puedes cambiar el color */
     border-radius: 12px;
     overflow: hidden;
@@ -194,3 +194,59 @@ table select{
      background-color: rgb(211, 160, 34);
 }
 
+.asignar-alimentos {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start; /* importante para sticky */
+    justify-content: flex-start;
+    gap: 40px;
+}
+
+.control-macros-asignar-alimentos {
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+    align-self: flex-start; /* necesario en flexbox para que sticky funcione */
+}
+
+.control-macros-asignar-alimentos table {
+    background-color: #d2a51c;
+    color: #FFFAFA;
+    border-collapse: collapse;
+    font-size: 14px;
+    width: auto;
+}
+
+.control-macros-asignar-alimentos th,
+.control-macros-asignar-alimentos td {
+    padding: 6px 10px;
+    border: 1px solid #FFFAFA;
+    text-align: left;
+}
+
+
+
+.section{
+
+      display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+
+
+
+.exceso-macro {
+  background-color: #d2a51c !important;
+  color: #FFFAFA !important;
+  font-weight: bold;
+}
+
+.hour-control{
+    
+    background-color: #d2a51c !important;
+    border: none!important;
+     color: #FFFAFA !important;
+  font-weight: bold;
+}

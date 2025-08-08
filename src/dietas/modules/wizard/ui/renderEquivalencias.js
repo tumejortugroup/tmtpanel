@@ -1,7 +1,7 @@
 import { getAlimentos } from "../fetch/getAlimentos.js";
 import { getEquivalencia } from "../fetch/getEquivalencias.js";
 
-export async function renderTablaEquivalencias() {
+export async function renderTablaEquivalencias(fila) {
   const alimentos = await getAlimentos();
   if (!alimentos.length) return;
 

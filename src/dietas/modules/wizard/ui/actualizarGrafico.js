@@ -27,6 +27,13 @@ export function actualizarGraficoMacronutrientes(calorias, proteinas, grasas, ca
   setText("table-carbs", `${c.toFixed(1)} gr`);
   setText("table-calories", `${kcal.toFixed(0)} kcal`);
 
+
+    setText("table-proteinDieta", `${p.toFixed(1)} gr`);
+  setText("table-fatDieta", `${g.toFixed(1)} gr`);
+  setText("table-carbsDieta", `${c.toFixed(1)} gr`);
+  setText("table-caloriesDieta", `${kcal.toFixed(0)} kcal`);
+
+
   // 3. Calcular calorías por macronutriente
   const kcalP = p * 4;
   const kcalG = g * 9;
