@@ -154,7 +154,7 @@ table select{
 }
 
 .btn-ajuste {
-    background-color: #d8a900; /* Amarillo dorado */
+    background-color: rgb(211, 160, 34); /* Amarillo dorado */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -180,11 +180,17 @@ table select{
     gap: 15px;
 }
 
-/***Botones añadir comida***/
+/***Botones añadir comida y alimentos***/
 .comida-btns {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     gap: 10px;
     margin-top: 10px;
+
 }
+
+.fila-añadir{
+     background-color: rgb(211, 160, 34);
+}
+
