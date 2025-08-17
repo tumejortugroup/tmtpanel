@@ -1,4 +1,4 @@
- import { obtenerIdDietaDesdeUrl } from '/src/dietas/modules/wizard/utils/params.js';
+import { obtenerIdDietaDesdeUrl } from '/src/dietas/modules/wizard/utils/params.js';
 
 export async function asociarComidasADieta(idComidasArray) {
   const idDieta = obtenerIdDietaDesdeUrl();
@@ -8,8 +8,17 @@ export async function asociarComidasADieta(idComidasArray) {
     return;
   }
 
+  // 👇 Extraer solo los IDs
+  const idsSolo = idComidasArray.map(c => c.id_comida);
+
+  console.log("🚀 Asociando comidas a dieta:", {
+    id_dieta: idDieta,
+    comidas: idsSolo
+  });
+
   try {
     const token = localStorage.getItem("token");
+
     const res = await fetch("http://localhost:9000/api/v1/dietas/asociar-comidas", {
       method: "POST",
       headers: {
@@ -17,8 +26,8 @@ export async function asociarComidasADieta(idComidasArray) {
         Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
-        id_dieta: idDieta,
-        comidas: idComidasArray
+        id_dieta: parseInt(idDieta),
+        comidas: idsSolo
       })
     });
 
@@ -26,7 +35,7 @@ export async function asociarComidasADieta(idComidasArray) {
 
     if (res.ok) {
       console.log("✅ Comidas asociadas a dieta correctamente:", data);
-      alert("✔️ Dieta creada y comidas asociadas.");
+      location.reload(); // o redirección
     } else {
       console.error("❌ Error al asociar comidas:", data);
       alert("Error al asociar comidas a la dieta.");
