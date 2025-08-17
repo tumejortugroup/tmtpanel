@@ -33,13 +33,27 @@ export function pesoExtraIntracelular(peso, genero) {
   };
 }
 
+/**
+ * 
+ * @param {number} peso 
+ * @param {number} porcentajeGraso 
+ * @returns 
+ */
 export function calcularMasaMagraYGrasa(peso, porcentajeGraso) {
+  console.log('Porcentaje graso:', porcentajeGraso); // ← Añade esto
+
   if (!peso || porcentajeGraso == null) return { masaMagra: 0, grasa: 0 };
   const kgGrasa = peso * (porcentajeGraso / 100);
   const masaMagra = peso - kgGrasa;
   return { masaMagra, grasa: kgGrasa };
 }
 
+/**
+ * 
+ * @param {number} kgMasaMagra 
+ * @param {number} altura 
+ * @returns 
+ */
 export function indiceMasaMagra(kgMasaMagra, altura) {
   if (!kgMasaMagra || !altura) return 0;
   return (kgMasaMagra / ((altura * altura) / 100)) * 100;

@@ -88,10 +88,11 @@ export function calcularTodo(index = 0) {
     setValue('peso_intracelular', int, index);
     setValue('porcentaje_intracelular', pInt * 100, index);
 
-    const { masaMagra, grasa } = calcularMasaMagraYGrasa(peso, porcentajeGraso);
-    setValue('kg_masa_magra', masaMagra, index);
-    setValue('kg_grasa', grasa, index);
-    setValue('indice_masa_magra', indiceMasaMagra(masaMagra, altura), index);
+   const { masaMagra, grasa } = calcularMasaMagraYGrasa(peso, porcentajeGraso);
+setValue('kg_masa_magra', masaMagra, index);
+setValue('kg_grasa', grasa, index);
+setValue('indice_masa_magra', indiceMasaMagra(masaMagra, altura), index);
+setValue('porcentaje_masa_magra', (masaMagra / peso) * 100, index); // ✅ ESTA ES LA QUE FALTABA
 
     const complexion = complexionOsea({
         altura,
