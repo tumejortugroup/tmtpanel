@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 📄 A4 estilo */
+.a4-informe {
+  width: 794px;
+  height: 1123px;
+  margin: 0 auto;
+  padding: 40px;
+  background: white;
+  color: black;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  overflow: hidden; /* evita scroll */
+  box-sizing: border-box;
+}
+
+/* 🧾 Datos generales */
+.informe-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.informe-header div {
+  width: 48%;
+}
+
+.informe-header p {
+  margin: 4px 0;
+}
+
+/* 🍽️ Tabla de alimentos */
+.bloque-comida {
+  border: 2px solid #000;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #fdfdfd;
+}
+
+.bloque-comida h3 {
+  margin-top: 0;
+  font-size: 15px;
+  background: #eee;
+  padding: 5px;
+}
+
+.tabla-comida {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 5px;
+}
+
+.tabla-comida th, .tabla-comida td {
+  border: 1px solid #999;
+  padding: 6px;
+  text-align: left;
+  font-size: 12px;
+}
+
+.tabla-comida th {
+  background-color: #f0f0f0;
+}
+
+/* 🎯 Suplementación */
+.suplementacion {
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.suplementacion p {
+  margin: 2px 0;
+}
+
+/* 🖨️ Print settings */
+@media print {
+  .a4-informe {
+    box-shadow: none;
+    width: auto;
+    height: auto;
+    page-break-after: always;
+  }
+  .no-print {
+    display: none;
+  }
+}
+
+
+
+    </style>
+</head>
+<body>
+    <div id="informe-dieta"></div>
+
+</body>
+ <script type="module" src="/src/dietas/mainVistaDieta.js"></script>
+</html>

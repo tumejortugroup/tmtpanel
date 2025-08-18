@@ -63,6 +63,11 @@ export async function listUser() {
              <a class="btn btn-sm btn-icon btn-eliminar-dieta" data-nombre="${usuario.nombre}" title="Eliminar" href="#">
               <span class="btn-inner">🗑️</span>
             </a>
+
+              <a class="btn btn-sm btn-icon btn-ver-dieta" title="Ver Dieta" href="#">
+                  <span class="btn-inner">👁️</span>
+                </a>
+
             </div>
           </td>
         </tr>

@@ -24,6 +24,13 @@ export function asignarEventoSelectDieta(rowElement, token) {
         if (nombreDatoTd) nombreDatoTd.textContent = data.nombre_dato || '—';
         if (fechaDatoTd) fechaDatoTd.textContent = data.fecha_creacion?.split(' ')[0] || '—';
       }
+
+      // 🔗 Actualizar href del botón 👁️ con el id_dieta seleccionado
+      const verBtn = rowElement.querySelector('.btn-ver-dieta');
+      if (verBtn) {
+        verBtn.href = `/dashboard/dietas/dieta.html?id_dieta=${idDieta}`;
+      }
+
     } catch (err) {
       console.error("❌ Error al obtener dato de dieta:", err);
     }

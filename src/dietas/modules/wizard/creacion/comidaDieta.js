@@ -32,6 +32,7 @@ export async function asociarComidasADieta(idComidasArray) {
     });
 
     const data = await res.json();
+    console.log('')
 
     if (res.ok) {
       console.log("✅ Comidas asociadas a dieta correctamente:", data);
