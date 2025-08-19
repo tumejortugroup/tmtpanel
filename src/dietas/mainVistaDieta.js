@@ -2,7 +2,7 @@ import { obtenerIdDietaDesdeUrl } from '/src/dietas/modules/wizard/utils/params.
 import { fetchInformeDieta } from '/src/dietas/modules/informe/fetchInforme.js';
 
 document.addEventListener("DOMContentLoaded", () => {
-  const idDieta = obtenerIdDietaDesdeUrl();
+    const idDieta = obtenerIdDietaDesdeUrl();
     console.log(idDieta)
-  fetchInformeDieta(idDieta);
+    fetchInformeDieta(idDieta);
 });

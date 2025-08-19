@@ -1,29 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        /* 📄 A4 estilo */
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe de Dieta</title>
+  <link rel="stylesheet" href="estilos.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <style>
+    /* 📄 A4 contenedor */
+/* Contenedor A4 */
 .a4-informe {
-  width: 794px;
-  height: 1123px;
+  width: 210mm;   /* A4 ancho */
+  min-height: 297mm; /* A4 alto */
   margin: 0 auto;
-  padding: 40px;
+  padding: 20mm;
   background: white;
-  color: black;
-  font-family: Arial, sans-serif;
-  font-size: 13px;
-  overflow: hidden; /* evita scroll */
   box-sizing: border-box;
+  font-family: "Helvetica", Arial, sans-serif;
+  font-size: 12px;
+  color: #333;
 }
 
-/* 🧾 Datos generales */
+/* Cuando se exporta a PDF con html2pdf, evitar overflow */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+/* 🧾 Encabezado general */
 .informe-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .informe-header div {
@@ -31,73 +40,129 @@
 }
 
 .informe-header p {
-  margin: 4px 0;
+  margin: 3px 0;
+  line-height: 1.4;
 }
 
-/* 🍽️ Tabla de alimentos */
+/* 🍽️ Bloque de comida */
 .bloque-comida {
-  border: 2px solid #000;
+  border: 1px solid #ccc;
   margin-bottom: 10px;
   padding: 10px;
-  border-radius: 4px;
-  background-color: #fdfdfd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
 .bloque-comida h3 {
-  margin-top: 0;
-  font-size: 15px;
-  background: #eee;
-  padding: 5px;
+  margin: 0 0 5px;
+  font-size: 14px;
+  color: #2c3e50;
+  text-transform: uppercase;
+ 
+
 }
 
+/* 🧂 Tabla de alimentos */
 .tabla-comida {
   width: 100%;
   border-collapse: collapse;
   margin-top: 5px;
 }
 
-.tabla-comida th, .tabla-comida td {
-  border: 1px solid #999;
-  padding: 6px;
+.tabla-comida th,
+.tabla-comida td {
+  border: 1px solid #ccc;
+  padding: 5px 8px;
   text-align: left;
-  font-size: 12px;
 }
 
 .tabla-comida th {
-  background-color: #f0f0f0;
+  background-color: #ecf0f1;
 }
 
 /* 🎯 Suplementación */
 .suplementacion {
   margin-top: 20px;
-  font-weight: bold;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .suplementacion p {
   margin: 2px 0;
 }
 
-/* 🖨️ Print settings */
+/* 🖨️ Botón imprimir */
+.no-print {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.btn-imprimir {
+  background: #2ecc71;
+  color: white;
+  padding: 8px 18px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-imprimir:hover {
+  background: #27ae60;
+}
+/* 📄 Contenedor A4 exacto */
+.a4-informe {
+  width: 210mm;
+  height: 297mm;
+  margin: 0 auto;
+  padding: 10mm; /* 👈 controla tus márgenes internos, no jsPDF */
+  background: white;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  font-size: 11pt;
+  color: #333;
+}
+
+.encabezado-comida{
+    display: flex;
+    flex-direction: row;
+    flex-direction: wrap;
+    align-items: center;
+    gap:15px;
+     border-bottom: 1px solid #ddd;
+}
+
 @media print {
-  .a4-informe {
-    box-shadow: none;
-    width: auto;
-    height: auto;
-    page-break-after: always;
+  body * {
+    visibility: hidden; /* Oculta TODO */
   }
-  .no-print {
-    display: none;
+
+  #informe-dieta, #informe-dieta * {
+    visibility: visible; /* Solo muestra el informe */
+  }
+
+  #informe-dieta {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 210mm;
+    height: 297mm;
+    margin: 0;
+    padding: 10mm;
+    page-break-after: always;
   }
 }
 
 
-
-    </style>
+  </style>
 </head>
 <body>
-    <div id="informe-dieta"></div>
+  <div class="a4-informe" id="informe-dieta">
+    <!--Contenido desde JS -->
+  </div>
 
-</body>
+  <div class="no-print center">
+    <button onclick="window.print()" class="btn-imprimir">🖨️ </button>
+  </div>
  <script type="module" src="/src/dietas/mainVistaDieta.js"></script>
+</body>
 </html>

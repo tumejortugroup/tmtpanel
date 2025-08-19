@@ -34,9 +34,14 @@ export async function asociarComidasADieta(idComidasArray) {
     const data = await res.json();
     console.log('')
 
-    if (res.ok) {
+  if (res.ok) {
       console.log("✅ Comidas asociadas a dieta correctamente:", data);
-      location.reload(); // o redirección
+
+      // 🔹 Abre nueva pestaña con la dieta
+      window.open(`/dashboard/dietas/dieta.html?id_dieta=${idDieta}`, "_blank");
+
+      // 🔹 Redirige la pestaña actual al index
+      window.location.href = "/dashboard/index.html";
     } else {
       console.error("❌ Error al asociar comidas:", data);
       alert("Error al asociar comidas a la dieta.");
@@ -46,3 +51,4 @@ export async function asociarComidasADieta(idComidasArray) {
     alert("Error de red al asociar comidas.");
   }
 }
+
