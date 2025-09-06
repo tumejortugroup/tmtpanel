@@ -1,4 +1,4 @@
-import { alimentosCache } from '../ui/sumaMacros.js';
+import { alimentosCache } from "../ui/sumaMacros.js";
 
 export function generarPayloadComidas() {
   const tablas = document.querySelectorAll(".table-dieta");
@@ -11,6 +11,7 @@ export function generarPayloadComidas() {
     const alimentos = [];
 
     filas.forEach(fila => {
+      const selectCategoria = fila.querySelector("select[name='select-categoria']");
       const selectAlimento = fila.querySelectorAll("select[name='select-alimentos']");
       const inputCantidad = fila.querySelector(".input-cantidad");
 
@@ -33,12 +34,11 @@ export function generarPayloadComidas() {
         proteinas_totales_alimento: parseFloat(alimentoCache.proteinas) * factor,
         grasas_totales_alimento: parseFloat(alimentoCache.grasas) * factor,
         carbohidratos_totales_alimento: parseFloat(alimentoCache.carbohidratos) * factor,
-        categoria: fila.querySelector("select")?.value?.toLowerCase() || "desconocida"
+        categoria: selectCategoria?.value?.toLowerCase() || "desconocida"
       };
 
       // Equivalentes
       const equivalentes = [];
-
       const eq1 = selectAlimento[1]?.value;
       const eq2 = selectAlimento[2]?.value;
 
@@ -54,7 +54,6 @@ export function generarPayloadComidas() {
           eqObj.id_alimento_equivalente1 = Number(eq2);
           eqObj.cantidad_equivalente1 = cantidadEq2;
         }
-
         alimento.equivalentes = [eqObj];
       }
 
@@ -62,17 +61,16 @@ export function generarPayloadComidas() {
     });
 
     if (alimentos.length > 0) {
- const hora = tabla.querySelector("input[name='cantidad-alimentos']")?.value || "";
-const nota = tabla.querySelector(".text-dieta")?.value || "";
+      const hora = tabla.querySelector("input[name='cantidad-alimentos']")?.value || "";
+      const nota = tabla.querySelector(".text-dieta")?.value || "";
 
-
-  comidas.push({
-    tipo_comida: tipoComida,
-    hora: hora,
-    nota: nota,
-    alimentos
-  });
-}
+      comidas.push({
+        tipo_comida: tipoComida,
+        hora: hora,
+        nota: nota,
+        alimentos
+      });
+    }
   });
 
   console.log("📦 Payload generado para comidas:", comidas);

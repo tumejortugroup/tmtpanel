@@ -1,6 +1,5 @@
 export function asignarEventoSelectDieta(rowElement, token) {
   const selectDieta = rowElement.querySelector('select[name="select-dieta"]');
-
   if (!selectDieta) return;
 
   selectDieta.addEventListener('change', async (e) => {
@@ -25,10 +24,15 @@ export function asignarEventoSelectDieta(rowElement, token) {
         if (fechaDatoTd) fechaDatoTd.textContent = data.fecha_creacion?.split(' ')[0] || '—';
       }
 
-      // 🔗 Actualizar href del botón 👁️ con el id_dieta seleccionado
+      // 🔗 Actualizar hrefs de los botones con el id_dieta seleccionado
       const verBtn = rowElement.querySelector('.btn-ver-dieta');
       if (verBtn) {
         verBtn.href = `/dashboard/dietas/dieta.html?id_dieta=${idDieta}`;
+      }
+
+      const editarBtn = rowElement.querySelector('.btn-editar-dieta');
+      if (editarBtn) {
+        editarBtn.href = `/dashboard/dietas/wizardUpdate.html?id_dieta=${idDieta}&id_dato=${data?.id_dato || ""}`;
       }
 
     } catch (err) {

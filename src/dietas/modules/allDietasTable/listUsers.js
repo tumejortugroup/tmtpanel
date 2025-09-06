@@ -47,31 +47,33 @@ export async function listUser() {
           </select>`
         : '<span class="text-muted">Sin dietas</span>';
 
-      // Fila HTML
       const rowHTML = `
-        <tr data-id-usuario="${usuario.id_usuario}">
-          <td>${usuario.nombre}</td>
-          <td>${usuario.apellidos}</td>
-          <td class="nombre-dato">—</td>
-          <td class="fecha-dato">—</td>
-          <td>${selectHTML}</td>
-          <td>
-            <div class="flex align-items-center list-user-action">
-              <a class="btn btn-sm btn-icon" data-bs-toggle="tooltip" title="Editar" href="/dashboard/user/user-update.html?id=${usuario.id_usuario}">
-                <span class="btn-inner">✏️</span>
-              </a>
-             <a class="btn btn-sm btn-icon btn-eliminar-dieta" data-nombre="${usuario.nombre}" title="Eliminar" href="#">
-              <span class="btn-inner">🗑️</span>
-            </a>
+  <tr data-id-usuario="${usuario.id_usuario}">
+    <td>${usuario.nombre}</td>
+    <td>${usuario.apellidos}</td>
+    <td class="nombre-dato">—</td>
+    <td class="fecha-dato">—</td>
+    <td>${selectHTML}</td>
+    <td>
+      <div class="flex align-items-center list-user-action">
+        <a class="btn btn-sm btn-icon btn-editar-dieta" 
+          data-bs-toggle="tooltip" 
+          title="Editar" 
+          href="#">
+          <span class="btn-inner">✏️</span>
+        </a>
 
-              <a class="btn btn-sm btn-icon btn-ver-dieta" title="Ver Dieta" href="#">
-                  <span class="btn-inner">👁️</span>
-                </a>
+        <a class="btn btn-sm btn-icon btn-eliminar-dieta" data-nombre="${usuario.nombre}" title="Eliminar" href="#">
+          <span class="btn-inner">🗑️</span>
+        </a>
 
-            </div>
-          </td>
-        </tr>
-      `;
+        <a class="btn btn-sm btn-icon btn-ver-dieta" title="Ver Dieta" href="#">
+          <span class="btn-inner">👁️</span>
+        </a>
+      </div>
+    </td>
+  </tr>
+`;
 
       // Insertar la fila en el tbody
       tbody.insertAdjacentHTML("beforeend", rowHTML);
