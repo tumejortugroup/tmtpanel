@@ -2375,6 +2375,7 @@ progress {
 
 .table-responsive {
   overflow-x: auto;
+  overflow-y: visible;
   -webkit-overflow-scrolling: touch;
 }
 

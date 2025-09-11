@@ -1,3 +1,24 @@
+/**
+ * initDeleteDieta()
+ * -----------------
+ * Inicializa la lógica de eliminación de dietas en la tabla de usuarios.
+ *
+ * Flujo:
+ * - Escucha clicks delegados en el `<table>`, buscando el botón `.btn-eliminar-dieta`.
+ * - Verifica que el usuario haya seleccionado una dieta en el `<select>`.
+ * - Solicita confirmación antes de proceder.
+ * - Llama a la API (`DELETE /dietas/:id`) con el token almacenado.
+ * - Si la eliminación es exitosa:
+ *    - Elimina la opción del `<select>`.
+ *    - Limpia las celdas de nombre y fecha asociadas.
+ *    - Recarga la página para reflejar el estado actualizado.
+ *
+ * Consideraciones:
+ * - Maneja la ausencia de tabla, botón, select o token sin romper la ejecución.
+ * - Usa confirm() y alert() para feedback mínimo, pero depende del navegador.
+ * - Si falla la petición, se notifica al usuario y se registra el error en consola.
+ */
+
 export function initDeleteDieta() {
   const table = document.querySelector('table');
   if (!table) return;

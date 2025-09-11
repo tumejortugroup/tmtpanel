@@ -87,7 +87,6 @@ export async function listUser() {
       asignarEventoCrearDieta(lastRow, usuario);
     }
 
-    console.log("✅ Usuarios, último control y lista de controles cargados.");
   } catch (error) {
     console.error("❌ Error al cargar usuarios o controles:", error);
   }
@@ -106,9 +105,6 @@ function asignarEventoCrearDieta(rowElement, usuario) {
     const selectedIdDato = selectControl?.value;
     const fallbackIdDato = tdUltimoControl.getAttribute("data-id-dato");
     const id_dato_final = selectedIdDato || fallbackIdDato;
-
-    console.log(`🖱️ Clic en dieta de usuario ${usuario.id_usuario}`);
-    console.log(`✅ id_dato usado: ${id_dato_final}`);
 
     if (!id_dato_final) {
       alert("❌ No se pudo determinar el control para crear la dieta.");

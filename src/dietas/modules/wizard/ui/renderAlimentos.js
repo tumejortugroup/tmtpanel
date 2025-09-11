@@ -8,8 +8,6 @@ export async function renderSelectAlimentos(selectId) {
       throw new Error("La respuesta del backend no es una lista.");
     }
 
-    console.log("✅ Alimentos renderizados en el <select>:", alimentos);
-
     const selects = document.querySelectorAll(`select[name='${selectId}']`);
     
     selects.forEach(select => {

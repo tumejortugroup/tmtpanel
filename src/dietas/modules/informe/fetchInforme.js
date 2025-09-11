@@ -1,4 +1,4 @@
-import { agruparPorTipoComida } from './agruparComida.js';
+
 import { renderInformeDieta } from './renderDieta.js'; // Esta función la puedes crear
 
 
@@ -19,7 +19,6 @@ export async function fetchInformeDieta(idDieta) {
     });
 
     const result = await res.json();
-    console.log("📄 Informe recibido:", result.data);
 
     renderInformeDieta(result.data); // ✅ Aquí lo pasas
   } catch (error) {

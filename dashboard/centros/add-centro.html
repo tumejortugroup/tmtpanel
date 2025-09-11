@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Alta Usuario</title>
+      <title>Alta Centro</title>
       
       <!-- Favicon -->
       
@@ -60,7 +60,7 @@
                       <div class="col-md-12">
                           <div class="flex-wrap d-flex justify-content-between align-items-center">
                               <div>
-                                  <h1>Añadir Usuario</h1>
+                                  <h1>Añadir Centro</h1>
                               </div>
                           </div>
                       </div>
@@ -89,72 +89,57 @@
                         <form id="userForm">
                            <div class="row">
                               <div class="form-group col-md-6">
-                                 <label class="form-label" for="fname">Nombre:</label>
-                                 <input type="text" class="form-control" id="fname" placeholder="Nombre">
+                                 <label class="form-label" for="nombrec">Nombre:</label>
+                                 <input type="text" class="form-control" id="nombrec" placeholder="Nombre">
                               </div>
                               <div class="form-group col-md-6">
-                                 <label class="form-label" for="lname">Apellidos:</label>
-                                 <input type="text" class="form-control" id="lname" placeholder="Apellidos">
+                                 <label class="form-label" for="direccionc">Dirección:</label>
+                                 <input type="text" class="form-control" id="direccionc" placeholder="Dirección">
                               </div>
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="mobno">Número de Teléfono:</label>
-                                 <input type="number" class="form-control" id="mobno" placeholder="Número de Teléfono">
-                              </div>
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="email">Email:</label>
-                                 <input type="email" class="form-control" id="email" placeholder="Email Personal">
-                              </div>
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="email">Fecha de nacimiento:</label>
-                                 <input type="date" class="form-control" id="birthday" placeholder="Fecha de nacimiento">
-                              </div>
-                              <div class="form-group col-md-6">
-                                    <label class="form-label">Rol:</label>
-                                    <select id="role" name="role" class="selectpicker form-control" data-style="py-0">
-                                      <option value="">Seleccionar</option>
-                                  </select>
 
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="estado">Estado:</label>
-                                    <select id="estado" class="form-control">
-                                        <option value="activo">Activo</option>
-                                        <option value="inactivo">Inactivo</option>
-                                    </select>
-                                </div>
-                                
+
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="correoC">Correo:</label>
+                                 <input type="email" class="form-control" id="correoC" placeholder="Correo">
+                              </div>
+                              
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="telefonoC">Número de Teléfono:</label>
+                                 <input type="number" class="form-control" id="telefonoC" placeholder="Número de Teléfono">
+                              </div>
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="nombrefc">Nombre Fiscal:</label>
+                                 <input type="text" class="form-control" id="nombrefc" placeholder="Nombre Fiscal">
+                              </div>
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="nifc">NIF</label>
+                                 <input type="text" class="form-control" id="nifc" placeholder="NIF">
+                              </div>
+                               
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="ciudadc">Ciudad:</label>
+                                 <input type="text" class="form-control" id="ciudadc" placeholder="Ciudad">
+                              </div>
+                              
+                              
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="cpostal">Codigo postal:</label>
+                                 <input type="text" class="form-control" id="cpostal" placeholder="Codigo postal">
+                              </div>
+
                             
                               <div class="form-group col-md-6">
-                                 <label class="form-label" for="add1">Dirección:</label>
-                                 <input type="text" class="form-control" id="add1" placeholder="Dirección del cliente">
+                                 <label class="form-label" for="paisc">Pais:</label>
+                                 <input type="text" class="form-control" id="paisc" placeholder="Pais">
                               </div>
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="city">Ciudad:</label>
-                                 <input type="text" class="form-control" id="city" placeholder="Ciudad">
-                              </div>
-
+                              
 
                               
                              
                             
                               
                            </div>
-                           <hr>
-                           <h5 class="mb-3">Seguridad</h5>
-                           <div class="row">
-                              <div class="form-group col-md-12">
-                                 <label class="form-label" for="uname">Nombre de usuario:</label>
-                                 <input type="text" class="form-control" id="uname" placeholder="Nombre de usuario/Email">
-                              </div>
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="pass">Contraseña:</label>
-                                 <input type="password" class="form-control" id="pass" placeholder="Contraseña">
-                              </div>
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="rpass">Repetir Contraseña:</label>
-                                 <input type="password" class="form-control" id="rpass" placeholder="Repetir Contraseña">
-                              </div>
-                           </div>
+                          
                           
                            <button type="submit" class="btn btn-primary">Crear</button>
                         </form>
@@ -395,7 +380,7 @@
     <!-- App Script -->
     <script src="/assets/js/hope-ui.js" defer></script>
 
-      <script type="module" src="/src/user/main.js"></script>
+      <script type="module" src="/src/centros/main.js"></script>
 
     <script type="module" src="/src/Auth/main.js"></script>
 

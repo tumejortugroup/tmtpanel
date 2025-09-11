@@ -1,5 +1,29 @@
 import { agruparPorTipoComida } from './agruparComida.js';
 
+/**
+ * renderInformeDieta()
+ * --------------------
+ * Renderiza un informe visual en formato A4 para una dieta completa.
+ *
+ * Flujo:
+ * 1. Valida la entrada: espera un array con la información de la dieta.
+ * 2. Pinta un encabezado con los datos generales del usuario y de la dieta.
+ * 3. Agrupa los items por tipo de comida usando `agruparPorTipoComida`.
+ * 4. Ordena las comidas por hora para mostrar el plan de forma cronológica.
+ * 5. Por cada comida:
+ *    - Renderiza un bloque con título, macros totales y tabla de alimentos.
+ *    - Incluye alimentos equivalentes y notas si existen.
+ * 6. Añade notas generales al final del informe (estilo recomendaciones).
+ *
+ * Consideraciones:
+ * - Usa `container.innerHTML = ""` para limpiar antes de renderizar.
+ * - Asume que `data[0]` contiene la información general de la dieta.
+ * - El DOM se genera dinámicamente con HTML + estilos inline.
+ * - Está pensado para imprimir/exportar, de ahí la clase `a4-informe`.
+ *
+ * @param {Array<Object>} data - Datos de la dieta y comidas.
+ */
+
 export function renderInformeDieta(data) {
   if (!Array.isArray(data) || !data.length) return;
 
@@ -28,7 +52,7 @@ export function renderInformeDieta(data) {
   `;
   container.insertAdjacentHTML("beforeend", headerHTML);
 
-// 2. Agrupar por tipo de comida
+
 const comidasAgrupadas = agruparPorTipoComida(data);
 
 // 🔹 Pasar a array y ordenar por hora
@@ -89,45 +113,46 @@ for (const [tipo, items] of comidasOrdenadas) {
             <tr>
               <td>${alimentos.join(" / ")}</td>
             </tr>
-            ${item.notas ? `
-              <tr>
-                <td style="font-size: 11px; color: #666; font-style: italic; padding-left: 15px;">
-                  📝 ${item.notas}
-                </td>
-              </tr>` : ''}
           `;
         }).join('')}
       </tbody>
-    </table>
-  `;
+      </table>
 
-  bloque.innerHTML = tablaHTML;
-  container.appendChild(bloque);
-}
+      ${(() => {
+          const notasUnicas = [...new Set(items.filter(i => i.notas).map(i => i.notas))];
+          return notasUnicas.length > 0
+            ? `
+              <div class="notas-comida" style="font-size: 11px; color: #666; font-style: italic; margin-top: 4px; padding-left: 10px;">
+                ${notasUnicas.map(n => `📝 ${n}`).join("<br>")}
+              </div>
+            `
+            : "";
+        })()}
 
+        `;
 
-// 4. Notas al final con letra pequeña
-const notasHTML = `
-  <div class="informe-notas" style="margin-top: 20px; font-size: 11px; line-height: 1.4;">
-    <p style="color: green; font-weight: bold; margin: 2px 0;">
-      1.- Beber 2-3 litros de agua. 2 batidos máximo al día. Hacer 10.000 pasos diarios
-    </p>
-    <p style="color: blue; font-weight: bold; margin: 2px 0;">
-      2.- Todo al horno, vapor, plancha, hervido o microondas.
-    </p>
-    <p style="color: red; font-weight: bold; margin: 2px 0;">
-      3.- Todos los alimentos han de ser pesados en crudo antes de cocinarlos.
-    </p>
-    <p style="color: brown; font-weight: bold; margin: 2px 0;">
-      4.- Tienes 20 gr de Aceite para todas las comidas del día, no superar 160° al cocinar.
-    </p>
-  </div>
-`;
-container.insertAdjacentHTML("beforeend", notasHTML);
+        bloque.innerHTML = tablaHTML;
+        container.appendChild(bloque);
+      }
 
 
+    
+    const notasHTML = `
+      <div class="informe-notas" style="margin-top: 20px; font-size: 11px; line-height: 1.4;">
+        <p style="color: green; font-weight: bold; margin: 2px 0;">
+          1.- Beber 2-3 litros de agua. 2 batidos máximo al día. Hacer 10.000 pasos diarios
+        </p>
+        <p style="color: blue; font-weight: bold; margin: 2px 0;">
+          2.- Todo al horno, vapor, plancha, hervido o microondas.
+        </p>
+        <p style="color: red; font-weight: bold; margin: 2px 0;">
+          3.- Todos los alimentos han de ser pesados en crudo antes de cocinarlos.
+        </p>
+        <p style="color: brown; font-weight: bold; margin: 2px 0;">
+          4.- Tienes 20 gr de Aceite para todas las comidas del día, no superar 160° al cocinar.
+        </p>
+      </div>
+    `;
+    container.insertAdjacentHTML("beforeend", notasHTML);
 
- 
-
-  
 }

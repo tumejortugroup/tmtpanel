@@ -1,4 +1,3 @@
-// src/dietas/modules/update/utils/renderDieta.js
 
 // 🔧 Función auxiliar para capitalizar
 function capitalizar(str) {

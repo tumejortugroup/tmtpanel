@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (rol === 'Propietario') {
                     addOption('Cliente', 'Cliente');
                     addOption('Preparador', 'Preparador');
-                } else if (rol === 'admin') {
+                } else if (rol === 'Administrador') {
                     addOption('Cliente', 'Cliente');
                     addOption('Preparador', 'Preparador');
                     addOption('Propietario', 'Propietario');

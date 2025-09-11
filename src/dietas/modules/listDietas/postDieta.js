@@ -44,7 +44,7 @@ export async function crearDieta(id_usuario, id_dato) {
 
     if (!id_dieta) throw new Error("❌ No se recibió ID de la dieta creada.");
 
-    console.log("✅ Dieta creada:", result);
+
 
     // 4. Asignar la dieta al usuario logueado según su rol
     const rolPayload = {
@@ -65,7 +65,6 @@ export async function crearDieta(id_usuario, id_dato) {
       throw new Error(`❌ Error al asignar la dieta al usuario logueado: HTTP ${resAsignacion.status}`);
     }
 
-    console.log("✅ Dieta asignada al preparador/propietario correctamente.");
 
     alert("✅ Dieta creada y asignada con éxito.");
     window.location.href = `/dashboard/dietas/wizard.html?id_dieta=${id_dieta}&id_dato=${id_dato}`;

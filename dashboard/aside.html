@@ -45,20 +45,7 @@
                     </i>
                 </a>
                 <ul class="sub-nav collapse" id="sidebar-user" data-bs-parent="#sidebar-menu">
-                    <li class="nav-item">
-                        <a class="nav-link " href="/dashboard/app/user-profile.html">
-                            <i class="icon">
-                                <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
-                                    <g>
-                                    <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                                    </g>
-                                </svg>
-                            </i>
-                            <i class="sidenav-mini-icon"> U </i>
-                            <span class="item-name">Perfil</span>
-                        </a>
-                    </li>
-                    
+                  
                
                     <li class="nav-item">
                         <a class="nav-link"  onclick="redirectToControl()">
@@ -93,7 +80,7 @@
                 </ul>
             </li>
 
-            <li class="nav-item"  data-visible-to="Propietario Preparador">
+            <li class="nav-item"  data-visible-to="Propietario Preparador Administrador">
                 <a class="nav-link" data-bs-toggle="collapse" href="#horizontal-menu" role="button" aria-expanded="false" aria-controls="horizontal-menu">
                     <i class="icon">
                         <img src="/assets/images/dashboard/iconos/dieta.webp" alt="" width="20" height="15" class="img-fluid">
@@ -171,7 +158,7 @@
                 </ul>
             </li>
            
-            <li class="nav-item" data-visible-to="Propietario Preparador">
+            <li class="nav-item" data-visible-to="Administrador">
                 <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-store" role="button" aria-expanded="false" aria-controls="sidebar-store">
                     <i class="bi bi-shop">
                         <img src="/assets/images/dashboard/iconos/tiendas.webp" alt="" width="20" height="15"class="img-fluid">
@@ -186,7 +173,7 @@
                 <ul class="sub-nav collapse" id="sidebar-store" data-bs-parent="#sidebar-menu">
                 
                     <li class="nav-item">
-                        <a class="nav-link " href="/dashboard/centro/store-add.html">
+                        <a class="nav-link " href="/dashboard/centros/add-centro.html">
                             <i class="icon">
                                 <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                     <g>
@@ -199,7 +186,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="/dashboard/centro/store-list.html">
+                        <a class="nav-link " href="/dashboard/centros/centros.html">
                             <i class="icon">
                                 <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                     <g>
@@ -267,7 +254,7 @@
                 </ul>
             </li>
         -->
-            <li class="nav-item" data-visible-to="Propietario Preparador">
+            <li class="nav-item" data-visible-to="Propietario Preparador Administrador">
                 <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-client" role="button" aria-expanded="false" aria-controls="sidebar-client">
                     <i>
                        <img src="/assets/images/dashboard/iconos/cliente.webp" alt="" width="20" height="10" class="img-fluid">
@@ -279,8 +266,8 @@
                         </svg>
                     </i>
                 </a>
-                <ul class="sub-nav collapse" id="sidebar-client" data-bs-parent="#sidebar-menu">
-                    <li class="nav-item">
+                <ul class="sub-nav collapse" id="sidebar-client" data-bs-parent="#sidebar-menu" >
+                    <li class="nav-item" data-visible-to="Propietario Preparador">
                         <a class="nav-link " href="/dashboard/user/user-add.html">
                             <i class="icon">
                                 <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
@@ -293,6 +280,21 @@
                             <span class="item-name">Añadir Usuario</span>
                         </a>  
                     </li>
+
+                     <li class="nav-item" data-visible-to="Administrador">
+                        <a class="nav-link " href="/dashboard/user/user-add-admin.html">
+                            <i class="icon">
+                                <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
+                                    <g>
+                                    <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                    </g>
+                                </svg>
+                            </i>
+                            <i class="sidenav-mini-icon"> A </i>
+                            <span class="item-name">Añadir Usuario</span>
+                        </a>  
+                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link " href="/dashboard/user/user-list.html">
                             <i class="icon">
@@ -306,7 +308,7 @@
                             <span class="item-name"> Clientes</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" data-visible-to="Administrador">
                         <a class="nav-link " href="/dashboard/app/prep-list.html">
                             <i class="icon">
                                 <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
@@ -320,7 +322,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" data-visible-to="Administrador">
                         <a class="nav-link " href="/dashboard/app/prep-list.html">
                             <i class="icon">
                                 <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
