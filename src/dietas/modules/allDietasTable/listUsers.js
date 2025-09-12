@@ -1,29 +1,8 @@
 import { asignarEventoSelectDieta } from "./dietaSeleccionada.js";
 
-
 /**
  * Obtiene y renderiza los usuarios de un centro junto con sus dietas.
- *
- * Flujo:
- * 1. Recupera `token` y `centro_id` del localStorage.
- * 2. Consulta la API de usuarios del centro.
- * 3. Por cada usuario, obtiene sus dietas y construye dinámicamente
- *    la fila correspondiente en la tabla.
- * 4. Si el usuario tiene dietas, genera un <select> con opciones
- *    y asigna el evento mediante `asignarEventoSelectDieta`.
- *
- * Consideraciones:
- * - Si faltan credenciales en localStorage, la función se interrumpe con un warning.
- * - Maneja errores HTTP y de red con try/catch, loggeando el detalle en consola.
- * - El DOM de la tabla se limpia en cada ejecución para evitar duplicados.
- *
- * Dependencias:
- * - `asignarEventoSelectDieta`: gestiona los eventos sobre el <select> de dietas.
- * - Endpoints:
- *    - `GET /usuarios/centro?id={centro_id}`
- *    - `GET /dietas/usuario/{id_usuario}`
  */
-
 export async function listUser() {
   const token = localStorage.getItem("token");
   const centro_id = localStorage.getItem("centro_id");
@@ -61,15 +40,25 @@ export async function listUser() {
       const dietasData = await resDietas.json();
       const dietas = Array.isArray(dietasData.data) ? dietasData.data : [];
 
-      // 📌 siempre mostrar un select si hay dietas
+      // 📌 Select de dietas
       let selectHTML = "";
       if (dietas.length === 0) {
         selectHTML = '<span class="text-muted">Sin dietas</span>';
       } else {
+        const ultimaDieta = dietas[dietas.length - 1];
+
         selectHTML = `
           <select class="form-select form-select-sm" name="select-dieta">
-            <option value="" selected disabled>-- Selecciona dieta --</option>
-            ${dietas.map(d => `<option value="${d.id_dieta}">${d.nombre}</option>`).join("")}
+            ${dietas
+              .map(
+                d => `
+                <option value="${d.id_dieta}" ${
+                  d.id_dieta === ultimaDieta.id_dieta ? "selected" : ""
+                }>
+                  ${d.nombre}
+                </option>`
+              )
+              .join("")}
           </select>
         `;
       }
@@ -104,13 +93,21 @@ export async function listUser() {
         </tr>
       `;
 
-
       tbody.insertAdjacentHTML("beforeend", rowHTML);
 
       const lastRow = tbody.lastElementChild;
 
       if (dietas.length > 0) {
+        // asignar eventos al select
         asignarEventoSelectDieta(lastRow, token);
+
+        // ⚡ forzar selección y evento change en la última dieta
+        const select = lastRow.querySelector('select[name="select-dieta"]');
+        if (select) {
+          const ultimaDieta = dietas[dietas.length - 1];
+          select.value = ultimaDieta.id_dieta;
+          select.dispatchEvent(new Event("change"));
+        }
       }
     }
 

@@ -1,7 +1,7 @@
 // main.js
 // main.js
 import { calcularTodo } from './modules/calculos/calculos.js';
-import { agregarColumna } from './modules/ui/columns.js';
+
 import { obtenerIdUsuarioDesdeUrl } from './modules/utils/params.js';
 import { cargarControlesPrevios } from './modules/fetch/getControlTabla.js';
 import { guardarControl } from './modules/fetch/postControl.js';
@@ -9,7 +9,7 @@ import { cargarListaUsers } from './modules/fetch/listUsers.js';
 import { mostrarNombreUsuario } from './modules/fetch/nombreUsuario.js';
 
 // Inicializa botón para agregar columnas (una sola vez)
-agregarColumna();
+
 mostrarNombreUsuario();
 cargarListaUsers();
 

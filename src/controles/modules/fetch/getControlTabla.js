@@ -95,22 +95,42 @@ export async function cargarControlesPrevios(idUsuario) {
         const input = document.createElement('input');
         input.className = 'nombre input-medidas';
         input.setAttribute('data-index', nuevoIndex);
+        input.value = `Control-`; 
         nuevaCelda.appendChild(input);
       } else if (variable === 'fecha') {
-        const input = document.createElement('input');
-        input.type = 'date';
-        input.className = 'fecha input-medidas';
-        input.setAttribute('data-index', nuevoIndex);
-        nuevaCelda.appendChild(input);
+       const input = document.createElement('input');
+      input.type = 'date';
+      input.className = 'fecha input-medidas';
+      input.setAttribute('data-index', nuevoIndex);
+      const hoy = new Date().toISOString().split('T')[0];
+      input.value = hoy;
+      nuevaCelda.appendChild(input);
+      }  else {
+      if (!variable || !(variable in plantillas)) return;
+      const campo = plantillas[variable].cloneNode(true);
+
+      // 👇 Variables que deben copiar el último valor
+      const copiarVariables = [
+        'genero',
+        'humero_biepicondileo',
+        'femur_bicondileo',
+        'muneca_estiloideo',
+        'muneca_circunferencia'
+      ];
+
+      if (copiarVariables.includes(variable) && controles.length > 0) {
+        campo.value = controles[controles.length - 1][variable] ?? '';
+        campo.readOnly =true;
       } else {
-        if (!variable || !(variable in plantillas)) return;
-        const campo = plantillas[variable].cloneNode(true);
         campo.value = '';
-        campo.setAttribute('data-index', nuevoIndex);
-        campo.disabled = false;
-        campo.readOnly = false;
-        nuevaCelda.appendChild(campo);
       }
+
+      campo.setAttribute('data-index', nuevoIndex);
+      campo.disabled = false;
+      campo.readOnly =false;
+      nuevaCelda.appendChild(campo);
+    }
+
 
       fila.appendChild(nuevaCelda);
     });

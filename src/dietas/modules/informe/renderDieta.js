@@ -38,12 +38,9 @@ export function renderInformeDieta(data) {
       <div>
         <p><strong>Nombre:</strong> ${gen.nombre_usuario} ${gen.apellido_usuario}</p>
         <p><strong>Kcal:</strong> ${gen.calorias_dieta}</p>
-        <p><strong>Proteinas:</strong> ${gen.proteinas_dieta}g</p>
-        <p><strong>Carbohidratos:</strong> ${gen.carbohidratos_dieta}g</p>
-        <p><strong>Grasas:</strong> ${gen.grasas_dieta}g</p>
+        <p><strong>Inicio:</strong> ${gen.fecha_creacion.split(' ')[0]}</p>
       </div>
       <div>
-        <p><strong>Inicio:</strong> ${gen.fecha_creacion.split(' ')[0]}</p>
         <p><strong>Validez:</strong> Mensual</p>
         <p><strong>Revisión:</strong> —</p>
         <p><strong>Responsable:</strong> ${gen.nombre_preparador || ''} ${gen.apellido_preparador || ''} ${gen.nombre_propietario || ''} ${gen.apellido_propietario || ''}</p>
@@ -73,20 +70,12 @@ for (const [tipo, items] of comidasOrdenadas) {
   bloque.classList.add("bloque-comida");
 
   const hora = items[0]?.hora ? items[0].hora.slice(0, 5) : "—";
-  const caloriasTotales = items[0]?.calorias_totales_comida || 0;
-  const proteinasTotales = items[0]?.proteinas_totales_comida || 0;
-  const grasasTotales = items[0]?.grasas_totales_comida || 0;
-  const carbosTotales = items[0]?.carbohidratos_totales_comida || 0;
+
 
   let tablaHTML = `
     <div class='encabezado-comida'>
       <h3>${tipo.toUpperCase()} <small>(${hora})</small></h3>
-      <p style="margin: 4px 0; font-size: 13px; color: #555;">
-        ${caloriasTotales} kcal | 
-        ${proteinasTotales} g proteínas | 
-        ${grasasTotales} g grasas | 
-        ${carbosTotales} g carbohidratos
-      </p>
+     
     </div>
     
     <table class="tabla-comida">
