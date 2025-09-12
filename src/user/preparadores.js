@@ -1,14 +1,12 @@
 import { initDeleteUser } from "./modules/deleteUser.js";
-
 import { toggleStatus } from "./modules/toggleStatus.js";
 import { initCreateUserFormAdmin } from "./modules/admin/createUserAdmin.js";
-import { cargarCentrosSelect } from "./modules/getCentros.js"; 
-import { listClientes } from "./modules/admin/listUserAdmin.js";
+import { listPreparadores } from "./modules/admin/listPreparadores.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   initCreateUserFormAdmin();
-  await listClientes();
+  await listPreparadores();
   toggleStatus();
   initDeleteUser();
-  cargarCentrosSelect("http://localhost:9000/api/v1/centros", "centro");
+
 });
