@@ -22,7 +22,7 @@ export async function actualizarUsuario(id) {
     };
 
     try {
-        const response = await fetch(`http://localhost:9000/api/v1/usuarios/${id}`, {
+        const response = await fetch(`https://my.tumejortugroup.com/api/v1/usuarios/${id}`, {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${token}`,

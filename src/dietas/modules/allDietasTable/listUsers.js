@@ -12,7 +12,7 @@ export async function listUser() {
     return;
   }
 
-  const endpoint = `http://localhost:9000/api/v1/usuarios/centro?id=${centro_id}`;
+  const endpoint = `https://my.tumejortugroup.com/api/v1/usuarios/centro?id=${centro_id}`;
 
   try {
     const response = await fetch(endpoint, {
@@ -33,7 +33,7 @@ export async function listUser() {
     for (const usuario of usuarios) {
       // Obtener dietas
       const resDietas = await fetch(
-        `http://localhost:9000/api/v1/dietas/usuario/${usuario.id_usuario}`,
+        `https://my.tumejortugroup.com/api/v1/dietas/usuario/${usuario.id_usuario}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 

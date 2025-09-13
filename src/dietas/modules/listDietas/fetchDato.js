@@ -22,7 +22,7 @@
 
 export async function fetchDetalleDato(id_dato, token) {
   try {
-    const res = await fetch(`http://localhost:9000/api/v1/datos/detalle/${id_dato}`, {
+    const res = await fetch(`https://my.tumejortugroup.com/api/v1/datos/detalle/${id_dato}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json"

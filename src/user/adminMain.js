@@ -10,5 +10,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   await listClientes();
   toggleStatus();
   initDeleteUser();
-  cargarCentrosSelect("http://localhost:9000/api/v1/centros", "centro");
+  cargarCentrosSelect("https://my.tumejortugroup.com/api/v1/centros", "centro");
 });

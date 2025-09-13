@@ -50,7 +50,7 @@ export function initDeleteDieta() {
     }
 
     try {
-      const res = await fetch(`http://localhost:9000/api/v1/dietas/${idDieta}`, {
+      const res = await fetch(`https://my.tumejortugroup.com/api/v1/dietas/${idDieta}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,

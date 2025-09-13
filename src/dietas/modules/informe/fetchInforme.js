@@ -12,7 +12,7 @@ export async function fetchInformeDieta(idDieta) {
   }
 
   try {
-    const res = await fetch(`http://localhost:9000/api/v1/dietas/informe/${idDieta}`, {
+    const res = await fetch(`https://my.tumejortugroup.com/api/v1/dietas/informe/${idDieta}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

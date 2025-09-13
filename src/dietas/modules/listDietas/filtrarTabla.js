@@ -14,10 +14,6 @@
  *      - Texto → compara con coincidencia parcial, sin mayúsculas/minúsculas.
  *   - Muestra/oculta la fila en función de si pasa todos los filtros.
  *
- * Consideraciones:
- * - Los filtros se aplican de forma acumulativa (AND).
- * - Si un input está vacío o no marcado, se ignora en el filtrado.
- * - Está diseñado para funcionar con una fila extra en <thead> destinada a filtros.
  *
  * @returns {void}
  */

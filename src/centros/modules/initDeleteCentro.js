@@ -16,7 +16,7 @@ export function initDeleteCentro() {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:9000/api/v1/centros/${id}`, {
+      const res = await fetch(`https://my.tumejortugroup.com/api/v1/centros/${id}`, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`,

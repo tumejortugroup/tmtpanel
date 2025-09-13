@@ -24,7 +24,7 @@ export async function checkSession() {
     }
 
     try {
-        const response = await fetch('http://localhost:9000/api/v1/auth/check', {
+        const response = await fetch('https://my.tumejortugroup.com/api/v1/auth/check', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`

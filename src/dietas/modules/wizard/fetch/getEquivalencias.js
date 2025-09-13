@@ -1,6 +1,6 @@
 export async function getEquivalencia(idPrincipal, idEquivalente, categoria, cantidadBase) {
     try {
-        const url = `http://localhost:9000/api/v1/equivalencias/calcular?id_alimento=${idPrincipal}&id_equivalente=${idEquivalente}&cantidad=${cantidadBase}&categoria=${categoria}`;
+        const url = `https://my.tumejortugroup.com/api/v1/equivalencias/calcular?id_alimento=${idPrincipal}&id_equivalente=${idEquivalente}&cantidad=${cantidadBase}&categoria=${categoria}`;
         
 
         const response = await fetch(url);
@@ -30,7 +30,7 @@ export async function getEquivalencia(idPrincipal, idEquivalente, categoria, can
 
 export async function getEquivalencia2(idPrincipal, idEquivalente, categoria, cantidadBase) {
     try {
-        const url = `http://localhost:9000/api/v1/equivalencias/calcular?id_alimento=${idPrincipal}&id_equivalente=${idEquivalente}&cantidad=${cantidadBase}&categoria=${categoria}`;
+        const url = `https://my.tumejortugroup.com/api/v1/equivalencias/calcular?id_alimento=${idPrincipal}&id_equivalente=${idEquivalente}&cantidad=${cantidadBase}&categoria=${categoria}`;
         console.log("📤 URL GET EQ 2:", url);
 
         const response = await fetch(url);

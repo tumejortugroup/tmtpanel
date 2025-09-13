@@ -10,7 +10,7 @@ export async function listUser() {
     return;
   }
 
-  const endpoint = `http://localhost:9000/api/v1/usuarios/centro?id=${centro_id}`;
+  const endpoint = `https://my.tumejortugroup.com/api/v1/usuarios/centro?id=${centro_id}`;
 
   try {
     const response = await fetch(endpoint, {
@@ -34,7 +34,7 @@ export async function listUser() {
       
 
       // Obtener controles
-      const resControles = await fetch(`http://localhost:9000/api/v1/datos/usuario/${usuario.id_usuario}`, {
+      const resControles = await fetch(`https://my.tumejortugroup.com/api/v1/datos/usuario/${usuario.id_usuario}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -45,7 +45,7 @@ export async function listUser() {
 
 
       // Último control
-      const resLast = await fetch(`http://localhost:9000/api/v1/datos/last/${usuario.id_usuario}`, {
+      const resLast = await fetch(`https://my.tumejortugroup.com/api/v1/datos/last/${usuario.id_usuario}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -111,7 +111,6 @@ function asignarEventoCrearDieta(rowElement, usuario) {
       return;
     }
 
-    // ✅ Usar la función centralizada
     crearDieta(usuario.id_usuario, id_dato_final);
   });
 }

@@ -8,7 +8,7 @@ export async function cargarControlesPrevios(idUsuario) {
   }
 
   try {
-    const response = await fetch(`http://localhost:9000/api/v1/datos/ultimos/${idUsuario}`, {
+    const response = await fetch(`https://my.tumejortugroup.com/api/v1/datos/ultimos/${idUsuario}`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }

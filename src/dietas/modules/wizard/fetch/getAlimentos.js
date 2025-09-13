@@ -2,7 +2,7 @@ export async function getAlimentos() {
   const token = localStorage.getItem("token");
 
   try {
-    const res = await fetch("http://localhost:9000/api/v1/alimentos", {
+    const res = await fetch("https://my.tumejortugroup.com/api/v1/alimentos", {
       headers: {
         Authorization: `Bearer ${token}`
       }

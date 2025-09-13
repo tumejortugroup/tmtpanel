@@ -35,7 +35,7 @@ export async function actualizarDieta() {
   };
 
   try {
-    const response = await fetch(`http://localhost:9000/api/v1/dietas/${idDieta}`, {
+    const response = await fetch(`https://my.tumejortugroup.com/api/v1/dietas/${idDieta}`, {
       method: "PUT",
       headers: {
              Authorization: `Bearer ${token}`,

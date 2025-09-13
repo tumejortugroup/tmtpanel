@@ -26,7 +26,7 @@ export function initCreateCentroForm() {
     };
 
     try {
-      const response = await fetch("http://localhost:9000/api/v1/centros", {
+      const response = await fetch("https://my.tumejortugroup.com/api/v1/centros", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

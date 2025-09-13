@@ -7,7 +7,7 @@ export async function listCentro() {
     }
 
 
-  const endpoint = `http://localhost:9000/api/v1/centros`;
+  const endpoint = `https://my.tumejortugroup.com/api/v1/centros`;
     
 
     try {

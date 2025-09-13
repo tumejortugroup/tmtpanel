@@ -28,8 +28,8 @@ export async function crearDieta(id_usuario, id_dato) {
       carbohidratos_dieta: detalle.carbohidratos_datos
     };
 
-    // 3. Crear la dieta
-    const res = await fetch('http://localhost:9000/api/v1/dietas', {
+
+    const res = await fetch('https://my.tumejortugroup.com/api/v1/dietas', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -46,13 +46,12 @@ export async function crearDieta(id_usuario, id_dato) {
 
 
 
-    // 4. Asignar la dieta al usuario logueado según su rol
     const rolPayload = {
-      id_usuario: Number(usuarioLogueado),  // ← Usuario logueado
+      id_usuario: Number(usuarioLogueado),
       rol
     };
 
-    const resAsignacion = await fetch(`http://localhost:9000/api/v1/dietas/${id_dieta}/asignar-rol`, {
+    const resAsignacion = await fetch(`https://my.tumejortugroup.com/api/v1/dietas/${id_dieta}/asignar-rol`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,

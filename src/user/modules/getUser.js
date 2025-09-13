@@ -7,7 +7,7 @@ export async function cargarUsuario(id) {
     }
 
     try {
-        const response = await fetch(`http://localhost:9000/api/v1/usuarios/${id}`, {
+        const response = await fetch(`https://my.tumejortugroup.com/api/v1/usuarios/${id}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,

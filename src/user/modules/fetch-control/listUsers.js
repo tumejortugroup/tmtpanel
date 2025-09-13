@@ -8,7 +8,7 @@ export async function cargarListaUsers() {
       return;
     }
 
-    const res = await fetch(`http://localhost:9000/api/v1/usuarios/centro?id=${centro_id}`, {
+    const res = await fetch(`https://my.tumejortugroup.com/api/v1/usuarios/centro?id=${centro_id}`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }

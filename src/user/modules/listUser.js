@@ -10,7 +10,7 @@ export async function listUser() {
     }
 
 
-  const endpoint = `http://localhost:9000/api/v1/usuarios/centro?id=${centro_id}`;
+  const endpoint = `https://my.tumejortugroup.com/api/v1/usuarios/centro?id=${centro_id}`;
     
 
     try {

@@ -3,7 +3,7 @@ import { listUser } from "./modules/listUser.js";
 import { toggleStatus } from "./modules/toggleStatus.js";
 import { initCreateUserForm } from "./modules/createUser.js";
 import { filtrarTabla } from "./modules/filtrarTabla.js";
-import { cargarCentrosSelect } from "./modules/getCentros.js"; // 👈 importar
+import { cargarCentrosSelect } from "./modules/getCentros.js"; 
 
 document.addEventListener("DOMContentLoaded", async () => {
   initCreateUserForm();
@@ -11,7 +11,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   toggleStatus();
   initDeleteUser();
   filtrarTabla();
-
-  // 👇 aquí cargas el select de centros
-  cargarCentrosSelect("http://localhost:9000/api/v1/centros", "centro");
+  cargarCentrosSelect("https://my.tumejortugroup.com/api/v1/centros", "centro");
 });

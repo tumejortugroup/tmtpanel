@@ -10,7 +10,7 @@ export async function listPreparadores() {
     }
 
 
-  const endpoint = `http://localhost:9000/api/v1/usuarios/preparadores`;
+  const endpoint = `https://my.tumejortugroup.com/api/v1/usuarios/preparadores`;
     
 
     try {

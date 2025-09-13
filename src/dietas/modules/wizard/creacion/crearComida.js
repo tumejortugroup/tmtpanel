@@ -9,7 +9,7 @@
 
   try {
     const token = localStorage.getItem("token");
-    const res = await fetch("http://localhost:9000/api/v1/comidas", {
+    const res = await fetch("https://my.tumejortugroup.com/api/v1/comidas", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

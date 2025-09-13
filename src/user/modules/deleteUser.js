@@ -16,7 +16,7 @@ export function initDeleteUser() {
 
         try {
             // Obtener ID del usuario por nombre
-            const res = await fetch(`http://localhost:9000/api/v1/usuarios/nombre/${encodeURIComponent(nombre)}`, {
+            const res = await fetch(`https://my.tumejortugroup.com/api/v1/usuarios/nombre/${encodeURIComponent(nombre)}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -29,7 +29,7 @@ export function initDeleteUser() {
             if (!confirm(`¿Estás seguro de eliminar a "${nombre}"?`)) return;
 
             // Eliminar usuario por ID
-            const deleteRes = await fetch(`http://localhost:9000/api/v1/usuarios/${userId}`, {
+            const deleteRes = await fetch(`https://my.tumejortugroup.com/api/v1/usuarios/${userId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

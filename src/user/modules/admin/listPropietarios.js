@@ -1,6 +1,6 @@
 export async function listPropietarios() {
     const token = localStorage.getItem("token");
- 
+    
 
     
     if (!token) {
@@ -9,7 +9,7 @@ export async function listPropietarios() {
     }
 
 
-  const endpoint = `http://localhost:9000/api/v1/usuarios/propietarios`;
+  const endpoint = `https://my.tumejortugroup.com/api/v1/usuarios/propietarios`;
     
 
     try {

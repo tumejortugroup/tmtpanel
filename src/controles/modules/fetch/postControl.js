@@ -70,7 +70,7 @@ export async function guardarControl(index) {
   try {
     const token = localStorage.getItem('token');
 
-    const res = await fetch('http://localhost:9000/api/v1/datos', {
+    const res = await fetch('https://my.tumejortugroup.com/api/v1/datos', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

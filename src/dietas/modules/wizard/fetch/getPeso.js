@@ -5,7 +5,7 @@ export async function obtenerDetalleDato() {
   const idDato = obtenerDatoDesdeUrl();
   if (!idDato) throw new Error("ID de dato no encontrado en la URL");
 
-    const response = await fetch(`http://localhost:9000/api/v1/datos/detalle/${idDato}`, {
+    const response = await fetch(`https://my.tumejortugroup.com/api/v1/datos/detalle/${idDato}`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,

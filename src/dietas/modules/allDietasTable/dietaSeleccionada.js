@@ -26,7 +26,7 @@ export function asignarEventoSelectDieta(rowElement, token) {
 
   async function actualizarFila(idDieta) {
     try {
-      const res = await fetch(`http://localhost:9000/api/v1/dietas/${idDieta}/dato`, {
+      const res = await fetch(`https://my.tumejortugroup.com/api/v1/dietas/${idDieta}/dato`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const result = await res.json();

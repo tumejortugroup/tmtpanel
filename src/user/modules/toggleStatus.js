@@ -16,7 +16,7 @@ export function toggleStatus() {
 
         try {
             // Obtener ID del usuario por nombre
-            const res = await fetch(`http://localhost:9000/api/v1/usuarios/nombre/${encodeURIComponent(nombre)}`, {
+            const res = await fetch(`https://my.tumejortugroup.com/api/v1/usuarios/nombre/${encodeURIComponent(nombre)}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
 
@@ -28,7 +28,7 @@ export function toggleStatus() {
             if (!confirm(`¿Estás seguro de cambiar el estado de "${nombre}" a inactivo?`)) return;
 
             // PATCH para inactivar
-            const patchRes = await fetch(`http://localhost:9000/api/v1/usuarios/${userId}/inactivar`, {
+            const patchRes = await fetch(`https://my.tumejortugroup.com/api/v1/usuarios/${userId}/inactivar`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

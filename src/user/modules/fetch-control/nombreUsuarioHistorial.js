@@ -13,7 +13,7 @@ export async function mostrarNombreUsuarioHistorial() {
    const token = localStorage.getItem('token');
  
    try {
-     const res = await fetch(`http://localhost:9000/api/v1/usuarios/${id}`, {
+     const res = await fetch(`https://my.tumejortugroup.com/api/v1/usuarios/${id}`, {
        headers: {
          'Authorization': `Bearer ${token}`
        }
