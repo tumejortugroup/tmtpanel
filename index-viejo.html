@@ -52,7 +52,7 @@
     <!-- loader END -->
     
     <aside class="sidebar sidebar-default sidebar-white sidebar-base navs-rounded-all ">
-        <div class="sidebar-header d-flex align-items-center justify-content-start">
+       <div class="sidebar-header d-flex align-items-center justify-content-start">
             <a href="../dashboard/index.html" class="navbar-brand">
                 <!--Logo start-->
                 <!--logo End-->
@@ -97,7 +97,7 @@
                 <!-- Sidebar Menu Start -->
                 <ul class="navbar-nav iq-main-menu" id="sidebar-menu">
                     <li class="nav-item static-item">
-                        <a class="nav-link static-item disabled" href="#" tabindex="-1">
+                        <a class="nav-link static-item disabled" href="/dashboard/index.html tabindex="-1">
                             <span class="default-icon">Principal</span>
                             <span class="mini-icon">-</span>
                         </a>
@@ -214,19 +214,67 @@
                                     <span class="item-name">Añadir Preparador</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link " href="../dashboard/app/prep-list.html">
-                                    <i class="icon">
-                                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
-                                            <g>
-                                            <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                                            </g>
-                                        </svg>
-                                    </i>
-                                    <i class="sidenav-mini-icon"> P </i>
-                                    <span class="item-name">Lista de Prep.</span>
-                                </a>
-                            </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link " href="/dashboard/controles/control.html">
+                          <i class="icon">
+                                <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
+                                    <g>
+                                    <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                    </g>
+                                </svg>
+                            </i>
+                          <i class="sidenav-mini-icon"> H </i>
+                          <span class="item-name"> Realizar control</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link " href="/dashboard/controles/vistaControles.html">
+                          <i class="icon">
+                                <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
+                                    <g>
+                                    <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                    </g>
+                                </svg>
+                            </i>
+                          <i class="sidenav-mini-icon"> H </i>
+                          <span class="item-name"> Lista controles</span>
+                        </a>
+                    </li>
+
+                      <li class="nav-item">
+                        <a class="nav-link " href="/dashboard/dietas/crearDieta.html">
+                          <i class="icon">
+                                <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
+                                    <g>
+                                    <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                    </g>
+                                </svg>
+                            </i>
+                          <i class="sidenav-mini-icon"> H </i>
+                          <span class="item-name"> Nueva preparacion</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link " href="/dashboard/dietas/vistaDietas.html">
+                          <i class="icon">
+                                <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
+                                    <g>
+                                    <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                    </g>
+                                </svg>
+                            </i>
+                          <i class="sidenav-mini-icon"> H </i>
+                          <span class="item-name"> Lista preparaciones</span>
+                        </a>
+                    </li>
+
+
+                         
+
                         </ul>
                     </li>
 
@@ -1041,8 +1089,7 @@
                 </ul>
                 <!-- Sidebar Menu End -->        </div>
         </div>
-        <div class="sidebar-footer"></div>
-    </aside>    <main class="main-content">
+        <div class="sidebar-footer"></div>    </aside>    <main class="main-content">
       <div class="position-relative iq-banner">
         <!--Nav Start-->
         <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
@@ -2050,7 +2097,7 @@
     
     <!-- App Script -->
     <script src="../assets/js/hope-ui.js" defer></script>
-    <script src="../src/Auth/logout.js"></script>
+    <script src="/src/Auth/main.js"></script>
     
     
     
