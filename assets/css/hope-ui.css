@@ -15919,6 +15919,8 @@ thead, tbody, tfoot, tr, td, th {
   width: calc(100% - 4.8rem);
 }
 
+
+
 @media (max-width: 991.98px) {
   .iq-navbar.navs-sticky.menu-sticky {
     width: 100% !important;
@@ -19868,6 +19870,8 @@ body.offcanvas-active {
 .sidebar .logo-main .logo-normal {
   display: block;
 }
+
+
 .sidebar .sidebar-toggle {
   position: absolute;
   right: -12px;
@@ -20766,6 +20770,10 @@ body {
   width: 1.875rem;
 }
 
+.icon-31 {
+  height: 1.875rem;
+}
+
 .icon-32 {
   height: 2rem;
   width: 2rem;
@@ -20784,6 +20792,10 @@ body {
 .icon-44 {
   height: 2.75rem;
   width: 2.75rem;
+}
+
+.icon-50 {
+  height: 3rem;
 }
 
 .avatar {
