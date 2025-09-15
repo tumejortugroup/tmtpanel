@@ -15,13 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
         let asideRendered = false;
 
         // 1. Cargar ASIDE
-        const asideLoaded = fetch('/dashboard/aside.html')
-            .then(res => res.text())
+       const asideLoaded = fetch('/dashboard/aside.html')
+            .then(res => {
+                if (!res.ok) throw new Error("No se pudo cargar aside.html");
+                return res.text();
+            })
             .then(html => {
-                document.querySelector('aside').innerHTML = html;
-                asideRendered = true;
-            });
-
+                document.getElementById('aside').innerHTML = html;
+                console.log("✅ aside cargado");
+            })
+            .catch(err => console.error(err));
         // 2. Cargar NAVBAR
         const navbarLoaded = fetch('/dashboard/navbar.html')
             .then(res => res.text())

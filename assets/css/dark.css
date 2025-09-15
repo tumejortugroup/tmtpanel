@@ -1189,3 +1189,21 @@ hr {
 .dark.boxed-fancy .boxed-inner {
   background: #151824;
 }
+
+#aside {
+  width: 250px;
+  background: #f5f5f5;
+  transition: transform 0.3s ease;
+}
+
+#aside.hidden {
+  transform: translateX(-100%);
+}
+
+.content-page {
+  position: relative;
+  z-index: 10;
+}
+.sidebar {
+  overflow: hidden;
+}
