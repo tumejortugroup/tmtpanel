@@ -29,10 +29,6 @@
       
       <!-- RTL Css -->
       <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
-
-      <!-- CSS Chuche-->
-      <link rel="stylesheet" href="/assets/css/login/login.css"/>
-     
       
       
   </head>
@@ -45,72 +41,62 @@
     <!-- loader END -->
     
       <div class="wrapper">
-      <section class="login-content background-login">
-         <div class="row m-0 align-items-center  vh-100 background-login">            
-            <div class="col-md-6 background-login">
+      <section class="login-content">
+         <div class="row m-0 align-items-center bg-white vh-100">            
+            <div class="col-md-6">
                <div class="row justify-content-center">
-                  <div class="col-md-10 background-login">
-                     <div class="card card-transparent shadow-none d-flex justify-content-center mb-0 auth-card background-login">
-                        <div class="card-body background-login"">
-                        
-
-                              <div class="logo-main">
-                                  <div class="logo-normal">
-                                        <img src="/assets/images/dashboard/tmtlogo.webp" alt="" width="200" height="100" class="img-fluid">
-                                        <div class="letra-logo">
-                                             <h2>Inicia sesión</h2>
-                                        </div>
-                                        
-                                  </div>
-                                  <div class="logo-mini">
-                                       <img src="/assets/images/dashboard/tmtlogo.webp" alt="" width="200" height="100" class="img-fluid">
-                                  </div>
-                              </div>
+                  <div class="col-md-10">
+                     <div class="card card-transparent shadow-none d-flex justify-content-center mb-0 auth-card">
+                        <div class="card-body">
+                           <a href="../../dashboard/index.html" class="navbar-brand d-flex align-items-center mb-3">
+                              <!--Logo start-->
+                              <!--logo End-->
+                              
+                              <!--Logo start-->
+                             <div class="logo-main" style="z-index: 1;">
+                                    <div class="logo-normal">
+                                        <img src="/assets/images/icons/logo.png" alt="Logo" class="icon-50">
+                                    </div>
+                                    <div class="logo-mini">
+                                        <img src="/assets/images/icons/logo-mini.png" alt="Logo" class="icon-30">
+                                    </div>
+                             </div>
                               <!--logo End-->
                               
                               
                               
                               
-             
-                     
+                              <h4 class="logo-title ms-3" style="display: none;">my TMT Panel</h4>
+                           </a>
+                           <h2 class="mb-2 text-center">Inicia Sesión</h2>
+                           <p class="text-center">Tu cambio empieza aquí.</p>
                            <form id ="login-form">
                               <div class="row">
                                  <div class="col-lg-12">
                                     <div class="form-group">
-                                       <label for="username" class="form-label">Nombre de usuario</label>
-                                       <input type="text" class="form-control" id="username"  placeholder=" ">
+                                       <label for="email" class="form-label">Email</label>
+                                       <input type="email" class="form-control" id="correo" aria-describedby="email" placeholder=" ">
                                     </div>
                                  </div>
                                  <div class="col-lg-12">
-                              <div class="form-group">
-                                    <label for="password" class="form-label">Contraseña</label>
-                                    <div style="position: relative;">
+                                    <div class="form-group">
+                                       <label for="password" class="form-label">Contraseña</label>
                                        <input type="password" class="form-control" id="password" aria-describedby="password" placeholder=" ">
-                                       <button type="button" onclick="togglePassword()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none;">
-                                          👁️
-                                       </button>
                                     </div>
-                              </div>
-
-                              <script>
-                                 function togglePassword() {
-                                    const passwordInput = document.getElementById('password');
-                                    const currentType = passwordInput.getAttribute('type');
-                                    passwordInput.setAttribute('type', currentType === 'password' ? 'text' : 'password');
-                                 }
-                              </script>
-
                                  </div>
                                  <div class="col-lg-12 d-flex justify-content-between">
-                                    
-                                   
+                                    <div class="form-check mb-3">
+                                       <input type="checkbox" class="form-check-input" id="customCheck1">
+                                       <label class="form-check-label" for="customCheck1">Recuérdame</label>
+                                    </div>
+                                    <a href="recoverpw.html" style="display: none;">Forgot Password?</a>
                                  </div>
                               </div>
                               <div class="d-flex justify-content-center">
-                                 <button type="submit" class="btn btn-primary">Entrar</button>
+                                 <button type="submit" class="btn btn-primary">Iniciar sesión</button>
                               </div>
                               <p class="text-center my-3" style="display: none;">or sign in with other accounts?</p>
-                              <div class="d-flex justify-content-center">
+                              <div class="d-flex justify-content-center" style="display: none;">
                                  <ul class="list-group list-group-horizontal list-group-flush" style="display: none;">
                                     <li class="list-group-item border-0 pb-0">
                                        <a href="#"><img src="/assets/images/brands/fb.svg" alt="fb"></a>
@@ -127,14 +113,18 @@
                                  </ul>
                               </div>
                               <p class="mt-3 text-center">
-                                 ¿No tienes cuenta? ¡Contacta con tu preparador!.</a>
+                                 ¿No tienes cuenta? <a href="https://www.tumejortugroup.com/pages/nuestras-tiendas" target="_blank" rel="noopener noreferrer" class="text-underline">Ponte en contacto con tu centro TMT</a>
                               </p>
                            </form>
                         </div>
                      </div>
                   </div>
                </div>
-               
+               <div class="sign-bg">
+                  <img src="/assets/images/icons/logo-transparente.png" 
+                  alt="Logo" width="350" height="auto" viewBox="0 0 431 398" fill="none" 
+                  style="opacity: 0.35; position: absolute; top:0; left: 0; z-index:0; transform: rotate(-25deg);">
+               </div>
             </div>
             <div class="col-md-6 d-md-block d-none bg-primary p-0 mt-n1 vh-100 overflow-hidden">
                <img src="/assets/images/auth/01.png" class="img-fluid gradient-main animated-scaleX" alt="images">
@@ -172,7 +162,6 @@
     
     <!-- App Script -->
     <script src="/assets/js/hope-ui.js" defer></script>
-    <script type="module" src="/src/Auth/main.js" ></script>
-    
+        <script type="module" src="/src/Auth/main.js" ></script>
   </body>
 </html>

@@ -6,10 +6,10 @@ export function initAuth() {
     loginForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        const username = document.getElementById('username')?.value.trim();
+        const correo = document.getElementById('correo')?.value.trim();
         const password = document.getElementById('password')?.value;
 
-        if (!username || !password) {
+        if (!correo || !password) {
             alert('Por favor, completa todos los campos.');
             return;
         }
@@ -21,7 +21,7 @@ export function initAuth() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ username, password })
+                body: JSON.stringify({ correo, password})
             });
 
             if (!response.ok) {
@@ -29,6 +29,7 @@ export function initAuth() {
             }
 
             const data = await response.json();
+            console.log("🔎 Login API response:", data);
 
             if (data?.token) {
                 localStorage.setItem('token', data.token);

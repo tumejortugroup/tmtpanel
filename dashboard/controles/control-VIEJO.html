@@ -1,0 +1,498 @@
+
+
+    <!doctype html>
+    <html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Crear Control</title>
+        
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+        
+        <!-- Library / Plugin Css Build -->
+        <link rel="stylesheet" href="/assets/css/core/libs.min.css" />
+        
+        
+        <!-- Hope Ui Design System Css -->
+        <link rel="stylesheet" href="/assets/css/hope-ui.min.css?v=2.0.0" />
+        
+        <!-- Custom Css -->
+        <link rel="stylesheet" href="/assets/css/custom.min.css?v=2.0.0" />
+        
+        <!-- Dark Css -->
+        <link rel="stylesheet" href="/assets/css/dark.css"/>
+        
+        <!-- Customizer Css -->
+        <link rel="stylesheet" href="/assets/css/customizer.min.css" />
+        
+        <!-- RTL Css -->
+        <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
+        <link rel="stylesheet" href="/assets/css/controles/controles.css"/>
+        
+        
+    </head>
+    <body class="  ">
+        <!-- loader Start -->
+        <div id="loading">
+        <div class="loader simple-loader">
+            <div class="loader-body"></div>
+        </div>    </div>
+        <!-- loader END -->
+        
+        <aside class="sidebar sidebar-default sidebar-white sidebar-base navs-rounded-all sidebar-dark">
+        
+        </aside>    <main class="main-content backside">
+        <div class="position-relative iq-banner">
+            <!--Nav Start-->
+            <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar navbar-dark">
+        
+            </nav>   
+            <div class="iq-navbar-header" style="height: 215px;">
+              <div class="container-fluid iq-container">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="flex-wrap d-flex justify-content-between align-items-center">
+                              <div>
+                                  <h1>¡Hola [Nombre]!</h1>
+                                  <p>Recuerda, estás cambiando la vida de la gente a a mejor.</p>
+                              </div>
+                      
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="iq-header-img">
+                  <img src="/assets/images/dashboard/top-header6.png" alt="header" class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX">
+              </div>
+          </div>          <!-- Nav Header Component End -->
+        <!--Nav End-->
+      </div>       <!-- Nav Header Component Start -->
+          
+        </div>
+        <div class="conatiner-fluid content-inner mt-n5 py-0">
+        <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                
+                </div>
+                <div class="card-body backside">
+                <div class="header-title header-controles">
+                    <div class="box-asignar-user">
+                        <h3 class="card-title">Creación de controles: </h3>
+                       <div class="btn-group">
+                            <select id="select-usuarios" class="form-select form-select-sm btn btn-primary" style="width: auto;">
+                            <option selected disabled>Seleccionar usuario</option>
+                            <!-- Opciones dinámicas -->
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+                    <div>
+                        
+
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                      
+                        
+                            <div>
+                               
+
+
+                                 <button id="btn-ver-controles" type="button" class="btn btn-primary " aria-expanded="false">
+                                    Controles
+                                </button>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered tabla-controles">
+                                
+    
+        <tbody>
+            <tr class="apartado-controles division-controles">
+                <th colspan="2">INFORMACIÓN</th>
+            </tr>
+            <tr class="apartado-controles fila-control-nombre" data-variable="nombre">
+                <th class="parametros-medidas">Nº Control</th>
+                <td class="controles" id="control-cabecero">
+                    <input class="nombre input-medidas" data-index ='1' value="Control-"/>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="fecha">
+                <th class="parametros-medidas">Fecha</th>
+                    <td class="controles">
+                    <input type="date" class="fecha input-medidas" data-index ='1'/>
+                </td>
+            </tr>
+            
+            <!-- GENERALES -->
+            <tr class="apartado-controles division-controles">
+                <th colspan="2">GENERALES</th>
+            </tr>
+            <tr class="apartado-controles" data-variable="edad">
+                <th class="parametros-medidas">Edad</th>
+                <td class="controles">
+                    <input type="number" class="edad input-medidas" data-index ='1'/>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="peso">
+                <th class="parametros-medidas">Peso</th>
+                <td class="controles">
+                    <input type="number"  class="peso input-medidas" data-index ='1' />
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="altura">
+                <th class="parametros-medidas">Altura</th>
+                <td class="controles">
+                    <input  type="number"  class="altura input-medidas" data-index ='1'/>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="genero">
+                <th class="parametros-medidas">Género</th>
+                <td class="controles">
+                    <select class="genero input-medidas" data-index ='1'>
+                        <option value="hombre">Hombre</option>
+                        <option value="mujer">Mujer</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="grado_actividad">
+                <th class="parametros-medidas">Actividad</th>
+                <td class="controles">
+                    <select class="actividad input-medidas" data-index ='1'>
+                        <option value="Inactiva">Inactiva</option>
+                        <option value="Baja">Baja</option>
+                        <option value="Ligera">Ligera</option>
+                        <option value="Media">Media</option>
+                        <option value="Alta">Alta</option>
+                        <option value="Muy alta">Muy alta</option>
+                        <option value="Alto grado">Alto grado</option>
+                        <option value="Extrema">Extrema</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="objetivo">
+                <th class="parametros-medidas">Objetivo</th>
+                <td class="controles">
+                    <select class="objetivo input-medidas" data-index ='1'>
+                        <option value="Bajada de peso">Bajada de peso</option>
+                        <option value="Aumento de peso">Aumento de peso</option>
+                        <option value="Hipertrofia">Hipertrofia</option>
+                        <option value="Definicion">Definicion</option>
+                        <option value="Restriccion severa">Restriccion severa</option>
+                        <option value="Mantenimiento">Mantenimiento</option>
+                        <option value="Carga carbohidratos">Carga carbohidratos</option>
+                    </select>
+                </td>
+            </tr>
+            <!-- PERÍMETROS -->
+            <tr class="apartado-controles division-controles">
+                <th colspan="2">PERÍMETROS</th>
+            </tr>
+            <tr class="apartado-controles" data-variable="cuello">
+                <th class="parametros-medidas">Cuello</th>
+                <td class="controles"><input type="number"  class="cuello input-medidas" data-index ='1' /></td>
+            </tr>
+            <tr class="apartado-controles" data-variable="cintura">
+                <th class="parametros-medidas">Cintura</th>
+                <td class="controles"><input  type="number" class="cintura input-medidas" data-index ='1' /></td>
+            </tr>
+            <tr class="apartado-controles" data-variable="cadera">
+                <th class="parametros-medidas">Cadera</th>
+                <td class="controles"><input type="number" class="cadera input-medidas" data-index ='1' /></td>
+            </tr>
+            <tr class="apartado-controles" data-variable="abdomen">
+                <th class="parametros-medidas">Abdomen</th>
+                <td class="controles">
+                    <input  type="number"  class="abdomen input-medidas" data-index ='1' />
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="brazo">
+                <th class="parametros-medidas">Brazo</th>
+                <td class="controles">
+                    <input type="number"  class="brazo input-medidas" data-index ='1' />
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="muslo">
+                <th class="parametros-medidas">Muslo</th>
+                <td class="controles">
+                    <input type="number"  class="muslo input-medidas" data-index ='1'/>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="triceps">
+                <th class="parametros-medidas">Tríceps</th>
+                <td class="controles">
+                    <input  type="number" class="triceps input-medidas" data-index ='1'/>
+                </td>
+            </tr>
+
+            <tr class="apartado-controles" data-variable="porcentaje_graso_perimetros">
+                <th class="parametros-medidas">% graso perimetral</th>
+                <td class="controles">
+                    <input type="number"  class="grasa_perimetral input-medidas" data-index ='1' readonly/>
+                </td>
+            </tr>
+
+
+            <!-- PLIEGUES -->
+            <tr class="apartado-controles division-controles">
+                <th colspan="2">PLIEGUES</th>
+            </tr>
+            <tr class="apartado-controles" data-variable="subescapular">
+                <th class="parametros-medidas"> Subescapular</th>
+                <td class="controles">
+                    <input type="number"  class="subescapular input-medidas" data-index ='1' />
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="abdomen_pliegue">
+                <th class="parametros-medidas">Abdomen</th>
+                <td class="controles">
+                    <input type="number"  class="abdomen_pliegue input-medidas" data-index ='1'/>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="supra_iliaco">
+                <th class="parametros-medidas">Suprailiaco</th>
+                <td class="controles">
+                    <input type="number"  class="supra_iliaco input-medidas" data-index ='1'/>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="muslo_pliegue">
+                <th class="parametros-medidas">Muslo</th>
+                <td class="controles">
+                    <input type="number"  class="muslo_pliegue input-medidas" data-index ='1'/>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="suma_pliegues">
+                <th class="parametros-medidas">Suma total</th>
+                <td class="controles">
+                    <input type="number"  class="suma_pliegues input-medidas" readonly data-index ='1'/>
+                </td>
+            </tr>
+
+             <tr class="apartado-controles" data-variable="porcentaje_graso_estimado_pliegues">
+                <th class="parametros-medidas">% graso pliegues</th>
+                <td class="controles">
+                    <input type="number"  class="grasa_pliegues input-medidas" data-index ='1' readonly/>
+                </td>
+            </tr>
+
+            <!-- HUESOS -->
+            <tr class="apartado-controles division-controles">
+                <th colspan="2">HUESOS</th>
+            </tr>
+            <tr class="apartado-controles" data-variable="humero_biepicondileo">
+                <th class="parametros-medidas">Húmero bicondileo</th>
+                <td class="controles">
+                    <input  type="number"  class="humero_bicondileo input-medidas" data-index ='1' readonly/>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="femur_bicondileo">
+                <th class="parametros-medidas">Fémur bicondileo</th>
+                <td class="controles">
+                    <input type="number"  class="femur_bicondileo input-medidas" data-index ='1' readonly/>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="muneca_estiloideo">
+                <th class="parametros-medidas">Muñeca estiloideo</th>
+                <td class="controles">
+                    <input type="number"  class="muneca_estiloideo input-medidas" readonly  data-index ='1'/>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="muneca_circunferencia">
+                <th class="parametros-medidas">Muñeca circunferencia</th>
+                <td class="controles">
+                    <input type="number"  class="muneca_circunferencia input-medidas" data-index ='1' readonly/>
+                </td>
+            </tr>
+
+            <!-- COMPOSICIÓN CORPORAL -->
+            <tr class="apartado-controles division-controles">
+                <th colspan="2">COMPOSICIÓN CORPORAL</th>
+            </tr>
+            <tr class="apartado-controles" data-variable="peso_oseo_rocha">
+                <th class="parametros-medidas">Peso óseo Rocha</th>
+                <td class="controles">
+                    <input type="number"  class="peso_oseo_rocha input-medidas"  data-index ='1'/>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="peso_residual">
+                <th class="parametros-medidas">Peso residual</th>
+                <td class="controles">
+                    <input type="number"  class="peso_residual input-medidas" data-index ='1' />
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="porcentaje_residual">
+                <th class="parametros-medidas">Porcentaje residual</th>
+                <td class="controles">
+                    <input type="number"  class="porcentaje_residual input-medidas" data-index ='1'/>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="peso_extracelular">
+                <th class="parametros-medidas">Peso extracelular</th>
+                <td class="controles">
+                    <input type="number"  class="peso_extracelular input-medidas" data-index ='1'/>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="porcentaje_extracelular">
+                <th class="parametros-medidas">Porcentaje extracelular</th>
+                <td class="controles">
+                    <input type="number"  class="porcentaje_extracelular input-medidas" data-index ='1' />
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="peso_intracelular">
+                <th class="parametros-medidas">Peso intracelular</th>
+                <td class="controles">
+                    <input type="number"  class="peso_intracelular input-medidas" data-index ='1'/>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="porcentaje_intracelular">
+                <th class="parametros-medidas">Porcentaje intracelular</th>
+                <td class="controles">
+                    <input type="number"  class="porcentaje_intracelular input-medidas" data-index ='1'/>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="imc"> 
+                <th class="parametros-medidas">IMC</th>
+                <td class="controles">
+                    <input type="number"  class="imc input-medidas" data-index ='1' />
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="complex_osea">
+                <th class="parametros-medidas">Complexión ósea</th>
+                <td class="controles">
+                    <input type="number"  class="complexion_osea input-medidas" data-index ='1'/>
+                </td>
+            </tr>
+
+            <tr class="apartado-controles" data-variable="kg_masa_magra">
+                <th class="parametros-medidas">Masa magra (kg)</th>
+                <td class="controles">
+                    <input type="number" class="kg_masa_magra input-medidas" data-index="1" />
+
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="porcentaje_masa_magra">
+                <th class="parametros-medidas">% Masa magra</th>
+                <td class="controles">
+                    <input type="number" class="porcentaje_masa_magra input-medidas" data-index="1" />
+
+                </td>
+            </tr>
+
+      
+           
+
+            <!-- MACRONUTRIENTES -->
+            <tr class="apartado-controles division-controles">
+                <th colspan="2">MACRONUTRIENTES</th>
+            </tr>
+            <tr class="apartado-controles" data-variable="tdee">
+                <th class="parametros-medidas">TDEE</th>
+                <td class="controles">
+                    <input type="number"  class="tdee input-medidas" data-index ='1' />
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="calorias_datos">
+                <th class="parametros-medidas">TDEE ajustado</th>
+                <td class="controles">
+                    <input type="number"  class="tdee_ajustado input-medidas" data-index ='1'/>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="proteinas_datos">
+                <th class="parametros-medidas">Gramos de proteínas</th>
+                <td class="controles">
+                    <input type="number"  class="gramos_proteinas input-medidas" data-index ='1'/>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="grasas_datos">
+            <th class="parametros-medidas">Gramos de grasas</th>
+                <td class="controles">
+                    <input type="number"  class="gramos_grasas input-medidas" data-index ='1'/>
+                </td>
+            </tr>
+            <tr class="apartado-controles" data-variable="carbohidratos_datos">
+                <th class="parametros-medidas">Gramos de carbohidratos</th>
+                <td class="controles">
+                    <input type="number"  class="gramos_carbohidratos input-medidas" data-index ='1' />
+                </td>
+            </tr>
+
+               
+        </tbody>
+
+    </table>
+    
+
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+        
+        <!-- Footer Section Start -->
+        <footer class="footer">
+            <div class="footer-body">
+                <ul class="left-panel list-inline mb-0 p-0">
+                  
+                </ul>
+                <div class="right-panel">
+                   
+                    <span class="">
+                        
+                    </span><a href="https://iqonic.design/"><img src="/assets/images/dashboard/iconos/logo-footer.webp" width="220" height="60" alt=""></a>
+                </div>
+            </div>
+        </footer>
+
+        <template>
+
+        </template>
+        
+      
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Library Bundle Script -->
+        <script src="/assets/js/core/libs.min.js"></script>
+        
+        <!-- External Library Bundle Script -->
+        <script src="/assets/js/core/external.min.js"></script>
+        
+        <!-- Widgetchart Script -->
+        <script src="/assets/js/charts/widgetcharts.js"></script>
+        
+        <!-- mapchart Script -->
+        <script src="/assets/js/charts/vectore-chart.js"></script>
+        <script src="/assets/js/charts/dashboard.js" ></script>
+        
+        <!-- fslightbox Script -->
+        <script src="/assets/js/plugins/fslightbox.js"></script>
+        
+        <!-- Settings Script -->
+        <script src="/assets/js/plugins/setting.js"></script>
+        
+        <!-- Slider-tab Script -->
+        <script src="/assets/js/plugins/slider-tabs.js"></script>
+        
+        <!-- Form Wizard Script -->
+        <script src="/assets/js/plugins/form-wizard.js"></script>
+        
+        <!-- AOS Animation Plugin-->
+        
+        <!-- App Script -->
+        <script src="/assets/js/hope-ui.js" defer></script>
+        <script type="module" src="/src/Auth/main.js"></script>
+        <script type="module" src="/src/controles/main.js"></script>
+        
+    </body>
+    </html>
