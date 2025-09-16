@@ -35,7 +35,7 @@ export async function cargarListaUsers() {
     select.addEventListener('change', (e) => {
       const idUsuario = e.target.value;
       if (idUsuario) {
-        window.location.href = `/dashboard/controles/vistaControles.html?id=${idUsuario}`;
+        window.location.href = `/dashboard/controles/vistaControles-NUEVO.html?id=${idUsuario}`;
       }
     });
 

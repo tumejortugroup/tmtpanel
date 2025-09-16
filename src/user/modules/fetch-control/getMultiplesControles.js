@@ -5,7 +5,7 @@ import { obtenerIdUsuarioDesdeUrl } from '/src/controles/modules/utils/params.js
 function actualizarColspanUserTabla() {
   const filasDivision = document.querySelectorAll('tr.division-controles');
 
-  // Cuenta el total de columnas por cada fila (excepto la <th>)
+  
   const anyFila = document.querySelector('tbody tr:not(.division-controles)');
   const columnasActuales = anyFila?.querySelectorAll('td')?.length || 1;
 
@@ -31,7 +31,7 @@ const tabla = document.querySelector('table');
 const filas = tabla?.querySelectorAll('tbody tr');
 if (!tabla || filas.length === 0) return;
 
-// 🔄 Limpiar tabla siempre
+// Limpiar tabla siempre
 filas.forEach(fila => {
   if (fila.classList.contains('division-controles')) return;
   fila.querySelectorAll('td').forEach(td => td.remove());
@@ -39,7 +39,7 @@ filas.forEach(fila => {
   if (th) th.setAttribute('colspan', '1');
 });
 
-// 🚫 Si no hay controles seleccionados, salir después de limpiar
+//  Si no hay controles seleccionados, salir después de limpiar
 if (nombresSeleccionados.length === 0) {
   console.warn('❌ No hay controles seleccionados');
   actualizarColspanUserTabla();
@@ -66,10 +66,10 @@ for (let nombre of nombresSeleccionados) {
   }
 }
 
-// 🔃 Ordenar por fecha ascendente (más vieja a más reciente)
+// Ordenar por fecha ascendente (más vieja a más reciente)
 controles.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
 
-// ▶️ Insertar en la tabla en orden de fecha
+//  Insertar en la tabla en orden de fecha
 controles.forEach(control => {
   filas.forEach(fila => {
     if (fila.classList.contains('division-controles')) return;

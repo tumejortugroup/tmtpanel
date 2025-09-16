@@ -8,6 +8,7 @@ export function initLogout() {
         localStorage.removeItem('nombre');
         localStorage.removeItem('id_usuario');
         localStorage.removeItem('rol');
+        localStorage.removeItem('centro_id');
         alert('Sesión cerrada');
         window.location.href = '/auth/sign-in.html';
 
