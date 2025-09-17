@@ -94,12 +94,172 @@
       </div>
       <div class="conatiner-fluid content-inner mt-n5 py-0">
 <div class="row">
-   <div class="col-md-12 col-lg-12">
-      <div class="row row-cols-1">
-         <div class="overflow-hidden d-slider1 ">
+   <div class="col-lg-3">
+            <div class="card" data-aos="fade-up" data-aos-delay="900">
+               <div class="flex-wrap card-header d-flex justify-content-between">
+                  <div class="header-title">
+                     <h4 class="card-title">Auto ajuste</h4>            
+                  </div>   
+               </div>
+               <div class="card-body">
+                  <div class="flex-wrap d-flex align-items-center justify-content-between">
+                     <div id="myChart" class="col-md-8 col-lg-8 myChart"></div>
+                     <div class="d-grid gap col-md-4 col-lg-4">
+                        <div class="d-flex align-items-start">
+                           <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#3a57e8">
+                              <g>
+                                 <circle cx="12" cy="12" r="8" fill="#3a57e8"></circle>
+                              </g>
+                           </svg>
+                           <div class="ms-3">
+                              <span class="text-gray">Proteínas</span>
+                              <h6>251K</h6>
+                           </div>
+                        </div>
+                        <div class="d-flex align-items-start">
+                           <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#4bc7d2">
+                              <g>
+                                 <circle cx="12" cy="12" r="8" fill="#4bc7d2"></circle>
+                              </g>
+                           </svg>
+                           <div class="ms-3">
+                              <span class="text-gray">Carbs.</span>
+                              <h6>176K</h6>
+                           </div>
+                        </div>
+                        <div class="d-flex align-items-start">
+                           <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#4bc7d2">
+                              <g>
+                                 <circle cx="12" cy="12" r="8" fill="#4bc7d2"></circle>
+                              </g>
+                           </svg>
+                           <div class="ms-3">
+                              <span class="text-gray">Grasas</span>
+                              <h6>176K</h6>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+        </div>    
+
+        <div class="col-lg-3">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <div class="p-2 rounded bg-warning disabled">
+                                    <svg class="icon-24" xmlns="http://www.w3.org/2000/svg" width="24" fill="none" viewBox="0 0 24 24" stroke="white">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                    </svg> 
+                                </div>
+                                <h4 class="px-3">Ajuste de valores</h4>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class="d-grid gap-card">
+                            <div class="form-group mb-2">
+                                <label class="form-label">Proteínas/kg</label>
+                                <div class="input-group">
+                                    <button class="btn btn-light border"  type="button" onclick="decrement(this)">-</button>
+                                    <input type="number" class="form-control text-center" value="1">
+                                    <button class="btn btn-light border" type="button" onclick="increment(this)">+</button>
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="form-label">Grasas/kg</label>
+                                <div class="input-group">
+                                    <button class="btn btn-light border"  type="button" onclick="decrement(this)">-</button>
+                                    <input type="number" class="form-control text-center" value="1">
+                                    <button class="btn btn-light border" type="button" onclick="increment(this)">+</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <div class="p-2 rounded bg-info disabled">
+                                    <svg class="icon-24" xmlns="http://www.w3.org/2000/svg" width="24" fill="none" viewBox="0 0 24 24" stroke="white">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                    </svg>
+                                </div>
+                                <h4 class="px-3">Macronutrientes</h4>
+                            </div> 
+                            
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class="d-grid gap-card">
+                            <div class="form-group mb-2">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="1000" aria-label="Recipient's username" aria-describedby="basic-addon3">
+                                    <span class="input-group-text" id="basic-addon3">Proteínas</span>
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="100" aria-label="Recipient's username" aria-describedby="basic-addon4">
+                                    <span class="input-group-text" id="basic-addon4">Carbs.</span>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="150" aria-label="Recipient's username" aria-describedby="basic-addon4">
+                                    <span class="input-group-text" id="basic-addon4">Grasas</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3">
+         <div class="card">
+            <div class="card-body">
+               <h2 class="counter mb-3" style="visibility: visible;">3450 Kcal</h2>
+               <div class="mt-3">
+                  <div class="pb-3">
+                     <div class="d-flex align-items-center justify-content-between mb-2">
+                        <p class="mb-0">Proteínas</p>
+                        <h4>60%</h4>
+                     </div>
+                     <div class="progress bg-info-subtle shadow-none w-100" style="height: 10px">
+                        <div class="progress-bar bg-info" data-toggle="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%; transition: width 2s;"></div>
+                     </div>
+                  </div>
+                  <div class="pb-3">
+                     <div class="d-flex align-items-center justify-content-between mb-2">
+                        <p class="mb-0">Grasas</p>
+                        <h4>80%</h4>
+                     </div>
+                     <div class="progress bg-success-subtle shadow-none w-100" style="height: 10px">
+                        <div class="progress-bar bg-success" data-toggle="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%; transition: width 2s;"></div>
+                     </div>
+                  </div>
+                  <div class="pb-3">
+                     <div class="d-flex align-items-center justify-content-between mb-2">
+                        <p class="mb-0">Carbohidratos</p>
+                        <h4>55%</h4>
+                     </div>
+                     <div class="progress bg-primary-subtle shadow-none w-100" style="height: 10px">
+                        <div class="progress-bar bg-primary" data-toggle="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width: 55%; transition: width 2s;"></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+            
  
                 <div class="card-body">
-                    <!---AQUI VA EL CUERPO DE TODO!!!!--> 
                       <div class="table-wrapper">
                                 <div class="col-7">
                                         <h3 class="mb-4">Auto-ajuste</h3>
@@ -187,332 +347,321 @@
                                 </div>
                             </div>
 
-
-
-                             <div class="table-wrapper">
-                                 <div class="col-7">
-                                        <h3 class="mb-4">Asignar alimentos</h3>
+<div class="row">
+      <div class="col-sm-12">
+         <div class="card">
+            <div class="card-header d-flex justify-content-between">
+               <div class="header-title">
+                  <h4 class="card-title">Asignación de alimentos</h4>
+               </div>
+               <div class="d-flex">
+                        <button class="btn btn-primary btn-sm me-2" type="button" id="btn-add-food">
+                            + Añadir columna
+                         </button>
+                        <button class="btn btn-primary btn-sm me-2" type="button" id="btn-add-food">
+                            - Quitar columna
+                         </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive mt-4">
+                  <table id="basic-table" class="table table-striped mb-0" role="grid"> 
+                        <thead>
+                            <tr>
+                                <th colspan="11">
+                                <div class="d-flex justify-content-start gap-2 w-25">
+                                    <select class="form-select" name="tipo-comida">
+                                        <option selected>Desayuno</option>
+                                        <option>Almuerzo</option>
+                                        <option>Comida</option>
+                                        <option >Merienda</option>
+                                        <option>Pre-entreno</option>
+                                        <option>Post-entreno</option>
+                                        <option>Cena</option>
+                                        <option >Pre-cama</option>
+                                    </select>
+                                    <input type="time" class="form-control" id="exampleInputtime" value="08:00">
                                 </div>
-                                    <div>
-                                    <div class="asignar-alimentos" >
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>MACRO</th>
+                                <th>Alimento</th>
+                                <th>Cantidad</th>
+                                <th>Eq</th>
+                                <th>Cantidad</th>
+                                <th>Eq</th>
+                                <th>Cantidad</th>
+                                <th>Eq</th>
+                                <th>Cantidad</th>
+                                <th>Eq</th>
+                                <th>Cantidad</th>
+                            </tr>
                                         
-                                       
-                                    <div class="section" id="tabla-container">
-                                      
-                                         
-                                        
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="header-dieta">
+                                    <select class="form-select" name="select-categoria">
+                                        <option selected>Proteina</option>
+                                        <option>Grasa</option>
+                                        <option>Carbohidrato</option>
+                                        <option>Fruta</option>
+                                        <option>Verdura</option>
+                                        <option>Otros</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
 
-
-                                        <table class="table-dieta">
-                                        <thead class="header-dieta">
-                                            <tr>
-                                            <th colspan="11">
-                                                <select  name="tipo-comida">
-                                                <option selected>Desayuno</option>
-                                                <option>Almuerzo</option>
-                                                <option>Comida</option>
-                                                <option >Merienda</option>
-                                                <option>Pre-entreno</option>
-                                                <option>Post-entreno</option>
-                                                <option>Cena</option>
-                                                <option >Pre-cama</option>
-                                                </select>
-                                                 <input type="time" class="hour-control" placeholder="Cantidad de alimentos" id="cantidad-alimentos" name="cantidad-alimentos" value="08:00">
-                                                <button class="btn-add-columns">➕ Añadir columnas</button>
-                                                <button class="btn-remove-columns">➖ Quitar columnas</button>
-                                            </th>
-                                            </tr>
-                                            <tr>
-                                                <th>MACRO</th>
-                                                <th>Alimento</th>
-                                                <th>Cantidad</th>
-                                                <th>Eq</th>
-                                                <th>Cantidad</th>
-                                                <th>Eq</th>
-                                                <th>Cantidad</th>
-                                                <th>Eq</th>
-                                                <th>Cantidad</th>
-                                                <th>Eq</th>
-                                                <th>Cantidad</th>
-                                       
-
-                                            </tr>
-                                        
-                                        </thead>
-                                        <tbody>
-                                            <tr >
-                                                <td class="header-dieta">
-                                                        <select name="select-categoria">
-                                                            <option selected>Proteina</option>
-                                                            <option>Grasa</option>
-                                                            <option>Carbohidrato</option>
-                                                            <option>Fruta</option>
-                                                            <option>Verdura</option>
-                                                            <option>Otros</option>
-                                                        </select>
-                                                </td>
-                                                <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-
-                                                </td>
-                                                <td><input class="input-cantidad" type="text"></td>
-                                                <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                 <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                 <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
+                                </td>
+                                <td><input class="form-control" type="text"></td>
+                                <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                    <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                    <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
                                                 
-                                            </tr>
-                                            <tr>
-                                                <td class="header-dieta">
-                                                        <select name="select-categoria">
-                                                             <option >Proteina</option>
-                                                            <option>Grasa</option>
-                                                            <option selected>Carbohidrato</option>
-                                                            <option>Fruta</option>
-                                                            <option>Verdura</option>
-                                                            <option>Otros</option>
-                                                        </select>
-                                                </td>
-                                                <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td><input class="input-cantidad" type="text"></td>
-                                                <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                 <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                 <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-      
-                                            </tr>
-
-                                           
-                                            <tr>
-                                                <td class="header-dieta">
-                                                        <select name="select-categoria">
-                                                             <option >Proteina</option>
-                                                            <option selected>Grasa</option>
-                                                            <option >Carbohidrato</option>
-                                                            <option>Fruta</option>
-                                                            <option>Verdura</option>
-                                                            <option>Otros</option>
-                                                        </select>
-                                                </td>
-                                                <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td><input class="input-cantidad" type="text"></td>
-                                                <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                 <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                 <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="header-dieta">
-                                                        <select name="select-categoria">
-                                                             <option >Proteina</option>
-                                                            <option >Grasa</option>
-                                                            <option >Carbohidrato</option>
-                                                            <option selected>Fruta</option>
-                                                            <option>Verdura</option>
-                                                            <option>Otros</option>
-                                                        </select>
-                                                </td>
-                                                <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td><input class="input-cantidad" type="text"></td>
-                                                <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                 <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                 <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                            </tr>
-                                         
-
-                                           
-                                            <tr>
-                                                    <td class="header-dieta">
-                                                        <select name="select-categoria">
-                                                             <option >Proteina</option>
-                                                            <option >Grasa</option>
-                                                            <option >Carbohidrato</option>
-                                                            <option >Fruta</option>
-                                                            <option selected>Verdura</option>
-                                                            <option>Otros</option>
-                                                        </select>
-                                                </td>
-                                                <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td><input class="input-cantidad" type="text"></td>
-                                                <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                 <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                 <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                            </tr>
-
-
-                                            <tr>
-                                                 <td class="header-dieta">
-                                                        <select name="select-categoria">
-                                                             <option >Proteina</option>
-                                                            <option >Grasa</option>
-                                                            <option >Carbohidrato</option>
-                                                            <option >Fruta</option>
-                                                            <option >Verdura</option>
-                                                            <option selected>Otros</option>
-                                                        </select>
-                                                </td>
-                                                <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td><input class="input-cantidad" type="text"></td>
-                                                <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                 <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                 <td>
-                                                    <select name="select-alimentos" class="form-select">
-                                                    <option value="">Alimentos</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                            </tr>
-                                   
-                                           
-
-                                            <tr>
-                                                <td class="header-dieta">
-                                                      Observaciones
-                                                </td>
-                                                <td colspan="10"><textarea class="text-dieta"></textarea></td>
-                                            </tr>
-                                        </tbody>
-                                        </table>
+                            </tr>
+                            <tr>
+                                <td class="header-dieta">
+                                        <select class="form-select" name="select-categoria">
+                                                <option >Proteina</option>
+                                            <option>Grasa</option>
+                                            <option selected>Carbohidrato</option>
+                                            <option>Fruta</option>
+                                            <option>Verdura</option>
+                                            <option>Otros</option>
+                                        </select>
+                                </td>
+                                <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td><input class="form-control" type="text"></td>
+                                <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                    <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                    <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="header-dieta">
+                                        <select class="form-select" name="select-categoria">
+                                                <option >Proteina</option>
+                                            <option selected>Grasa</option>
+                                            <option >Carbohidrato</option>
+                                            <option>Fruta</option>
+                                            <option>Verdura</option>
+                                            <option>Otros</option>
+                                        </select>
+                                </td>
+                                <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td><input class="form-control" type="text"></td>
+                                <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                    <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                    <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="header-dieta">
+                                        <select class="form-select" name="select-categoria">
+                                                <option >Proteina</option>
+                                            <option >Grasa</option>
+                                            <option >Carbohidrato</option>
+                                            <option selected>Fruta</option>
+                                            <option>Verdura</option>
+                                            <option>Otros</option>
+                                        </select>
+                                </td>
+                                <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td><input class="form-control" type="text"></td>
+                                <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                    <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                    <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                            </tr>                                                                                
+                            <tr>
+                                    <td class="header-dieta">
+                                        <select class="form-select" name="select-categoria">
+                                                <option >Proteina</option>
+                                            <option >Grasa</option>
+                                            <option >Carbohidrato</option>
+                                            <option >Fruta</option>
+                                            <option selected>Verdura</option>
+                                            <option>Otros</option>
+                                        </select>
+                                </td>
+                                <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td><input class="form-control" type="text"></td>
+                                <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                    <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                    <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                    <td class="header-dieta">
+                                        <select class="form-select" name="select-categoria">
+                                                <option >Proteina</option>
+                                            <option >Grasa</option>
+                                            <option >Carbohidrato</option>
+                                            <option >Fruta</option>
+                                            <option >Verdura</option>
+                                            <option selected>Otros</option>
+                                        </select>
+                                </td>
+                                <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td><input class="form-control" type="text"></td>
+                                <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                    <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                    <td>
+                                    <select name="select-alimentos" class="form-select">
+                                    <option value="">Alimentos</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="header-dieta">
+                                        Observaciones
+                                </td>
+                                <td colspan="10"><textarea class="form-control"></textarea></td>
+                            </tr>
+            </tbody>
+            </table>
 
                                       
                                       
@@ -546,7 +695,138 @@
 
                                 </div>
 
-                                <button type="button" id="guardar-dieta-btn" name="next" class="btn btn-primary next action-button float-end" value="Next" >Crear</button>
+
+
+                        <!-- Card flotante -->
+<style>
+  /* Cambia el texto del botón según el estado del collapse (sin JS) */
+  .toggle-btn .text-open { display: inline; }
+  .toggle-btn .text-closed { display: none; }
+  .toggle-btn[aria-expanded="false"] .text-open { display: none; }
+  .toggle-btn[aria-expanded="false"] .text-closed { display: inline; }
+
+  /* Botón Mostrar/Minimizar: mitad cuando cerrado */
+  .toggle-btn { width: 50% !important; }
+
+  /* Botón Mostrar/Minimizar: full cuando abierto */
+  .toggle-btn[aria-expanded="true"] {
+    width: 100% !important;
+  }
+
+  /* Botón Guardar siempre mitad */
+  #guardar-dieta-btn {
+    width: 50% !important;
+  }
+
+  /* 🔹 Estilo flotante sutil */
+  .btn {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .btn:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+  }
+
+  .btn:active {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+  }
+</style>
+
+<!-- CONTENEDOR ÚNICO FIJO -->
+<div class="position-fixed bottom-0 end-0 m-3 d-flex flex-column align-items-end"
+     style="z-index:1100; width:330px;">
+
+  <!-- Botón para mostrar/minimizar la tabla -->
+  <button class="btn btn-primary mb-2 toggle-btn"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#macronutrientesCard"
+          aria-expanded="true"
+          aria-controls="macronutrientesCard">
+    <span class="text-open">Minimizar tabla</span>
+    <span class="text-closed">Mostrar tabla</span>
+  </button>
+
+  <!-- Card colapsable -->
+  <div class="collapse show w-100 mb-2" id="macronutrientesCard">
+    <div class="card">
+      <div class="card-header d-flex align-items-center">
+        <div class="p-2 rounded bg-info disabled">
+          <svg class="icon-24" xmlns="http://www.w3.org/2000/svg" width="24" fill="none" viewBox="0 0 24 24" stroke="white">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+        </div>
+        <h4 class="px-3 mb-0">Macronutrientes</h4>
+      </div>
+
+      <div class="card-body">
+        <form class="d-grid gap-2">
+            <div class="form-group mb-2">
+            <div class="input-group">
+                <!-- Etiqueta -->
+                <span class="input-group-text">Calorías</span>
+
+                <!-- Input solo lectura -->
+                <input type="text" class="form-control text-center" value="291kcal" readonly>
+
+                <!-- Input editable -->
+                <input type="text" class="form-control text-center" value="- kcal" readonly>
+            </div>
+            </div>
+          <div class="form-group mb-2">
+            <div class="input-group">
+                <!-- Etiqueta -->
+                <span class="input-group-text">Proteínas</span>
+
+                <!-- Input solo lectura -->
+                <input type="text" class="form-control text-center" value="291.6gr" readonly>
+
+                <!-- Input editable -->
+                <input type="text" class="form-control text-center" value="- gr" readonly>
+            </div>
+            </div>
+
+          <div class="form-group mb-2">
+            <div class="input-group">
+                <!-- Etiqueta -->
+                <span class="input-group-text">Carbs.</span>
+
+                <!-- Input solo lectura -->
+                <input type="text" class="form-control text-center" value="291.6gr" readonly>
+
+                <!-- Input editable -->
+                <input type="text" class="form-control text-center" value="- gr" readonly>
+            </div>
+            </div>
+          <div class="form-group mb-2">
+            <div class="input-group">
+                <!-- Etiqueta -->
+                <span class="input-group-text">Grasas</span>
+
+                <!-- Input solo lectura -->
+                <input type="text" class="form-control text-center" value="291.6gr" readonly>
+
+                <!-- Input editable -->
+                <input type="text" class="form-control text-center" value="- gr" readonly>
+            </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón Guardar (siempre pequeño) -->
+  <button type="button" id="guardar-dieta-btn" class="btn btn-success">Guardar</button>
+</div>
+
+
+</div>
+
+        
                                
                             </div>
                 </div>
