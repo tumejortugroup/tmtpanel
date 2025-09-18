@@ -1,3 +1,4 @@
+import { formatearFecha } from "/src/user/modules/utils/formatearFecha.js";
 export async function listUser() {
     const token = localStorage.getItem("token");
     const centro_id = localStorage.getItem("centro_id");
@@ -40,7 +41,7 @@ export async function listUser() {
         usuarios.forEach(usuario => {
             const rowHTML = `
                 <tr>
-                    <td>${usuario.numerocliente}</td>
+                    <td>${usuario.numero_usuario.substring(0, 3)}</td>
                     <td>
                         <span class="badge ${usuario.estado?.toLowerCase() === 'activo' ? 'bg-success' : 'bg-secondary'} badge-estado" data-nombre="${usuario.nombre}">
                             ${usuario.estado}
@@ -50,7 +51,7 @@ export async function listUser() {
                     <td>${usuario.apellidos}</td>
                     <td>${usuario.telefono}</td>
                     <td>${usuario.correo}</td>
-                    <td>${usuario.fecha_creacion}</td> 
+                    <td>${formatearFecha(usuario.fecha_creacion)}</td> 
                     <td>${usuario.ciudad}</td>
                   
                     

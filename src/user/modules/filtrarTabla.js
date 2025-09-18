@@ -1,5 +1,10 @@
 export function filtrarTabla() {
   const table = document.getElementById('user-list-table');
+  if (!table) {
+    console.warn("⚠️ No se encontró la tabla con id user-list-table");
+    return;
+  }
+
   const inputs = table.querySelectorAll('thead tr:nth-child(2) input');
 
   inputs.forEach((input, colIndex) => {
@@ -11,24 +16,22 @@ export function filtrarTabla() {
         let visible = true;
 
         inputs.forEach((inputFiltro, i) => {
-          const filtro = inputFiltro.type === 'checkbox'
-            ? inputFiltro.checked
-            : inputFiltro.value.toLowerCase().trim();
+          let filtro;
 
-          if (!filtro) return; // si el input está vacío, no filtra esa columna
+          if (inputFiltro.type === 'checkbox') {
+            filtro = inputFiltro.checked ? "activo" : "inactivo";
+          } else {
+            filtro = inputFiltro.value.toLowerCase().trim();
+          }
+
+          if (!filtro) return;
 
           const celda = celdas[i];
           if (!celda) return;
 
-          const tipo = inputFiltro.type;
-
-          if (tipo === 'checkbox') {
+          if (inputFiltro.type === 'checkbox') {
             const estadoTexto = celda.textContent.trim().toLowerCase();
-            const estaActivo = estadoTexto.includes('activo');
-            if (filtro !== estaActivo) visible = false;
-          } else if (tipo === 'date') {
-            const celdaFecha = celda.textContent.trim().slice(0, 10);
-            if (!celdaFecha.includes(filtro)) visible = false;
+            if (!estadoTexto.includes(filtro)) visible = false;
           } else {
             const celdaTexto = celda.textContent.toLowerCase().trim();
             if (!celdaTexto.includes(filtro)) visible = false;

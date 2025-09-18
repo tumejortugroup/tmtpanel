@@ -1,3 +1,4 @@
+import { formatearFecha } from "/src/user/modules/utils/formatearFecha.js";
 export async function listClientes() {
     const token = localStorage.getItem("token");
     const centro_id = localStorage.getItem("centro_id");
@@ -40,19 +41,21 @@ export async function listClientes() {
         usuarios.forEach(usuario => {
             const rowHTML = `
                 <tr>
-                    <td>${usuario.username}</td>
-                    <td>${usuario.nombre}</td>
-                    <td>${usuario.apellidos}</td>
-                    <td>${usuario.fecha_de_nacimiento}</td>
-                    <td>${usuario.telefono}</td>
-                  
+                    <td>${usuario.centro}</td>
                     <td>
                         <span class="badge ${usuario.estado?.toLowerCase() === 'activo' ? 'bg-success' : 'bg-secondary'} badge-estado" data-nombre="${usuario.nombre}">
                             ${usuario.estado}
                         </span>
 
                     </td>
-                    <td>${usuario.centro}</td>
+                    <td>${usuario.nombre}</td>
+                    <td>${usuario.apellidos}</td>
+                    <td>${usuario.telefono}</td>
+                    <td>${formatearFecha(usuario.fecha_creacion)}</td>
+                    
+                  
+                    
+                    
                       <td>
                         <div class="flex align-items-center list-user-action">
                             <a class="btn btn-sm btn-icon btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar" aria-label="Edit" data-bs-original-title="Edit" href="/dashboard/user/user-update.html?id=${usuario.id_usuario}">

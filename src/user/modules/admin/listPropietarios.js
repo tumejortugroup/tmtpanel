@@ -1,3 +1,4 @@
+import { formatearFecha } from "/src/user/modules/utils/formatearFecha.js";
 export async function listPropietarios() {
     const token = localStorage.getItem("token");
     
@@ -39,12 +40,10 @@ export async function listPropietarios() {
         usuarios.forEach(usuario => {
             const rowHTML = `
                 <tr>
-                    <td>${usuario.username}</td>
+
+             
                     <td>${usuario.nombre}</td>
                     <td>${usuario.apellidos}</td>
-                    <td>${usuario.fecha_de_nacimiento}</td>
-                    <td>${usuario.telefono}</td>
-                  
                     <td>
                         <span class="badge ${usuario.estado?.toLowerCase() === 'activo' ? 'bg-success' : 'bg-secondary'} badge-estado" data-nombre="${usuario.nombre}">
                             ${usuario.estado}
@@ -52,7 +51,11 @@ export async function listPropietarios() {
 
                     </td>
                     <td>${usuario.centro}</td>
-                      <td>
+                    <td>${usuario.telefono}</td>
+                  
+                  
+                   
+                       <td>
                         <div class="flex align-items-center list-user-action">
                             <a class="btn btn-sm btn-icon btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar" aria-label="Edit" data-bs-original-title="Edit" href="/dashboard/user/user-update.html?id=${usuario.id_usuario}">
                                 <span class="btn-inner">

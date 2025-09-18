@@ -15,7 +15,16 @@ export function initCreateUserForm() {
             return;
         }
 
+        //FORMATEAR NUMERO PARA 001 010 ETC 
+
+        let numeroInput = document.getElementById("cname").value.trim();
+
+
+        let numeroFormateado = numeroInput.padStart(3, "0");
+        const numeroUsuario = `${numeroFormateado}-${userData.centro_id}`;
+
         const formData = {
+            numero_usuario: numeroUsuario,
             nombre: document.getElementById("fname").value,
             apellidos: document.getElementById("lname").value,
             telefono: document.getElementById("mobno").value,
