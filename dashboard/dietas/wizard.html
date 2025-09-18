@@ -103,44 +103,76 @@
                </div>
                <div class="card-body">
                   <div class="flex-wrap d-flex align-items-center justify-content-between">
-                     <div id="myChart" class="col-md-8 col-lg-8 myChart"></div>
+                    <div class="myChart">
+                        <svg width="200" height="200" viewBox="0 0 200 200">
+
+                            <circle id="circle-carbs"
+                                    cx="100" cy="100" r="70"
+                                    fill="transparent"
+                                    stroke="#4bc7d2" stroke-width="10"
+                                    stroke-linecap="round"
+                                    stroke-dasharray="440"
+                                    stroke-dashoffset="440"
+                                    transform="rotate(-90 100 100)" />
+
+
+                            <circle id="circle-fat"
+                                    cx="100" cy="100" r="55"
+                                    fill="transparent"
+                                    stroke="#ff9800" stroke-width="10"
+                                    stroke-linecap="round"
+                                    stroke-dasharray="345"
+                                    stroke-dashoffset="345"
+                                    transform="rotate(-90 100 100)" />
+
+                            <!-- PROTEINAS -->
+                            <circle id="circle-protein"
+                                    cx="100" cy="100" r="85"
+                                    fill="transparent"
+                                    stroke="#3a57e8" stroke-width="10"
+                                    stroke-linecap="round"
+                                    stroke-dasharray="534"
+                                    stroke-dashoffset="534"
+                                    transform="rotate(-90 100 100)" />   
+                        </svg>
+                    </div>
                      <div class="d-grid gap col-md-4 col-lg-4">
+                       <div class="d-grid gap col-md-4 col-lg-4">
                         <div class="d-flex align-items-start">
-                           <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#3a57e8">
-                              <g>
-                                 <circle cx="12" cy="12" r="8" fill="#3a57e8"></circle>
-                              </g>
-                           </svg>
-                           <div class="ms-3">
-                              <span class="text-gray">Proteínas</span>
-                              <h6>251K</h6>
-                           </div>
+                            <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#3a57e8">
+                                <g><circle cx="12" cy="12" r="8" fill="#3a57e8"></circle></g>
+                            </svg>
+                            <div class="ms-3">
+                                <span class="text-gray">Proteínas</span>
+                                <h6 id="table-protein" "></h6>
+                            </div>
                         </div>
+
                         <div class="d-flex align-items-start">
-                           <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#4bc7d2">
-                              <g>
-                                 <circle cx="12" cy="12" r="8" fill="#4bc7d2"></circle>
-                              </g>
-                           </svg>
-                           <div class="ms-3">
-                              <span class="text-gray">Carbs.</span>
-                              <h6>176K</h6>
-                           </div>
+                            <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#4bc7d2">
+                                <g><circle cx="12" cy="12" r="8" fill="#4bc7d2"></circle></g>
+                            </svg>
+                            <div class="ms-3">
+                                <span class="text-gray">Carbs.</span>
+                                <h6 id="table-carbs" ></h6>
+                            </div>
                         </div>
+
                         <div class="d-flex align-items-start">
-                           <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#4bc7d2">
-                              <g>
-                                 <circle cx="12" cy="12" r="8" fill="#4bc7d2"></circle>
-                              </g>
-                           </svg>
-                           <div class="ms-3">
-                              <span class="text-gray">Grasas</span>
-                              <h6>176K</h6>
-                           </div>
+                            <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#ff9800">
+                                <g><circle cx="12" cy="12" r="8" fill="#ff9800"></circle></g>
+                            </svg>
+                            <div class="ms-3">
+                            <span class="text-gray">Grasas</span>
+                            <h6 id="table-fat" ></h6>
+                            </div>
                         </div>
+                        </div>
+
                      </div>
                   </div>
-               </div>
+               </div> 
+
             </div>
         </div>    
 
@@ -163,17 +195,17 @@
                             <div class="form-group mb-2">
                                 <label class="form-label">Proteínas/kg</label>
                                 <div class="input-group">
-                                    <button class="btn btn-light border"  type="button" onclick="decrement(this)">-</button>
-                                    <input type="number" class="form-control text-center" value="1">
-                                    <button class="btn btn-light border" type="button" onclick="increment(this)">+</button>
+                                    <button id="btn-decrease-protein" class="btn btn-light border"  type="button" onclick="decrement(this)">-</button>
+                                    <span id="protein-value" class="form-control text-center"></span>
+                                    <button id="btn-increase-protein" class="btn btn-light border" type="button" onclick="increment(this)">+</button>
                                 </div>
                             </div>
                             <div class="form-group mb-2">
                                 <label class="form-label">Grasas/kg</label>
                                 <div class="input-group">
-                                    <button class="btn btn-light border"  type="button" onclick="decrement(this)">-</button>
-                                    <input type="number" class="form-control text-center" value="1">
-                                    <button class="btn btn-light border" type="button" onclick="increment(this)">+</button>
+                                    <button id="btn-decrease-fat"  class="btn btn-light border"  type="button" onclick="decrement(this)">-</button>
+                                    <span id="fat-value" class="form-control text-center">-</span>
+                                    <button id="btn-increase-fat" class="btn btn-light border" type="button" onclick="increment(this)">+</button>
                                 </div>
                             </div>
                         </form>
@@ -200,19 +232,19 @@
                         <form class="d-grid gap-card">
                             <div class="form-group mb-2">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="1000" aria-label="Recipient's username" aria-describedby="basic-addon3">
-                                    <span class="input-group-text" id="basic-addon3">Proteínas</span>
+                                    <span  id="macro-proteinas" class="form-control "></span>
+                                    <span  class="input-group-text" id="basic-addon3">Proteínas</span>
                                 </div>
                             </div>
                             <div class="form-group mb-2">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="100" aria-label="Recipient's username" aria-describedby="basic-addon4">
+                                    <span id="macro-carbohidratos" class="form-control"></span>
                                     <span class="input-group-text" id="basic-addon4">Carbs.</span>
                                 </div>
                             </div>
                             <div class="form-group mb-3">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="150" aria-label="Recipient's username" aria-describedby="basic-addon4">
+                                    <span  id="macro-grasas" class="form-control"></span>
                                     <span class="input-group-text" id="basic-addon4">Grasas</span>
                                 </div>
                             </div>
@@ -224,33 +256,33 @@
             <div class="col-lg-3">
          <div class="card">
             <div class="card-body">
-               <h2 class="counter mb-3" style="visibility: visible;">3450 Kcal</h2>
+               <h2 class="counter mb-3"  id="table-calories" style="visibility: visible;"> Kcal</h2>
                <div class="mt-3">
                   <div class="pb-3">
                      <div class="d-flex align-items-center justify-content-between mb-2">
                         <p class="mb-0">Proteínas</p>
-                        <h4>60%</h4>
+                        <h4></h4>
                      </div>
                      <div class="progress bg-info-subtle shadow-none w-100" style="height: 10px">
-                        <div class="progress-bar bg-info" data-toggle="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%; transition: width 2s;"></div>
+                        <div <div id="protein-progress" class="progress-bar bg-info" data-toggle="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%; transition: width 2s;"></div>
                      </div>
                   </div>
                   <div class="pb-3">
                      <div class="d-flex align-items-center justify-content-between mb-2">
                         <p class="mb-0">Grasas</p>
-                        <h4>80%</h4>
+                        <h4></h4>
                      </div>
                      <div class="progress bg-success-subtle shadow-none w-100" style="height: 10px">
-                        <div class="progress-bar bg-success" data-toggle="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%; transition: width 2s;"></div>
+                        <div id="fat-progress" class="progress-bar bg-success" data-toggle="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%; transition: width 2s;"></div>
                      </div>
                   </div>
                   <div class="pb-3">
                      <div class="d-flex align-items-center justify-content-between mb-2">
                         <p class="mb-0">Carbohidratos</p>
-                        <h4>55%</h4>
+                        <h4></h4>
                      </div>
                      <div class="progress bg-primary-subtle shadow-none w-100" style="height: 10px">
-                        <div class="progress-bar bg-primary" data-toggle="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width: 55%; transition: width 2s;"></div>
+                        <div id="carbs-progress" class="progress-bar bg-primary" data-toggle="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width: 55%; transition: width 2s;"></div>
                      </div>
                   </div>
                </div>
@@ -260,92 +292,7 @@
             
  
                 <div class="card-body">
-                      <div class="table-wrapper">
-                                <div class="col-7">
-                                        <h3 class="mb-4">Auto-ajuste</h3>
-
-                                        <div class="auto-ajuste-container">
-                                                <div style="width: 100%; max-width: 500px; margin: 2rem auto;">
-                                                    <canvas id="macroChart"  width="320" height="300"></canvas>
-                                                </div>
-
-                                                <div class="col-md-3 info-autoAjuste">
-
-                                                        
-                                                        <div>
-                                                            <div class="mb-3">
-                                                                <label class="d-block text-center title-autoAjuste">Proteínas/kg</label>
-                                                                <div class="d-flex justify-content-center">
-                                                                    <!-- Botón para disminuir proteínas -->
-                                                                    <button id="btn-decrease-protein" class=" btn-ajuste" type="button">-</button>
-                                                                    <!-- Valor de proteínas -->
-                                                                    <span id="protein-value" class="mx-3">-</span> g/Kg
-                                                                    <!-- Botón para aumentar proteínas -->
-                                                                    <button id="btn-increase-protein" class=" btn-ajuste" type="button">+</button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label class="d-block text-center title-autoAjuste">Grasas/kg</label>
-                                                                <div class="d-flex justify-content-center">
-                                                                    <!-- Botón para disminuir grasas -->
-                                                                    <button id="btn-decrease-fat" class=" btn-ajuste" type="button">-</button>
-                                                                    <!-- Valor de grasas -->
-                                                                    <span id="fat-value" class="mx-3">-</span> g/Kg
-                                                                    <!-- Botón para aumentar grasas -->
-                                                                    <button id="btn-increase-fat" class=" btn-ajuste" type="button">+</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                        
-                                                            <table class="table-ajuste" id="macrosTable">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th colspan="2">Macronutrientes</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr><th>Calorías</th><td id="table-calories">- kcal</td></tr>
-                                                                    <tr><th>Proteínas</th><td id="table-protein">- gr</td></tr>
-                                                                    <tr><th>Grasas</th><td id="table-fat">- gr</td></tr>
-                                                                    <tr><th>Hidratos</th><td id="table-carbs">- gr</td></tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-
-                                                        <div>
-                                                            <table class="table-ajuste table-bordered text-center">
-                                                            <thead>
-                                                                <tr>
-                                                                <th colspan="2">Macronutriente</th>
-                                                                
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                <th>Proteínas</th>
-                                                                <td id="percent-protein">- %</td>
-                                                                </tr>
-                                                                <tr>
-                                                                <th>Grasas</th>
-                                                                <td id="percent-fat">- %</td>
-                                                                </tr>
-                                                                <tr>
-                                                                <th>Carbohidratos</th>
-                                                                <td id="percent-carbs">- %</td>
-                                                                </tr>
-                                                            </tbody>
-                                                            </table>
-                                                        </div>
-                                                 
-
-                                                      
-                                                </div>
-                                        </div>
-                                       
-
-                                </div>
-                            </div>
+                     
 
 <div class="row">
       <div class="col-sm-12">

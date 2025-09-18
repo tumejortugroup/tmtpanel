@@ -25262,3 +25262,8 @@ pre[class*=language-] {
 }
 
 
+circle {
+  transform: rotate(-90deg); /* arranca arriba */
+  transform-origin: 50% 50%;
+  transition: stroke-dashoffset 0.6s ease; /* animación suave */
+}
