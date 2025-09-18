@@ -23,7 +23,7 @@
       background: white;
       box-sizing: border-box;
       font-family: 'Inter', sans-serif;
-      font-size: 12px;
+      font-size: 13px;
       color: #333;
     }
 
@@ -148,7 +148,7 @@
 .tabla-comida {
   width: 100%;
   border-collapse: collapse;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .tabla-comida th,
@@ -162,12 +162,21 @@
   background-color: #f9f9f9;
   font-weight: 600;
   color: #333;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 
 .tabla-comida tr:last-child td {
   border-bottom: none; /* sin borde en la última fila */
 }
+
+.tabla-comida tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.tabla-comida tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
 
 /* Observaciones */
 .bloque-comida .bloque-observaciones {
@@ -182,7 +191,7 @@
 }
 
 .bloque-comida .bloque-observaciones div {
-  font-size: 12px;
+  font-size: 13px;
   color: #666;
   font-style: italic;
 }
@@ -199,7 +208,7 @@
     }
 
     .bloque-comida .bloque-observaciones div {
-      font-size: 12px;
+      font-size: 13px;
       color: #666;
       font-style: italic;
     }
