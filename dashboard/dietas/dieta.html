@@ -4,165 +4,307 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Informe de Dieta</title>
+
+  <!-- Fuente Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+
   <link rel="stylesheet" href="estilos.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <style>
     /* 📄 A4 contenedor */
-/* Contenedor A4 */
-.a4-informe {
-  width: 210mm;   /* A4 ancho */
-  min-height: 297mm; /* A4 alto */
-  margin: 0 auto;
-  padding: 20mm;
-  background: white;
-  box-sizing: border-box;
-  font-family: "Helvetica", Arial, sans-serif;
-  font-size: 12px;
-  color: #333;
+    .a4-informe {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      padding: 20mm;
+      background: white;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: #333;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+  /* Contenido editable*/
+  [contenteditable="true"] {
+  outline: none;
+  border: 1px dashed transparent;
+  cursor: text;
 }
 
-/* Cuando se exporta a PDF con html2pdf, evitar overflow */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+[contenteditable="true"]:hover {
+  border: 1px dashed #aaa;
 }
-/* 🧾 Encabezado general */
+
+[contenteditable="true"]:focus {
+  border: 1px dashed #007bff;
+  background-color: #fdfdfd;
+}
+
+/* toolbar */
+
+.editor-toolbar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.editor-toolbar button {
+  background: #f1f1f1;
+  border: 1px solid #ccc;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+}
+
+.editor-toolbar button:hover {
+  background: #ddd;
+}
+
+
+
+    /* 🧾 Encabezado general */
+    .informe-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .informe-header div {
+      width: 48%;
+    }
+
+    .informe-header p {
+      margin: 3px 0;
+      line-height: 1.4;
+    }
+
+    .header-logo img.logo-informe {
+  max-height: 50px;
+  margin-right: 15px;
+}
+
 .informe-header {
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
-.informe-header div {
-  width: 48%;
+.header-info {
+  flex: 1;
 }
 
-.informe-header p {
-  margin: 3px 0;
-  line-height: 1.4;
+    /* 🍽️ Bloque de comida */
+    .bloque-comida {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background-color: #f7f7f7; 
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Header dentro del bloque */
+    .bloque-comida .bloque-header h5 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 600;
+      color: #181818; /* color primario */
+      text-transform: uppercase;
+    }
+
+    .bloque-comida .bloque-header small {
+      font-size: 12px;
+      color: #6c757d;
+    }
+
+   /* Tabla de alimentos */
+.bloque-comida .bloque-tabla {
+  background-color: #fff;
+  border-radius: 8px;
+  margin-top: 10px;
+  overflow: hidden; /* para que los bordes redondeados se apliquen también a la tabla */
 }
 
-/* 🍽️ Bloque de comida */
-.bloque-comida {
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+.bloque-comida .bloque-tabla h6 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 8px;
 }
 
-.bloque-comida h3 {
-  margin: 0 0 5px;
-  font-size: 14px;
-  color: #2c3e50;
-  text-transform: uppercase;
- 
-
-}
-
-/* 🧂 Tabla de alimentos */
 .tabla-comida {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 5px;
+  font-size: 12px;
 }
 
 .tabla-comida th,
 .tabla-comida td {
-  border: 1px solid #ccc;
-  padding: 5px 8px;
+  padding: 8px 10px;
   text-align: left;
+  border-bottom: 1px solid #eee;
 }
 
 .tabla-comida th {
-  background-color: #ecf0f1;
-}
-
-/* 🎯 Suplementación */
-.suplementacion {
-  margin-top: 20px;
-  font-size: 12px;
-}
-
-.suplementacion p {
-  margin: 2px 0;
-}
-
-/* 🖨️ Botón imprimir */
-.no-print {
-  text-align: center;
-  margin-top: 15px;
-}
-
-.btn-imprimir {
-  background: #2ecc71;
-  color: white;
-  padding: 8px 18px;
-  font-size: 14px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-imprimir:hover {
-  background: #27ae60;
-}
-/* 📄 Contenedor A4 exacto */
-.a4-informe {
-  width: 210mm;
-  height: 297mm;
-  margin: 0 auto;
-  padding: 10mm; /* 👈 controla tus márgenes internos, no jsPDF */
-  background: white;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-  font-size: 11pt;
+  background-color: #f9f9f9;
+  font-weight: 600;
   color: #333;
+  border-bottom: 2px solid #ddd;
 }
 
-.encabezado-comida{
-    display: flex;
-    flex-direction: row;
-    flex-direction: wrap;
-    align-items: center;
-    gap:15px;
-     border-bottom: 1px solid #ddd;
+.tabla-comida tr:last-child td {
+  border-bottom: none; /* sin borde en la última fila */
 }
 
-@media print {
-  body * {
-    visibility: hidden; /* Oculta TODO */
-  }
+/* Observaciones */
+.bloque-comida .bloque-observaciones {
+  margin-top: 12px;
+}
 
-  #informe-dieta, #informe-dieta * {
-    visibility: visible; /* Solo muestra el informe */
-  }
+.bloque-comida .bloque-observaciones h6 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 5px;
+}
 
-  #informe-dieta {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 210mm;
-    height: 297mm;
-    margin: 0;
-    padding: 10mm;
-    page-break-after: always;
-  }
+.bloque-comida .bloque-observaciones div {
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
+}
+    /* Observaciones */
+    .bloque-comida .bloque-observaciones h6 {
+      font-size: 13px;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 5px;
+    }
+
+    .bloque-comida .bloque-observaciones {
+      margin-top: 10px;
+    }
+
+    .bloque-comida .bloque-observaciones div {
+      font-size: 12px;
+      color: #666;
+      font-style: italic;
+    }
+
+    /* 🖨️ Botón imprimir */
+    .no-print {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 2000; /* aseguramos que quede por encima */
+}
+
+/* Botón Exportar PDF */
+.btn-export {
+  background: #1aa053;
+  color: #fff;
+  padding: 8px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s ease-in-out;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-export:hover {
+  background: #158042;
+}
+
+/* Botón Imprimir */
+.btn-print {
+  background: #d2a528;
+  color: #fff;
+  padding: 8px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s ease-in-out;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-print:hover {
+  background: #b58e21;
 }
 
 
+    @media print {
+      
+      * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+     }
+
+      u {
+        text-decoration-color: inherit !important;
+        text-decoration-thickness: 2px !important;
+      }
+      body * {
+        visibility: hidden;
+      }
+      #informe-dieta, #informe-dieta * {
+        visibility: visible;
+      }
+      #informe-dieta {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        padding: 10mm;
+        page-break-after: always;
+      }
+    }
   </style>
 </head>
 <body>
+   <!-- Barra de edición -->
+  
   <div class="a4-informe" id="informe-dieta">
     <!--Contenido desde JS -->
   </div>
+  <div id="export-buttons" class="no-print" 
+       style="position:fixed; bottom:20px; right:20px; display:flex; flex-direction:column; gap:10px; z-index:2000;">
+    <button id="btn-export-pdf" class="btn-export">
+    <i class="bi bi-file-earmark-pdf"></i> Exportar PDF
+    </button>
 
-  <div class="no-print center">
-    <button onclick="window.print()" class="btn-imprimir">🖨️ </button>
+    <button id="btn-print" class="btn-print">
+    <i class="bi bi-printer"></i> Imprimir
+    </button>
   </div>
- <script type="module" src="/src/dietas/mainVistaDieta.js"></script>
+
+<!-- Tu JS principal (solo una vez) -->
+<script type="module" src="/src/dietas/mainVistaDieta.js"></script>
+
+  
+
+
 </body>
 </html>
