@@ -1,77 +1,80 @@
 import { renderSelectAlimentos } from '/src/dietas/modules/wizard/ui/renderAlimentos.js';
 
-export function addColumns(button) {
-  const table = button.closest(".table-dieta");
-  if (!table) return;
 
-  const headerRow = table.querySelector("thead tr:last-child");
-  const currentCols = headerRow.children.length;
+export function addColumns() {
+  // Seleccionamos todas las tablas con clase .table
+  const tables = document.querySelectorAll(".table");
 
+  tables.forEach(table => {
+    const headerRow = table.querySelector("thead tr:last-child");
+    if (!headerRow) return;
 
-  if (currentCols >= 21) {
-    alert("⚠️ Máximo 21 columnas.");
-    return;
-  }
+    const currentCols = headerRow.children.length;
 
-  // --- Añadir cabeceras Eq + Cantidad ---
-  const thEq = document.createElement("th");
-  thEq.textContent = "Eq";
-  headerRow.appendChild(thEq);
+    // límite de columnas (ejemplo: 21)
+    if (currentCols >= 21) {
+      return; // si quieres, puedes alertar solo en la primera tabla
+    }
 
-  const thCantidad = document.createElement("th");
-  thCantidad.textContent = "Cantidad";
-  headerRow.appendChild(thCantidad);
+    // --- Añadir cabeceras Alimento + gr ---
+    const thEq = document.createElement("th");
+    thEq.textContent = "Alimento";
+    headerRow.appendChild(thEq);
 
-  // --- Añadir columnas en el cuerpo ---
-  const bodyRows = table.querySelectorAll("tbody tr");
-  bodyRows.forEach(row => {
-    if (row.querySelector("textarea")) return; 
+    const thCantidad = document.createElement("th");
+    thCantidad.textContent = "gr";
+    headerRow.appendChild(thCantidad);
 
+    // --- Añadir celdas en cada fila del tbody ---
+    const bodyRows = table.querySelectorAll("tbody tr");
+    bodyRows.forEach(row => {
+      if (row.querySelector("textarea")) return;
 
-    const tdEq = document.createElement("td");
-    const select = document.createElement("select");
-    select.name = "select-alimentos"; 
-    select.classList.add("form-select");
-    tdEq.appendChild(select);
+      // Columna Alimento (select)
+      const tdEq = document.createElement("td");
+      tdEq.classList.add("px-1", "py-0");
+      const select = document.createElement("select");
+      select.name = "select-alimentos";
+      select.classList.add("form-select", "form-select-sm");
+      select.innerHTML = `<option value="">Alimentos</option>`;
+      tdEq.appendChild(select);
 
-    // Cantidad
-    const tdCantidad = document.createElement("td");
-    const input = document.createElement("input");
-    input.type = "text";
-    input.classList.add("input-cantidad");
-    tdCantidad.appendChild(input);
+      // Columna gr (input)
+      const tdCantidad = document.createElement("td");
+      tdCantidad.classList.add("px-1", "py-0");
+      const input = document.createElement("input");
+      input.type = "text";
+      input.classList.add("form-control", "form-control-sm");
+      tdCantidad.appendChild(input);
 
-    row.appendChild(tdEq);
-    row.appendChild(tdCantidad);
+      row.appendChild(tdEq);
+      row.appendChild(tdCantidad);
+    });
   });
 
-
+  // Rellenar selects dinámicamente en todas
   renderSelectAlimentos("select-alimentos");
 }
 
-export function removeColumns(button) {
-  const table = button.closest(".table-dieta");
-  if (!table) return;
+export function removeColumns() {
+  const tables = document.querySelectorAll(".table");
 
-  const headerRow = table.querySelector("thead tr:last-child");
-  const currentCols = headerRow.children.length;
+  tables.forEach(table => {
+    const headerRow = table.querySelector("thead tr:last-child");
+    if (!headerRow) return;
 
+    const bodyRows = table.querySelectorAll("tbody tr");
 
-  if (currentCols <= 3) {
-    alert("⚠️ Deben quedar al menos MACRO + Alimento + Cantidad.");
-    return;
-  }
+    // comprobar que haya al menos una pareja de columnas aparte de MACRO
+    if (headerRow.children.length > 3) {
+      headerRow.removeChild(headerRow.lastElementChild);
+      headerRow.removeChild(headerRow.lastElementChild);
 
-  // --- Quitar columnas del header ---
-  headerRow.removeChild(headerRow.lastElementChild); 
-  headerRow.removeChild(headerRow.lastElementChild); 
-
-  // --- Quitar columnas del cuerpo ---
-  const bodyRows = table.querySelectorAll("tbody tr");
-  bodyRows.forEach(row => {
-    if (row.querySelector("textarea")) return; 
-
-    row.removeChild(row.lastElementChild); 
-    row.removeChild(row.lastElementChild); 
+      bodyRows.forEach(row => {
+        if (row.querySelector("textarea")) return;
+        row.removeChild(row.lastElementChild);
+        row.removeChild(row.lastElementChild);
+      });
+    }
   });
 }

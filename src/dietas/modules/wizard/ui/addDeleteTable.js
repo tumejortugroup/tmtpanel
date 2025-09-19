@@ -1,38 +1,59 @@
-export function duplicarUltimaTabla() {
-  const container = document.getElementById("tabla-container");
-  const tablas = container.querySelectorAll("table.table-dieta");
 
-  if (tablas.length === 0) {
-    console.warn("⚠️ No hay tablas para clonar.");
+export function duplicarUltimaTabla() {
+  const button = event.target;
+  const btnsDiv = button.closest(".comida-btns");
+  if (!btnsDiv) return;
+
+  const parent = btnsDiv.parentNode;
+  const tablas = parent.querySelectorAll("table");
+  if (tablas.length === 0) return;
+
+  let ultimaTabla = tablas[tablas.length - 1];
+
+  // 👉 Si la última es Suplementacion, usamos la anterior
+  if (ultimaTabla.id === "Suplementacion" && tablas.length > 1) {
+    ultimaTabla = tablas[tablas.length - 2];
+  }
+
+  // Si seguimos sin tabla válida, no se clona
+  if (!ultimaTabla || ultimaTabla.id === "Suplementacion") {
+    console.warn("⚠️ No se puede clonar la tabla de Suplementación.");
     return;
   }
 
-  const ultimaTabla = tablas[tablas.length - 1];
-  const clon = ultimaTabla.cloneNode(true); // Clona solo la tabla, no toda la sección
+  // Clonar
+  const clon = ultimaTabla.cloneNode(true);
 
-  container.appendChild(clon);
+  // 👉 Si existe Suplementacion, insertar justo antes de ella
+  const tablaSuplementacion = parent.querySelector("#Suplementacion");
+  if (tablaSuplementacion) {
+    parent.insertBefore(clon, tablaSuplementacion);
+  } else {
+    // Si no hay Suplementacion, insertar antes de los botones
+    parent.insertBefore(clon, btnsDiv);
+  }
 }
-
 
 export function eliminarUltimaTabla() {
-  const container = document.getElementById("tabla-container");
-  const tablas = container.querySelectorAll("table.table-dieta");
+  const button = event.target;
+  const btnsDiv = button.closest(".comida-btns");
+  if (!btnsDiv) return;
 
-  if (tablas.length <= 1) {
-    console.warn("⚠️ No se puede eliminar la última tabla.");
-    
-    // Opcional: Desactivar el botón si solo queda una
-    const botonEliminar = document.getElementById("btn-eliminar-tabla");
-    if (botonEliminar) botonEliminar.disabled = true;
+  const parent = btnsDiv.parentNode;
+  const tablas = parent.querySelectorAll("table");
 
+  // 👉 Si hay 2 o menos tablas, no borrar nada
+  if (tablas.length <= 2) {
+    console.warn("⚠️ No se puede eliminar porque solo quedan dos tablas (incluyendo Suplementación).");
     return;
   }
 
-  const ultimaTabla = tablas[tablas.length - 1];
+  let ultimaTabla = tablas[tablas.length - 1];
+
+  if (ultimaTabla.id === "Suplementacion") {
+    // 👉 Si la última es Suplementacion, borramos la anterior
+    ultimaTabla = tablas[tablas.length - 2];
+  }
+
   ultimaTabla.remove();
-
-  // Re-activar el botón en caso de que se hubiera desactivado antes
-  const botonEliminar = document.getElementById("btn-eliminar-tabla");
-  if (botonEliminar) botonEliminar.disabled = false;
 }
-
