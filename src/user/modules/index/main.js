@@ -5,9 +5,9 @@ import { pintarUsuariosDashboard } from "/src/user/modules/index/listActivos.js"
 
 
 document.addEventListener("DOMContentLoaded", async () => {
-   await listCumpleaños();
-   await listUsuariosUltimos();
-   await pintarTotalClientes();
-   await pintarUsuariosDashboard()
+    listCumpleaños();
+    listUsuariosUltimos();
+    pintarTotalClientes();
+   pintarUsuariosDashboard()
 
 });
