@@ -50,7 +50,7 @@ export function initCreateUserForm() {
             });
 
             if (response.ok) {
-                window.location.href = "/dashboard/index.html";
+                window.location.href = "/dashboard/user/user-list.html";
             } else {
                 alert("Hubo un problema al crear el usuario.");
                 console.error("Respuesta no OK:", response.status, await response.text());

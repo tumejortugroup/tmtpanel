@@ -40,7 +40,7 @@ export function initAuth() {
 
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
-            alert('No se pudo conectar al servidor. Intenta más tarde.');
+            alert('No se pudo conectar al servidor. Intenta más tarde.');/*AQUI*/
         }
     });
 }

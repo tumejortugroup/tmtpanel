@@ -1,17 +1,35 @@
+
+
 import { getAlimentos } from '/src/dietas/modules/wizard/fetch/getAlimentos.js';
 
 export async function renderSelectAlimentos(selectId) {
   try {
-    const alimentos = await getAlimentos();
+    // Cachear alimentos en window
+    if (!window.__alimentosCache) {
+      const alimentos = await getAlimentos();
 
-    if (!Array.isArray(alimentos)) {
-      throw new Error("La respuesta del backend no es una lista.");
+      if (!Array.isArray(alimentos)) {
+        throw new Error("La respuesta del backend no es una lista.");
+      }
+
+      window.__alimentosCache = alimentos;
     }
+
+    const alimentos = window.__alimentosCache;
 
     const selects = document.querySelectorAll(`select[name='${selectId}']`);
     
     selects.forEach(select => {
-      select.innerHTML = `<option value="">Seleccionar</option>`; // default
+      // ⚡ Solo rellenamos si está vacío (solo tiene el placeholder)
+      if (select.options.length > 1) return;
+
+      // Asegurar placeholder
+      if (select.options.length === 0) {
+        const placeholder = document.createElement("option");
+        placeholder.value = "";
+        placeholder.textContent = "Seleccionar";
+        select.appendChild(placeholder);
+      }
 
       alimentos.forEach(alimento => {
         const option = document.createElement("option");

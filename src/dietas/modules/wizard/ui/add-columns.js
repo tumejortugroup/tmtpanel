@@ -1,8 +1,12 @@
 import { renderSelectAlimentos } from '/src/dietas/modules/wizard/ui/renderAlimentos.js';
 
 
+
+
+
+import { renderTablaEquivalencias } from '/src/dietas/modules/wizard/ui/renderEquivalencias.js';
+
 export function addColumns() {
-  // Seleccionamos todas las tablas con clase .table
   const tables = document.querySelectorAll(".table");
 
   tables.forEach(table => {
@@ -10,13 +14,9 @@ export function addColumns() {
     if (!headerRow) return;
 
     const currentCols = headerRow.children.length;
+    if (currentCols >= 21) return;
 
-    // límite de columnas (ejemplo: 21)
-    if (currentCols >= 21) {
-      return; // si quieres, puedes alertar solo en la primera tabla
-    }
-
-    // --- Añadir cabeceras Alimento + gr ---
+    // --- Añadir cabeceras ---
     const thEq = document.createElement("th");
     thEq.textContent = "Alimento";
     headerRow.appendChild(thEq);
@@ -30,7 +30,6 @@ export function addColumns() {
     bodyRows.forEach(row => {
       if (row.querySelector("textarea")) return;
 
-      // Columna Alimento (select)
       const tdEq = document.createElement("td");
       tdEq.classList.add("px-1", "py-0");
       const select = document.createElement("select");
@@ -39,22 +38,20 @@ export function addColumns() {
       select.innerHTML = `<option value="">Alimentos</option>`;
       tdEq.appendChild(select);
 
-      // Columna gr (input)
       const tdCantidad = document.createElement("td");
       tdCantidad.classList.add("px-1", "py-0");
-      const input = document.createElement("input");
-      input.type = "text";
-      input.classList.add("form-control", "form-control-sm");
-      tdCantidad.appendChild(input);
+      tdCantidad.textContent = "";
 
       row.appendChild(tdEq);
       row.appendChild(tdCantidad);
     });
   });
 
-  // Rellenar selects dinámicamente en todas
+  // 👇 Muy importante: volver a rellenar y enganchar eventos
   renderSelectAlimentos("select-alimentos");
+  renderTablaEquivalencias();
 }
+
 
 export function removeColumns() {
   const tables = document.querySelectorAll(".table");
