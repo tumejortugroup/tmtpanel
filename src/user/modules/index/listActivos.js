@@ -46,37 +46,38 @@ export async function pintarUsuariosDashboard() {
 
         // Pintamos las tarjetas
         ul.innerHTML = `
-            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="700">
-                <div class="card-body">
-                    <div class="progress-widget">
-                        <div class="circle-progress" data-value="100"></div>
-                        <div class="progress-detail">
-                            <p class="mb-2">Usuarios</p>
-                            <h4 class="counter">${totalUsuarios}</h4>
-                        </div>
-                    </div>
-                </div>
-            </li>
 
-            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="800">
+            <li class="swiper-slide card card-slide aos-init aos-animate swiper-slide-active" data-aos="fade-up" data-aos-delay="700" role="group"  style="width: 272px; margin-right: 32px;">
                 <div class="card-body">
                     <div class="progress-widget">
-                        <div class="circle-progress" data-value="${percentActivos}"></div>
+                        <div class="text-center circle-progress-01 circle-progress circle-progress-primary" data-value="${percentActivos}"></div>
                         <div class="progress-detail">
-                            <p class="mb-2">Activos</p>
+                            <p class="mb-2">Clientes activos</p>
                             <h4 class="counter">${usuarios_activos}</h4>
                         </div>
                     </div>
                 </div>
             </li>
 
-            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="900">
+            <li class="swiper-slide card card-slide aos-init aos-animate swiper-slide-active" data-aos="fade-up" data-aos-delay="800" role="group"  style="width: 272px; margin-right: 32px;">
                 <div class="card-body">
                     <div class="progress-widget">
-                        <div class="circle-progress" data-value="${percentInactivos}"></div>
+                        <div class="text-center circle-progress-01 circle-progress circle-progress-primary" data-value="${percentInactivos}"></div>
                         <div class="progress-detail">
-                            <p class="mb-2">Inactivos</p>
-                            <h4 class="counter">${usuarios_inactivos}</h4>
+                            <p class="mb-2">Clientes inactivos</p>
+                            <h4 class="counter">${usuarios_inactivos}</h4>   
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li class="swiper-slide card card-slide aos-init aos-animate swiper-slide-active" data-aos="fade-up" data-aos-delay="900" role="group"  style="width: 272px; margin-right: 32px;">
+                <div class="card-body">
+                    <div class="progress-widget">
+                        <div class="text-center circle-progress-01 circle-progress circle-progress-primary" data-value="100"></div>
+                        <div class="progress-detail">
+                            <p class="mb-2">Clientes totales</p>
+                            <h4 class="counter">${totalUsuarios}</h4>
                         </div>
                     </div>
                 </div>
@@ -99,8 +100,8 @@ export async function pintarUsuariosDashboard() {
                         d="M18 2.0845
                            a 15.9155 15.9155 0 0 1 0 31.831
                            a 15.9155 15.9155 0 0 1 0 -31.831"
-                        fill="none" stroke="#4cafef" stroke-width="2"/>
-                  <text x="18" y="20.35" class="percentage" text-anchor="middle" font-size="8" fill="#4cafef">
+                        fill="none" stroke="#d2a528" stroke-width="2"/>
+                  <text x="18" y="20.35" class="percentage" text-anchor="middle" font-size="8" fill="#d2a528">
                     ${value}%
                   </text>
                 </svg>

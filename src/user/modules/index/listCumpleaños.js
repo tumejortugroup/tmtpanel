@@ -56,13 +56,19 @@ const response = await fetch(endpoint, {
         <div class="d-flex justify-content-start align-items-center ${index > 0 ? "mt-4" : ""}">
             <div class="pe-3">
                 <!-- Si tienes avatar real úsalo, si no, inicial -->
-                <span class="avatar bg-primary text-white p-2 rounded-circle">
-                    ${usuario.nombre.charAt(0)}
+                <div class="iq-media-group iq-media-group-1">
+                    <a href="#" class="iq-media-1">
+                        <div class="icon iq-icon-box-3 rounded-pill">
+                            ${usuario.nombre.charAt(0)}
+                        </div>
+                    </a>
+                </div>
+                    
                 </span>
             </div>
             <div>
                 <h6 class="mb-1">${nombreCompleto}</h6>
-                <p class="mb-0">🎂 ${cumpleFormateado}</p>
+                <p class="mb-0"><i class="bi bi-cake2"></i> ${cumpleFormateado}</p>
             </div>
         </div>
     `;

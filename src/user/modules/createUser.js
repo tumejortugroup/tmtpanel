@@ -57,7 +57,7 @@ export function initCreateUserForm() {
 
         } catch (error) {
             console.error("Error en la solicitud:", error);
-            alert("Error de conexión con el servidor.");
+            alert("Rellena todos los campos obligatorios.");
         }
     });
 }

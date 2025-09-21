@@ -15919,6 +15919,18 @@ thead, tbody, tfoot, tr, td, th {
   width: calc(100% - 4.8rem);
 }
 
+.logo-mini {
+  display: none;
+}
+
+/* Cuando el aside pasa a mini */
+.sidebar-mini .logo-normal {
+  display: none;       /* ocultamos el logo grande */
+}
+
+.sidebar-mini .logo-mini {
+  display: block;      /* mostramos el logo mini */
+}
 
 
 @media (max-width: 991.98px) {

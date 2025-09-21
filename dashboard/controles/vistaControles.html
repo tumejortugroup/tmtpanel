@@ -90,55 +90,39 @@
       </div>
       <div class="conatiner-fluid content-inner mt-n5 py-0">
 <div class="row">
-   <div class="col-md-12 col-lg-12">
-      <div class="row row-cols-1">
-         <div class="overflow-hidden d-slider1 ">
+   <div class="col-sm-12">
+      <div class="card">
+         <div class="card-header d-flex justify-content-between flex-wrap">
+            <div class="header-title">
+                <h4 class="card-title mb-0">Historial de Controles</h4>
+            </div>
+            <div class="d-flex">
+                    <div class="dropdown">
+                        <button class="btn btn-primary btn-sm dropdown-toggle me-2" type="button" id="dropdownMenuButtonSM" data-bs-toggle="dropdown" aria-expanded="false">
+                            Seleccionar usuario
+                         </button>
+                            <ul id="select-usuarios" class="dropdown-menu" aria-labelledby="dropdownMenuButtonSM" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 33px);" data-popper-placement="bottom-start">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                    </div>
 
 
- <!-- ESTA COPIADO DE AQUI PARA ABAJO DE CONTROL-NUEVO.HTML.-->
+                    <div class="dropdown">
+                        <button id="btnControlDrop"  class="btn btn-primary btn-sm dropdown-toggle me-2" type="button" id="dropdownMenuButtonSM" data-bs-toggle="dropdown" aria-expanded="false">
+                            Seleccionar control
+                         </button>
+                            <ul id="lista-controles" aria-labelledby="btnControlDrop" class="dropdown-menu show" aria-labelledby="dropdownMenuButtonSM" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 33px);" data-popper-placement="bottom-start">
+                            </ul>
+                    </div>
+                </div>
+            </div>    
+
                 <div class="card-body">
-                   
-
-
-
-
-
-                     <div class="header-title header-controles">
-
-      <div class="mis-controles-header-wrapper">
-
-        <!-- Título -->
-        <h3 class="card-title">Historial controles:</h3>
-
-        <!-- Botón Usuario -->
-      <div class="btn-group">
-                            <select id="select-usuarios" class="form-select form-select-sm btn btn-primary" style="width: auto;">
-                            <option selected disabled>Seleccionar usuario</option>
-                            <!-- Opciones dinámicas -->
-                            </select>
-
-        </div>
-
-        <!-- Botón Controles alineado a la derecha -->
-        <div class="dropdown seleccion-controles">
-          <button id="btnControlDrop" type="button" class="btn btn-primary dropdown-toggle btn-user-style" data-bs-toggle="dropdown" aria-expanded="false">
-            Controles
-          </button>
-          <ul class="dropdown-menu" id="lista-controles" aria-labelledby="btnControlDrop">
-            <!-- Contenido generado dinámicamente -->
-          </ul>
-        </div>
-
-    </div>
-  </div>
-</div>
-
-                
- <div class="table-responsive">
-                    <table class="table table-bordered">
-                        
-
-                        
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                                              
          <tbody>
                     <!--INFORMACIÓN-->
                     <thead>           

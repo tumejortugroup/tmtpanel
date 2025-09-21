@@ -46,21 +46,23 @@ export async function listUsuariosUltimos() {
                 <tr>
                     <td>
                         <div class="d-flex align-items-center">
-                            <img class="rounded bg-soft-primary img-fluid avatar-40 me-3"
-                                 src="../assets/images/shapes/0${(index % 5) + 1}.png" 
-                                 alt="profile">
-                            <h6>${nombreCompleto}</h6>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="iq-media-group iq-media-group-1">
-                            <a href="#" class="iq-media-1">
+                            <!-- Icono -->
+                            <div class="pe-3">
+                            <div class="iq-media-group iq-media-group-1">
+                                <a href="#" class="iq-media-1">
                                 <div class="icon iq-icon-box-3 rounded-pill">
                                     ${usuario.nombre.charAt(0)}
                                 </div>
-                            </a>
+                                </a>
+                            </div>
+                            </div>
+                            <!-- Nombre -->
+                            <div>
+                            <h6 class="mb-1">${nombreCompleto}</h6>
+                            </div>
                         </div>
                     </td>
+                    
                     <td>${fecha}</td>
                 </tr>
             `;
