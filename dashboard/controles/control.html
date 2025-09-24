@@ -32,6 +32,8 @@
 
       <!-- Boostrap Icons -->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     
      
       
@@ -74,7 +76,7 @@
                       <div class="col-md-12">
                           <div class="flex-wrap d-flex justify-content-between align-items-center">
                               <div>
-                                  <h1>¡Hola [Nombre]!</h1>
+                                  <h1>¡Hola <span class="nombre-usuario"></span>!</h1>
                                   <p>Recuerda, estás cambiando la vida de la gente a a mejor.</p>
                               </div>
                       
@@ -108,13 +110,10 @@
                             </ul>
                     </div>
                     <div class="dropdown">
-                        <button id="btn-ver-controles"  class="btn btn-primary btn-sm dropdown-toggle me-2" type="button" id="dropdownMenuButtonSM" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button id="btnControlDrop"  class="btn btn-primary btn-sm dropdown-toggle me-2" type="button" id="dropdownMenuButtonSM" data-bs-toggle="dropdown" aria-expanded="false">
                             Seleccionar control
                          </button>
-                            <ul id="select-usuarios" class="dropdown-menu show" aria-labelledby="dropdownMenuButtonSM" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 33px);" data-popper-placement="bottom-start">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <ul id="lista-controles" aria-labelledby="btnControlDrop" class="dropdown-menu " aria-labelledby="dropdownMenuButtonSM" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 33px);" data-popper-placement="bottom-start">
                             </ul>
                     </div>
                 </div>    
@@ -135,14 +134,14 @@
                     </thead>    
                         <tr class="" data-variable="nombre"> 
                             <th class="justify-content-between">Nº Control</th>
-                            <td class="text-center" id="control-cabecero">
-                                <input type="text" class="form-control" data-index ='1' value="Control-"/>
+                            <td class="text-center" >
+                                <input type="text" class="nombre form-control" data-index ='1' value="Control-"/>
                             </td>
                         </tr>
                         <tr class="" data-variable="fecha"> 
                             <th class="justify-content-between">Fecha</th>
                             <td class="text-center">
-                                <input type="date" class="form-control" data-index ='1'/>
+                                <input type="date" class="fecha form-control" data-index ='1'/>
                             </td>
                         </tr>
                     <!--FIN INFORMACIÓN-->    
@@ -156,25 +155,25 @@
                         <tr class=" " data-variable="edad"> 
                             <th class="justify-content-between">Edad</th>
                             <td class="text-center">
-                                <input type="number" class="form-control" data-index ='1' value="Control-"/>
+                                <input type="number" class="edad form-control" data-index ='1' value="Control-"/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="peso"> 
                             <th class="justify-content-between">Peso</th>
                             <td class="text-center">
-                                <input type="number" class="form-control" data-index ='1'/>
+                                <input type="number" class="peso form-control" data-index ='1'/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="altura"> 
                             <th class="justify-content-between">Altura</th>
                             <td class="text-center">
-                                <input type="number" class="form-control" data-index ='1'/>
+                                <input type="number" class="altura form-control" data-index ='1'/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="genero"> 
                             <th class="justify-content-between">Género</th>
                             <td class="text-center">
-                                <select class="form-select" aria-label=".form-select-sm example" data-index ='1'>
+                                <select class="genero form-select" aria-label=".form-select-sm example" data-index ='1'>
                                     <option value="hombre">Hombre</option>
                                     <option value="mujer">Mujer</option>
                             </select>
@@ -183,7 +182,7 @@
                         <tr class=" " data-variable="grado_actividad"> 
                             <th class="justify-content-between">Actividad</th>
                             <td class="text-center">
-                                <select class="form-select" aria-label=".form-select-sm example" data-index ='1'>
+                                <select class="actividad form-select" aria-label=".form-select-sm example" data-index ='1'>
                                     <option value="Inactiva">Inactiva</option>
                                     <option value="Baja">Baja</option>
                                     <option value="Ligera">Ligera</option>
@@ -198,7 +197,7 @@
                         <tr class=" " data-variable="objetivo"> 
                             <th class="justify-content-between">Objetivo</th>
                             <td class="text-center">
-                                <select class="form-select" aria-label=".form-select-sm example" data-index ='1'>
+                                <select class="objetivo form-select" aria-label=".form-select-sm example" data-index ='1'>
                                     <option value="Bajada de peso">Bajada de peso</option>
                                     <option value="Aumento de peso">Aumento de peso</option>
                                     <option value="Hipertrofia">Hipertrofia</option>
@@ -221,49 +220,49 @@
                         <tr class=" " data-variable="cuello"> 
                             <th class="justify-content-between">Cuello</th>
                             <td class="text-center">
-                                <input type="number" class="form-control" data-index ='1'/>
+                                <input type="number" class="cuello form-control" data-index ='1'/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="cintura"> 
                             <th class="justify-content-between">Cintura</th>
                             <td class="text-center">
-                                <input type="number" class="form-control" data-index ='1'/>
+                                <input type="number" class="cintura form-control" data-index ='1'/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="cadera"> 
                             <th class="justify-content-between">Cadera</th>
                             <td class="text-center">
-                                <input type="number" class="form-control" data-index ='1'/>
+                                <input type="number" class="cadera form-control" data-index ='1'/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="abdomen"> 
                             <th class="justify-content-between">Abdomen</th>
                             <td class="text-center">
-                                <input type="number" class="form-control" data-index ='1'/>
+                                <input type="number" class="abdomen form-control" data-index ='1'/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="brazo"> 
                             <th class="justify-content-between">Brazo</th>
                             <td class="text-center">
-                                <input type="number" class="form-control" data-index ='1'/>
+                                <input type="number" class="brazo form-control" data-index ='1'/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="muslo"> 
                             <th class="justify-content-between">Muslo</th>
                             <td class="text-center">
-                                <input type="number" class="form-control" data-index ='1'/>
+                                <input type="number" class="muslo form-control" data-index ='1'/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="triceps"> 
                             <th class="justify-content-between">Tríceps</th>
                             <td class="text-center">
-                                <input type="number" class="form-control" data-index ='1'/>
+                                <input type="number" class="triceps form-control" data-index ='1'/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="porcentaje_graso_perimetros" > 
                             <th class="justify-content-between">% graso perimetral</th>
                             <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="form-control" data-index ='1' readonly disabled/>
+                                <input  type="number" id="disabledTextInput" class=" grasa_perimetral form-control" data-index ='1' readonly disabled/>
                             </td>
                         </tr>
                     <!--FIN PERÍMETROS-->
@@ -278,37 +277,37 @@
                         <tr class=" " data-variable="subescapular"> 
                             <th class="justify-content-between">Subescapular</th>
                             <td class="text-center">
-                                <input  type="number"  class="form-control" data-index ='1'/>
+                                <input  type="number"  class="subescapular form-control" data-index ='1'/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="abdomen_pliegue"> 
                             <th class="justify-content-between">Abdomen</th>
                             <td class="text-center">
-                                <input  type="number" class="form-control" data-index ='1'/>
+                                <input  type="number" class="abdomen_pliegue form-control" data-index ='1'/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="supra_iliaco"> 
                             <th class="justify-content-between">Suprailiaco</th>
                             <td class="text-center">
-                                <input  type="number"  class="form-control" data-index ='1'/>
+                                <input  type="number"  class=" supra_iliaco form-control" data-index ='1'/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="muslo_pliegue"> 
                             <th class="justify-content-between">Muslo</th>
                             <td class="text-center">
-                                <input  type="number"  class="form-control" data-index ='1' />
+                                <input  type="number"  class="muslo_pliegue form-control" data-index ='1' />
                             </td>
                         </tr>
                         <tr class=" " data-variable="suma_pliegues"> 
                             <th class="justify-content-between">Suma total</th>
                             <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="form-control" data-index ='1' readonly disabled/>
+                                <input  type="number" id="disabledTextInput" class="suma_pliegues form-control" data-index ='1' readonly disabled/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="porcentaje_graso_estimado_pliegues"> 
                             <th class="justify-content-between">% graso pliegues</th>
                             <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="form-control" data-index ='1' readonly disabled/>
+                                <input  type="number" id="disabledTextInput" class="grasa_pliegues form-control" data-index ='1' readonly disabled/>
                             </td>
                         </tr>
                     <!--FIN PLIEGUES-->
@@ -323,25 +322,25 @@
                         <tr class=" " data-variable="humero_biepicondileo"> 
                             <th class="d-flex justify-content-between">Húmero bicondileo</th>
                             <td class="text-center">
-                                <input  type="number"  class="form-control" data-index ='1' />
+                                <input  type="number"  class="humero_bicondileo form-control" data-index ='1' />
                             </td>
                         </tr>
                         <tr class=" " data-variable="femur_bicondileo"> 
                             <th class="justify-content-between">Fémur bicondileo</th>
                             <td class="text-center">
-                                <input  type="number"  class="form-control" data-index ='1' />
+                                <input  type="number"  class="femur_bicondileo form-control" data-index ='1' />
                             </td>
                         </tr>
                         <tr class=" " data-variable="muneca_estiloideo"> 
                             <th class="justify-content-between">Muñeca bicondileo</th>
                             <td class="text-center">
-                                <input  type="number"  class="form-control" data-index ='1' />
+                                <input  type="number"  class="muneca_estiloideo form-control" data-index ='1' />
                             </td>
                         </tr>
                         <tr class=" " data-variable="muneca_circunferencia"> 
                             <th class="justify-content-between">Muñeca circunferencia</th>
                             <td class="text-center">
-                                <input  type="number"  class="form-control" data-index ='1' />
+                                <input  type="number"  class="muneca_circunferencia form-control" data-index ='1' />
                             </td>
                         </tr>
                     <!--FIN HUESOS-->
@@ -356,69 +355,108 @@
                         <tr class=" " data-variable="peso_oseo_rocha"> 
                             <th class="justify-content-between">Peso óseo Rocha</th>
                             <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="form-control" data-index ='1' readonly disabled/>
+                                <input  type="number" id="disabledTextInput" class=" peso_oseo_rocha form-control" data-index ='1' readonly disabled/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="peso_residual"> 
                             <th class="justify-content-between">Peso residual</th>
                             <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="form-control" data-index ='1' readonly disabled/>
+                                <input  type="number" id="disabledTextInput" class="peso_residual form-control" data-index ='1' readonly disabled/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="porcentaje_residual"> 
                             <th class="justify-content-between">Porcentaje residual</th>
                             <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="form-control" data-index ='1' readonly disabled/>
+                                <input  type="number" id="disabledTextInput" class="porcentaje_residual form-control" data-index ='1' readonly disabled/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="peso_extracelular"> 
                             <th class="justify-content-between">Peso extracelular</th>
                             <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="form-control" data-index ='1' readonly disabled/>
+                                <input  type="number" id="disabledTextInput" class="peso_extracelular form-control" data-index ='1' readonly disabled/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="porcentaje_extracelular"> 
                             <th class="justify-content-between">Porcentaje extracelular</th>
                             <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="form-control" data-index ='1' readonly disabled/>
+                                <input  type="number" id="disabledTextInput" class="porcentaje_extracelular form-control" data-index ='1' readonly disabled/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="peso_intracelular"> 
                             <th class="justify-content-between">Peso intracelular</th>
                             <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="form-control" data-index ='1' readonly disabled/>
+                                <input  type="number" id="disabledTextInput" class="peso_intracelular form-control" data-index ='1' readonly disabled/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="porcentaje_intracelular"> 
                             <th class="justify-content-between">Porcentaje intracelular</th>
                             <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="form-control" data-index ='1' readonly disabled/>
+                                <input  type="number" id="disabledTextInput" class="porcentaje_intracelular form-control" data-index ='1' readonly disabled/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="imc"> 
                             <th class="justify-content-between">IMC</th>
                             <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="form-control" data-index ='1' readonly disabled/>
+                                <input  type="number" id="disabledTextInput" class="imc form-control" data-index ='1' readonly disabled/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="complex_osea"> 
                             <th class="justify-content-between">Complexión ósea</th>
                             <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="form-control" data-index ='1' readonly disabled/>
+                                <input  type="number" id="disabledTextInput" class=" complexion_osea form-control" data-index ='1' readonly disabled/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="kg_masa_magra"> 
                             <th class="justify-content-between">Masa magra (kg)</th>
                             <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="form-control" data-index ='1' readonly disabled/>
+                                <input  type="number" id="disabledTextInput" class=" kg_masa_magra form-control" data-index ='1' readonly disabled/>
                             </td>
                         </tr>
                         <tr class=" " data-variable="porcentaje_masa_magra"> 
                             <th class="justify-content-between">% Masa magra</th>
                             <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="form-control" data-index ='1' readonly disabled/>
+                                <input  type="number" id="disabledTextInput" class="indice_masa_magra form-control" data-index ='1' readonly disabled/>
                             </td>
                         </tr>  
+
+                         <tr class="apartado-controles division-controles" hidden>
+                            <th colspan="2">MACRONUTRIENTES</th>
+                        </tr>
+                        <tr class="apartado-controles" data-variable="tdee" hidden>
+                            <th class="parametros-medidas">TDEE</th>
+                            <td class="controles">
+                                <input type="number" class="tdee input-medidas" data-index="1" />
+                            </td>
+                        </tr>
+                        <tr class="apartado-controles" data-variable="calorias_datos" hidden>
+                            <th class="parametros-medidas">TDEE ajustado</th>
+                            <td class="controles">
+                                <input type="number" class="tdee_ajustado input-medidas" data-index="1" />
+                            </td>
+                        </tr>
+                        <tr class="apartado-controles" data-variable="proteinas_datos" hidden>
+                            <th class="parametros-medidas">Gramos de proteínas</th>
+                            <td class="controles">
+                                <input type="number" class="gramos_proteinas input-medidas" data-index="1" />
+                            </td>
+                        </tr>
+                        <tr class="apartado-controles" data-variable="grasas_datos" hidden>
+                            <th class="parametros-medidas">Gramos de grasas</th>
+                            <td class="controles">
+                                <input type="number" class="gramos_grasas input-medidas" data-index="1" />
+                            </td>
+                        </tr>
+                        <tr class="apartado-controles" data-variable="carbohidratos_datos" hidden>
+                            <th class="parametros-medidas">Gramos de carbohidratos</th>
+                            <td class="controles">
+                                <input type="number" class="gramos_carbohidratos input-medidas" data-index="1" />
+                            </td>
+                        </tr>
+
+                 
+       
+
+          
                     <!--FIN COMPOSICIÓN CORPORAL-->   
         </tbody>
 
@@ -436,7 +474,7 @@
       </div>
 
       <div class="btn-download">
-          <button type="button" class="btn btn-success btn-sm fs-7 mb-2">Guardar</button>
+          <button data-index="1" type="button" class="btn btn-success btn-sm fs-7 mb-2 guardar-control">Guardar</button>
       </div>
       <!-- Footer Section Start -->
       <footer class="footer">

@@ -8,43 +8,59 @@ import { guardarControl } from './modules/fetch/postControl.js';
 import { cargarListaUsers } from './modules/fetch/listUsers.js';
 import { mostrarNombreUsuario } from './modules/fetch/nombreUsuario.js';
 
+import { mostrarNombreUsuarioHistorial } from './modules/fetch/nombreUsuarioHistorial.js';
+import { cargarListaControles } from './modules/fetch/listControles.js';
+
+
+
 // Inicializa botón para agregar columnas (una sola vez)
 
-mostrarNombreUsuario();
-cargarListaUsers();
 
 // Variable global para rastrear la columna activa
 let indiceActivo = 0;
 
-// Detectar el input activo (por foco)
-document.addEventListener('focusin', (e) => {
-  const el = e.target;
-  if (el.matches('input[data-index], select[data-index]')) {
-    const index = parseInt(el.getAttribute('data-index'));
-    if (!isNaN(index)) {
-      indiceActivo = index;
-      console.log('Índice activo:', indiceActivo);
-    }
-  }
-});
 
-// Ejecutar cálculo automáticamente cuando se modifica un input/select
-document.addEventListener('input', (e) => {
-  const el = e.target;
 
-  // Evita cálculos si es un input de tipo fecha
-  if (el.type === 'date') return;
 
-  if (el.matches('input[data-index], select[data-index]')) {
-    const index = parseInt(el.getAttribute('data-index'));
-    if (!isNaN(index)) {
-      calcularTodo(index);
-    }
-  }
-});
 
 
 document.addEventListener('DOMContentLoaded', () => {
+
+
+mostrarNombreUsuario();
+cargarListaUsers();
+  cargarListaControles();
+  mostrarNombreUsuarioHistorial();
+
+
+
+      // Detectar el input activo (por foco)
+  document.addEventListener('focusin', (e) => {
+    const el = e.target;
+    if (el.matches('input[data-index], select[data-index]')) {
+      const index = parseInt(el.getAttribute('data-index'));
+      if (!isNaN(index)) {
+        indiceActivo = index;
+        console.log('Índice activo:', indiceActivo);
+      }
+    }
+  });
+
+  // Ejecutar cálculo automáticamente cuando se modifica un input/select
+  document.addEventListener('input', (e) => {
+    const el = e.target;
+
+    // Evita cálculos si es un input de tipo fecha
+    if (el.type === 'date') return;
+
+    if (el.matches('input[data-index], select[data-index]')) {
+      const index = parseInt(el.getAttribute('data-index'));
+      if (!isNaN(index)) {
+        calcularTodo(index);
+      }
+    }
+  });
+
   const idUsuario = obtenerIdUsuarioDesdeUrl();
 
   if (idUsuario) {
@@ -52,37 +68,19 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     console.warn('ID de usuario no encontrado en la URL');
   }
-});
+
 
 
 
 /*****POST CONTROL ******* */
 
+// 👉 Listener global al botón "Guardar"
 document.addEventListener('click', (e) => {
-  const btn = e.target.closest('button.guardar-control');
-  if (!btn) return;
-
-  const index = parseInt(btn.getAttribute('data-index'));
-  if (!isNaN(index)) {
-    console.log('🖱️ Botón "Guardar" clicado. Index:', index);
-    guardarControl(index);
+  if (e.target.matches('button.guardar-control')) {
+    console.log('🖱️ Botón "Guardar" clicado.');
+    guardarControl();
   }
 });
-
-
-/**GET CONTROLES DEL USUARIO INPUT */
-/*
-document.addEventListener('DOMContentLoaded', () => {
-  const idUsuario = obtenerIdUsuarioDesdeUrl();
-
-  if (idUsuario) {
-    cargarControlesPrevios(idUsuario);
-    cargarListaControles(); 
-  } else {
-    console.warn('ID de usuario no encontrado en la URL');
-  }
-});
-*/
 
 /***GET USERS INPUT */
 document.getElementById('btn-ver-controles').addEventListener('click', () => {
@@ -95,6 +93,4 @@ document.getElementById('btn-ver-controles').addEventListener('click', () => {
   }
 });
 
-
-
-
+});

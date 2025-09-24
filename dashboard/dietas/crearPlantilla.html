@@ -93,202 +93,16 @@
         <!--Nav End-->
       </div>
       <div class="conatiner-fluid content-inner mt-n5 py-0">
-<div class="row">
-   <div class="col-lg-3">
-            <div class="card" data-aos="fade-up" data-aos-delay="900">
-               <div class="flex-wrap card-header d-flex justify-content-between">
-                  <div class="header-title">
-                     <h5 class="card-title">Auto ajuste</h5>            
-                  </div>   
-               </div>
-               <div class="card-body">
-                  <div class="flex-wrap d-flex align-items-center justify-content-between">
-                    <div class="myChart">
-                        <svg width="200" height="200" viewBox="0 0 200 200">
-
-                            <circle id="circle-carbs"
-                                    cx="100" cy="100" r="70"
-                                    fill="transparent"
-                                    stroke="#4bc7d2" stroke-width="10"
-                                    stroke-linecap="round"
-                                    stroke-dasharray="440"
-                                    stroke-dashoffset="440"
-                                    transform="rotate(-90 100 100)" />
 
 
-                            <circle id="circle-fat"
-                                    cx="100" cy="100" r="55"
-                                    fill="transparent"
-                                    stroke="#ff9800" stroke-width="10"
-                                    stroke-linecap="round"
-                                    stroke-dasharray="345"
-                                    stroke-dashoffset="345"
-                                    transform="rotate(-90 100 100)" />
-
-                            <!-- PROTEINAS -->
-                            <circle id="circle-protein"
-                                    cx="100" cy="100" r="85"
-                                    fill="transparent"
-                                    stroke="#3a57e8" stroke-width="10"
-                                    stroke-linecap="round"
-                                    stroke-dasharray="534"
-                                    stroke-dashoffset="534"
-                                    transform="rotate(-90 100 100)" />   
-                        </svg>
-                    </div>
-                     <div class="d-grid gap col-md-4 col-lg-4">
-                       <div class="d-grid gap col-md-4 col-lg-4">
-                        <div class="d-flex align-items-start">
-                            <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#3a57e8">
-                                <g><circle cx="12" cy="12" r="8" fill="#3a57e8"></circle></g>
-                            </svg>
-                            <div class="ms-3">
-                                <span class="text-gray">Proteínas</span>
-                                <h6 id="table-protein"></h6>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-start">
-                            <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#4bc7d2">
-                                <g><circle cx="12" cy="12" r="8" fill="#4bc7d2"></circle></g>
-                            </svg>
-                            <div class="ms-3">
-                                <span class="text-gray">Carbs.</span>
-                                <h6 id="table-carbs" ></h6>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-start">
-                            <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#ff9800">
-                                <g><circle cx="12" cy="12" r="8" fill="#ff9800"></circle></g>
-                            </svg>
-                            <div class="ms-3">
-                            <span class="text-gray">Grasas</span>
-                            <h6 id="table-fat" ></h6>
-                            </div>
-                        </div>
-                        </div>
-
-                     </div>
-                  </div>
-               </div> 
-
-            </div>
-        </div>    
-
-        <div class="col-lg-3">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <div class="p-2 rounded bg-warning disabled">
-                                    <svg class="icon-24" xmlns="http://www.w3.org/2000/svg" width="24" fill="none" viewBox="0 0 24 24" stroke="white">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                    </svg> 
-                                </div>
-                                <h5 class="px-3">Ajuste de valores</h5>
-                            </div> 
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <form class="d-grid gap-card">
-                            <div class="form-group mb-2">
-                                <label class="form-label">Proteínas/kg</label>
-                                <div class="input-group">
-                                    <button id="btn-decrease-protein" class="btn btn-light border"  type="button" onclick="decrement(this)">-</button>
-                                    <span id="protein-value" class="form-control text-center"></span>
-                                    <button id="btn-increase-protein" class="btn btn-light border" type="button" onclick="increment(this)">+</button>
-                                </div>
-                            </div>
-                            <div class="form-group mb-2">
-                                <label class="form-label">Grasas/kg</label>
-                                <div class="input-group">
-                                    <button id="btn-decrease-fat"  class="btn btn-light border"  type="button" onclick="decrement(this)">-</button>
-                                    <span id="fat-value" class="form-control text-center">-</span>
-                                    <button id="btn-increase-fat" class="btn btn-light border" type="button" onclick="increment(this)">+</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <div class="p-2 rounded bg-info disabled">
-                                    <svg class="icon-24" xmlns="http://www.w3.org/2000/svg" width="24" fill="none" viewBox="0 0 24 24" stroke="white">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                                    </svg>
-                                </div>
-                                <h5 class="px-3">Macronutrientes</h5>
-                            </div> 
-                            
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <form class="d-grid gap-card">
-                            <div class="form-group mb-2">
-                                <div class="input-group">
-                                    <span  id="macro-proteinas" class="form-control "></span>
-                                    <span  class="input-group-text" id="basic-addon3">Proteínas</span>
-                                </div>
-                            </div>
-                            <div class="form-group mb-2">
-                                <div class="input-group">
-                                    <span id="macro-carbohidratos" class="form-control"></span>
-                                    <span class="input-group-text" id="basic-addon4">Carbs.</span>
-                                </div>
-                            </div>
-                            <div class="form-group mb-3">
-                                <div class="input-group">
-                                    <span  id="macro-grasas" class="form-control"></span>
-                                    <span class="input-group-text" id="basic-addon4">Grasas</span>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-3">
-         <div class="card">
-            <div class="card-body">
-               <h4 class="counter mb-3"  id="table-calories" style="visibility: visible;"> Kcal</h4>
-               <div class="mt-3">
-                  <div class="pb-3">
-                     <div class="d-flex align-items-center justify-content-between mb-2">
-                        <p class="mb-0">Proteínas</p>
-                        <h4></h4>
-                     </div>
-                     <div class="progress bg-info-subtle shadow-none w-100" style="height: 10px">
-                        <div id="protein-progress" class="progress-bar bg-info" data-toggle="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%; transition: width 2s;"></div>
-                     </div>
-                  </div>
-                  <div class="pb-3">
-                     <div class="d-flex align-items-center justify-content-between mb-2">
-                        <p class="mb-0">Grasas</p>
-                        <h4></h4>
-                     </div>
-                     <div class="progress bg-success-subtle shadow-none w-100" style="height: 10px">
-                        <div id="fat-progress" class="progress-bar bg-success" data-toggle="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%; transition: width 2s;"></div>
-                     </div>
-                  </div>
-                  <div class="pb-3">
-                     <div class="d-flex align-items-center justify-content-between mb-2">
-                        <p class="mb-0">Carbohidratos</p>
-                        <h4></h4>
-                     </div>
-                     <div class="progress bg-primary-subtle shadow-none w-100" style="height: 10px">
-                        <div id="carbs-progress" class="progress-bar bg-primary" data-toggle="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width: 55%; transition: width 2s;"></div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+   
+        
+                            <div class="form-group col-md-6">
+                                 <label class="form-label" for="fname">Nombre</label>
+                                 <label style="color: #c03221" data-bs-toggle="tooltip" data-bs-placement="top" title="Campo obligatorio">*</label>
+                                 <input type="text" class="form-control" id="nplantilla" placeholder="Nombre" required="">
+                              </div>
+        
             
  
                 <div class="card-body">
@@ -2187,7 +2001,6 @@
                                         <button onclick="duplicarUltimaTabla()" class="btn btn-primary btn-sm me-2 " type="button"  on="">+ Añadir comida</button>
                                         <button onclick="eliminarUltimaTabla()" class="btn btn-primary btn-sm me-2 " type="button" " on="">- Quitar comida</button>
                                     </div> 
-                                    
                                     </div>
                                    
                                  
@@ -2239,85 +2052,10 @@
      style="z-index:1100; width:330px;">
 
   <!-- Botón para mostrar/minimizar la tabla -->
-  <button class="btn btn-primary btn-sm fs-7 mb-2 toggle-btn"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#macronutrientesCard"
-          aria-expanded="false"
-          aria-controls="macronutrientesCard">
-    <span class="text-open">Minimizar tabla</span>
-    <span class="text-closed">Mostrar tabla</span>
-  </button>
-
-  <!-- Card colapsable -->
-  <div class="collapse  w-100 mb-2" id="macronutrientesCard">
-    <div class="card">
-      <div class="card-header d-flex align-items-center">
-        <div class="p-2 rounded bg-info disabled">
-          <svg class="icon-24" xmlns="http://www.w3.org/2000/svg" width="24" fill="none" viewBox="0 0 24 24" stroke="white">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-          </svg>
-        </div>
-        <h5 class="px-3 mb-0">Macronutrientes</h5>
-      </div>
-
-      <div class="card-body">
-        <form class="d-grid gap-2">
-            <div class="form-group mb-2">
-            <div class="input-group">
-                <!-- Etiqueta -->
-                <span class="input-group-text">Calorías</span>
-
-                <!-- Input solo lectura -->
-                <input type="text" class="form-control text-center" value="291kcal" readonly>
-
-                <!-- Input editable -->
-                <input type="text" class="form-control text-center" value="- kcal" readonly>
-            </div>
-            </div>
-          <div class="form-group mb-2">
-            <div class="input-group">
-                <!-- Etiqueta -->
-                <span class="input-group-text">Proteínas</span>
-
-                <!-- Input solo lectura -->
-                <input type="text" class="form-control text-center" value="291.6gr" readonly>
-
-                <!-- Input editable -->
-                <input type="text" class="form-control text-center" value="- gr" readonly>
-            </div>
-            </div>
-
-          <div class="form-group mb-2">
-            <div class="input-group">
-                <!-- Etiqueta -->
-                <span class="input-group-text">Carbs.</span>
-
-                <!-- Input solo lectura -->
-                <input type="text" class="form-control text-center" value="291.6gr" readonly>
-
-                <!-- Input editable -->
-                <input type="text" class="form-control text-center" value="- gr" readonly>
-            </div>
-            </div>
-          <div class="form-group mb-2">
-            <div class="input-group">
-                <!-- Etiqueta -->
-                <span class="input-group-text">Grasas</span>
-
-                <!-- Input solo lectura -->
-                <input type="text" class="form-control text-center" value="291.6gr" readonly>
-
-                <!-- Input editable -->
-                <input type="text" class="form-control text-center" value="- gr" readonly>
-            </div>
-            </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
+  
+          
+          
+    
   <!-- Botón Guardar (siempre pequeño) -->
   <button type="button" id="guardar-dieta-btn" class="btn btn-success btn-sm fs-7 mb-2">Guardar</button>
 </div>
@@ -2563,7 +2301,7 @@
     <script src="/assets/js/hope-ui.js" defer></script>
     <script type="module" src="/src/Auth/main.js"></script>
 
-    <script type="module" src="/src/dietas/mainWizard.js"></script>
+    <script type="module" src="/src/Plantilla/main.js"></script>
     
     
     

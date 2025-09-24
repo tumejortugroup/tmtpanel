@@ -9,9 +9,7 @@ export async function cargarControlesPrevios(idUsuario) {
 
   try {
     const response = await fetch(`https://my.tumejortugroup.com/api/v1/datos/ultimos/${idUsuario}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
+      headers: { 'Authorization': `Bearer ${token}` }
     });
 
     const result = await response.json();
@@ -32,50 +30,33 @@ export async function cargarControlesPrevios(idUsuario) {
       }
     });
 
-    // Limpiar todas las celdas
+    // Limpiar todas las celdas de la tabla
     filas.forEach(fila => {
       fila.querySelectorAll('td').forEach(td => td.remove());
     });
 
     controles.reverse();
 
-    // 🔒 Crear columnas previas bloqueadas
-    controles.forEach((control, index) => {
+    // 🔒 Crear columnas previas como texto plano
+    controles.forEach(control => {
       filas.forEach(fila => {
         const nuevaCelda = document.createElement('td');
         nuevaCelda.style.backgroundColor = 'white';
 
         const variable = fila.dataset.variable;
+        let value = control[variable] ?? '';
 
-        if (fila.classList.contains('fila-control-nombre')) {
-          const input = document.createElement('input');
-          input.className = 'nombre input-medidas';
-          input.setAttribute('data-index', index);
-          input.value = control.nombre ?? `Control-${index + 1}`;
-          input.readOnly = true;
-          nuevaCelda.appendChild(input);
+        // 🔄 Mapeo especial
+        if (variable === 'porcentaje_masa_magra' && control.indice_masa_magra !== undefined) {
+          value = control.indice_masa_magra;
+        }
+
+        if (variable === 'nombre') {
+          nuevaCelda.textContent = control.nombre ?? '';
         } else if (variable === 'fecha') {
-          const input = document.createElement('input');
-          input.type = 'date';
-          input.className = 'fecha input-medidas';
-          input.setAttribute('data-index', index);
-          input.value = control.fecha ?? '';
-          input.readOnly = true;
-          nuevaCelda.appendChild(input);
+          nuevaCelda.textContent = control.fecha?.split('T')[0] ?? '';
         } else {
-          if (!variable || !(variable in plantillas)) return;
-          const campo = plantillas[variable].cloneNode(true);
-          campo.value = control[variable] ?? '';
-          campo.setAttribute('data-index', index);
-
-          // Desactivar campo según tipo
-          if (campo.tagName === 'SELECT') {
-            campo.disabled = true;
-          } else {
-            campo.readOnly = true;
-          }
-
-          nuevaCelda.appendChild(campo);
+          nuevaCelda.textContent = value;
         }
 
         fila.appendChild(nuevaCelda);
@@ -84,84 +65,57 @@ export async function cargarControlesPrevios(idUsuario) {
 
     // 🆕 Crear la última columna editable
     const nuevoIndex = controles.length;
-
     filas.forEach(fila => {
       const nuevaCelda = document.createElement('td');
       nuevaCelda.style.backgroundColor = '#f9f9f9';
 
       const variable = fila.dataset.variable;
 
-      if (fila.classList.contains('fila-control-nombre')) {
+      if (variable === 'nombre') {
         const input = document.createElement('input');
-        input.className = 'nombre input-medidas';
+        input.type = 'text';
+        input.className = 'nombre form-control';
         input.setAttribute('data-index', nuevoIndex);
-        input.value = `Control-`; 
+        input.value = `Control-`;
         nuevaCelda.appendChild(input);
+
       } else if (variable === 'fecha') {
-       const input = document.createElement('input');
-      input.type = 'date';
-      input.className = 'fecha input-medidas';
-      input.setAttribute('data-index', nuevoIndex);
-      const hoy = new Date().toISOString().split('T')[0];
-      input.value = hoy;
-      nuevaCelda.appendChild(input);
-      }  else {
-      if (!variable || !(variable in plantillas)) return;
-      const campo = plantillas[variable].cloneNode(true);
+        const input = document.createElement('input');
+        input.type = 'date';
+        input.className = 'fecha form-control';
+        input.setAttribute('data-index', nuevoIndex);
+        const hoy = new Date().toISOString().split('T')[0];
+        input.value = hoy;
+        nuevaCelda.appendChild(input);
 
-      // 👇 Variables que deben copiar el último valor
-      const copiarVariables = [
-        'genero',
-        'humero_biepicondileo',
-        'femur_bicondileo',
-        'muneca_estiloideo',
-        'muneca_circunferencia'
-      ];
-
-      if (copiarVariables.includes(variable) && controles.length > 0) {
-        campo.value = controles[controles.length - 1][variable] ?? '';
-        campo.readOnly =true;
       } else {
-        campo.value = '';
+        if (!variable || !(variable in plantillas)) return;
+        const campo = plantillas[variable].cloneNode(true);
+
+        // Variables que se copian del último control y quedan bloqueadas
+        const copiarVariables = [
+          'genero',
+          'humero_biepicondileo',
+          'femur_bicondileo',
+          'muneca_estiloideo',
+          'muneca_circunferencia',
+        ];
+
+        if (copiarVariables.includes(variable) && controles.length > 0) {
+          campo.value = controles[controles.length - 1][variable] ?? '';
+          campo.readOnly = true;
+        } else {
+          campo.value = '';
+          campo.readOnly = false;
+        }
+
+        campo.disabled = false;
+        campo.setAttribute('data-index', nuevoIndex);
+        nuevaCelda.appendChild(campo);
       }
-
-      campo.setAttribute('data-index', nuevoIndex);
-      campo.disabled = false;
-      campo.readOnly =false;
-      nuevaCelda.appendChild(campo);
-    }
-
 
       fila.appendChild(nuevaCelda);
     });
-
-    // 🎯 Fila de acciones
-    let filaAcciones = tabla.querySelector('tr.fila-acciones');
-    if (!filaAcciones) {
-      filaAcciones = document.createElement('tr');
-      filaAcciones.classList.add('fila-acciones');
-      const th = document.createElement('th');
-      th.textContent = 'Acciones';
-      th.style.backgroundColor = '#d4a321';
-      filaAcciones.appendChild(th);
-      tabla.querySelector('tbody').appendChild(filaAcciones);
-    }
-
-    // Asegurar suficientes celdas en la fila de acciones
-    const totalColumnas = controles.length + 1;
-    while (filaAcciones.children.length < totalColumnas + 1) {
-      const td = document.createElement('td');
-      td.style.backgroundColor = '#f9f9f9';
-      filaAcciones.appendChild(td);
-    }
-
-    // Botón Guardar en la última celda
-    const ultimaCelda = filaAcciones.lastElementChild;
-    ultimaCelda.innerHTML = `
-      <button class="guardar-control" data-index="${nuevoIndex}">
-        Guardar
-      </button>
-    `;
 
     actualizarColspanTabla?.();
     console.log('✅ Controles previos cargados correctamente.');
