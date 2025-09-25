@@ -102,28 +102,33 @@ export async function guardarControl() {
       console.error('❌ Error al guardar:', result);
       alert('❌ No se pudo guardar el control.');
     } else {
-      console.log('✅ Control guardado correctamente.');
+      console.log('Control guardado correctamente.');
 
       Swal.fire({
-        title: '✅ Control guardado con éxito',
-        text: 'Elige qué quieres hacer:',
-        icon: 'success',
-        showCancelButton: true,
-        showDenyButton: true,
-        confirmButtonText: 'Ver control',
-        denyButtonText: 'Hacer dieta ',
-        cancelButtonText: 'Seguiré luego'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // 👉 Redirección a Dashboard
-          window.location.href = '/dashboard/index.html';
-        } else if (result.isDenied) {
-          ///CREAR DIETA
-          window.location.href = '/controles';
-        } else if (result.dismiss === Swal.DismissReason.cancel) {        
-          ///CREAR PDF
-        }
-      });
+          title: 'Control guardado con éxito',
+          text: 'Elige qué quieres hacer:',
+          icon: 'success',
+          showCancelButton: true,
+          showDenyButton: true,
+          confirmButtonText: 'Hacer dieta',
+          denyButtonText: 'Ver control',
+          cancelButtonText: 'Seguiré luego',
+          customClass: {
+            actions: 'd-flex flex-column gap-2 w-100 px-4 pb-3', // 👈 botones en columna
+            confirmButton: 'btn btn-primary w-100',
+            denyButton: 'btn btn-outline-primary w-100',
+            cancelButton: 'btn bg-transparent text-gray-normal w-100'
+          },
+          buttonsStyling: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = '/dashboard/index.html';
+          } else if (result.isDenied) {
+            window.location.href = '/controles';
+          } else if (result.dismiss === Swal.DismissReason.cancel) {        
+            // Crear PDF
+          }
+        });
     }
 
   } catch (err) {
