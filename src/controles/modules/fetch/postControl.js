@@ -1,12 +1,29 @@
+
 import { getFloat, getSelectValue, getValue } from '../utils/dom.js';
 import { obtenerIdUsuarioDesdeUrl } from '../utils/params.js';
 
-export async function guardarControl(index) {
+// 👉 Detectar automáticamente el último índice usado en la tabla
+function getUltimoIndex() {
+  const inputs = document.querySelectorAll('tbody input[data-index], tbody select[data-index]');
+  let max = 0;
+  inputs.forEach(el => {
+    const idx = parseInt(el.getAttribute('data-index'));
+    if (!isNaN(idx) && idx > max) {
+      max = idx;
+    }
+  });
+  return max;
+}
+
+export async function guardarControl() {
   const idUsuario = obtenerIdUsuarioDesdeUrl();
   if (!idUsuario) {
     console.warn('⚠️ ID de usuario no encontrado en la URL');
     return;
   }
+
+  const index = getUltimoIndex(); // 👈 usamos el último
+  console.log('📌 Última columna detectada para guardar [index=' + index + ']');
 
   const datos = {
     id_usuario: parseInt(idUsuario),
@@ -86,7 +103,27 @@ export async function guardarControl(index) {
       alert('❌ No se pudo guardar el control.');
     } else {
       console.log('✅ Control guardado correctamente.');
-      alert('✅ Control guardado con éxito.');
+
+      Swal.fire({
+        title: '✅ Control guardado con éxito',
+        text: 'Elige qué quieres hacer:',
+        icon: 'success',
+        showCancelButton: true,
+        showDenyButton: true,
+        confirmButtonText: 'Ver control',
+        denyButtonText: 'Hacer dieta ',
+        cancelButtonText: 'Seguiré luego'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // 👉 Redirección a Dashboard
+          window.location.href = '/dashboard/index.html';
+        } else if (result.isDenied) {
+          ///CREAR DIETA
+          window.location.href = '/controles';
+        } else if (result.dismiss === Swal.DismissReason.cancel) {        
+          ///CREAR PDF
+        }
+      });
     }
 
   } catch (err) {

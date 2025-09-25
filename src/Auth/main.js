@@ -82,19 +82,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // 8. Mostrar nombre y rol en la UI
-            setTimeout(() => {
-                const nombreElems = document.querySelectorAll('.nombre-usuario-navbar');
+           setTimeout(() => {
+                const nombreElems = document.querySelectorAll('.nombre-usuario');
                 const rolElems = document.querySelectorAll('.rol-usuario');
 
-                if (nombreElems.length === 0 || rolElems.length === 0) {
-                    console.error('No se encontraron elementos para actualizar el nombre y rol');
+                if (nombreElems.length === 0 && rolElems.length === 0) {
+                    console.error('No se encontraron elementos para actualizar el nombre ni el rol');
                     return;
                 }
 
-                nombreElems.forEach(el => el.textContent = nombre);
-                rolElems.forEach(el => el.textContent = rol);
-            }, 100);
+                if (nombreElems.length > 0) {
+                    nombreElems.forEach(el => el.textContent = nombre);
+                }
+
+                if (rolElems.length > 0) {
+                    rolElems.forEach(el => el.textContent = rol);
+                }
+                }, 100);
 
             // 9. Inicializar logout
             initLogout();

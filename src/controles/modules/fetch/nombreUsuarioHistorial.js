@@ -1,5 +1,3 @@
-import { obtenerIdUsuarioDesdeUrl } from '/src/controles/modules/utils/params.js';
-
 export async function mostrarNombreUsuarioHistorial() {
    const id = obtenerIdUsuarioDesdeUrl();
    if (!id) {
@@ -38,5 +36,3 @@ export async function mostrarNombreUsuarioHistorial() {
      console.error('❌ Error al obtener usuario:', err);
    }
 }
-
-
