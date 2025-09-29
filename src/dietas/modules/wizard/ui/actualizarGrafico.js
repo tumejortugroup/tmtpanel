@@ -23,6 +23,13 @@ function updateProgressBar(id, percent) {
   bar.setAttribute("aria-valuenow", percent.toFixed(1));
 }
 
+function updateMacroInput(id, value, unit = "gr") {
+  const input = document.getElementById(id);
+  if (!input) return;
+
+  input.value = `${value.toFixed(1)} ${unit}`;
+}
+
 export function actualizarGraficoMacronutrientes(calorias, proteinas, grasas, carbohidratos) {
   const p = parseFloat(proteinas) || 0;
   const g = parseFloat(grasas) || 0;
@@ -38,6 +45,12 @@ export function actualizarGraficoMacronutrientes(calorias, proteinas, grasas, ca
   if (kcalElem) {
     kcalElem.innerText = `${kcal.toFixed(0)} Kcal`;
   }
+
+  // 🔹 actualizar inputs de la tabla de macronutrientes
+  updateMacroInput("table-caloriesDieta", kcal, "kcal");
+  updateMacroInput("table-proteinDieta", p, "gr");
+  updateMacroInput("table-fatDieta", g, "gr");
+  updateMacroInput("table-carbsDieta", c, "gr");
 
   // actualizar textos macros
   const protElem = document.getElementById("macro-proteinas");

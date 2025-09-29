@@ -37,24 +37,35 @@ export function generarPayloadComidas() {
         categoria: selectCategoria?.value?.toLowerCase() || "desconocida"
       };
 
-      // Equivalentes
-      const equivalentes = [];
-      const eq1 = selectAlimento[1]?.value;
-      const eq2 = selectAlimento[2]?.value;
+      // Equivalentes en formato flat con numeración incorrecta de la DB
+      const equivalentes = {};
+      
+      for (let i = 1; i < selectAlimento.length && i <= 9; i++) {
+        const eqSelect = selectAlimento[i];
+        const eqValue = eqSelect?.value;
+        
+        if (eqValue) {
+          const cantidadEq = parseFloat(eqSelect.parentElement.nextElementSibling?.textContent || 0);
+          
+          if (i === 1) {
+            // Primer equivalente sin número
+            equivalentes.id_alimento_equivalente = Number(eqValue);
+            equivalentes.cantidad_equivalente = cantidadEq;
+          } else if (i === 2) {
+            // Segundo equivalente con "1"
+            equivalentes.id_alimento_equivalente1 = Number(eqValue);
+            equivalentes.cantidad_equivalente1 = cantidadEq;
+          } else {
+            // Del tercero en adelante: i=3 → "3", i=4 → "4", etc.
+            equivalentes[`id_alimento_equivalente${i}`] = Number(eqValue);
+            equivalentes[`cantidad_equivalente${i}`] = cantidadEq;
+          }
+        }
+      }
 
-      if (eq1 || eq2) {
-        const eqObj = {};
-        if (eq1) {
-          const cantidadEq1 = parseFloat(selectAlimento[1]?.parentElement.nextElementSibling?.textContent || 0);
-          eqObj.id_alimento_equivalente = Number(eq1);
-          eqObj.cantidad_equivalente = cantidadEq1;
-        }
-        if (eq2) {
-          const cantidadEq2 = parseFloat(selectAlimento[2]?.parentElement.nextElementSibling?.textContent || 0);
-          eqObj.id_alimento_equivalente1 = Number(eq2);
-          eqObj.cantidad_equivalente1 = cantidadEq2;
-        }
-        alimento.equivalentes = [eqObj];
+      // Solo agregar equivalentes si hay al menos uno
+      if (Object.keys(equivalentes).length > 0) {
+        alimento.equivalentes = [equivalentes];
       }
 
       alimentos.push(alimento);

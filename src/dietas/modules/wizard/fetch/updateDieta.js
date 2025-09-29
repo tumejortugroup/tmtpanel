@@ -1,30 +1,60 @@
 import { obtenerIdDietaDesdeUrl } from '/src/dietas/modules/wizard/utils/params.js';
-export async function actualizarDieta() {
 
-    const token = localStorage.getItem("token");
-  const idDieta = obtenerIdDietaDesdeUrl(); // ⬅️ Usa el parámetro de la URL
+
+export async function actualizarDieta() {
+  const token = localStorage.getItem("token");
+  const idDieta = obtenerIdDietaDesdeUrl();
+  
   if (!idDieta) {
     console.error("❌ No se encontró el ID de la dieta en la URL.");
     return;
   }
 
-  // Obtener nombre y descripción
-  const nombre = document.getElementById("nombre-dieta").value.trim();
-  const descripcion = document.getElementById("descripcion-dieta").value.trim();
+  const nombreElement = document.getElementById("nombre-dieta");
+  const descripcionElement = document.getElementById("descripcion-dieta");
 
-  if (!nombre) {
-    alert("⚠️ El nombre de la dieta es obligatorio.");
+  if (!nombreElement || !descripcionElement) {
+    console.error("❌ No se encontraron los campos de nombre o descripción.");
+    console.log("Elementos encontrados:", {
+      nombre: nombreElement,
+      descripcion: descripcionElement
+    });
     return;
   }
 
-  // Obtener macros
-  const proteinasText = document.getElementById("table-protein").textContent.replace("gr", "").trim();
-  const grasasText = document.getElementById("table-fat").textContent.replace("gr", "").trim();
-  const carbohidratosText = document.getElementById("table-carbs").textContent.replace("gr", "").trim();
+  const nombre = nombreElement.value.trim();
+  const descripcion = descripcionElement.value.trim();
+
+  const proteinElement = document.getElementById("table-protein");
+  const fatElement = document.getElementById("table-fat");
+  const carbsElement = document.getElementById("table-carbs");
+
+  if (!proteinElement || !fatElement || !carbsElement) {
+    console.error("❌ No se encontraron los elementos de macros.");
+    console.log("Elementos encontrados:", {
+      protein: proteinElement,
+      fat: fatElement,
+      carbs: carbsElement
+    });
+    return;
+  }
+
+  const proteinasText = proteinElement.textContent.replace("gr", "").trim();
+  const grasasText = fatElement.textContent.replace("gr", "").trim();
+  const carbohidratosText = carbsElement.textContent.replace("gr", "").trim();
 
   const proteinas = parseFloat(proteinasText);
   const grasas = parseFloat(grasasText);
   const carbohidratos = parseFloat(carbohidratosText);
+
+  if (isNaN(proteinas) || isNaN(grasas) || isNaN(carbohidratos)) {
+    console.error("❌ Los valores de macros no son válidos:", {
+      proteinas,
+      grasas,
+      carbohidratos
+    });
+    return;
+  }
 
   const data = {
     nombre,
@@ -34,11 +64,13 @@ export async function actualizarDieta() {
     carbohidratos_dieta: carbohidratos
   };
 
+  console.log("📤 Datos a enviar:", data);
+
   try {
     const response = await fetch(`https://my.tumejortugroup.com/api/v1/dietas/${idDieta}`, {
       method: "PUT",
       headers: {
-             Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)

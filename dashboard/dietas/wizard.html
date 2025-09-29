@@ -195,17 +195,17 @@
                             <div class="form-group mb-2">
                                 <label class="form-label">Proteínas/kg</label>
                                 <div class="input-group">
-                                    <button id="btn-decrease-protein" class="btn btn-light border"  type="button" onclick="decrement(this)">-</button>
+                                    <button id="btn-decrease-protein" class="btn btn-light border"  type="button" >-</button>
                                     <span id="protein-value" class="form-control text-center"></span>
-                                    <button id="btn-increase-protein" class="btn btn-light border" type="button" onclick="increment(this)">+</button>
+                                    <button id="btn-increase-protein" class="btn btn-light border" type="button" >+</button>
                                 </div>
                             </div>
                             <div class="form-group mb-2">
                                 <label class="form-label">Grasas/kg</label>
                                 <div class="input-group">
-                                    <button id="btn-decrease-fat"  class="btn btn-light border"  type="button" onclick="decrement(this)">-</button>
+                                    <button id="btn-decrease-fat"  class="btn btn-light border"  type="button" >-</button>
                                     <span id="fat-value" class="form-control text-center">-</span>
-                                    <button id="btn-increase-fat" class="btn btn-light border" type="button" onclick="increment(this)">+</button>
+                                    <button id="btn-increase-fat" class="btn btn-light border" type="button" >+</button>
                                 </div>
                             </div>
                         </form>
@@ -2270,10 +2270,10 @@
                 <span class="input-group-text">Calorías</span>
 
                 <!-- Input solo lectura -->
-                <input type="text" class="form-control text-center" value="291kcal" readonly>
+                <input type="text" id="table-caloriesDieta" class="form-control text-center" value="" readonly>
 
                 <!-- Input editable -->
-                <input type="text" class="form-control text-center" value="- kcal" readonly>
+                <input type="text" id="table-caloriesDieta1" class="form-control text-center" value="" readonly>
             </div>
             </div>
           <div class="form-group mb-2">
@@ -2282,10 +2282,10 @@
                 <span class="input-group-text">Proteínas</span>
 
                 <!-- Input solo lectura -->
-                <input type="text" class="form-control text-center" value="291.6gr" readonly>
+                <input type="text" id="table-proteinDieta" class="form-control text-center" value="" readonly>
 
                 <!-- Input editable -->
-                <input type="text" class="form-control text-center" value="- gr" readonly>
+                <input type="text" id="table-proteinDieta1" class="form-control text-center" value="" readonly>
             </div>
             </div>
 
@@ -2295,10 +2295,10 @@
                 <span class="input-group-text">Carbs.</span>
 
                 <!-- Input solo lectura -->
-                <input type="text" class="form-control text-center" value="291.6gr" readonly>
+                <input type="text" id="table-fatDieta" class="form-control text-center" value="" readonly>
 
                 <!-- Input editable -->
-                <input type="text" class="form-control text-center" value="- gr" readonly>
+                <input type="text" id="table-fatDieta1" class="form-control text-center" value="" readonly>
             </div>
             </div>
           <div class="form-group mb-2">
@@ -2307,10 +2307,10 @@
                 <span class="input-group-text">Grasas</span>
 
                 <!-- Input solo lectura -->
-                <input type="text" class="form-control text-center" value="291.6gr" readonly>
+                <input type="text" id="table-carbsDieta" class="form-control text-center" value="" readonly>
 
                 <!-- Input editable -->
-                <input type="text" class="form-control text-center" value="- gr" readonly>
+                <input type="text" id="table-carbsDieta1" class="form-control text-center" value="" readonly>
             </div>
             </div>
         </form>
@@ -2322,7 +2322,9 @@
   <button type="button" id="guardar-dieta-btn" class="btn btn-success btn-sm fs-7 mb-2">Guardar</button>
 </div>
 
-
+                                                               
+                                                                  
+                                                                   
 </div>
 
         

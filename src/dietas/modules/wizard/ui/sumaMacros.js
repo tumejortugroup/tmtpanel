@@ -8,12 +8,16 @@ export async function prepararSumaMacros() {
   const filas = document.querySelectorAll(".table-dieta tbody tr");
 
   filas.forEach(fila => {
-    const select = fila.querySelector('select[name="select-alimentos"]');
+    const selects = fila.querySelectorAll('select[name="select-alimentos"]');
     const input = fila.querySelector(".input-cantidad");
 
-    if (!select || !input) return;
+    if (!selects.length || !input) return;
 
-    select.addEventListener("change", recalcularTotales);
+    // Agregar listener a TODOS los selects para recalcular cuando cambien
+    selects.forEach(select => {
+      select.addEventListener("change", recalcularTotales);
+    });
+    
     input.addEventListener("input", recalcularTotales);
   });
 }
@@ -27,13 +31,14 @@ function recalcularTotales() {
   const filas = document.querySelectorAll(".table-dieta tbody tr");
 
   filas.forEach(fila => {
-    const select = fila.querySelector('select[name="select-alimentos"]');
+    // ✅ Solo obtener el PRIMER select (alimento principal)
+    const selectPrincipal = fila.querySelector('select[name="select-alimentos"]');
     const input = fila.querySelector(".input-cantidad");
 
     const cantidad = parseFloat(input?.value);
-    const alimentoId = select?.value;
+    const alimentoId = selectPrincipal?.value;
 
-    if (!alimentoId || isNaN(cantidad)) return;
+    if (!alimentoId || isNaN(cantidad) || cantidad <= 0) return;
 
     const alimento = alimentosCache.find(a => a.id_alimento == alimentoId);
     if (!alimento) return;
@@ -52,17 +57,21 @@ function recalcularTotales() {
   });
 
   // Actualizar el DOM
-  document.getElementById("table-caloriesDieta1").textContent = `${totalCalorias.toFixed(1)} kcal`;
-  document.getElementById("table-proteinDieta1").textContent = `${totalProteinas.toFixed(1)} gr`;
-  document.getElementById("table-fatDieta1").textContent = `${totalGrasas.toFixed(1)} gr`;
-  document.getElementById("table-carbsDieta1").textContent = `${totalHidratos.toFixed(1)} gr`;
+  const caloriasEl = document.getElementById("table-caloriesDieta1");
+  const proteinasEl = document.getElementById("table-proteinDieta1");
+  const grasasEl = document.getElementById("table-fatDieta1");
+  const hidratosEl = document.getElementById("table-carbsDieta1");
 
-  compararYSombrear("table-caloriesDieta", "table-caloriesDieta1");
-compararYSombrear("table-proteinDieta", "table-proteinDieta1");
-compararYSombrear("table-fatDieta", "table-fatDieta1");
-compararYSombrear("table-carbsDieta", "table-carbsDieta1");
+  if (caloriasEl) caloriasEl.value = `${totalCalorias.toFixed(1)} kcal`;
+  if (proteinasEl) proteinasEl.value = `${totalProteinas.toFixed(1)} gr`;
+  if (grasasEl) grasasEl.value = `${totalGrasas.toFixed(1)} gr`;
+  if (hidratosEl) hidratosEl.value = `${totalHidratos.toFixed(1)} gr`;
+
+  if (caloriasEl) compararYSombrear("table-caloriesDieta", "table-caloriesDieta1");
+  if (proteinasEl) compararYSombrear("table-proteinDieta", "table-proteinDieta1");
+  if (grasasEl) compararYSombrear("table-fatDieta", "table-fatDieta1");
+  if (hidratosEl) compararYSombrear("table-carbsDieta", "table-carbsDieta1");
 }
-
 
 function compararYSombrear(idNecesario, idDieta) {
   const tdNecesario = document.getElementById(idNecesario);
@@ -70,12 +79,11 @@ function compararYSombrear(idNecesario, idDieta) {
 
   if (!tdNecesario || !tdDieta) return;
 
-  const valNecesario = parseFloat(tdNecesario.textContent);
-  const valDieta = parseFloat(tdDieta.textContent);
+  const valNecesario = parseFloat(tdNecesario.value || tdNecesario.textContent);
+  const valDieta = parseFloat(tdDieta.value || tdDieta.textContent);
 
   if (isNaN(valNecesario) || isNaN(valDieta)) return;
 
-  // Añadir o quitar clase según el valor
   if (valDieta > valNecesario) {
     tdDieta.classList.add("exceso-macro");
   } else {

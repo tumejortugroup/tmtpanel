@@ -29,13 +29,5 @@ export function updateTableAndChart() {
   // Actualizar gráfico y calorías
   actualizarGraficoMacronutrientes(totalCalories, proteinas, grasas, carbohidratos);
 
-  // Calcular porcentajes
-  const percentProteinas = (kcalProteinas / totalCalories) * 100;
-  const percentGrasas = (kcalGrasas / totalCalories) * 100;
-  const percentCarbos = (kcalCarbos / totalCalories) * 100;
-
-  // Mostrar en DOM
-  document.getElementById('percent-protein').innerText = `${percentProteinas.toFixed(1)} %`;
-  document.getElementById('percent-fat').innerText = `${percentGrasas.toFixed(1)} %`;
-  document.getElementById('percent-carbs').innerText = `${percentCarbos.toFixed(1)} %`;
+ 
 }
