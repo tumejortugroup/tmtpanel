@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const idDieta = params.get("id_dieta");
 
   if (!idDieta) {
-    alert("❌ Falta id_dieta en la URL");
+    alert("Falta id_dieta en la URL");
     return;
   }
 
@@ -30,15 +30,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   await ejecutarAutoAjuste();
 
   // 1. Cargar alimentos
+  console.log('PASO 1: Cargando alimentos...');
   await tablaAlimentos();
+  console.log('PASO 1 COMPLETADO. Cache:', !!window.__alimentosCache, 'Elementos:', window.__alimentosCache?.length);
 
   // 2. Traer dieta existente
+  console.log('PASO 2: Cargando dieta...');
   const data = await getDieta(idDieta);
   if (!data) return;
 
   // 3. Agrupar y renderizar
+  console.log('PASO 3: Agrupando y renderizando...');
   const comidas = agruparPorComida(data);
   renderDieta({ data, comidas });
+
+  // Resto del código...
 
   // 4. Guardar cambios
   document.getElementById("guardar-dieta-btn").addEventListener("click", async () => {

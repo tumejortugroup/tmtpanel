@@ -23,9 +23,33 @@ export function agruparPorComida(data) {
       cantidad_equivalente1: item.cantidad_equivalente1,
       id_alimento_equivalente3: item.id_alimento_equivalente3,
       nombre_alimento_equivalente3: item.nombre_alimento_equivalente3,
-      cantidad_equivalente3: item.cantidad_equivalente3
+      cantidad_equivalente3: item.cantidad_equivalente3,
+       id_alimento_equivalente4: item.id_alimento_equivalente4,
+      nombre_alimento_equivalente4: item.nombre_alimento_equivalente4,
+      cantidad_equivalente4: item.cantidad_equivalente4,
+      id_alimento_equivalente5: item.id_alimento_equivalente5,
+      nombre_alimento_equivalente5: item.nombre_alimento_equivalente5,
+      cantidad_equivalente5: item.cantidad_equivalente5,
+       id_alimento_equivalente6: item.id_alimento_equivalente6,
+      nombre_alimento_equivalente6: item.nombre_alimento_equivalente6,
+      cantidad_equivalente6: item.cantidad_equivalente6,
+      id_alimento_equivalente7: item.id_alimento_equivalente7,
+      nombre_alimento_equivalente7: item.nombre_alimento_equivalente7,
+      cantidad_equivalente7: item.cantidad_equivalente7,
+       id_alimento_equivalente8: item.id_alimento_equivalente8,
+      nombre_alimento_equivalente8: item.nombre_alimento_equivalente8,
+      cantidad_equivalente8: item.cantidad_equivalente8,
+      id_alimento_equivalente9: item.id_alimento_equivalente9,
+      nombre_alimento_equivalente9: item.nombre_alimento_equivalente9,
+      cantidad_equivalente9: item.cantidad_equivalente9
     });
-
+    // En agruparPorComida, después del push
+console.log('Objeto agrupado:', {
+  nombre: item.nombre_alimento,
+  eq4: item.id_alimento_equivalente4,
+  eq5: item.id_alimento_equivalente5, 
+  eq6: item.id_alimento_equivalente6
+});
     return acc;
   }, {});
 }
