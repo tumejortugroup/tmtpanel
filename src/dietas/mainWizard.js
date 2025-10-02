@@ -4,6 +4,7 @@ import { tablaAlimentos } from '/src/dietas/modules/wizard/tablaAlimentos.js';
 import { actualizarDieta } from './modules/wizard/fetch/updateDieta.js';
 import { guardarDietaCompleta } from '/src/dietas/modules/wizard/creacion/guardarDieta.js';
 import { addColumns, removeColumns } from '/src/dietas/modules/wizard/ui/add-columns.js';
+import { cargarPlantillasCentro } from './modules/plantilla/fetch/fetchPlantilla.js';
 
 
 
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   await ejecutarAutoAjuste();
   await tablaAlimentos();
 
-
+  await cargarPlantillasCentro();
   document.getElementById("guardar-dieta-btn").addEventListener("click", async () => {
 
 

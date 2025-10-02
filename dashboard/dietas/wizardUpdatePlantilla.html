@@ -1,4 +1,5 @@
 
+
 <!doctype html>
 <html lang="en" dir="ltr">
   <head>
@@ -76,7 +77,7 @@
                       <div class="col-md-12">
                           <div class="flex-wrap d-flex justify-content-between align-items-center">
                               <div>
-                                  <h1>¡Hola [Nombre]!</h1>
+                                    <h1>¡Hola, <span class="nombre-usuario"></span></h1>
                                   <p>Recuerda, estás cambiando la vida de la gente a a mejor.</p>
                               </div>
 
@@ -93,9 +94,9 @@
         <!--Nav End-->
       </div>
       <div class="conatiner-fluid content-inner mt-n5 py-0">
-<div class="row"> 
+<div class="row">
    <div class="col-lg-3">
-            <div class="card h-100" data-aos="fade-up" data-aos-delay="900">
+            <div class="card" data-aos="fade-up" data-aos-delay="900">
                <div class="flex-wrap card-header d-flex justify-content-between">
                   <div class="header-title">
                      <h4 class="card-title">Auto ajuste</h4>            
@@ -103,49 +104,81 @@
                </div>
                <div class="card-body">
                   <div class="flex-wrap d-flex align-items-center justify-content-between">
-                     <div id="myChart" class="col-md-8 col-lg-8 myChart"></div>
+                    <div class="myChart">
+                        <svg width="200" height="200" viewBox="0 0 200 200">
+
+                            <circle id="circle-carbs"
+                                    cx="100" cy="100" r="70"
+                                    fill="transparent"
+                                    stroke="#4bc7d2" stroke-width="10"
+                                    stroke-linecap="round"
+                                    stroke-dasharray="440"
+                                    stroke-dashoffset="440"
+                                    transform="rotate(-90 100 100)" />
+
+
+                            <circle id="circle-fat"
+                                    cx="100" cy="100" r="55"
+                                    fill="transparent"
+                                    stroke="#ff9800" stroke-width="10"
+                                    stroke-linecap="round"
+                                    stroke-dasharray="345"
+                                    stroke-dashoffset="345"
+                                    transform="rotate(-90 100 100)" />
+
+                            <!-- PROTEINAS -->
+                            <circle id="circle-protein"
+                                    cx="100" cy="100" r="85"
+                                    fill="transparent"
+                                    stroke="#3a57e8" stroke-width="10"
+                                    stroke-linecap="round"
+                                    stroke-dasharray="534"
+                                    stroke-dashoffset="534"
+                                    transform="rotate(-90 100 100)" />   
+                        </svg>
+                    </div>
                      <div class="d-grid gap col-md-4 col-lg-4">
+                       <div class="d-grid gap col-md-4 col-lg-4">
                         <div class="d-flex align-items-start">
-                           <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#3a57e8">
-                              <g>
-                                 <circle cx="12" cy="12" r="8" fill="#3a57e8"></circle>
-                              </g>
-                           </svg>
-                           <div class="ms-3">
-                              <span class="text-gray">Proteínas</span>
-                              <h6>251K</h6>
-                           </div>
+                            <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#3a57e8">
+                                <g><circle cx="12" cy="12" r="8" fill="#3a57e8"></circle></g>
+                            </svg>
+                            <div class="ms-3">
+                                <span class="text-gray">Proteínas</span>
+                                <h6 id="table-protein" "></h6>
+                            </div>
                         </div>
+
                         <div class="d-flex align-items-start">
-                           <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#4bc7d2">
-                              <g>
-                                 <circle cx="12" cy="12" r="8" fill="#4bc7d2"></circle>
-                              </g>
-                           </svg>
-                           <div class="ms-3">
-                              <span class="text-gray">Carbs.</span>
-                              <h6>176K</h6>
-                           </div>
+                            <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#4bc7d2">
+                                <g><circle cx="12" cy="12" r="8" fill="#4bc7d2"></circle></g>
+                            </svg>
+                            <div class="ms-3">
+                                <span class="text-gray">Carbs.</span>
+                                <h6 id="table-carbs" ></h6>
+                            </div>
                         </div>
+
                         <div class="d-flex align-items-start">
-                           <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#4bc7d2">
-                              <g>
-                                 <circle cx="12" cy="12" r="8" fill="#4bc7d2"></circle>
-                              </g>
-                           </svg>
-                           <div class="ms-3">
-                              <span class="text-gray">Grasas</span>
-                              <h6>176K</h6>
-                           </div>
+                            <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#ff9800">
+                                <g><circle cx="12" cy="12" r="8" fill="#ff9800"></circle></g>
+                            </svg>
+                            <div class="ms-3">
+                            <span class="text-gray">Grasas</span>
+                            <h6 id="table-fat" ></h6>
+                            </div>
                         </div>
+                        </div>
+
                      </div>
                   </div>
-               </div>
+               </div> 
+
             </div>
         </div>    
 
         <div class="col-lg-3">
-                <div class="card h-100">
+                <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <div class="d-flex align-items-center">
@@ -163,17 +196,17 @@
                             <div class="form-group mb-2">
                                 <label class="form-label">Proteínas/kg</label>
                                 <div class="input-group">
-                                    <button class="btn btn-light border"  type="button" onclick="decrement(this)">-</button>
-                                    <input type="number" class="form-control text-center" value="1">
-                                    <button class="btn btn-light border" type="button" onclick="increment(this)">+</button>
+                                    <button id="btn-decrease-protein" class="btn btn-light border"  type="button" onclick="decrement(this)">-</button>
+                                    <span id="protein-value" class="form-control text-center"></span>
+                                    <button id="btn-increase-protein" class="btn btn-light border" type="button" onclick="increment(this)">+</button>
                                 </div>
                             </div>
                             <div class="form-group mb-2">
                                 <label class="form-label">Grasas/kg</label>
                                 <div class="input-group">
-                                    <button class="btn btn-light border"  type="button" onclick="decrement(this)">-</button>
-                                    <input type="number" class="form-control text-center" value="1">
-                                    <button class="btn btn-light border" type="button" onclick="increment(this)">+</button>
+                                    <button id="btn-decrease-fat"  class="btn btn-light border"  type="button" onclick="decrement(this)">-</button>
+                                    <span id="fat-value" class="form-control text-center">-</span>
+                                    <button id="btn-increase-fat" class="btn btn-light border" type="button" onclick="increment(this)">+</button>
                                 </div>
                             </div>
                         </form>
@@ -182,7 +215,7 @@
             </div>
 
             <div class="col-lg-3">
-                <div class="card h-100">
+                <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <div class="d-flex align-items-center">
@@ -200,19 +233,19 @@
                         <form class="d-grid gap-card">
                             <div class="form-group mb-2">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="1000" aria-label="Recipient's username" aria-describedby="basic-addon3">
-                                    <span class="input-group-text" id="basic-addon3">Proteínas</span>
+                                    <span  id="macro-proteinas" class="form-control "></span>
+                                    <span  class="input-group-text" id="basic-addon3">Proteínas</span>
                                 </div>
                             </div>
                             <div class="form-group mb-2">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="100" aria-label="Recipient's username" aria-describedby="basic-addon4">
+                                    <span id="macro-carbohidratos" class="form-control"></span>
                                     <span class="input-group-text" id="basic-addon4">Carbs.</span>
                                 </div>
                             </div>
                             <div class="form-group mb-3">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="150" aria-label="Recipient's username" aria-describedby="basic-addon4">
+                                    <span  id="macro-grasas" class="form-control"></span>
                                     <span class="input-group-text" id="basic-addon4">Grasas</span>
                                 </div>
                             </div>
@@ -222,35 +255,35 @@
             </div>
             
             <div class="col-lg-3">
-         <div class="card h-100">
+         <div class="card">
             <div class="card-body">
-               <h2 class="counter mb-3" style="visibility: visible;">3450 Kcal</h2>
+               <h2 class="counter mb-3"  id="table-calories" style="visibility: visible;"> Kcal</h2>
                <div class="mt-3">
                   <div class="pb-3">
                      <div class="d-flex align-items-center justify-content-between mb-2">
                         <p class="mb-0">Proteínas</p>
-                        <h4>60%</h4>
+                        <h4></h4>
                      </div>
                      <div class="progress bg-info-subtle shadow-none w-100" style="height: 10px">
-                        <div class="progress-bar bg-info" data-toggle="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%; transition: width 2s;"></div>
+                        <div id="protein-progress" class="progress-bar bg-info" data-toggle="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%; transition: width 2s;"></div>
                      </div>
                   </div>
                   <div class="pb-3">
                      <div class="d-flex align-items-center justify-content-between mb-2">
                         <p class="mb-0">Grasas</p>
-                        <h4>80%</h4>
+                        <h4></h4>
                      </div>
                      <div class="progress bg-success-subtle shadow-none w-100" style="height: 10px">
-                        <div class="progress-bar bg-success" data-toggle="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%; transition: width 2s;"></div>
+                        <div id="fat-progress" class="progress-bar bg-success" data-toggle="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%; transition: width 2s;"></div>
                      </div>
                   </div>
                   <div class="pb-3">
                      <div class="d-flex align-items-center justify-content-between mb-2">
                         <p class="mb-0">Carbohidratos</p>
-                        <h4>55%</h4>
+                        <h4></h4>
                      </div>
                      <div class="progress bg-primary-subtle shadow-none w-100" style="height: 10px">
-                        <div class="progress-bar bg-primary" data-toggle="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width: 55%; transition: width 2s;"></div>
+                        <div id="carbs-progress" class="progress-bar bg-primary" data-toggle="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width: 55%; transition: width 2s;"></div>
                      </div>
                   </div>
                </div>
@@ -260,438 +293,81 @@
             
  
                 <div class="card-body">
-                      <div class="table-wrapper">
-                                <div class="col-7">
-                                        <h3 class="mb-4">Auto-ajuste</h3>
+                     
 
-                                        <div class="auto-ajuste-container">
-                                                <div style="width: 100%; max-width: 500px; margin: 2rem auto;">
-                                                    <canvas id="macroChart"  width="320" height="300"></canvas>
-                                                </div>
-
-                                                <div class="col-md-3 info-autoAjuste">
-
-                                                        
-                                                        <div>
-                                                            <div class="mb-3">
-                                                                <label class="d-block text-center title-autoAjuste">Proteínas/kg</label>
-                                                                <div class="d-flex justify-content-center">
-                                                                    <!-- Botón para disminuir proteínas -->
-                                                                    <button id="btn-decrease-protein" class=" btn-ajuste" type="button">-</button>
-                                                                    <!-- Valor de proteínas -->
-                                                                    <span id="protein-value" class="mx-3">-</span> g/Kg
-                                                                    <!-- Botón para aumentar proteínas -->
-                                                                    <button id="btn-increase-protein" class=" btn-ajuste" type="button">+</button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label class="d-block text-center title-autoAjuste">Grasas/kg</label>
-                                                                <div class="d-flex justify-content-center">
-                                                                    <!-- Botón para disminuir grasas -->
-                                                                    <button id="btn-decrease-fat" class=" btn-ajuste" type="button">-</button>
-                                                                    <!-- Valor de grasas -->
-                                                                    <span id="fat-value" class="mx-3">-</span> g/Kg
-                                                                    <!-- Botón para aumentar grasas -->
-                                                                    <button id="btn-increase-fat" class=" btn-ajuste" type="button">+</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                        
-                                                            <table class="table-ajuste" id="macrosTable">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th colspan="2">Macronutrientes</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr><th>Calorías</th><td id="table-calories">- kcal</td></tr>
-                                                                    <tr><th>Proteínas</th><td id="table-protein">- gr</td></tr>
-                                                                    <tr><th>Grasas</th><td id="table-fat">- gr</td></tr>
-                                                                    <tr><th>Hidratos</th><td id="table-carbs">- gr</td></tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-
-                                                        <div>
-                                                            <table class="table-ajuste table-bordered text-center">
-                                                            <thead>
-                                                                <tr>
-                                                                <th colspan="2">Macronutriente</th>
-                                                                
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                <th>Proteínas</th>
-                                                                <td id="percent-protein">- %</td>
-                                                                </tr>
-                                                                <tr>
-                                                                <th>Grasas</th>
-                                                                <td id="percent-fat">- %</td>
-                                                                </tr>
-                                                                <tr>
-                                                                <th>Carbohidratos</th>
-                                                                <td id="percent-carbs">- %</td>
-                                                                </tr>
-                                                            </tbody>
-                                                            </table>
-                                                        </div>
-                                                 
-
-                                                      
-                                                </div>
-                                        </div>
-                                       
-
-                                </div>
-                            </div>
-
-<div class="row mt-5">
+<div class="row">
       <div class="col-sm-12">
          <div class="card">
             <div class="card-header d-flex justify-content-between">
                <div class="header-title">
                   <h4 class="card-title">Asignación de alimentos</h4>
                </div>
-               <div class="d-flex">
-                        <button class="btn btn-primary btn-sm me-2" type="button" id="btn-add-food">
-                            + Añadir columna
-                         </button>
-                        <button class="btn btn-primary btn-sm me-2" type="button" id="btn-add-food">
-                            - Quitar columna
-                         </button>
-                </div>
+
+                 <div class="d-flex">
+                                        <button class="btn btn-primary btn-sm me-2 btn-add-columns" type="button" id="btn-add-column" on>
+                                            + Añadir alimento
+                                        </button>
+                                        <button class="btn btn-primary btn-sm me-2 btn-remove-columns" type="button" id="btn-remove-column">
+                                            - Quitar alimento
+                                        </button>
+                                </div>
+                
             </div>
             <div class="card-body p-0">
-                <div class="table-responsive mt-4">
-                  <table id="basic-table" class="table table-striped mb-0 fs-7" role="grid"> 
+                <div id="" class="table-responsive mt-4">
+                 <div class="row align-items-center  mt-2 mb-2 ms-2">
+                        <div class="col-md-6">
+                            <div class="dataTables_length d-flex align-items-center gap-2" id="datatable_length">
+                                <span>Plantilla:</span>
+                                <select name="datatable_length" aria-controls="datatable" class="form-select form-select-sm w-auto">
+                                <option>Ninguna</option>
+                                <option>25</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div id="tabla-container">
+            <!-- Las tablas se generarán aquí dinámicamente -->
+                    </div>
+
+
+
+
+
+
+            <table id="Suplementacion" class="table table-striped mb-0 fs-7" role="grid"> 
                         <thead>
                             <tr>
                                 <th colspan="11">
                                 <div class="d-flex justify-content-start gap-2 w-25">
-                                    <select class="form-select form-select-sm" name="tipo-comida">
-                                        <option selected>Desayuno</option>
-                                        <option>Almuerzo</option>
-                                        <option>Comida</option>
-                                        <option >Merienda</option>
-                                        <option>Pre-entreno</option>
-                                        <option>Post-entreno</option>
-                                        <option>Cena</option>
-                                        <option >Pre-cama</option>
-                                    </select>
-                                    <input type="time" class="form-control fomr-control-sm" id="exampleInputtime" value="08:00">
+                                   <span>Suplementacion</span>
+                                    
+                                 
                                 </div>
                                 </th>
                             </tr>
-                           <tr>
-                                <th>MACRO</th>
-                                <th>Alimento</th>
-                                <th>Cantidad</th>
-                                <th>Alimento</th>
-                                <th>Cantidad</th>
-                                <th>Alimento</th>
-                                <th>Cantidad</th>
-                                <th>Alimento</th>
-                                <th>Cantidad</th>
-                                <th>Alimento</th>
-                                <th>Cantidad</th>
-                            </tr>
+                         
                                         
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="header-dieta px-1 py-0">
-                                    <select class="form-select form-select-sm" name="select-categoria">
-                                        <option selected>Proteina</option>
-                                        <option>Grasa</option>
-                                        <option>Carbohidrato</option>
-                                        <option>Fruta</option>
-                                        <option>Verdura</option>
-                                        <option>Otros</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-
-                                </td class="px-1 py-1">
-                                <td class="px-1 py-0"><input class="form-control form-control-sm" type="text"></td>
-                                <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                    <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                    <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                                
-                            </tr>
-                            <tr>
-                                <td class="header-dieta px-1 py-0">
-                                        <select class="form-select form-select-sm" name="select-categoria">
-                                                <option >Proteina</option>
-                                            <option>Grasa</option>
-                                            <option selected>Carbohidrato</option>
-                                            <option>Fruta</option>
-                                            <option>Verdura</option>
-                                            <option>Otros</option>
-                                        </select>
-                                </td>
-                                <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"><input class="form-control form-control-sm" type="text"></td>
-                                <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                    <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                    <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                            </tr>
-                            <tr>
-                                <td class="header-dieta px-1 py-0">
-                                        <select class="form-select form-select-sm" name="select-categoria">
-                                            <option >Proteina</option>
-                                            <option selected>Grasa</option>
-                                            <option >Carbohidrato</option>
-                                            <option>Fruta</option>
-                                            <option>Verdura</option>
-                                            <option>Otros</option>
-                                        </select>
-                                </td>
-                                <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"><input class="form-control form-control-sm" type="text"></td>
-                                <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                    <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                    <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                            </tr>
-                            <tr>
-                                <td class="header-dieta px-1 py-0">
-                                        <select class="form-select form-select-sm" name="select-categoria">
-                                            <option >Proteina</option>
-                                            <option >Grasa</option>
-                                            <option >Carbohidrato</option>
-                                            <option selected>Fruta</option>
-                                            <option>Verdura</option>
-                                            <option>Otros</option>
-                                        </select>
-                                </td>
-                                <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"><input class="form-control form-control-sm" type="text"></td>
-                                <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                    <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                    <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                            </tr>                                                                                
-                            <tr>
-                                    <td class="header-dieta px-1 py-0">
-                                        <select class="form-select form-select-sm" name="select-categoria">
-                                                <option >Proteina</option>
-                                            <option >Grasa</option>
-                                            <option >Carbohidrato</option>
-                                            <option >Fruta</option>
-                                            <option selected>Verdura</option>
-                                            <option>Otros</option>
-                                        </select>
-                                </td>
-                                <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"><input class="form-control form-control-sm" type="text"></td>
-                                <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                    <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                    <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                    <td class="header-dieta px-1 py-0">
-                                        <select class="form-select form-select-sm" name="select-categoria">
-                                                <option >Proteina</option>
-                                            <option >Grasa</option>
-                                            <option >Carbohidrato</option>
-                                            <option >Fruta</option>
-                                            <option >Verdura</option>
-                                            <option selected>Otros</option>
-                                        </select>
-                                </td>
-                                <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"><input class="form-control form-control-sm" type="text"></td>
-                                <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                    <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td class="px-1 py-0"></td>
-                                    <td class="px-1 py-0">
-                                    <select name="select-alimentos" class="form-select form-select-sm">
-                                    <option value="">Alimentos</option>
-                                    </select>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td class="header-dieta px-1 py-0">
-                                        Observaciones
-                                </td>
-                                <td colspan="10"><textarea class="form-control form-control-sm"></textarea></td>
-                            </tr>
-            </tbody>
+                            <td>
+                                    <textarea></textarea>
+                            </td>
+                           
+                                  
+                         </tbody>
             </table>
-
                                       
                                       
-                                        
+                                    <div class="comida-btns"> 
+                                        <button onclick="eliminarUltimaTabla()" class="btn-ajuste">-</button>
+                                        <button onclick="crearTablaVacia()" class="btn-ajuste"> +</button>
+                                    </div> 
                                     
                                     </div>
-                                     <div class="control-macros-asignar-alimentos">
-                                              <table class="table-ajuste" id="macrosTableDieta">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Macros</th>
-                                                                        <th>Necesarios</th>
-                                                                        <th>Dieta</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr><th>Calorías</th><td id="table-caloriesDieta">- kcal</td> <td id="table-caloriesDieta1">- kcal</td></tr>
-                                                                    <tr><th>Proteínas</th><td id="table-proteinDieta">- gr</td> <td id="table-proteinDieta1">- kcal</td></tr>
-                                                                    <tr><th>Grasas</th><td id="table-fatDieta">- gr</td> <td id="table-fatDieta1">- kcal</td></tr>
-                                                                    <tr><th>Hidratos</th><td id="table-carbsDieta">- gr</td> <td id="table-carbsDieta1">- kcal</td></tr>
-                                                                </tbody>
-                                            </table>
-                                        </div>         
-                                    </div>
-                                    <div class="comida-btns"> 
-                                         <button onclick="eliminarUltimaTabla()" class="btn-ajuste">-</button>
-                                                        <button onclick="duplicarUltimaTabla()" class="btn-ajuste"> +</button>
-                                                   
-
-                                    </div>
+                                   
+                                 
 
                                 </div>
 
@@ -716,7 +392,7 @@
   /* Botón Guardar siempre mitad */
   #guardar-dieta-btn {
     width: 50% !important;
-  }
+  }gr
 
   /* 🔹 Estilo flotante sutil */
   .btn {
@@ -744,14 +420,14 @@
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#macronutrientesCard"
-          aria-expanded="true"
+          aria-expanded="false"
           aria-controls="macronutrientesCard">
     <span class="text-open">Minimizar tabla</span>
     <span class="text-closed">Mostrar tabla</span>
   </button>
 
   <!-- Card colapsable -->
-  <div class="collapse show w-100 mb-2" id="macronutrientesCard">
+  <div class="collapse true w-100 mb-2" id="macronutrientesCard">
     <div class="card">
       <div class="card-header d-flex align-items-center">
         <div class="p-2 rounded bg-info disabled">
@@ -771,10 +447,10 @@
                 <span class="input-group-text">Calorías</span>
 
                 <!-- Input solo lectura -->
-                <input type="text" class="form-control text-center" value="291kcal" readonly>
+                <input type="text" id="table-caloriesDieta" class="form-control text-center" value="" readonly>
 
                 <!-- Input editable -->
-                <input type="text" class="form-control text-center" value="- kcal" readonly>
+                <input type="text" id="table-caloriesDieta1" class="form-control text-center" value="" readonly>
             </div>
             </div>
           <div class="form-group mb-2">
@@ -783,10 +459,10 @@
                 <span class="input-group-text">Proteínas</span>
 
                 <!-- Input solo lectura -->
-                <input type="text" class="form-control text-center" value="291.6gr" readonly>
+                <input type="text" id="table-proteinDieta" class="form-control text-center" value="" readonly>
 
                 <!-- Input editable -->
-                <input type="text" class="form-control text-center" value="- gr" readonly>
+                <input type="text" id="table-proteinDieta1" class="form-control text-center" value="" readonly>
             </div>
             </div>
 
@@ -796,10 +472,10 @@
                 <span class="input-group-text">Carbs.</span>
 
                 <!-- Input solo lectura -->
-                <input type="text" class="form-control text-center" value="291.6gr" readonly>
+                <input type="text" id="table-fatDieta" class="form-control text-center" value="" readonly>
 
                 <!-- Input editable -->
-                <input type="text" class="form-control text-center" value="- gr" readonly>
+                <input type="text" id="table-fatDieta1" class="form-control text-center" value="" readonly>
             </div>
             </div>
           <div class="form-group mb-2">
@@ -808,10 +484,10 @@
                 <span class="input-group-text">Grasas</span>
 
                 <!-- Input solo lectura -->
-                <input type="text" class="form-control text-center" value="291.6gr" readonly>
+                <input type="text" id="table-carbsDieta" class="form-control text-center" value="" readonly>
 
                 <!-- Input editable -->
-                <input type="text" class="form-control text-center" value="- gr" readonly>
+                <input type="text" id="table-carbsDieta1" class="form-control text-center" value="" readonly>
             </div>
             </div>
         </form>
@@ -1064,7 +740,7 @@
     <script src="/assets/js/hope-ui.js" defer></script>
     <script type="module" src="/src/Auth/main.js"></script>
 
-    <script type="module" src="/src/dietas/mainWizard.js"></script>
+    <script type="module" src="/src/dietas/modules/plantilla/mainUpdatePlantilla.js"></script>
     
     
     

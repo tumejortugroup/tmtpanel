@@ -1,12 +1,13 @@
-import { getDieta } from "./fetch/getDieta.js";
+
+import { getPlantilla } from "./fetch/getPlantilla.js";
 import { agruparPorComida } from "./utils/agruparComida.js";
-import { renderDieta } from "./utils/renderDieta.js";
+import { renderPlantilla } from "./utils/renderPlantilla.js";
 import { tablaAlimentos } from "/src/dietas/modules/wizard/tablaAlimentos.js";
 import { ejecutarAutoAjuste } from '/src/dietas/modules/wizard/autoAjuste.js';
 import { crearTablaVacia, eliminarUltimaTabla } from "./utils/crearTablaVacia.js";
-import { eliminarComidas } from "./fetch/eliminarComidas.js"; // 👈
-import { actualizarDieta } from "/src/dietas/modules/wizard/fetch/updateDieta.js"; // suponiendo que ya lo tienes
-import { guardarDietaCompleta } from "/src/dietas/modules/wizard/creacion/guardarDieta.js"; // idem
+import { eliminarComidas } from "./fetch/eliminarComidas.js";
+import { actualizarDieta } from "/src/dietas/modules/wizard/fetch/updateDieta.js";
+import { guardarDietaCompleta } from "/src/dietas/modules/wizard/creacion/guardarDieta.js";
 import { addColumns, removeColumns } from "./utils/addAlimentos.js";
 import { cargarPlantillasCentro } from '/src/dietas/modules/plantilla/fetch/fetchPlantilla.js';
 
@@ -20,38 +21,46 @@ function borrarComidasDeDieta(data) {
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const idDieta = params.get("id_dieta");
-
+  const idPlantilla = params.get("id_plantilla");
 
   if (!idDieta) {
     alert("Falta id_dieta en la URL");
     return;
   }
-  /**BOTONES DE AÑADIR COMIDA Y ALIMETNOS */
+
+  // BOTONES DE AÑADIR COMIDA Y ALIMENTOS
   document.getElementById("btn-add-column")?.addEventListener("click", addColumns);
   document.getElementById("btn-remove-column")?.addEventListener("click", removeColumns);
   window.crearTablaVacia = crearTablaVacia;
   window.eliminarUltimaTabla = eliminarUltimaTabla;
 
-   
   await ejecutarAutoAjuste();
-
   await tablaAlimentos();
   await cargarPlantillasCentro();
 
-  const data = await getDieta(idDieta);
-  if (!data) return;
+  let data;
+  let comidas;
 
-  const comidas = agruparPorComida(data);
-  renderDieta({ data, comidas });
+  // Detectar si hay plantilla seleccionada
+  if (idPlantilla) {
+    console.log("📋 Cargando plantilla:", idPlantilla);
+    data = await getPlantilla(idPlantilla);
+    if (!data) return;
+    
+    comidas = agruparPorComida(data);
+    await renderPlantilla({ data, comidas });
+  } else {
+    console.log("📄 Cargando dieta:", idDieta);
+    data = await getDieta(idDieta);
+    if (!data) return;
+    
+    comidas = agruparPorComida(data);
+    await renderDieta({ data, comidas });
+  }
 
   document.getElementById("guardar-dieta-btn").addEventListener("click", async () => {
-    // Primero eliminamos las comidas actuales de la dieta
     await borrarComidasDeDieta(data);
-
-    //  Luego actualizamos dieta (nombre, descripción, etc.)
     await actualizarDieta();
-
-    //  Finalmente volvemos a crear las comidas y asociarlas
     await guardarDietaCompleta();
   });
 });

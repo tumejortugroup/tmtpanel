@@ -6,27 +6,23 @@ import {
   generarTablaComida
 } from './helpers.js';
 
-export async function renderDieta({ data, comidas }) {
+export async function renderPlantilla({ data, comidas }) {
   try {
-    // Rellenar nombre y descripción
+    // Rellenar nombre (las plantillas solo tienen nombre, no descripción)
     const nombreInput = document.getElementById("nombre-dieta");
-    const descripcionTextarea = document.getElementById("descripcion-dieta");
 
     if (data && data.length > 0) {
-      if (nombreInput) nombreInput.value = data[0].nombre_dieta || "";
-      if (descripcionTextarea) descripcionTextarea.value = data[0].descripcion || "";
+      if (nombreInput) nombreInput.value = data[0].nombre_plantilla || "";
     }
 
     // Obtener alimentos disponibles
     let alimentos = obtenerAlimentosDisponibles();
    
-    
     if (alimentos.length === 0) {
       console.warn('No hay alimentos. Intentando cargar...');
       const { renderSelectAlimentos } = await import('/src/dietas/modules/wizard/ui/renderAlimentos.js');
       await renderSelectAlimentos("select-alimentos");
       alimentos = obtenerAlimentosDisponibles();
-
     }
 
     const numEquivalentes = obtenerMaxEquivalentes(comidas);
@@ -56,22 +52,20 @@ export async function renderDieta({ data, comidas }) {
       }
     });
 
-    // NUEVA FUNCIONALIDAD: Agregar recálculo de equivalencias
+    // Agregar recálculo de equivalencias
     await agregarCalculoEquivalencias(contenedor);
 
-
+    console.log('Plantilla renderizada exitosamente');
 
   } catch (error) {
-    console.error('Error en renderDieta:', error);
+    console.error('Error en renderPlantilla:', error);
   }
 }
 
-// 🔧 Nueva función para agregar cálculo automático de equivalencias
+// Función para agregar cálculo automático de equivalencias
 async function agregarCalculoEquivalencias(contenedor) {
-  // Importar las funciones necesarias
   const { getEquivalencia } = await import('/src/dietas/modules/wizard/fetch/getEquivalencias.js');
   
-
   const filas = contenedor.querySelectorAll(".table tbody tr:not(:last-child)"); 
   
   filas.forEach(fila => {
@@ -79,14 +73,12 @@ async function agregarCalculoEquivalencias(contenedor) {
     const inputCantidad = fila.querySelector(".input-cantidad");
     if (!selectMacro || !inputCantidad) return;
 
-
     const selects = fila.querySelectorAll("select[name='select-alimentos']");
     if (selects.length < 2) return;
 
     const selectPrincipal = selects[0];
     const equivalentes = [];
 
-    // Recopilar pares de (select, td) para equivalencias
     for (let i = 1; i < selects.length; i++) {
       const td = selects[i].closest("td").nextElementSibling;
       if (td) {
@@ -100,7 +92,6 @@ async function agregarCalculoEquivalencias(contenedor) {
       const categoria = selectMacro.value?.toLowerCase();
 
       if (!idPrincipal || isNaN(cantidad) || !categoria) {
-        // Limpiar equivalencias si no hay datos válidos
         equivalentes.forEach(eq => {
           if (eq.td.tagName === 'TD') {
             eq.td.textContent = "";
@@ -109,14 +100,12 @@ async function agregarCalculoEquivalencias(contenedor) {
         return;
       }
 
-      // Limpiar todas las celdas de cantidad
       equivalentes.forEach(eq => {
         if (eq.td.tagName === 'TD') {
           eq.td.textContent = "";
         }
       });
 
-      // Calcular equivalencias para cada select que tenga valor
       for (const { select, td } of equivalentes) {
         if (!select.value || !td) continue;
         
@@ -134,19 +123,16 @@ async function agregarCalculoEquivalencias(contenedor) {
       }
     }
 
-    // Agregar eventos a todos los elementos relevantes
     [selectMacro, selectPrincipal, inputCantidad].forEach(el => {
       if (el) {
         el.addEventListener("change", calcular);
       }
     });
     
-    // Agregar evento input para cantidad
     if (inputCantidad) {
       inputCantidad.addEventListener("input", calcular);
     }
 
-    // Agregar eventos a selects de equivalencias
     equivalentes.forEach(({ select }) => {
       if (select) {
         select.addEventListener("change", calcular);
