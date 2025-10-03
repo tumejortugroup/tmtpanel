@@ -2,7 +2,7 @@ export async function getInformeDatoHistorico(idUsuario) {
     try {
         const token = localStorage.getItem('token');
         
-        const response = await fetch(`https://my.tumejortugroup.com/api/v1/datos/usuario/${idUsuario}/historico`, {
+        const response = await fetch(`https://my.tumejortugroup.com/api/v1/datos/historico/${idUsuario}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
