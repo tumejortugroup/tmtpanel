@@ -103,8 +103,8 @@ export async function guardarControl() {
       return;
     }
 
-    console.log('Control guardado correctamente. ID:', id_dato);
-
+       const informeUrl = `/dashboard/controles/informe?id_usuario=${idUsuario}&id_dato=${id_dato}`;
+      
     // Mostrar modal de SweetAlert
     const modalResult = await Swal.fire({
       title: 'Control guardado con éxito',
@@ -130,6 +130,7 @@ export async function guardarControl() {
     if (id_dieta) {
       alert("✅ Dieta creada y asignada con éxito.");
       window.location.href = `/dashboard/dietas/wizard.html?id_dieta=${id_dieta}&id_dato=${id_dato}`;
+      window.open(informeUrl, '_blank');
     }
     
   } else if (modalResult.isDenied) {
@@ -137,7 +138,8 @@ export async function guardarControl() {
     const id_dieta = await crearDieta(idUsuario, id_dato);
     if (id_dieta) {
       alert("✅ Dieta creada con éxito.");
-      window.location.href = `/controles/detalle.html?id_dato=${id_dato}`;
+      window.location.href = `/dashboard/controles/informe?id_usuario=${idUsuario}&id_dato=${id_dato}`;
+      
     }
     
   } else if (modalResult.dismiss === Swal.DismissReason.cancel) {
@@ -146,6 +148,7 @@ export async function guardarControl() {
     if (id_dieta) {
       alert("✅ Dieta creada con éxito.");
       window.location.href = '/dashboard/index.html';
+      window.open(informeUrl, '_blank');
     }
   }
   } catch (err) {
