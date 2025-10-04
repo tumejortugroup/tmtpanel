@@ -1,5 +1,5 @@
-import { cargarUsuario } from "./modules/getUser.js";
-import { actualizarUsuario } from "./modules/updateUser.js";
+import { cargarUsuario } from "./modules/fetch/getUser.js";
+import { actualizarUsuario } from "./modules/fetch/updateUser.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);

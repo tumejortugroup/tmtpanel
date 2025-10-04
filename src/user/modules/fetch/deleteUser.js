@@ -8,36 +8,29 @@ export function initDeleteUser() {
 
         e.preventDefault();
 
+        const userId = btn.getAttribute('data-id');
         const nombre = btn.getAttribute('data-nombre');
-        if (!nombre) return alert('Nombre no válido');
+        
+        if (!userId) return alert('ID de usuario no válido');
 
-        const token = localStorage.getItem('token'); // ✅ Asegúrate de tener el token guardado
+        const token = localStorage.getItem('token');
         if (!token) return alert('Token de autenticación no encontrado. Por favor, inicia sesión.');
 
+        if (!confirm(`¿Estás seguro de eliminar a "${nombre}"?`)) return;
+
         try {
-            // Obtener ID del usuario por nombre
-            const res = await fetch(`https://my.tumejortugroup.com/api/v1/usuarios/nombre/${encodeURIComponent(nombre)}`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-
-            if (!res.ok) throw new Error('Usuario no encontrado');
-            const data = await res.json();
-            const userId = data.id_usuario;
-
-            if (!confirm(`¿Estás seguro de eliminar a "${nombre}"?`)) return;
-
-            // Eliminar usuario por ID
             const deleteRes = await fetch(`https://my.tumejortugroup.com/api/v1/usuarios/${userId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}` // ✅ Aquí se usa correctamente
+                    'Authorization': `Bearer ${token}`
                 }
             });
 
-            if (!deleteRes.ok) throw new Error('No se pudo eliminar el usuario');
+            if (!deleteRes.ok) {
+                const error = await deleteRes.json();
+                throw new Error(error.message || 'No se pudo eliminar el usuario');
+            }
 
             btn.closest('tr').remove();
             alert(`Usuario "${nombre}" eliminado correctamente.`);

@@ -1,4 +1,4 @@
-import { formatearFecha } from "/src/user/modules/utils/formatearFecha.js";
+
 export async function listPropietarios() {
     const token = localStorage.getItem("token");
     
