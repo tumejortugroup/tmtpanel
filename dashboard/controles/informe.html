@@ -1,156 +1,323 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informe de Datos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe de Control</title>
+
+  <!-- Fuente Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
 
-
+  <link rel="stylesheet" href="estilos.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
     <style>
+
+        /* 📄 A4 contenedor */
+    .a4-informe {
+      width: 210mm;
+      padding: 20mm;
+      margin: 0 auto;
+      background: white;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+      border-radius: 12px;
+      font-size: 13px;
+      color: #333;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+  /* Contenido editable*/
+  [contenteditable="true"] {
+  outline: none;
+  border: 1px dashed transparent;
+  cursor: text;
+}
+
+[contenteditable="true"]:hover {
+  border: 1px dashed #aaa;
+}
+
+[contenteditable="true"]:focus {
+  border: 1px dashed #007bff;
+  background-color: #fdfdfd;
+}
+
+/* toolbar */
+
+.editor-toolbar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.editor-toolbar button {
+  background: #f1f1f1;
+  border: 1px solid #ccc;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+}
+
+.editor-toolbar button:hover {
+  background: #ddd;
+}
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white;
-            padding: 2rem;
-            color: #000;
-        }
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8f9fa;
+  padding: 2rem;
+  color: #333;
+}
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 12px;
+}
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 3px solid #000;
-        }
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #eee; /* más suave */
+}
 
-        .logo {
-            width: 120px;
-            height: 120px;
-            background-color: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-            font-weight: bold;
-        }
+.logo img.logo-informe {
+  max-height: 50px;
+  margin-right: 15px;
+}
 
-        .header-info {
-            text-align: right;
-            font-size: 0.9rem;
-        }
+.header-info {
+  text-align: right;
+  font-size: 14px;
+  color: #555;
+}
 
-        .header-info div {
-            margin-bottom: 0.25rem;
-        }
+.header-info div {
+  margin-bottom: 0.25rem;
+}
 
-        .datos-personales {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-        }
+/* Secciones */
+.datos-personales {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  font-size: 14px;
+}
 
-        .datos-personales div {
-            margin-bottom: 0.25rem;
-        }
+.datos-personales div {
+  margin-bottom: 0.25rem;
+}
 
-        .section-title {
-            background-color: #90EE90;
-            text-align: center;
-            padding: 0.5rem;
-            font-weight: bold;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
+/* Títulos de sección */
+.section-title {
+  background-color: #f7f7f7; /* gris claro */
+  text-align: center;
+  padding: 0.6rem;
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  color: #181818;
+}
 
-        .medidas-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
+.medidas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  font-size: 14px;
+  margin-bottom: 1rem;
+}
 
-        .medida-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.25rem;
-        }
+.medida-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+  color: #444;
+}
 
-        .section-2cols {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
+.section-2cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
 
-        .composicion-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.25rem;
-            font-size: 0.9rem;
-        }
+.composicion-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+  font-size: 14px;
+  color: #444;
+}
 
-        .peso-global {
-            text-align: center;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-        }
+.peso-global {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 14px;
+  font-weight: 500;
+  color: #181818;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.75rem;
-            margin-bottom: 1rem;
-        }
+/* Tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
 
-        th, td {
-            border: 1px solid #000;
-            padding: 0.4rem;
-            text-align: center;
-        }
+th, td {
+  padding: 0.6rem 0.8rem;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
 
-        th {
-            background-color: #90EE90;
-            font-weight: bold;
-        }
+th {
+  background-color: #f9f9f9;
+  font-weight: 600;
+  color: #333;
+}
 
-        .destacado {
-            background-color: #FFFF99;
-        }
+tr:last-child td {
+  border-bottom: none;
+}
 
-        .loading {
-            text-align: center;
-            padding: 2rem;
-            font-size: 1.2rem;
-        }
+tbody tr:nth-child(odd) {
+  background-color: #fff;
+}
+tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
 
-        .error {
-            text-align: center;
-            padding: 2rem;
-            color: red;
-        }
+.destacado {
+  background-color: #edcf7e !important;
+}
+
+/* Estados */
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.1rem;
+  color: #888;
+}
+
+.error {
+  text-align: center;
+  padding: 2rem;
+  color: #c0392b;
+  font-weight: 600;
+}
+
+  /* 🖨️ Botón imprimir */
+    .no-print {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 2000; /* aseguramos que quede por encima */
+}
+
+/* Botón Exportar PDF */
+.btn-export {
+  background: #1aa053;
+  color: #fff;
+  padding: 8px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s ease-in-out;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-export:hover {
+  background: #158042;
+}
+
+/* Botón Imprimir */
+.btn-print {
+  background: #d2a528;
+  color: #fff;
+  padding: 8px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s ease-in-out;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-print:hover {
+  background: #b58e21;
+}
+
+
+    @media print {
+      
+      * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+     }
+
+      u {
+        text-decoration-color: inherit !important;
+        text-decoration-thickness: 2px !important;
+      }
+      body * {
+        visibility: hidden;
+      }
+      #informe-dieta, #informe-dieta * {
+        visibility: visible;
+      }
+      #informe-dieta {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        padding: 10mm;
+        page-break-after: always;
+      }
+    }
+
     </style>
 </head>
 <body>
-    <div class="container" id="container">
+    <div class="" id="container">
         <div class="loading">Cargando datos...</div>
     </div>
 

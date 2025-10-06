@@ -42,7 +42,7 @@ export async function listUser() {
             const rowHTML = `
                 <tr>
         <td class="text-truncate">${usuario.numero_usuario.substring(0, 3)}</td>
-        <td class="text-truncate">
+        <td class="text-truncate" style="cursor:pointer;">
           <span class="badge ${usuario.estado?.toLowerCase() === 'activo' ? 'bg-success' : 'bg-secondary'} badge-estado" data-nombre="${usuario.nombre}">
             ${usuario.estado}
           </span>
