@@ -1,4 +1,4 @@
-import { parseJwt } from '../../Auth/modules/jwt.js';
+import { parseJwt } from '/src/Auth/modules/jwt.js';
 
 export function initCreateUserForm() {
     const form = document.getElementById("userForm");

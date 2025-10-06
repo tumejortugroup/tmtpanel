@@ -1,4 +1,4 @@
-import { formatearFecha } from "/src/user/modules/utils/formatearFecha.js";
+
 export async function listPreparadores() {
     const token = localStorage.getItem("token");
  

@@ -1,4 +1,4 @@
-import { parseJwt } from '../../../Auth/modules/jwt.js';
+
 
 export function initCreateUserFormAdmin() {
     const form = document.getElementById("userForm");
@@ -25,7 +25,6 @@ export function initCreateUserFormAdmin() {
             direccion: document.getElementById("add1").value,
             ciudad: document.getElementById("city").value,
             id_centro: idCentro, 
-            username: document.getElementById("uname").value,
             password: document.getElementById("pass").value,
             estado: document.getElementById("estado").value
         };

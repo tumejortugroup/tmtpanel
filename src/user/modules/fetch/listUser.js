@@ -59,10 +59,10 @@ export async function listUser() {
                 <i class="bi bi-three-dots-vertical"></i>
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton${usuario.id_usuario}">
-                <li><a class="dropdown-item" href="/dashboard/user/user-update.html?id=${usuario.id_usuario}">Control</a></li>
+                <li><a class="dropdown-item" href="/dashboard/controles/control.html?id=${usuario.id_usuario}">Control</a></li>
                 <li><a class="dropdown-item" href="/dashboard/user/user-update.html?id=${usuario.id_usuario}">Dieta</a></li>
                 <li><a class="dropdown-item" href="/dashboard/user/user-update.html?id=${usuario.id_usuario}">Editar</a></li>
-                <li><a class="dropdown-item" href="#" data-nombre="${usuario.nombre}">Eliminar</a></li>
+                <li><a class="dropdown-item btn-eliminar" href="#" data-nombre="${usuario.nombre}" data-id="${usuario.id_usuario}">Eliminar</a></li>
               </ul>
             </div>
           </div>
