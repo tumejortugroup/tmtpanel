@@ -4,6 +4,7 @@ import { inicializarGrafico } from '/src/dietas/modules/wizard/ui/inicializarGra
 import { actualizarGraficoMacronutrientes } from '/src/dietas/modules/wizard/ui/actualizarGrafico.js';
 import { inicializarAutoAjuste } from '/src/dietas/modules/wizard/autoajuste/inicializarAutoAjuste.js';
 import { configurarBotones } from '/src/dietas/modules/wizard/utils/configurarBotones.js';
+import { cargarDietasUsuario, renderizarSelectDietas } from '/src/dietas/modules/wizard/fetch/cargarDietas.js';
 
 export async function ejecutarAutoAjuste() {
   inicializarGrafico();
@@ -12,6 +13,15 @@ export async function ejecutarAutoAjuste() {
   try {
     const detalle = await obtenerDetalleDato();
     const peso = parseFloat(detalle?.data?.peso);
+    const id_usuario = detalle?.data?.id_usuario; // 👈 Obtener id_usuario
+
+    console.log(`👤 ID Usuario: ${id_usuario}`);
+
+    // 👇 Cargar dietas del usuario
+    if (id_usuario) {
+      const dietas = await cargarDietasUsuario(id_usuario);
+      renderizarSelectDietas(dietas);
+    }
 
     const dieta = await obtenerDieta();
     const datos = dieta?.data;
@@ -22,7 +32,7 @@ export async function ejecutarAutoAjuste() {
     }
 
     const {
-        calorias_dieta,
+      calorias_dieta,
       proteinas_dieta,
       grasas_dieta,
       carbohidratos_dieta
@@ -38,8 +48,9 @@ export async function ejecutarAutoAjuste() {
       console.error("❌ Algún dato de macronutriente no es válido:", { proteinas, grasas, carbohidratos });
       return;
     }
-        await inicializarAutoAjuste();
-    actualizarGraficoMacronutrientes(calorias,proteinas, grasas, carbohidratos);
+
+    await inicializarAutoAjuste();
+    actualizarGraficoMacronutrientes(calorias, proteinas, grasas, carbohidratos);
 
   } catch (error) {
     console.error("❌ Error al inicializar el autoajuste:", error);

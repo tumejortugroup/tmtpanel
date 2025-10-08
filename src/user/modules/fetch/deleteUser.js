@@ -1,20 +1,28 @@
 export function initDeleteUser() {
-    const table = document.querySelector('table');
-    if (!table) return;
+    const tbody = document.querySelector('tbody');
+    if (!tbody) return;
 
-    table.addEventListener('click', async (e) => {
+    tbody.addEventListener('click', async (e) => {
+        // Buscar si el click fue en el botón eliminar o dentro de él
         const btn = e.target.closest('.btn-eliminar');
         if (!btn) return;
 
         e.preventDefault();
+        e.stopPropagation(); // Evitar que se propague y cierre el dropdown
 
         const userId = btn.getAttribute('data-id');
         const nombre = btn.getAttribute('data-nombre');
         
-        if (!userId) return alert('ID de usuario no válido');
+        if (!userId) {
+            alert('ID de usuario no válido');
+            return;
+        }
 
         const token = localStorage.getItem('token');
-        if (!token) return alert('Token de autenticación no encontrado. Por favor, inicia sesión.');
+        if (!token) {
+            alert('Token de autenticación no encontrado. Por favor, inicia sesión.');
+            return;
+        }
 
         if (!confirm(`¿Estás seguro de eliminar a "${nombre}"?`)) return;
 
@@ -30,6 +38,13 @@ export function initDeleteUser() {
             if (!deleteRes.ok) {
                 const error = await deleteRes.json();
                 throw new Error(error.message || 'No se pudo eliminar el usuario');
+            }
+
+            // Cerrar el dropdown manualmente antes de eliminar la fila
+            const dropdown = btn.closest('.dropdown');
+            if (dropdown) {
+                const bsDropdown = bootstrap.Dropdown.getInstance(dropdown.querySelector('[data-bs-toggle="dropdown"]'));
+                if (bsDropdown) bsDropdown.hide();
             }
 
             btn.closest('tr').remove();
