@@ -36,7 +36,7 @@ export async function crearDieta(id_usuario, id_dato) {
       id_usuario,
       id_dato,
       nombre: nombreDieta,
-      calorias_dieta: detalle.tdee,
+      calorias_dieta: detalle.calorias_datos,
       proteinas_dieta: detalle.proteinas_datos,
       grasas_dieta: detalle.grasas_datos,
       carbohidratos_dieta: detalle.carbohidratos_datos

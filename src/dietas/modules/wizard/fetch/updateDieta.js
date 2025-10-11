@@ -15,10 +15,7 @@ export async function actualizarDieta() {
 
   if (!nombreElement || !descripcionElement) {
     console.error("❌ No se encontraron los campos de nombre o descripción.");
-    console.log("Elementos encontrados:", {
-      nombre: nombreElement,
-      descripcion: descripcionElement
-    });
+   
     return;
   }
 
@@ -31,11 +28,7 @@ export async function actualizarDieta() {
 
   if (!proteinElement || !fatElement || !carbsElement) {
     console.error("❌ No se encontraron los elementos de macros.");
-    console.log("Elementos encontrados:", {
-      protein: proteinElement,
-      fat: fatElement,
-      carbs: carbsElement
-    });
+  
     return;
   }
 
@@ -64,7 +57,7 @@ export async function actualizarDieta() {
     carbohidratos_dieta: carbohidratos
   };
 
-  console.log("📤 Datos a enviar:", data);
+
 
   try {
     const response = await fetch(`https://my.tumejortugroup.com/api/v1/dietas/${idDieta}`, {
@@ -80,7 +73,7 @@ export async function actualizarDieta() {
 
     if (response.ok && result.success) {
       alert("✅ Dieta actualizada correctamente.");
-      console.log("📦 Respuesta del servidor:", result);
+
     } else {
       console.error("❌ Error al actualizar la dieta:", result);
       alert("❌ Hubo un error al actualizar la dieta.");

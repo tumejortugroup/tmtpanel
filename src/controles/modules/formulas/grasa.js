@@ -18,13 +18,14 @@ export function grasaPorPerimetros({ genero, altura, cuello, cintura, cadera }) 
   return null;
 }
 
-export function sumaPliegues({ subescapular, abdomen_pliegue, supra_iliaco, muslo_pliegue }) {
+export function sumaPliegues({ triceps, subescapular, abdomen_pliegue, supra_iliaco, muslo_pliegue }) {
+  const t = parseFloat(triceps || 0);
   const s = parseFloat(subescapular || 0);
   const a = parseFloat(abdomen_pliegue || 0);
   const si = parseFloat(supra_iliaco || 0);
   const m = parseFloat(muslo_pliegue || 0);
 
-  return s + a + si + m;
+  return t + s + a + si + m;
 }
 
 export function grasaPorPliegues({ genero, pliegues }) {

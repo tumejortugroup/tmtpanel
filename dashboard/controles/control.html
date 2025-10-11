@@ -110,20 +110,12 @@
                             </ul>
                     </div>
                     <div class="dropdown">
-                            <button class="btn btn-primary btn-sm dropdown-toggle me-2" type="button" id="btnControlDrop" data-bs-toggle="dropdown" aria-expanded="false">
-                                Controles
-                            </button>
-
-                            <div class="dropdown-menu p-2" aria-labelledby="btnControlDrop" style="min-width: 250px;">
-                                <ul id="lista-controles" class="list-unstyled mb-2" style="max-height: 200px; overflow-y: auto;">
-                                </ul>
-
-                                <!-- Contenedor fijo del botón -->
-                                <div class="d-flex ">
-                                <button id="ver-controles" class="btn btn-link text-primary brn-sm">Mostrar</button>
-                                </div>
-                            </div>
-                            </div>
+                        <button id="btnControlDrop"  class="btn btn-primary btn-sm dropdown-toggle me-2" type="button" id="dropdownMenuButtonSM" data-bs-toggle="dropdown" aria-expanded="false">
+                            Seleccionar control
+                         </button>
+                            <ul id="lista-controles" aria-labelledby="btnControlDrop" class="dropdown-menu " aria-labelledby="dropdownMenuButtonSM" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 33px);" data-popper-placement="bottom-start">
+                            </ul>
+                    </div>
                 </div>    
             </div>
             
@@ -261,12 +253,7 @@
                                 <input type="number" class="muslo form-control" data-index ='1'/>
                             </td>
                         </tr>
-                        <tr class=" " data-variable="triceps"> 
-                            <th class="justify-content-between">Tríceps</th>
-                            <td class="text-center">
-                                <input type="number" class="triceps form-control" data-index ='1'/>
-                            </td>
-                        </tr>
+                        
                         <tr class=" " data-variable="porcentaje_graso_perimetros" > 
                             <th class="justify-content-between">% graso perimetral</th>
                             <td class="text-center">
@@ -278,10 +265,15 @@
                     <!--PLIEGUES-->
                         <thead>           
                             <tr>
-                                <th class="text-center" colspan="2">PLIEGUES
-                                </th>
+                                <th class="text-center" colspan="2">PLIEGUES</th>
                             </tr>
-                        </thead>    
+                        </thead>
+                        <tr class=" " data-variable="triceps"> 
+                            <th class="justify-content-between">Tríceps</th>
+                            <td class="text-center">
+                                <input type="number" class="triceps form-control" data-index ='1'/>
+                            </td>
+                        </tr>    
                         <tr class=" " data-variable="subescapular"> 
                             <th class="justify-content-between">Subescapular</th>
                             <td class="text-center">

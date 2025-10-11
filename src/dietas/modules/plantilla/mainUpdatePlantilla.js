@@ -14,7 +14,7 @@ import { cargarPlantillasCentro } from '/src/dietas/modules/plantilla/fetch/fetc
 function borrarComidasDeDieta(data) {
   const ids = data.map(item => item.id_comida);
   const idsUnicas = [...new Set(ids)];
-  console.log("🚀 Enviando a borrar:", idsUnicas);
+  
   return eliminarComidas(idsUnicas);
 }
 
@@ -43,14 +43,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Detectar si hay plantilla seleccionada
   if (idPlantilla) {
-    console.log("📋 Cargando plantilla:", idPlantilla);
+    
     data = await getPlantilla(idPlantilla);
     if (!data) return;
     
     comidas = agruparPorComida(data);
     await renderPlantilla({ data, comidas });
   } else {
-    console.log("📄 Cargando dieta:", idDieta);
+    
     data = await getDieta(idDieta);
     if (!data) return;
     

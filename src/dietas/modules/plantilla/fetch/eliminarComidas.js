@@ -19,10 +19,8 @@ export async function eliminarComidas(idsComidas) {
     const result = await res.json();
 
     if (res.ok) {
-      console.log("✅ Comidas eliminadas correctamente:", result);
       return true;
     } else {
-      console.error("❌ Error al eliminar comidas:", result);
       return false;
     }
   } catch (error) {

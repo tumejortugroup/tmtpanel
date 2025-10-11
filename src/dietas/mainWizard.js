@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
+
   await ejecutarAutoAjuste();
   await tablaAlimentos();
 

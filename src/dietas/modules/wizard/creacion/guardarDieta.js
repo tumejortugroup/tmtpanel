@@ -15,7 +15,6 @@ export async function guardarDietaCompleta() {
       .filter(id => !!id)
       .map(id => ({ id_comida: id })); 
 
-    console.log("🍽️ IDs de comidas creadas:", idsComidas);
 
     if (!idsComidas.length) {
       alert("⚠️ No se generaron comidas válidas para asociar.");

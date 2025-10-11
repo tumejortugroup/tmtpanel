@@ -11,10 +11,6 @@ export async function asociarComidasADieta(idComidasArray) {
   // 👇 Extraer solo los IDs
   const idsSolo = idComidasArray.map(c => c.id_comida);
 
-  console.log("🚀 Asociando comidas a dieta:", {
-    id_dieta: idDieta,
-    comidas: idsSolo
-  });
 
   try {
     const token = localStorage.getItem("token");
@@ -32,10 +28,10 @@ export async function asociarComidasADieta(idComidasArray) {
     });
 
     const data = await res.json();
-    console.log('')
+
 
   if (res.ok) {
-      console.log("✅ Comidas asociadas a dieta correctamente:", data);
+ 
 
       // 🔹 Abre nueva pestaña con la dieta
       window.open(`/dashboard/dietas/dieta.html?id_dieta=${idDieta}`, "_blank");

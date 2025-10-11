@@ -20,19 +20,20 @@ export async function cargarUsuario(id) {
         }
 
         const usuario = await response.json();
+        console.log('Usuario cargado:', usuario);
 
         setTimeout(() => {
             const mapeo = {
-                UnameU: usuario.username,
-                fnameU: usuario.nombre,
-                lnameU: usuario.apellidos,
-                mobnoU: usuario.telefono,
-                emailU: usuario.correo,
-                dir: usuario.direccion,
-                cit: usuario.ciudad,
-                passwordU: usuario.password,
-                rolU: usuario.rol,
-                estadoU: usuario.estado
+                cname: usuario.numero_usuario,
+                fname: usuario.nombre,
+                lname: usuario.apellidos,
+                mobno: usuario.telefono,
+                email: usuario.correo,
+                birthday: usuario.fecha_de_nacimiento,
+                role: usuario.rol,
+                estado: usuario.estado,
+                add1: usuario.direccion,
+                city: usuario.ciudad
             };
 
             for (const id in mapeo) {

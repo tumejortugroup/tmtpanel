@@ -15,6 +15,6 @@ export async function obtenerDetalleDato() {
   if (!response.ok) throw new Error(`Error al obtener el detalle del dato: ${response.statusText}`);
 
   const data = await response.json();
-  console.log(`📦 Detalle del dato ${idDato}:`, data);
+
   return data;
 }
