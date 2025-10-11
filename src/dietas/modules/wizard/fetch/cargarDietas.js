@@ -1,7 +1,7 @@
 import {obtenerIdDietaDesdeUrl, obtenerDatoDesdeUrl} from '/src/dietas/modules/wizard/utils/params.js'
 
 export function renderizarSelectDietas(dietas) {
-    console.log('🔍 Buscando select con id="dietas-anteriores"...');
+
     const select = document.getElementById('dietas-anteriores');
     
     if (!select) {
@@ -9,13 +9,13 @@ export function renderizarSelectDietas(dietas) {
         return;
     }
 
-    console.log(`📋 Renderizando ${dietas.length} dietas...`);
+
 
     // Opción por defecto como placeholder
     select.innerHTML = '<option value="" selected disabled>Dietas</option>';
 
     if (dietas.length === 0) {
-        console.log("ℹ️ Usuario sin dietas");
+
         return;
     }
 
@@ -27,7 +27,7 @@ export function renderizarSelectDietas(dietas) {
         select.appendChild(option);
     });
 
-    console.log(`✅ Select renderizado con ${dietas.length} dietas`);
+
 
     // Event listener para el cambio
     select.onchange = function() {
@@ -35,17 +35,16 @@ export function renderizarSelectDietas(dietas) {
         const id_dieta2 = this.value;
         
         if (!id_dieta2) {
-            console.log("ℹ️ Valor vacío seleccionado");
+
             return;
         }
 
         const id_dieta = obtenerIdDietaDesdeUrl();
         const id_dato = obtenerDatoDesdeUrl();
         
-        console.log(`🔄 Redirigiendo con:`, { id_dieta, id_dato, id_dieta2 });
         
         const url = `/dashboard/dietas/wizardBaseDieta.html?id_dieta=${id_dieta}&id_dato=${id_dato}&id_dieta2=${id_dieta2}`;
-        console.log('📍 URL:', url);
+
         
         window.location.href = url;
     };
@@ -77,7 +76,6 @@ export async function cargarDietasUsuario(id_usuario) {
         const dietasData = await response.json();
         const dietas = Array.isArray(dietasData.data) ? dietasData.data : [];
         
-        console.log(`✅ Dietas cargadas para usuario ${id_usuario}:`, dietas);
         return dietas;
         
     } catch (error) {

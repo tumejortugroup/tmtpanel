@@ -27,8 +27,8 @@ let indiceActivo = 0;
 document.addEventListener('DOMContentLoaded', () => {
 
 
-mostrarNombreUsuario();
-cargarListaUsers();
+  mostrarNombreUsuario();
+  cargarListaUsers();
   cargarListaControles();
   mostrarNombreUsuarioHistorial();
 

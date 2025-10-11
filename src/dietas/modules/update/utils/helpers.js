@@ -46,10 +46,8 @@ export function generarOpcionesAlimentos(alimentos, alimentoSeleccionado = null)
 export function obtenerMaxEquivalentes(comidas) {
   let max = 0;
   
-  console.log('=== DEBUGGING OBTENER MAX EQUIVALENTES ===');
   
   Object.values(comidas).forEach((comida, comidaIndex) => {
-    console.log(`Comida ${comidaIndex}: ${comida.tipo_comida}`);
     
     comida.alimentos.forEach((alimento, alimentoIndex) => {
       let count = 0;
@@ -71,17 +69,15 @@ export function obtenerMaxEquivalentes(comidas) {
         }
       });
       
-      console.log(`  Alimento ${alimentoIndex} (${alimento.nombre_alimento}): ${count} equivalentes [${equivalentesEncontrados.join(', ')}]`);
-      console.log(`    Debug IDs: eq4=${alimento.id_alimento_equivalente4}, eq5=${alimento.id_alimento_equivalente5}, eq6=${alimento.id_alimento_equivalente6}`);
+      
       
       if (count > max) {
         max = count;
-        console.log(`    NUEVO MÁXIMO: ${max}`);
       }
     });
   });
   
-  console.log(`MÁXIMO FINAL: ${max}`);
+  (`MÁXIMO FINAL: ${max}`);
   return max;
 }
 

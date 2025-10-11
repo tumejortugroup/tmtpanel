@@ -20,20 +20,20 @@ function initClient() {
         discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
         scope: SCOPES
     }).then(() => {
-        console.log("Cliente de Google API inicializado.");
+        
         const authInstance = gapi.auth2.getAuthInstance();
 
         // Asignar eventos a botones
         document.getElementById('authorize-button').onclick = () => {
             authInstance.signIn().then(() => {
-                console.log("Sesión iniciada.");
+                
                 toggleButtons(true);
             });
         };
 
         document.getElementById('signout-button').onclick = () => {
             authInstance.signOut().then(() => {
-                console.log("Sesión cerrada.");
+                
                 toggleButtons(false);
             });
         };

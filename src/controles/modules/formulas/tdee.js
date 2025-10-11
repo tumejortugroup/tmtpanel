@@ -24,23 +24,13 @@ const ajustesObjetivo = {
 export function calcularTDEE(bmr, actividad) {
   const factor = factoresActividad[actividad] || 1.2;
   const tdee = bmr * factor;
-
-  console.log(`🧮 calcularTDEE():`);
-  console.log(`- BMR: ${bmr}`);
-  console.log(`- Actividad: ${actividad}`);
-  console.log(`- Factor actividad: ${factor}`);
-  console.log(`- Resultado TDEE: ${tdee}`);
-
   return tdee;
 }
 
 export function ajustarTDEE(tdee, objetivo) {
   const ajuste = ajustesObjetivo[objetivo];
   
-  console.log(`🛠️ ajustarTDEE():`);
-  console.log(`- TDEE base: ${tdee}`);
-  console.log(`- Objetivo: ${objetivo}`);
-  console.log(`- Ajuste objetivo: ${ajuste}`);
+
 
   if (ajuste === undefined) {
     console.warn(`❌ Objetivo desconocido: "${objetivo}"`);
@@ -48,7 +38,6 @@ export function ajustarTDEE(tdee, objetivo) {
   }
 
   const tdeeAjustado = tdee + ajuste;
-  console.log(`- TDEE ajustado: ${tdeeAjustado}`);
 
   return tdeeAjustado;
 }

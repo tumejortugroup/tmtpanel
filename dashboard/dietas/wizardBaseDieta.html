@@ -196,17 +196,17 @@
                             <div class="form-group mb-2">
                                 <label class="form-label">Proteínas/kg</label>
                                 <div class="input-group">
-                                    <button id="btn-decrease-protein" class="btn btn-light border"  type="button" onclick="decrement(this)">-</button>
+                                    <button id="btn-decrease-protein" class="btn btn-light border"  type="button">-</button>
                                     <span id="protein-value" class="form-control text-center"></span>
-                                    <button id="btn-increase-protein" class="btn btn-light border" type="button" onclick="increment(this)">+</button>
+                                    <button id="btn-increase-protein" class="btn btn-light border" type="button">+</button>
                                 </div>
                             </div>
                             <div class="form-group mb-2">
                                 <label class="form-label">Grasas/kg</label>
                                 <div class="input-group">
-                                    <button id="btn-decrease-fat"  class="btn btn-light border"  type="button" onclick="decrement(this)">-</button>
+                                    <button id="btn-decrease-fat"  class="btn btn-light border"  type="button">-</button>
                                     <span id="fat-value" class="form-control text-center">-</span>
-                                    <button id="btn-increase-fat" class="btn btn-light border" type="button" onclick="increment(this)">+</button>
+                                    <button id="btn-increase-fat" class="btn btn-light border" type="button">+</button>
                                 </div>
                             </div>
                         </form>
@@ -320,8 +320,14 @@
                             <div class="dataTables_length d-flex align-items-center gap-2" id="datatable_length">
                                 <span>Plantilla:</span>
                                 <select name="datatable_length" aria-controls="datatable" class="form-select form-select-sm w-auto">
-                                <option>Ninguna</option>
-                                <option>25</option>
+                                    <option>Ninguna</option>
+                                </select>
+                            </div>
+
+                              <div class="dataTables_length d-flex align-items-center gap-2" >
+                                <span>Dieta</span>
+                               <select id="dietas-anteriores" class="form-select form-select-sm w-auto">
+                                    <option value="">Ninguna</option>
                                 </select>
                             </div>
                         </div>
@@ -740,7 +746,7 @@
     <script src="/assets/js/hope-ui.js" defer></script>
     <script type="module" src="/src/Auth/main.js"></script>
 
-    <script type="module" src="/src/dietas/modules/plantilla/mainUpdatePlantilla.js"></script>
+    <script type="module" src="/src/dietas/modules/wizardBase/mainWizardBase.js"></script>
     
     
     
