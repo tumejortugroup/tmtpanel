@@ -325,8 +325,7 @@ function renderizarTablaProgresion(historico, idDatoActual) {
     return tabla1 + tabla2;
 }
 
-
-/* =====================
+ /*=====================
    Toolbar sencilla WYSIWYG
    ===================== */
 function ensureEditorToolbar() {
