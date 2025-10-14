@@ -51,6 +51,10 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('rol', rol);
             localStorage.setItem('centro_id', centro_id); 
 
+              window.dispatchEvent(new CustomEvent('dashboardReady', { 
+                detail: { token, nombre, rol, centro_id, id_usuario }
+            }));
+
             // 7. Insertamos opciones del select según el rol del usuario
             const roleSelect = document.getElementById('role');
 

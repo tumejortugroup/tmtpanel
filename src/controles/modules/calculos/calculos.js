@@ -21,7 +21,9 @@ import {
   pesoExtraIntracelular,
   calcularMasaMagraYGrasa,
   indiceMasaMagra,
-  complexionOsea
+  complexionOsea,
+   pesoMuscular,    
+  pesoGraso
 } from '../formulas/composicion.js';
 import { calcularTDEE, ajustarTDEE } from '../formulas/tdee.js';
 import { calcularMacronutrientes } from '../formulas/macros.js';
@@ -96,6 +98,20 @@ export function calcularTodo(index = 0) {
   setValue('kg_grasa', grasa, index);
   setValue('indice_masa_magra', indiceMasaMagra(masaMagra, altura), index);
   setValue('porcentaje_masa_magra', (masaMagra / peso) * 100, index);
+
+// ✅ Peso muscular
+  const { kg: kgMuscular, porcentaje: pctMuscular } = pesoMuscular({
+    masaMagra,
+    pesoOseo,
+    pesoTotal: peso
+  });
+  setValue('peso_muscular', kgMuscular, index);
+  setValue('porcentaje_masa_muscular', pctMuscular, index);
+
+  // ✅ Peso graso
+  const { kg: kgGraso, porcentaje: pctGraso } = pesoGraso(peso, porcentajeGraso);
+  setValue('peso_graso', kgGraso, index);
+  setValue('porcentaje_graso', pctGraso, index);
 
   const complexion = complexionOsea({
     altura,

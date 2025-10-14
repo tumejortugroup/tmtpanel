@@ -15,13 +15,12 @@ import { round } from '../utils/math.js';
 export function pesoOseoRocha({ altura, humero_biepicondileo, femur_bicondileo }) {
   if (!altura || !humero_biepicondileo || !femur_bicondileo) return 0;
   
-  // Convertir a metros
-  const h = altura / 100;
-  const d = humero_biepicondileo / 100;
-  const D = femur_bicondileo / 100;
+  const h = altura / 100; // convertir a metros
+  const d = humero_biepicondileo; // mantener en cm
+  const D = femur_bicondileo; // mantener en cm
 
-  // Fórmula de Rocha: 3.02 × (h² × d × D × 400)^0.712
-  const base = (h * h) * d * D * 400;
+  // Fórmula de Würch: 3.02 × (h² × √(d × D) × 0.04)^0.712
+  const base = h * h * Math.sqrt(d * D) * 0.04;
   const pesoOseo = 3.02 * Math.pow(base, 0.712);
   
   return round(pesoOseo, 2);
@@ -73,6 +72,50 @@ export function calcularMasaMagraYGrasa(peso, porcentajeGraso) {
 export function indiceMasaMagra(kgMasaMagra, altura) {
   if (!kgMasaMagra || !altura) return 0;
   return (kgMasaMagra / ((altura * altura) / 100)) * 100;
+}
+
+/**
+ * Calcula el peso muscular y su porcentaje
+ * Método: Peso Muscular = Masa Magra - Peso Óseo
+ * 
+ * @param {Object} datos
+ * @param {number} datos.masaMagra - Masa magra total en kg
+ * @param {number} datos.pesoOseo - Peso óseo en kg
+ * @param {number} datos.pesoTotal - Peso corporal total en kg
+ * @returns {Object} { kg, porcentaje }
+ */
+export function pesoMuscular({ masaMagra, pesoOseo, pesoTotal }) {
+  if (!masaMagra || !pesoOseo || !pesoTotal) {
+    return { kg: 0, porcentaje: 0 };
+  }
+
+  const kg = masaMagra - pesoOseo;
+  const porcentaje = (kg / pesoTotal) * 100;
+
+  return {
+    kg: round(kg, 2),
+    porcentaje: round(porcentaje, 2)
+  };
+}
+
+/**
+ * Calcula el peso graso y su porcentaje
+ * 
+ * @param {number} pesoTotal - Peso corporal total en kg
+ * @param {number} porcentajeGraso - Porcentaje de grasa corporal
+ * @returns {Object} { kg, porcentaje }
+ */
+export function pesoGraso(pesoTotal, porcentajeGraso) {
+  if (!pesoTotal || porcentajeGraso == null) {
+    return { kg: 0, porcentaje: 0 };
+  }
+
+  const kg = pesoTotal * (porcentajeGraso / 100);
+
+  return {
+    kg: round(kg, 2),
+    porcentaje: round(porcentajeGraso, 2)
+  };
 }
 
 /**

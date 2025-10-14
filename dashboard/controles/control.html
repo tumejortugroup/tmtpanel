@@ -353,7 +353,91 @@
                                 <th class="text-center" colspan="2">COMPOSICIÓN CORPORAL
                                 </th>
                             </tr>
-                    </thead>         
+                    </thead>
+                        <tr class=" " data-variable="imc"> 
+                            <th class="justify-content-between">IMC</th>
+                            <td class="text-center">
+                                <input  type="number" id="disabledTextInput" class="imc form-control" data-index ='1' readonly disabled/>
+                            </td>
+                        </tr>
+                        <tr class=" " data-variable="indice_masa_magra"> 
+                            <th class="justify-content-between">IMM</th>
+                            <td class="text-center">
+                                <input  type="number" id="disabledTextInput" class="indice_masa_magra form-control" data-index ='1' readonly disabled/>
+                            </td>
+                        </tr>
+
+
+                        <!-- % Masa Magra (porcentaje del peso total) -->
+                        <tr class=" " data-variable="porcentaje_masa_magra"> 
+                            <th class="justify-content-between">% Masa magra</th>
+                            <td class="text-center">
+                                <input type="number" id="disabledTextInput" class="porcentaje_masa_magra form-control" data-index='1' readonly disabled/>
+                            </td>
+                        </tr>
+
+                     
+
+                        <!-- ✅ NUEVO: Porcentaje masa muscular -->
+                        <tr class=" " data-variable="porcentaje_masa_muscular"> 
+                            <th class="justify-content-between">% Masa muscular</th>
+                            <td class="text-center">
+                                <input type="number" id="disabledTextInput" class="porcentaje_masa_muscular form-control" data-index='1' readonly disabled/>
+                            </td>
+                        </tr>
+
+                        <tr class=" " data-variable="porcentaje_graso"> 
+                            <th class="justify-content-between">% Graso</th>
+                            <td class="text-center">
+                                <input type="number" id="disabledTextInput" class="porcentaje_graso form-control" data-index='1' readonly disabled/>
+                            </td>
+                        </tr>
+                     
+                        
+                        <tr class=" " data-variable="porcentaje_residual"> 
+                            <th class="justify-content-between">Porcentaje residual</th>
+                            <td class="text-center">
+                                <input  type="number" id="disabledTextInput" class="porcentaje_residual form-control" data-index ='1' readonly disabled/>
+                            </td>
+                        </tr>
+
+                        <tr class=" " data-variable="porcentaje_extracelular"> 
+                            <th class="justify-content-between">Porcentaje extracelular</th>
+                            <td class="text-center">
+                                <input  type="number" id="disabledTextInput" class="porcentaje_extracelular form-control" data-index ='1' readonly disabled/>
+                            </td>
+                        </tr>
+
+                        <tr class=" " data-variable="porcentaje_intracelular"> 
+                            <th class="justify-content-between">Porcentaje intracelular</th>
+                            <td class="text-center">
+                                <input  type="number" id="disabledTextInput" class="porcentaje_intracelular form-control" data-index ='1' readonly disabled/>
+                            </td>
+                        </tr>
+
+                        <tr class=" " data-variable="kg_masa_magra"> 
+                            <th class="justify-content-between">Masa magra (kg)</th>
+                            <td class="text-center">
+                                <input  type="number" id="disabledTextInput" class=" kg_masa_magra form-control" data-index ='1' readonly disabled/>
+                            </td>
+                        </tr>
+
+                           <!-- ✅ NUEVO: Peso muscular -->
+                        <tr class=" " data-variable="peso_muscular"> 
+                            <th class="justify-content-between">Peso muscular (kg)</th>
+                            <td class="text-center">
+                                <input type="number" id="disabledTextInput" class="peso_muscular form-control" data-index='1' readonly disabled/>
+                            </td>
+                        </tr>
+
+                        <tr class=" " data-variable="peso_graso"> 
+                            <th class="justify-content-between">Peso graso (kg)</th>
+                            <td class="text-center">
+                                <input type="number" id="disabledTextInput" class="peso_graso form-control" data-index='1' readonly disabled/>
+                            </td>
+                        </tr>
+
+
                         <tr class=" " data-variable="peso_oseo_rocha"> 
                             <th class="justify-content-between">Peso óseo Rocha</th>
                             <td class="text-center">
@@ -366,60 +450,29 @@
                                 <input  type="number" id="disabledTextInput" class="peso_residual form-control" data-index ='1' readonly disabled/>
                             </td>
                         </tr>
-                        <tr class=" " data-variable="porcentaje_residual"> 
-                            <th class="justify-content-between">Porcentaje residual</th>
-                            <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="porcentaje_residual form-control" data-index ='1' readonly disabled/>
-                            </td>
-                        </tr>
+                      
                         <tr class=" " data-variable="peso_extracelular"> 
                             <th class="justify-content-between">Peso extracelular</th>
                             <td class="text-center">
                                 <input  type="number" id="disabledTextInput" class="peso_extracelular form-control" data-index ='1' readonly disabled/>
                             </td>
                         </tr>
-                        <tr class=" " data-variable="porcentaje_extracelular"> 
-                            <th class="justify-content-between">Porcentaje extracelular</th>
-                            <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="porcentaje_extracelular form-control" data-index ='1' readonly disabled/>
-                            </td>
-                        </tr>
+                       
                         <tr class=" " data-variable="peso_intracelular"> 
                             <th class="justify-content-between">Peso intracelular</th>
                             <td class="text-center">
                                 <input  type="number" id="disabledTextInput" class="peso_intracelular form-control" data-index ='1' readonly disabled/>
                             </td>
                         </tr>
-                        <tr class=" " data-variable="porcentaje_intracelular"> 
-                            <th class="justify-content-between">Porcentaje intracelular</th>
-                            <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="porcentaje_intracelular form-control" data-index ='1' readonly disabled/>
-                            </td>
-                        </tr>
-                        <tr class=" " data-variable="imc"> 
-                            <th class="justify-content-between">IMC</th>
-                            <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="imc form-control" data-index ='1' readonly disabled/>
-                            </td>
-                        </tr>
+                        
                         <tr class=" " data-variable="complex_osea"> 
                             <th class="justify-content-between">Complexión ósea</th>
                             <td class="text-center">
                                 <input  type="number" id="disabledTextInput" class=" complexion_osea form-control" data-index ='1' readonly disabled/>
                             </td>
                         </tr>
-                        <tr class=" " data-variable="kg_masa_magra"> 
-                            <th class="justify-content-between">Masa magra (kg)</th>
-                            <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class=" kg_masa_magra form-control" data-index ='1' readonly disabled/>
-                            </td>
-                        </tr>
-                        <tr class=" " data-variable="porcentaje_masa_magra"> 
-                            <th class="justify-content-between">% Masa magra</th>
-                            <td class="text-center">
-                                <input  type="number" id="disabledTextInput" class="indice_masa_magra form-control" data-index ='1' readonly disabled/>
-                            </td>
-                        </tr>  
+                      
+                        
 
                          <tr class="apartado-controles division-controles" hidden>
                             <th colspan="2">MACRONUTRIENTES</th>
