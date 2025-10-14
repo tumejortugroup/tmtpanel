@@ -118,7 +118,7 @@ export async function cargarControlesPrevios(idUsuario) {
     });
 
     actualizarColspanTabla?.();
-    console.log('✅ Controles previos cargados correctamente.');
+
   } catch (error) {
     console.error('❌ Error al cargar controles previos:', error);
   }

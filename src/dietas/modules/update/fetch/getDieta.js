@@ -14,7 +14,7 @@ export async function getDieta(idDieta) {
     });
 
     const result = await res.json();
-    console.log("📄 Informe recibido:", result.data);
+
 
     return result.data; // ✅ devolvemos los datos al mainUpdate.js
   } catch (error) {

@@ -31,21 +31,13 @@ export function renderizarSelectDietas(dietas) {
 
     // Event listener para el cambio
     select.onchange = function() {
-        console.log('✅ Dieta seleccionada!');
-        const id_dieta2 = this.value;
-        
+        const id_dieta2 = this.value; 
         if (!id_dieta2) {
-
             return;
         }
-
         const id_dieta = obtenerIdDietaDesdeUrl();
-        const id_dato = obtenerDatoDesdeUrl();
-        
-        
-        const url = `/dashboard/dietas/wizardBaseDieta.html?id_dieta=${id_dieta}&id_dato=${id_dato}&id_dieta2=${id_dieta2}`;
-
-        
+        const id_dato = obtenerDatoDesdeUrl();    
+        const url = `/dashboard/dietas/wizardBaseDieta.html?id_dieta=${id_dieta}&id_dato=${id_dato}&id_dieta2=${id_dieta2}`;  
         window.location.href = url;
     };
 }

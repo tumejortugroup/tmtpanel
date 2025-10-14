@@ -239,5 +239,5 @@ export function eliminarUltimaTabla() {
 
   // Eliminar la última tabla normal
   tablasNormales[tablasNormales.length - 1].remove();
-  console.log("✅ Tabla eliminada correctamente");
+
 }

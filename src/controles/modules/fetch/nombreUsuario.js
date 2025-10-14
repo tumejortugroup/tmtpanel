@@ -20,7 +20,7 @@ export async function mostrarNombreUsuario() {
     });
 
     const data = await res.json();
-    console.log('📦 Datos completos del usuario:', data);
+
     
     const nombre = data.nombre || data.username || 'Usuario';
     const numeroUsuarioCompleto = data.numero_usuario; // Capturar numero_usuario completo
@@ -28,8 +28,7 @@ export async function mostrarNombreUsuario() {
     // ✅ Extraer solo los 3 primeros números (antes del guion)
     const numeroUsuario = numeroUsuarioCompleto ? numeroUsuarioCompleto.split('-')[0] : null;
     
-    console.log('🔢 Número de usuario completo:', numeroUsuarioCompleto);
-    console.log('🔢 Número de usuario (3 primeros):', numeroUsuario);
+
 
     // Guardar en localStorage como respaldo
     if (numeroUsuario) {
@@ -41,11 +40,7 @@ export async function mostrarNombreUsuario() {
       const option = select.querySelector(`option[value="${id}"]`);
       if (option) {
         select.value = id;
-        
-        // Almacenar numero_usuario en data attribute
         select.dataset.numeroUsuario = numeroUsuario;
-        
-        console.log('✅ Número de usuario almacenado en select:', select.dataset.numeroUsuario);
       } else {
         setTimeout(esperarOSeleccionar, 100);
       }

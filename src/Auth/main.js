@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(html => {
                 document.getElementById('aside').innerHTML = html;
-                console.log("✅ aside cargado");
+
             })
             .catch(err => console.error(err));
         // 2. Cargar NAVBAR

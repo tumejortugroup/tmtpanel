@@ -20,7 +20,6 @@ export async function cargarCentrosSelect(endpoint, selectId) {
       select.appendChild(option);
     });
 
-    console.log("✅ Centros cargados correctamente.");
   } catch (error) {
     console.error("❌ Error cargando centros:", error);
   }

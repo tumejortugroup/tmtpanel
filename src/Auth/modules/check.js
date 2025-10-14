@@ -11,7 +11,7 @@ export async function checkSession() {
     }
 
     if (!token || token.trim() === '') {
-        console.log('Token inválido o no encontrado');
+
         window.location.href = '/dashboard/auth/sign-in.html';
         return;
     }

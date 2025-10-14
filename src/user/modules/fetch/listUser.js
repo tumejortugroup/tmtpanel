@@ -5,7 +5,7 @@ async function obtenerUltimaDieta(id_usuario) {
     const token = localStorage.getItem("token");
     const endpoint = `https://my.tumejortugroup.com/api/v1/dietas/last/${id_usuario}`;
 
-    console.log(`🔍 Obteniendo última dieta para usuario ${id_usuario}`);
+
 
     try {
         const response = await fetch(endpoint, {
@@ -22,10 +22,10 @@ async function obtenerUltimaDieta(id_usuario) {
         }
 
         const data = await response.json();
-        console.log(`✅ Data para usuario ${id_usuario}:`, data);
+
         
         if (data && data.success && data.data) {
-            console.log(`✅ Dieta encontrada:`, data.data);
+
             return data.data;
         } else {
             console.warn(`⚠️ No se encontró dieta para usuario ${id_usuario}`);
@@ -72,16 +72,13 @@ export async function listUser() {
 
         tbody.innerHTML = "";
 
-        console.log(`👥 Obteniendo dietas para ${usuarios.length} usuarios...`);
 
         // Obtener las últimas dietas de todos los usuarios en paralelo
         const dietasPromises = usuarios.map(usuario => obtenerUltimaDieta(usuario.id_usuario));
         const dietas = await Promise.all(dietasPromises);
 
-        console.log(`✅ Dietas obtenidas:`, dietas);
-
        usuarios.forEach((usuario, index) => {
-    const dietaData = dietas[index];
+        const dietaData = dietas[index];
     
     // Si dietaData es un número, convertirlo a objeto
     const dietaInfo = typeof dietaData === 'number' 
@@ -127,7 +124,7 @@ export async function listUser() {
             tbody.insertAdjacentHTML("beforeend", rowHTML);
         });
 
-        console.log(`✅ Tabla de usuarios renderizada con ${usuarios.length} filas`);
+
 
     } catch (error) {
         console.error("❌ Error al cargar los usuarios:", error.message);

@@ -57,7 +57,7 @@ export async function cargarPlantillasCentro() {
       tbody.insertAdjacentHTML("beforeend", rowHTML);
     });
 
-    console.log(`✅ ${plantillas.length} plantillas cargadas en la tabla`);
+
 
     // Event listener para eliminar plantillas
     document.querySelectorAll('.eliminar-plantilla').forEach(btn => {
@@ -100,7 +100,7 @@ async function eliminarPlantilla(idPlantilla) {
       throw new Error(`❌ Error HTTP: ${response.status} - ${response.statusText}`);
     }
 
-    console.log("✅ Plantilla eliminada correctamente");
+
     
     // Recargar la lista de plantillas
     await cargarPlantillasCentro();

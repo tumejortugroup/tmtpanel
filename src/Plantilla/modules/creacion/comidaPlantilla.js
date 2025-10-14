@@ -1,8 +1,8 @@
 export async function asociarComidasAPlantilla(id_plantilla, idsComidas) {
-  console.log("🚀 asociarComidasAPlantilla() llamado con:", { id_plantilla, idsComidas });
+
 
   const payload = { comidas: idsComidas };
-  console.log("📦 Payload que se enviará:", payload);
+
 
   try {
     const token = localStorage.getItem("token");
@@ -20,10 +20,10 @@ export async function asociarComidasAPlantilla(id_plantilla, idsComidas) {
     );
 
     const data = await res.json();
-    console.log("📩 Respuesta de la API en asociación:", res.status, data);
+
 
     if (res.ok) {
-      console.log("✅ Comidas asociadas correctamente a la plantilla", id_plantilla);
+
     } else {
       alert("❌ Error al asociar comidas: " + (data.error || res.status));
     }

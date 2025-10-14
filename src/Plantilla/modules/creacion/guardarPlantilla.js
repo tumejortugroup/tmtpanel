@@ -10,7 +10,7 @@ export async function guardarPlantillaCompleta() {
       alert("❌ No se pudo crear la plantilla.");
       return;
     }
-    console.log("📦 Plantilla creada con ID:", id_plantilla);
+
 
     // 2. Crear comidas
     const comidas = await crearComidas();
@@ -20,7 +20,6 @@ export async function guardarPlantillaCompleta() {
     }
 
     const idsComidas = comidas.map(c => c?.id_comida).filter(Boolean);
-    console.log("🍽️ IDs de comidas creadas:", idsComidas);
 
     if (!idsComidas.length) {
       alert("⚠️ No se generaron comidas válidas para asociar.");

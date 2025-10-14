@@ -13,7 +13,6 @@ import { cargarPlantillasCentro } from '/src/dietas/modules/plantilla/fetch/fetc
 function borrarComidasDeDieta(data) {
   const ids = data.map(item => item.id_comida);
   const idsUnicas = [...new Set(ids)];
-  console.log("🚀 Enviando a borrar:", idsUnicas);
   return eliminarComidas(idsUnicas);
 }
 

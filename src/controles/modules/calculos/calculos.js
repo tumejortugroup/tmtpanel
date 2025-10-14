@@ -78,7 +78,7 @@ export function calcularTodo(index = 0) {
     humero_biepicondileo: getFloat('humero_bicondileo', index),  // ← CORREGIDO
     femur_bicondileo: getFloat('femur_bicondileo', index)
   });
-  console.log('peso oseo rocha:', pesoOseo);
+
   setValue('peso_oseo_rocha', pesoOseo, index);
 
   const { kg: pr, porcentaje: prPct } = pesoResidual(peso, genero);
@@ -101,7 +101,7 @@ export function calcularTodo(index = 0) {
     altura,
     muñeca: getFloat('muneca_estiloideo', index)
   });
-  console.log('complexion_osea', complexion);
+
   setValue('complexion_osea', complexion, index);
 
   // TDEE

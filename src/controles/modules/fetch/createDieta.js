@@ -76,11 +76,11 @@ export async function crearDieta(id_usuario, id_dato) {
       throw new Error(`❌ Error al asignar la dieta al usuario logueado: HTTP ${resAsignacion.status}`);
     }
 
-    console.log(`✅ Dieta creada: ${nombreDieta}`);
+
     
     // ✅ Eliminar numero_usuario del localStorage después de crear la dieta
     localStorage.removeItem("numero_usuario_actual");
-    console.log('🗑️ numero_usuario eliminado del localStorage');
+
     
     return id_dieta;
 

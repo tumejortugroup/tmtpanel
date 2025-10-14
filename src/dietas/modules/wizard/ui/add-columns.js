@@ -1,9 +1,4 @@
 import { renderSelectAlimentos } from '/src/dietas/modules/wizard/ui/renderAlimentos.js';
-
-
-
-
-
 import { renderTablaEquivalencias } from '/src/dietas/modules/wizard/ui/renderEquivalencias.js';
 
 export function addColumns() {
@@ -15,6 +10,15 @@ export function addColumns() {
 
     const currentCols = headerRow.children.length;
     if (currentCols >= 21) return;
+
+    // --- Actualizar colspan en TODAS las filas del thead ---
+    const theadRows = table.querySelectorAll("thead tr");
+    theadRows.forEach(row => {
+      row.querySelectorAll("th[colspan]").forEach(cell => {
+        const currentColspan = parseInt(cell.getAttribute("colspan")) || 1;
+        cell.setAttribute("colspan", currentColspan + 2);
+      });
+    });
 
     // --- Añadir cabeceras ---
     const thEq = document.createElement("th");
@@ -29,6 +33,12 @@ export function addColumns() {
     const bodyRows = table.querySelectorAll("tbody tr");
     bodyRows.forEach(row => {
       if (row.querySelector("textarea")) return;
+
+      // Actualizar colspan en tbody también si existe
+      row.querySelectorAll("td[colspan]").forEach(cell => {
+        const currentColspan = parseInt(cell.getAttribute("colspan")) || 1;
+        cell.setAttribute("colspan", currentColspan + 2);
+      });
 
       const tdEq = document.createElement("td");
       tdEq.classList.add("px-1", "py-0");

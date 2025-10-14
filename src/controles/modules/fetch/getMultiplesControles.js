@@ -149,5 +149,5 @@ export async function cargarControlesSeleccionados() {
 
 
       actualizarColspanTabla?.();
-  console.log('✅ Controles seleccionados mostrados correctamente.');
+
 }

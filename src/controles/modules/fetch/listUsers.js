@@ -13,8 +13,6 @@ export async function cargarListaUsers() {
     });
 
     const result = await res.json();
-    console.log('📦 Respuesta del servidor:', result);
-
     if (!Array.isArray(result)) {
       console.warn('❌ La respuesta del servidor no es una lista de usuarios');
       return;
@@ -34,11 +32,9 @@ export async function cargarListaUsers() {
     ul.removeAttribute('style');
     btn.setAttribute('aria-expanded', 'false');
 
-    // Limpiar el contenido previo del UL y poner un encabezado
     ul.innerHTML = '';
     const liHeader = document.createElement('li');
-    //liHeader.innerHTML = `<h6 class="dropdown-header">Seleccionar usuario</h6>`;
-    //ul.appendChild(liHeader);
+
 
     // Poblar el UL con items con estilo Bootstrap
     result.forEach(user => {
@@ -77,8 +73,6 @@ export async function cargarListaUsers() {
         window.location.href = `/dashboard/controles/control.html?id=${encodeURIComponent(idUsuario)}`;
       }
     });
-
-    console.log('✅ Lista de usuarios cargada en el dropdown.');
   } catch (err) {
     console.error('❌ Error al cargar usuarios:', err);
   }

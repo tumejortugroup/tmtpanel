@@ -4,7 +4,7 @@ import { actualizarUsuario } from "./modules/fetch/updateUser.js";
 document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
-    console.log("ID desde URL:", id);
+
 
     if (id) {
         cargarUsuario(id);

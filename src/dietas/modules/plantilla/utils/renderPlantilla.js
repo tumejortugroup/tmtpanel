@@ -55,8 +55,6 @@ export async function renderPlantilla({ data, comidas }) {
     // Agregar recálculo de equivalencias
     await agregarCalculoEquivalencias(contenedor);
 
-    console.log('Plantilla renderizada exitosamente');
-
   } catch (error) {
     console.error('Error en renderPlantilla:', error);
   }

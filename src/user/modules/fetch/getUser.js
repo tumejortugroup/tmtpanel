@@ -20,7 +20,6 @@ export async function cargarUsuario(id) {
         }
 
         const usuario = await response.json();
-        console.log('Usuario cargado:', usuario);
 
         setTimeout(() => {
             const mapeo = {

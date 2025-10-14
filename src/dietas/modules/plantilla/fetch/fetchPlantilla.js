@@ -39,7 +39,6 @@ export async function cargarPlantillasCentro() {
       selectPlantillas.appendChild(option);
     });
 
-    console.log(`✅ ${plantillas.length} plantillas cargadas`);
 
     // Event listener para capturar cambio de plantilla
     selectPlantillas.addEventListener('change', function() {
@@ -52,7 +51,7 @@ export async function cargarPlantillasCentro() {
         
         const nuevaURL = `/dashboard/dietas/wizardUpdatePlantilla.html?id_dieta=${idDieta}&id_dato=${idDato}&id_plantilla=${idPlantillaSeleccionada}`;
         
-        console.log('Redirigiendo a:', nuevaURL);
+
         window.location.href = nuevaURL;
       }
     });

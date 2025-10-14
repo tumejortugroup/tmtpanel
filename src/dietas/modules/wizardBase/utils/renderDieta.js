@@ -67,7 +67,7 @@ export async function renderDieta({ data, comidas }) {
 }
 
 // 🔧 Nueva función para agregar cálculo automático de equivalencias
-async function agregarCalculoEquivalencias(contenedor) {
+export async function agregarCalculoEquivalencias(contenedor) {
   // Importar las funciones necesarias
   const { getEquivalencia } = await import('/src/dietas/modules/wizard/fetch/getEquivalencias.js');
   

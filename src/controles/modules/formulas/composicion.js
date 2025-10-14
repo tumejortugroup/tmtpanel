@@ -57,8 +57,6 @@ export function pesoExtraIntracelular(peso, genero) {
  * @returns {Object} { masaMagra, grasa }
  */
 export function calcularMasaMagraYGrasa(peso, porcentajeGraso) {
-  console.log('Porcentaje graso:', porcentajeGraso);
-
   if (!peso || porcentajeGraso == null) return { masaMagra: 0, grasa: 0 };
   const kgGrasa = peso * (porcentajeGraso / 100);
   const masaMagra = peso - kgGrasa;

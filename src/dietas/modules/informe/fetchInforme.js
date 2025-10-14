@@ -14,10 +14,6 @@ export async function fetchInformeDieta(idDieta) {
     return;
   }
 
-  // Debug: verificar el token
-  console.log("Token encontrado:", token ? "Sí" : "No");
-  console.log("Longitud del token:", token?.length);
-
   try {
     const res = await fetch(`https://my.tumejortugroup.com/api/v1/dietas/informe/${idDieta}`, {
       method: 'GET',
@@ -27,7 +23,6 @@ export async function fetchInformeDieta(idDieta) {
       }
     });
 
-    console.log("Status de respuesta:", res.status);
 
     if (!res.ok) {
       const errorData = await res.json();
@@ -36,7 +31,6 @@ export async function fetchInformeDieta(idDieta) {
     }
 
     const result = await res.json();
-    console.log("Respuesta completa:", result);
 
     if (result.success && result.data) {
       renderInformeDieta(result.data);

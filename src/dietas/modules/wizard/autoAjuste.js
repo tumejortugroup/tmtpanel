@@ -8,7 +8,7 @@ import { cargarDietasUsuario, renderizarSelectDietas } from '/src/dietas/modules
 import { setCaloriasObjetivo } from '/src/dietas/modules/wizard/utils/caloriasStore.js'; // 👈 IMPORTAR
 
 export async function ejecutarAutoAjuste() {
-  console.log('🟡 [ejecutarAutoAjuste] Inicio');
+
   
   inicializarGrafico();
   configurarBotones();
@@ -18,9 +18,7 @@ export async function ejecutarAutoAjuste() {
     const peso = parseFloat(detalle?.data?.peso);
     const id_usuario = detalle?.data?.id_usuario;
 
-    console.log('🟡 Datos obtenidos:');
-    console.log('   Peso:', peso);
-    console.log('   ID Usuario:', id_usuario);
+
 
     if (id_usuario) {
       const dietas = await cargarDietasUsuario(id_usuario);
@@ -47,11 +45,6 @@ export async function ejecutarAutoAjuste() {
     const grasas = parseFloat(grasas_dieta);
     const carbohidratos = parseFloat(carbohidratos_dieta);
 
-    console.log('🟡 Datos de la dieta (backend):');
-    console.log('   Calorías:', calorias);
-    console.log('   Proteínas:', proteinas, 'g');
-    console.log('   Grasas:', grasas, 'g');
-    console.log('   Carbohidratos:', carbohidratos, 'g');
 
     if ([proteinas, grasas, carbohidratos].some(v => isNaN(v))) {
       console.error("❌ Algún dato de macronutriente no es válido:", { proteinas, grasas, carbohidratos });
@@ -61,13 +54,10 @@ export async function ejecutarAutoAjuste() {
     // ✅ GUARDAR calorías objetivo en el store
     setCaloriasObjetivo(calorias);
 
-    console.log('🟡 Llamando a inicializarAutoAjuste...');
     await inicializarAutoAjuste();
-    
-    console.log('🟡 Llamando a actualizarGraficoMacronutrientes (desde ejecutarAutoAjuste)...');
+
     actualizarGraficoMacronutrientes(calorias, proteinas, grasas, carbohidratos);
-    
-    console.log('🟡 [ejecutarAutoAjuste] Fin');
+
 
   } catch (error) {
     console.error("❌ Error al inicializar el autoajuste:", error);

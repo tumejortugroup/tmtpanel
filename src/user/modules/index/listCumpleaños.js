@@ -3,7 +3,6 @@ import { formatearFecha } from "/src/user/modules/utils/formatearFecha.js";
 export async function listCumpleaños() {
     const token = localStorage.getItem("token");
     const centro_id = localStorage.getItem("centro_id");
-    console.log('Pasa funcion')
 
     if (!token || !centro_id) {
         console.warn("⚠️ Faltan datos: token o centro_id no encontrados en localStorage.");
@@ -13,13 +12,13 @@ export async function listCumpleaños() {
     const endpoint = `https://my.tumejortugroup.com/api/v1/usuarios/centro/cumpleaños?id=${centro_id}`;
 
     try {
-       console.log("🚀 Llamando a endpoint:", endpoint);
 
-const response = await fetch(endpoint, {
-    method: "GET",
-    headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
+
+    const response = await fetch(endpoint, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
     }
 });
 
@@ -32,8 +31,6 @@ const response = await fetch(endpoint, {
 
         const usuarios = await response.json();
 
-            // 👀 Mostramos el array de usuarios en consola
-    console.log("✅ Usuarios recibidos:", usuarios);
     console.table(usuarios);
 
         // Seleccionamos el contenedor de la card
@@ -50,7 +47,7 @@ const response = await fetch(endpoint, {
         ? formatearFecha(usuario.proximo_cumple) 
         : "Sin fecha";
 
-    console.log(`🖌 Pintando usuario ${index + 1}:`, nombreCompleto, cumpleFormateado);
+
 
     const userHTML = `
         <div class="d-flex justify-content-start align-items-center ${index > 0 ? "mt-4" : ""}">

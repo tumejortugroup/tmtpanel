@@ -20,10 +20,10 @@ export async function crearComidas() {
     });
 
     const data = await res.json();
-    console.log("📩 Respuesta crearComidas:", data);
+
 
     if (res.ok && Array.isArray(data.data)) {
-      console.log("✅ Comidas creadas con éxito:", data.data);
+
       return data.data; // 👈 devolvemos solo el array [{id_comida:...}]
     } else {
       console.error("❌ Error al crear comidas:", data);

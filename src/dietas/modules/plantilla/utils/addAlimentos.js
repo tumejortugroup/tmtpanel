@@ -163,7 +163,7 @@ export async function addColumns() {
     await agregarEventosEquivalenciaFila(fila);
   }
 
-  console.log("✅ Columna añadida correctamente");
+  
 }
 
 // 📌 ELIMINAR COLUMNAS
@@ -206,5 +206,5 @@ export async function removeColumns() {
     await agregarEventosEquivalenciaFila(fila);
   }
 
-  console.log("✅ Columna eliminada correctamente");
+  
 }

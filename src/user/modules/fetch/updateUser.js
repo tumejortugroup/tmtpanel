@@ -24,7 +24,6 @@ export async function actualizarUsuario(id) {
         return;
     }
 
-    console.log('📤 Datos a enviar:', data);
 
     try {
         const response = await fetch(`https://my.tumejortugroup.com/api/v1/usuarios/${id}`, {
@@ -42,7 +41,7 @@ export async function actualizarUsuario(id) {
         }
 
         const result = await response.json();
-        console.log("✅ Usuario actualizado:", result);
+
         alert("Usuario actualizado con éxito.");
         
         // Opcional: Redirigir a la lista de usuarios

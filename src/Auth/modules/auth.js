@@ -29,7 +29,6 @@ export function initAuth() {
             }
 
             const data = await response.json();
-            console.log("🔎 Login API response:", data);
 
             if (data?.token) {
                 localStorage.setItem('token', data.token);

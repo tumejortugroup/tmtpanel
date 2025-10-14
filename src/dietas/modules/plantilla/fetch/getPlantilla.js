@@ -14,7 +14,7 @@ export async function getPlantilla(idPlantilla) {
     });
 
     const result = await res.json();
-    console.log("📄 Plantilla recibida:", result.data);
+
 
     return result.data;
   } catch (error) {

@@ -104,7 +104,7 @@ async function agregarEventosEquivalenciaFila(fila) {
 
 // 📌 AÑADIR COLUMNAS
 export async function addColumns() {
-  const tables = document.querySelectorAll(".table-dieta"); // Más específico
+  const tables = document.querySelectorAll(".table-dieta");
   const alimentos = obtenerAlimentosDisponibles();
 
   tables.forEach(table => {
@@ -112,10 +112,24 @@ export async function addColumns() {
     if (!headerRow) return;
 
     const currentCols = headerRow.children.length;
-    // Máximo 21 columnas: 3 fijas + 9 pares de equivalencias (18)
     if (currentCols >= 21) {
       console.warn("⚠️ Ya hay el máximo de columnas (9 equivalencias)");
       return;
+    }
+
+    // 🔥 ACTUALIZAR COLSPAN ANTES DE AÑADIR COLUMNAS
+    // 1. Primera fila del thead (donde está el select de tipo de comida)
+    const firstHeaderTh = table.querySelector("thead tr:first-child th[colspan]");
+    if (firstHeaderTh) {
+      const colspanActual = parseInt(firstHeaderTh.getAttribute("colspan")) || currentCols;
+      firstHeaderTh.setAttribute("colspan", colspanActual + 2);
+    }
+
+    // 2. Fila de observaciones en tbody
+    const observacionesTd = table.querySelector("tbody tr:last-child td[colspan]");
+    if (observacionesTd) {
+      const colspanActual = parseInt(observacionesTd.getAttribute("colspan")) || (currentCols - 1);
+      observacionesTd.setAttribute("colspan", colspanActual + 2);
     }
 
     // Calcular el número de equivalencia
@@ -133,7 +147,6 @@ export async function addColumns() {
     // --- Añadir celdas en cada fila del tbody ---
     const bodyRows = table.querySelectorAll("tbody tr");
     bodyRows.forEach(row => {
-      // Saltar fila de observaciones
       if (row.querySelector("textarea")) return;
 
       const tdEq = document.createElement("td");
@@ -153,7 +166,7 @@ export async function addColumns() {
     });
   });
 
-  // 👇 IMPORTANTE: Limpiar marca de eventos y reaplicar
+  // 👇 Limpiar marca de eventos y reaplicar
   const todasLasFilas = document.querySelectorAll(".table-dieta tbody tr:not(:last-child)");
   todasLasFilas.forEach(fila => {
     fila.dataset.eventosAgregados = 'false';
@@ -162,7 +175,6 @@ export async function addColumns() {
   for (const fila of todasLasFilas) {
     await agregarEventosEquivalenciaFila(fila);
   }
-
 }
 
 // 📌 ELIMINAR COLUMNAS
@@ -173,12 +185,30 @@ export async function removeColumns() {
     const headerRow = table.querySelector("thead tr:last-child");
     if (!headerRow) return;
 
-    const bodyRows = table.querySelectorAll("tbody tr");
+    const currentCols = headerRow.children.length;
 
-    // Mínimo 3 columnas fijas + 2 (1 equivalencia)
-    if (headerRow.children.length <= 5) {
+    if (currentCols <= 5) {
       console.warn("⚠️ No se puede eliminar más columnas (mínimo 1 equivalencia)");
       return;
+    }
+
+    // 🔥 ACTUALIZAR COLSPAN ANTES DE ELIMINAR COLUMNAS
+    // 1. Primera fila del thead
+    const firstHeaderTh = table.querySelector("thead tr:first-child th[colspan]");
+    if (firstHeaderTh) {
+      const colspanActual = parseInt(firstHeaderTh.getAttribute("colspan"));
+      if (colspanActual > 2) {
+        firstHeaderTh.setAttribute("colspan", colspanActual - 2);
+      }
+    }
+
+    // 2. Fila de observaciones en tbody
+    const observacionesTd = table.querySelector("tbody tr:last-child td[colspan]");
+    if (observacionesTd) {
+      const colspanActual = parseInt(observacionesTd.getAttribute("colspan"));
+      if (colspanActual > 2) {
+        observacionesTd.setAttribute("colspan", colspanActual - 2);
+      }
     }
 
     // Eliminar últimas 2 columnas de header
@@ -186,8 +216,8 @@ export async function removeColumns() {
     headerRow.removeChild(headerRow.lastElementChild);
 
     // Eliminar últimas 2 celdas de cada fila
+    const bodyRows = table.querySelectorAll("tbody tr");
     bodyRows.forEach(row => {
-      // Saltar fila de observaciones
       if (row.querySelector("textarea")) return;
       
       if (row.lastElementChild) row.removeChild(row.lastElementChild);
@@ -195,7 +225,7 @@ export async function removeColumns() {
     });
   });
 
-  // 👇 IMPORTANTE: Limpiar marca de eventos y reaplicar
+  // 👇 Limpiar marca de eventos y reaplicar
   const todasLasFilas = document.querySelectorAll(".table-dieta tbody tr:not(:last-child)");
   todasLasFilas.forEach(fila => {
     fila.dataset.eventosAgregados = 'false';
@@ -204,5 +234,4 @@ export async function removeColumns() {
   for (const fila of todasLasFilas) {
     await agregarEventosEquivalenciaFila(fila);
   }
-
 }

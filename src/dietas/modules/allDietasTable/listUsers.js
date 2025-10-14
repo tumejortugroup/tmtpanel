@@ -110,8 +110,6 @@ export async function listUser() {
         }
       }
     }
-
-    console.log("✅ Usuarios y dietas cargados correctamente.");
   } catch (error) {
     console.error("❌ Error al cargar usuarios o dietas:", error);
   }

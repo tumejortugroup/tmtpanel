@@ -84,6 +84,5 @@ export function generarPayloadComidas() {
     }
   });
 
-  console.log("📦 Payload generado para comidas:", comidas);
   return comidas;
 }

@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const index = parseInt(el.getAttribute('data-index'));
       if (!isNaN(index)) {
         indiceActivo = index;
-        console.log('Índice activo:', indiceActivo);
+
       }
     }
   });
@@ -77,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // 👉 Listener global al botón "Guardar"
 document.addEventListener('click', (e) => {
   if (e.target.matches('button.guardar-control')) {
-    console.log('🖱️ Botón "Guardar" clicado.');
     guardarControl();
   }
 });
