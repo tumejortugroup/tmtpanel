@@ -72,19 +72,19 @@ export async function listUser() {
           <td>${selectHTML}</td>
           <td>
 
-          <div class="flex align-items-center list-user-action justify-content-center">
-              <div class="dropdown">
-                <button class="btn btn-sm btn-icon" type="button" id="" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="bi bi-three-dots-vertical"></i>
-                </button>
-                    <ul class="dropdown-menu" aria-labelledby="">
-                        <li><button class="dropdown-item" onclick="'">Ver Control</button></li>
-                        <li><button class="dropdown-item" onclick="'">Ver Dieta</button></li>
-                        <li><button class="dropdown-item" onclick="'">Editar Dieta</button></li>
-                        <li><button class="dropdown-item btn-eliminar" data-nombre="" data-id="">Eliminar Dieta</button></li>
-                    </ul>
-              </div>
-            </div>
+         <div class="flex align-items-center list-user-action justify-content-center">
+          <div class="dropdown">
+            <button class="btn btn-sm btn-icon" type="button" id="" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-three-dots-vertical"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="">
+              <li><button class="dropdown-item btn-ver-control">Ver Control</button></li>
+              <li><button class="dropdown-item btn-ver-dieta">Ver Dieta</button></li>
+              <li><button class="dropdown-item btn-editar-dieta">Editar Dieta</button></li>
+              <li><button class="dropdown-item btn-eliminar">Eliminar Dieta</button></li>
+            </ul>
+          </div>
+        </div>
 
           
             <div class="flex align-items-center list-user-action" style="display:none;">

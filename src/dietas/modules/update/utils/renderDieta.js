@@ -123,7 +123,13 @@ async function agregarCalculoEquivalencias(contenedor) {
         try {
           const eqVal = await getEquivalencia(idPrincipal, select.value, categoria, cantidad);
           if (td.tagName === 'TD') {
-            td.textContent = eqVal !== null ? `${eqVal}` : "-";
+            // ⬇️ CAMBIO: Redondear hacia arriba sin decimales
+            if (eqVal !== null) {
+              const valorRedondeado = Math.ceil(eqVal);
+              td.textContent = `${valorRedondeado}`;
+            } else {
+              td.textContent = "-";
+            }
           }
         } catch (error) {
           console.error('Error calculando equivalencia:', error);

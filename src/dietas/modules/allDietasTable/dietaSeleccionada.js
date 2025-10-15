@@ -1,25 +1,3 @@
-/**
- * asignarEventoSelectDieta()
- * --------------------------
- * Asocia la lógica de actualización a un <select> de dietas dentro de una fila de usuario.
- *
- * Funcionalidad:
- * - Escucha cambios en el select de dietas.
- * - Al seleccionar una dieta:
- *    - Obtiene los datos asociados vía API (`/dietas/:id/dato`).
- *    - Actualiza dinámicamente las celdas de nombre y fecha.
- *    - Refresca los enlaces de "Ver" y "Editar" para que apunten a la dieta seleccionada.
- * - Si se resetea el select, limpia las celdas.
- *
- * Parámetros:
- * @param {HTMLElement} rowElement - Fila de la tabla que contiene el select y botones.
- * @param {string} token - JWT para autorización en las peticiones.
- *
- * Consideraciones:
- * - Ignora la ejecución si no existe el select en la fila.
- * - Maneja errores de red/API y deja trazas en consola sin romper la UI.
- */
-
 export function asignarEventoSelectDieta(rowElement, token) {
   const selectDieta = rowElement.querySelector('select[name="select-dieta"]');
   if (!selectDieta) return;
@@ -42,28 +20,63 @@ export function asignarEventoSelectDieta(rowElement, token) {
         if (fechaDatoTd) fechaDatoTd.textContent = data.fecha_creacion?.split(' ')[0] || '—';
       }
 
-      // 🔗 actualizar botones
-      const verBtn = rowElement.querySelector('.btn-ver-dieta');
+      // 🔗 Actualizar botones directos
+      const verBtn = rowElement.querySelector('.list-user-action:last-child .btn-ver-dieta');
       if (verBtn) verBtn.href = `/dashboard/dietas/dieta.html?id_dieta=${idDieta}`;
 
-      const editarBtn = rowElement.querySelector('.btn-editar-dieta');
+      const editarBtn = rowElement.querySelector('.list-user-action:last-child .btn-editar-dieta');
       if (editarBtn) editarBtn.href = `/dashboard/dietas/wizardUpdate.html?id_dieta=${idDieta}&id_dato=${data?.id_dato || ""}`;
+
+      // 🔗 Actualizar botones del dropdown
+      const dropdownVerControl = rowElement.querySelector('.dropdown-menu .btn-ver-control');
+      if (dropdownVerControl) {
+        dropdownVerControl.onclick = () => {
+          // Obtener el id_usuario de la fila
+          const idUsuario = rowElement.querySelector('[data-id-usuario]')?.dataset.idUsuario || 
+                            rowElement.dataset.idUsuario || 
+                            rowElement.querySelector('td:first-child')?.textContent.trim();
+          
+          window.location.href = `/dashboard/controles/informe.html?id_usuario=${idUsuario}&id_dato=${data?.id_dato || ""}`;
+        };
+      }
+
+      const dropdownVerDieta = rowElement.querySelector('.dropdown-menu .btn-ver-dieta');
+      if (dropdownVerDieta) {
+        dropdownVerDieta.onclick = () => {
+          window.location.href = `/dashboard/dietas/dieta.html?id_dieta=${idDieta}`;
+        };
+      }
+
+      const dropdownEditarDieta = rowElement.querySelector('.dropdown-menu .btn-editar-dieta');
+      if (dropdownEditarDieta) {
+        dropdownEditarDieta.onclick = () => {
+          window.location.href = `/dashboard/dietas/wizardUpdate.html?id_dieta=${idDieta}&id_dato=${data?.id_dato || ""}`;
+        };
+      }
+
+      const dropdownEliminar = rowElement.querySelector('.dropdown-menu .btn-eliminar');
+      if (dropdownEliminar) {
+        dropdownEliminar.setAttribute('data-id', idDieta);
+        dropdownEliminar.setAttribute('data-nombre', data?.nombre_dato || 'Dieta');
+      }
+
     } catch (err) {
       console.error("❌ Error al obtener dato de dieta:", err);
     }
   }
 
-  // 👉 cada vez que se cambia de opción
   selectDieta.addEventListener('change', e => {
     const idDieta = e.target.value;
     if (idDieta) {
       actualizarFila(idDieta);
     } else {
-      // resetear si no hay valor
       const nombreDatoTd = rowElement.querySelector('.nombre-dato');
       const fechaDatoTd = rowElement.querySelector('.fecha-dato');
       if (nombreDatoTd) nombreDatoTd.textContent = '—';
       if (fechaDatoTd) fechaDatoTd.textContent = '—';
+
+      const dropdownBtns = rowElement.querySelectorAll('.dropdown-menu button');
+      dropdownBtns.forEach(btn => btn.onclick = null);
     }
   });
 }

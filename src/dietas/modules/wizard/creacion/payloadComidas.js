@@ -71,10 +71,12 @@ export function generarPayloadComidas() {
       alimentos.push(alimento);
     });
 
-    if (alimentos.length > 0) {
-      const hora = tabla.querySelector("input[name='cantidad-alimentos']")?.value || "";
-      const nota = tabla.querySelector(".text-dieta")?.value || "";
+    // Capturar hora y nota
+    const hora = tabla.querySelector("input[type='time']")?.value || "";
+    const nota = tabla.querySelector("textarea")?.value || "";
 
+    // ⬇️ CAMBIO: Agregar comida incluso si no tiene alimentos (para suplementación)
+    if (alimentos.length > 0 || nota.trim() !== "") {
       comidas.push({
         tipo_comida: tipoComida,
         hora: hora,
@@ -83,6 +85,21 @@ export function generarPayloadComidas() {
       });
     }
   });
+
+  // ⬇️ NUEVO: Capturar tabla de suplementación por separado
+  const tablaSuplemento = document.getElementById("Suplementacion");
+  if (tablaSuplemento) {
+    const notaSuplemento = tablaSuplemento.querySelector("textarea")?.value || "";
+    
+    if (notaSuplemento.trim() !== "") {
+      comidas.push({
+        tipo_comida: "suplementacion",
+        hora: "",
+        nota: notaSuplemento,
+        alimentos: []
+      });
+    }
+  }
 
   return comidas;
 }

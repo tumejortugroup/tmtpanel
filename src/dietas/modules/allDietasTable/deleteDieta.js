@@ -4,7 +4,7 @@
  * Inicializa la lógica de eliminación de dietas en la tabla de usuarios.
  *
  * Flujo:
- * - Escucha clicks delegados en el `<table>`, buscando el botón `.btn-eliminar-dieta`.
+ * - Escucha clicks delegados en el `<table>`, buscando el botón `.btn-eliminar-dieta` o `.btn-eliminar`.
  * - Verifica que el usuario haya seleccionado una dieta en el `<select>`.
  * - Solicita confirmación antes de proceder.
  * - Llama a la API (`DELETE /dietas/:id`) con el token almacenado.
@@ -24,7 +24,8 @@ export function initDeleteDieta() {
   if (!table) return;
 
   table.addEventListener('click', async (e) => {
-    const btn = e.target.closest('.btn-eliminar-dieta');
+    // ⬇️ CAMBIO: Buscar tanto el botón del dropdown como el botón directo
+    const btn = e.target.closest('.btn-eliminar-dieta') || e.target.closest('.btn-eliminar');
     if (!btn) return;
 
     e.preventDefault();
@@ -69,7 +70,7 @@ export function initDeleteDieta() {
       if (nombreTd) nombreTd.textContent = '—';
       if (fechaTd) fechaTd.textContent = '—';
 
-            location.reload();
+      location.reload();
     } catch (err) {
       console.error(err);
       alert(`Error al eliminar dieta: ${err.message}`);
