@@ -34,7 +34,7 @@ export function initCreateUserForm() {
             direccion: document.getElementById("add1").value,
             ciudad: document.getElementById("city").value,
             id_centro: userData.centro_id,
-            password: document.getElementById("pass").value,
+            password: document.getElementById("pass").value.trim() || null,
             estado: document.getElementById("estado").value
         };
 

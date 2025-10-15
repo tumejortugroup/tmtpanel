@@ -49,7 +49,14 @@ export async function renderTablaEquivalencias() {
       for (const { select, td } of equivalentes) {
         if (!select.value) continue;
         const eqVal = await getEquivalencia(idPrincipal, select.value, categoria, cantidad);
-        td.textContent = eqVal !== null ? `${eqVal} g` : "-";
+        
+        // ⬇️ CAMBIO: Redondear hacia arriba sin decimales
+        if (eqVal !== null) {
+          const valorRedondeado = Math.ceil(eqVal);
+          td.textContent = `${valorRedondeado} g`;
+        } else {
+          td.textContent = "-";
+        }
       }
     }
 
