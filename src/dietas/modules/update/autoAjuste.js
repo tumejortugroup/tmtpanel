@@ -1,11 +1,11 @@
 import { obtenerDieta } from '/src/dietas/modules/wizard/fetch/getDieta.js';
-import { obtenerDetalleDato } from '/src/dietas/modules/wizard/fetch/getPeso.js';
-import { inicializarGrafico } from '/src/dietas/modules/wizard/ui/inicializarGrafico.js';
-import { actualizarGraficoMacronutrientes } from '/src/dietas/modules/wizard/ui/actualizarGrafico.js';
-import { inicializarAutoAjuste } from '/src/dietas/modules/wizard/autoajuste/inicializarAutoAjuste.js';
-import { configurarBotones } from '/src/dietas/modules/wizard/utils/configurarBotones.js';
-import { cargarDietasUsuario, renderizarSelectDietas } from '/src/dietas/modules/wizard/fetch/cargarDietas.js';
-import { setCaloriasObjetivo } from '/src/dietas/modules/wizard/utils/caloriasStore.js'; // 👈 IMPORTAR
+import { obtenerDetalleDato } from '/src/dietas/modules/update/fetch/getPeso.js';
+import { inicializarGrafico } from '/src/dietas/modules/update/ui/inicializarGrafico.js';
+import { actualizarGraficoMacronutrientes } from '/src/dietas/modules/update/ui/actualizarGrafico.js';
+import { inicializarAutoAjuste } from '/src/dietas/modules/update/autoajuste/inicializarAutoAjuste.js';
+import { configurarBotones } from '/src/dietas/modules/update/utils/configurarBotones.js';
+import { cargarDietasUsuario, renderizarSelectDietas } from '/src/dietas/modules/update/fetch/cargarDietas.js';
+import { setCaloriasObjetivo } from '/src/dietas/modules/update/utils/caloriasStore.js'; 
 
 export async function ejecutarAutoAjuste() {
 

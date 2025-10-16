@@ -1,4 +1,3 @@
-// 🔧 Generar opciones para select de alimentos
 function generarOpcionesAlimentos(alimentos, alimentoSeleccionado = null) {
   let opciones = '<option value="">Alimentos</option>';
   
@@ -19,18 +18,32 @@ function generarOpcionesAlimentos(alimentos, alimentoSeleccionado = null) {
 }
 
 export function crearTablaVacia() {
+  console.log("🏗️ Creando tabla vacía...");
+  
   const button = event.target;
   const btnsDiv = button.closest(".comida-btns");
   if (!btnsDiv) return;
 
-  const parent = btnsDiv.parentNode;
+  // CAMBIO: Usar contenedor global desde el inicio
+  const contenedorGlobal = document.getElementById("tabla-container");
+  if (!contenedorGlobal) {
+    console.error("❌ No se encontró tabla-container global");
+    return;
+  }
+
+  // DIAGNÓSTICO: Verificar estado antes de insertar en contenedor global
+  const tablasAntes = contenedorGlobal.querySelectorAll("table");
+  console.log("📊 Tablas ANTES de insertar en contenedor global:", tablasAntes.length);
+  tablasAntes.forEach((tabla, index) => {
+    console.log(`Tabla existente ${index}: ${tabla.className}`);
+  });
   
   // Obtener alimentos disponibles
   const alimentos = window.__alimentosCache || [];
   
   // Obtener el número de equivalentes de las tablas existentes
-  const tablas = parent.querySelectorAll("table:not(#Suplementacion)");
-  let numEquivalentes = 9; // Default si no hay tablas
+  const tablas = contenedorGlobal.querySelectorAll("table:not(#Suplementacion)");
+  let numEquivalentes = 1; // Default mínimo
   
   if (tablas.length > 0) {
     const primeraFila = tablas[0].querySelector("thead tr:last-child");
@@ -39,6 +52,8 @@ export function crearTablaVacia() {
       numEquivalentes = Math.floor((ths.length - 3) / 2);
     }
   }
+
+  console.log(`📊 Creando tabla con ${numEquivalentes} equivalentes`);
 
   // Generar opciones de alimentos
   const opcionesAlimentos = generarOpcionesAlimentos(alimentos);
@@ -129,19 +144,58 @@ export function crearTablaVacia() {
   temp.innerHTML = tablaHTML;
   const nuevaTabla = temp.firstElementChild;
 
-  // Insertar la tabla
-  const tablaSuplementacion = parent.querySelector("#Suplementacion");
+  console.log("🔨 Nueva tabla creada:", nuevaTabla.className);
+
+  // CAMBIO: Insertar en el contenedor global
+  console.log("🎯 Insertando en contenedor global");
+
+  // Buscar dónde insertar dentro del contenedor global
+  const tablaSuplementacion = contenedorGlobal.querySelector("#Suplementacion");
+  const botonesGlobales = contenedorGlobal.querySelector(".comida-btns");
+  
   if (tablaSuplementacion) {
-    parent.insertBefore(nuevaTabla, tablaSuplementacion);
+    contenedorGlobal.insertBefore(nuevaTabla, tablaSuplementacion);
+    console.log("✅ Tabla insertada ANTES de suplementación en contenedor global");
+  } else if (botonesGlobales) {
+    contenedorGlobal.insertBefore(nuevaTabla, botonesGlobales);
+    console.log("✅ Tabla insertada ANTES de botones en contenedor global");
   } else {
-    parent.insertBefore(nuevaTabla, btnsDiv);
+    contenedorGlobal.appendChild(nuevaTabla);
+    console.log("✅ Tabla añadida al final del contenedor global");
   }
+
+  // DIAGNÓSTICO: Verificar estado después de insertar
+  const tablasDespues = contenedorGlobal.querySelectorAll("table");
+  console.log("📊 Tablas DESPUÉS de insertar en contenedor global:", tablasDespues.length);
+  tablasDespues.forEach((tabla, index) => {
+    console.log(`Tabla ${index}: ${tabla.className}`);
+  });
+
+  console.log("✅ Tabla insertada en el DOM");
 
   // Agregar funcionalidad de cálculo de equivalencias
   agregarCalculoEquivalenciasATabla(nuevaTabla);
+
+  // Configurar listeners para suma de macros con delay
+  setTimeout(async () => {
+    console.log("🔄 Configurando listeners después de crear tabla...");
+    
+    const tablasFinales = contenedorGlobal.querySelectorAll("table");
+    const tablasConClase = contenedorGlobal.querySelectorAll(".table-dieta");
+    
+    console.log("🔍 Verificación post-creación:");
+    console.log(`Total tablas: ${tablasFinales.length}`);
+    console.log(`Tablas con .table-dieta: ${tablasConClase.length}`);
+    
+    tablasFinales.forEach((tabla, index) => {
+      console.log(`Tabla ${index} en contenedor: ${tabla.className}`);
+    });
+    
+    const { configurarListenersParaNuevaTabla } = await import('/src/dietas/modules/update/ui/sumaMacros.js');
+    configurarListenersParaNuevaTabla();
+  }, 200);
 }
 
-// Función auxiliar para agregar cálculo a una tabla específica
 async function agregarCalculoEquivalenciasATabla(tabla) {
   const { getEquivalencia } = await import('/src/dietas/modules/wizard/fetch/getEquivalencias.js');
   
@@ -153,7 +207,7 @@ async function agregarCalculoEquivalenciasATabla(tabla) {
     if (!selectMacro || !inputCantidad) return;
 
     const selects = fila.querySelectorAll("select[name='select-alimentos']");
-    if (selects.length < 2) return;
+    if (selects.length < 1) return;
 
     const selectPrincipal = selects[0];
     const equivalentes = [];
@@ -191,7 +245,7 @@ async function agregarCalculoEquivalenciasATabla(tabla) {
         try {
           const eqVal = await getEquivalencia(idPrincipal, select.value, categoria, cantidad);
           if (td.tagName === 'TD') {
-            td.textContent = eqVal !== null ? `${eqVal}` : "-";
+            td.textContent = eqVal !== null ? `${Math.ceil(eqVal)}` : "-";
           }
         } catch (error) {
           console.error('Error calculando equivalencia:', error);
@@ -225,18 +279,27 @@ export function eliminarUltimaTabla() {
   const btnsDiv = button.closest(".comida-btns");
   if (!btnsDiv) return;
 
-  const parent = btnsDiv.parentNode;
-  const tablas = parent.querySelectorAll("table");
+  const contenedorGlobal = document.getElementById("tabla-container");
+  if (!contenedorGlobal) return;
 
-  // Filtrar solo tablas que NO sean Suplementación
+  const tablas = contenedorGlobal.querySelectorAll("table");
   const tablasNormales = Array.from(tablas).filter(tabla => tabla.id !== "Suplementacion");
 
-  // Si solo queda 1 tabla normal, no se puede eliminar
   if (tablasNormales.length <= 1) {
     console.warn("⚠️ No se puede eliminar porque solo queda una tabla de comida.");
     return;
   }
 
-  // Eliminar la última tabla normal
+  console.log(`🗑️ Eliminando tabla. Había ${tablasNormales.length} tablas`);
   tablasNormales[tablasNormales.length - 1].remove();
+  
+  // Verificar después de eliminar
+  const tablasRestantes = contenedorGlobal.querySelectorAll("table");
+  console.log(`📊 Tablas restantes: ${tablasRestantes.length}`);
+  
+  // Recalcular después de eliminar
+  setTimeout(async () => {
+    const { configurarListenersParaNuevaTabla } = await import('/src/dietas/modules/update/ui/sumaMacros.js');
+    configurarListenersParaNuevaTabla();
+  }, 100);
 }
