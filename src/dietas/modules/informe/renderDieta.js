@@ -99,9 +99,12 @@ export function renderInformeDieta(data) {
     bloque.setAttribute("contenteditable", "true"); // editable por usuario
 
     const hora = items[0]?.hora ? items[0].hora.slice(0, 5) : "—";
+    
+    // 👇 NUEVA LÓGICA: Verificar si es SUPLEMENTACION
+    const esSuplementacion = tipo.toUpperCase() === "SUPLEMENTACION";
 
-    // Tabla de alimentos
-    const tablaAlimentos = `
+    // Tabla de alimentos (solo si NO es suplementación)
+    const tablaAlimentos = esSuplementacion ? "" : `
       <div class="bloque-tabla">
         <table class="tabla-comida">
           <thead>
