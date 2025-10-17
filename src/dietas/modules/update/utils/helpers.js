@@ -129,16 +129,6 @@ export function generarCeldasEquivalentes(alimento, numEquivalentes, todosLosAli
 
 // 🔧 Generar fila completa
 export function generarFilaAlimento(alimento, categoria, numEquivalentes, todosLosAlimentos) {
-  // ✅ FIX: Generar opciones de categoría con values y selección correcta
-  const categorias = ['Proteina', 'Grasa', 'Carbohidrato', 'Fruta', 'Verdura', 'Otros'];
-  const opcionesCategoria = categorias.map(cat => {
-    const selected = categoria === cat ? 'selected' : '';
-    return `<option value="${cat}" ${selected}>${cat}</option>`;
-  }).join('');
-
-  // Filtrar alimentos por la categoría actual para el select principal
-  const alimentosCategoria = filtrarAlimentosPorCategoria(todosLosAlimentos, categoria);
-
   return `
     <tr>
       <td class="header-dieta px-1 py-0">
@@ -153,7 +143,7 @@ export function generarFilaAlimento(alimento, categoria, numEquivalentes, todosL
       </td>
       <td class="px-1 py-0">
         <select name="select-alimentos" class="form-select form-select-sm" data-categoria="${categoria}">
-          ${generarOpcionesAlimentos(alimentosCategoria, alimento)}
+          ${generarOpcionesAlimentos(todosLosAlimentos, alimento)}
         </select>
       </td>
       <td class="px-1 py-0">
@@ -163,6 +153,7 @@ export function generarFilaAlimento(alimento, categoria, numEquivalentes, todosL
     </tr>
   `;
 }
+
 // 🔧 Generar tabla completa para una comida
 export function generarTablaComida(comida, numEquivalentes, todosLosAlimentos) {
   const categorias = ['Proteina', 'Carbohidrato', 'Grasa', 'Fruta', 'Verdura', 'Otros'];

@@ -1,4 +1,4 @@
-// 📍 /src/dietas/modules/wizardBase/utils/caloriasStore.js
+// 📍 /src/dietas/modules/wizard/utils/caloriasStore.js
 let caloriasObjetivo = null;
 
 export function setCaloriasObjetivo(calorias) {

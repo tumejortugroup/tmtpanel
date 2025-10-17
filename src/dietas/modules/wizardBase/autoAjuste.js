@@ -1,11 +1,11 @@
 import { obtenerDieta } from '/src/dietas/modules/wizard/fetch/getDieta.js';
-import { obtenerDetalleDato } from '/src/dietas/modules/wizard/fetch/getPeso.js';
-import { inicializarGrafico } from '/src/dietas/modules/wizard/ui/inicializarGrafico.js';
-import { actualizarGraficoMacronutrientes } from '/src/dietas/modules/wizard/ui/actualizarGrafico.js';
-import { inicializarAutoAjuste } from '/src/dietas/modules/wizard/autoajuste/inicializarAutoAjuste.js';
-import { configurarBotones } from '/src/dietas/modules/wizard/utils/configurarBotones.js';
-import { cargarDietasUsuario, renderizarSelectDietas } from '/src/dietas/modules/wizard/fetch/cargarDietas.js';
-import { setCaloriasObjetivo } from '/src/dietas/modules/wizard/utils/caloriasStore.js'; // 👈 IMPORTAR
+import { obtenerDetalleDato } from '/src/dietas/modules/wizardBase/fetch/getPeso.js';
+import { inicializarGrafico } from '/src/dietas/modules/wizardBase/ui/inicializarGrafico.js';
+import { actualizarGraficoMacronutrientes } from '/src/dietas/modules/wizardBase/ui/actualizarGrafico.js';
+import { inicializarAutoAjuste } from '/src/dietas/modules/wizardBase/autoajuste/inicializarAutoAjuste.js';
+import { configurarBotones } from '/src/dietas/modules/wizardBase/utils/configurarBotones.js';
+import { cargarDietasUsuario, renderizarSelectDietas } from '/src/dietas/modules/wizardBase/fetch/cargarDietas.js';
+import { setCaloriasObjetivo } from '/src/dietas/modules/wizardBase/utils/caloriasStore.js'; 
 
 export async function ejecutarAutoAjuste() {
 
@@ -17,6 +17,8 @@ export async function ejecutarAutoAjuste() {
     const detalle = await obtenerDetalleDato();
     const peso = parseFloat(detalle?.data?.peso);
     const id_usuario = detalle?.data?.id_usuario;
+
+
 
     if (id_usuario) {
       const dietas = await cargarDietasUsuario(id_usuario);
@@ -44,7 +46,6 @@ export async function ejecutarAutoAjuste() {
     const carbohidratos = parseFloat(carbohidratos_dieta);
 
 
-
     if ([proteinas, grasas, carbohidratos].some(v => isNaN(v))) {
       console.error("❌ Algún dato de macronutriente no es válido:", { proteinas, grasas, carbohidratos });
       return;
@@ -53,12 +54,9 @@ export async function ejecutarAutoAjuste() {
     // ✅ GUARDAR calorías objetivo en el store
     setCaloriasObjetivo(calorias);
 
-
     await inicializarAutoAjuste();
-    
 
     actualizarGraficoMacronutrientes(calorias, proteinas, grasas, carbohidratos);
-    
 
 
   } catch (error) {

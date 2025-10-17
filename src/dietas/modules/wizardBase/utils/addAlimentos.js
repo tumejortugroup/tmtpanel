@@ -166,7 +166,7 @@ export async function addColumns() {
     });
   });
 
-  // 👇 Limpiar marca de eventos y reaplicar
+  // 👇 IMPORTANTE: Limpiar marca de eventos y reaplicar
   const todasLasFilas = document.querySelectorAll(".table-dieta tbody tr:not(:last-child)");
   todasLasFilas.forEach(fila => {
     fila.dataset.eventosAgregados = 'false';
@@ -225,7 +225,7 @@ export async function removeColumns() {
     });
   });
 
-  // 👇 Limpiar marca de eventos y reaplicar
+  // 👇 IMPORTANTE: Limpiar marca de eventos y reaplicar
   const todasLasFilas = document.querySelectorAll(".table-dieta tbody tr:not(:last-child)");
   todasLasFilas.forEach(fila => {
     fila.dataset.eventosAgregados = 'false';

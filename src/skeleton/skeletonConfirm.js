@@ -46,7 +46,7 @@ export function mostrarConfirmacionGuardado(options = {}) {
             <div class="progress-icon">
               <div class="spinner"></div>
             </div>
-            <h3>Guardando dieta...</h3>
+            <h3>Realizando cambios ..</h3>
             <p class="progress-message">Por favor espera mientras se realizan los cambios</p>
           </div>
           
@@ -64,7 +64,7 @@ export function mostrarConfirmacionGuardado(options = {}) {
             <div class="success-icon">
               <i class="bi bi-check-circle"></i>
             </div>
-            <h3>¡Guardado exitoso!</h3>
+            <h3>¡Cambio realizado!</h3>
             <p class="success-message">Los cambios se han guardado correctamente</p>
           </div>
         </div>

@@ -1,23 +1,24 @@
-import { obtenerIdDietaDesdeUrl } from '/src/dietas/modules/wizard/utils/params.js';
-
-export async function obtenerDieta() {
+export async function getDieta(idDieta) {
   const token = localStorage.getItem("token");
-  const idDieta = obtenerIdDietaDesdeUrl();
-  if (!idDieta) throw new Error("ID de dieta no encontrado en la URL");
 
-  const response = await fetch(`https://my.tumejortugroup.com/api/v1/dietas/${idDieta}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json"
-    }
-  });
+  if (!token) {
+    alert("❌ Token no encontrado. Inicia sesión.");
+    return null;
+  }
 
-  if (!response.ok) throw new Error(`Error al obtener la dieta: ${response.statusText}`);
+  try {
+    const res = await fetch(`https://my.tumejortugroup.com/api/v1/dietas/informe/${idDieta}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
 
-  const data = await response.json();
+    const result = await res.json();
 
-  return data;
+
+    return result.data; // ✅ devolvemos los datos al mainUpdate.js
+  } catch (error) {
+    console.error("❌ Error al obtener informe de dieta:", error);
+    return null;
+  }
 }
-
-

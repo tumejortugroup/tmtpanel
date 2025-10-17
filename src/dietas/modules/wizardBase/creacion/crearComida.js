@@ -21,8 +21,7 @@
     const data = await res.json();
 
     if (res.ok) {
-
-      return data; 
+      return data; // [{ id_comida: ... }]
     } else {
       console.error("❌ Error al crear comidas:", data);
       alert("Error al crear comidas.");

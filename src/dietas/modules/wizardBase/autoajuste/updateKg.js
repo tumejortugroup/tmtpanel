@@ -1,5 +1,5 @@
-import { updateTableAndChart } from '/src/dietas/modules/wizard/autoajuste/uptadeTableAndChart.js';
-import { setProteinasPorKg, setGrasasPorKg } from '/src/dietas/modules/wizard/utils/ratiosStore.js'; // 👈 IMPORTAR
+import { updateTableAndChart } from '/src/dietas/modules/wizardBase/autoajuste/uptadeTableAndChart.js';
+import { setProteinasPorKg, setGrasasPorKg } from '/src/dietas/modules/wizardBase/utils/ratiosStore.js'; // 👈 IMPORTAR
 
 export function updateKgValue(id, delta) {
   console.log('🔴 [updateKgValue] Click detectado');

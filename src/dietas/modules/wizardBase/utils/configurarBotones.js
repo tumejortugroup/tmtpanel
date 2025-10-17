@@ -1,4 +1,4 @@
-import { updateKgValue } from '/src/dietas/modules/wizard/autoajuste/updateKg.js';
+import { updateKgValue } from '/src/dietas/modules/wizardBase/autoajuste/updateKg.js';
 
 export function configurarBotones() {
   const configuraciones = [

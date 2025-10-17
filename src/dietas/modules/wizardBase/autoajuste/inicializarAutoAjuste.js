@@ -1,7 +1,7 @@
-import { obtenerDetalleDato } from '/src/dietas/modules/wizard/fetch/getPeso.js';
+import { obtenerDetalleDato } from '/src/dietas/modules/wizardBase/fetch/getPeso.js';
 import { obtenerDieta } from '/src/dietas/modules/wizard/fetch/getDieta.js';
-import { setPeso } from '/src/dietas/modules/wizard/utils/pesoStore.js';
-import { setRatios } from '/src/dietas/modules/wizard/utils/ratiosStore.js'; // 👈 IMPORTAR
+import { setPeso } from '/src/dietas/modules/wizardBase/utils/pesoStore.js';
+import { setRatios } from '/src/dietas/modules/wizardBase/utils/ratiosStore.js'; // 👈 IMPORTAR
 
 export async function inicializarAutoAjuste() {
   try {

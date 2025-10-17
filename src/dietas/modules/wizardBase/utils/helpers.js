@@ -6,7 +6,6 @@ export function capitalizar(str) {
 
 // 🔧 Obtener alimentos desde el cache (cargados por renderSelectAlimentos.js)
 export function obtenerAlimentosDisponibles() {
-  // Los alimentos están en window.__alimentosCache según renderSelectAlimentos.js
   return window.__alimentosCache || [];
 }
 
@@ -15,7 +14,6 @@ export function filtrarAlimentosPorCategoria(alimentos, categoria) {
   if (!alimentos || alimentos.length === 0) return [];
   
   return alimentos.filter(alimento => {
-    // Según renderSelectAlimentos.js, los alimentos tienen la propiedad 'categoria'
     const categoriaAlimento = alimento.categoria || '';
     return capitalizar(categoriaAlimento) === categoria;
   });
@@ -30,7 +28,6 @@ export function generarOpcionesAlimentos(alimentos, alimentoSeleccionado = null)
   }
   
   alimentos.forEach(alimento => {
-    // Según renderSelectAlimentos.js: id_alimento y nombre
     const id = alimento.id_alimento;
     const nombre = alimento.nombre;
     const selected = alimentoSeleccionado && 
@@ -46,19 +43,18 @@ export function generarOpcionesAlimentos(alimentos, alimentoSeleccionado = null)
 export function obtenerMaxEquivalentes(comidas) {
   let max = 0;
   
-
-  
-  Object.values(comidas).forEach((comida, comidaIndex) => {
-
+  Object.values(comidas).forEach((comida) => {
+    // ✅ Saltar suplementación (no tiene alimentos)
+    if (capitalizar(comida.tipo_comida) === 'Suplementacion') {
+      return;
+    }
     
-    comida.alimentos.forEach((alimento, alimentoIndex) => {
+    comida.alimentos.forEach((alimento) => {
       let count = 0;
-      const equivalentesEncontrados = [];
       
       // Revisar equivalente base
       if (alimento.id_alimento_equivalente && alimento.id_alimento_equivalente !== null) {
         count++;
-        equivalentesEncontrados.push('base');
       }
       
       // Revisar equivalentes 1, 3, 4, 5, 6, 7, 8, 9 (saltando el 2)
@@ -67,10 +63,8 @@ export function obtenerMaxEquivalentes(comidas) {
         const key = `id_alimento_equivalente${i}`;
         if (alimento[key] && alimento[key] !== null) {
           count++;
-          equivalentesEncontrados.push(`${i}`);
         }
       });
-      
       
       if (count > max) {
         max = count;
@@ -78,7 +72,7 @@ export function obtenerMaxEquivalentes(comidas) {
     });
   });
   
-
+  console.log(`📊 MÁXIMO DE EQUIVALENTES: ${max}`);
   return max;
 }
 
@@ -102,18 +96,16 @@ export function generarColumnasTabla(numEquivalentes) {
 export function generarCeldasEquivalentes(alimento, numEquivalentes, todosLosAlimentos) {
   let html = '';
   
-  // Mapeo exacto según agruparPorComida: [0, 1, 3, 4, 5, 6, 7, 8, 9]
+  // Mapeo exacto: [0, 1, 3, 4, 5, 6, 7, 8, 9]
   const indicesEquivalentes = [0, 1, 3, 4, 5, 6, 7, 8, 9];
   
   for (let i = 0; i < numEquivalentes; i++) {
     const indiceReal = indicesEquivalentes[i];
     
-    // Generar las claves correctas
     const idKey = indiceReal === 0 ? 'id_alimento_equivalente' : `id_alimento_equivalente${indiceReal}`;
     const nombreKey = indiceReal === 0 ? 'nombre_alimento_equivalente' : `nombre_alimento_equivalente${indiceReal}`;
     const cantidadKey = indiceReal === 0 ? 'cantidad_equivalente' : `cantidad_equivalente${indiceReal}`;
     
-    // Crear objeto del alimento equivalente si existe
     let alimentoEquivalente = null;
     if (alimento && alimento[idKey] && alimento[idKey] !== null) {
       alimentoEquivalente = { 
@@ -141,12 +133,12 @@ export function generarFilaAlimento(alimento, categoria, numEquivalentes, todosL
     <tr>
       <td class="header-dieta px-1 py-0">
         <select class="form-select form-select-sm" name="select-categoria">
-          <option ${categoria === 'Proteina' ? 'selected' : ''}>Proteina</option>
-          <option ${categoria === 'Grasa' ? 'selected' : ''}>Grasa</option>
-          <option ${categoria === 'Carbohidrato' ? 'selected' : ''}>Carbohidrato</option>
-          <option ${categoria === 'Fruta' ? 'selected' : ''}>Fruta</option>
-          <option ${categoria === 'Verdura' ? 'selected' : ''}>Verdura</option>
-          <option ${categoria === 'Otros' ? 'selected' : ''}>Otros</option>
+          <option value="Proteina" ${categoria === 'Proteina' ? 'selected' : ''}>Proteina</option>
+          <option value="Grasa" ${categoria === 'Grasa' ? 'selected' : ''}>Grasa</option>
+          <option value="Carbohidrato" ${categoria === 'Carbohidrato' ? 'selected' : ''}>Carbohidrato</option>
+          <option value="Fruta" ${categoria === 'Fruta' ? 'selected' : ''}>Fruta</option>
+          <option value="Verdura" ${categoria === 'Verdura' ? 'selected' : ''}>Verdura</option>
+          <option value="Otros" ${categoria === 'Otros' ? 'selected' : ''}>Otros</option>
         </select>
       </td>
       <td class="px-1 py-0">
@@ -166,6 +158,15 @@ export function generarFilaAlimento(alimento, categoria, numEquivalentes, todosL
 export function generarTablaComida(comida, numEquivalentes, todosLosAlimentos) {
   const categorias = ['Proteina', 'Carbohidrato', 'Grasa', 'Fruta', 'Verdura', 'Otros'];
   
+  // ✅ CAPITALIZAR el tipo_comida que viene del backend
+  const tipoComidaCapitalizado = capitalizar(comida.tipo_comida);
+  
+  console.log('🍽️ Generando tabla:', {
+    original: comida.tipo_comida,
+    capitalizado: tipoComidaCapitalizado,
+    hora: comida.hora
+  });
+  
   return `
     <table class="table table-striped mb-0 fs-7 table-dieta" role="grid">
       <thead>
@@ -173,14 +174,15 @@ export function generarTablaComida(comida, numEquivalentes, todosLosAlimentos) {
           <th colspan="${3 + (numEquivalentes * 2)}">
             <div class="d-flex justify-content-start gap-2 w-25">
               <select class="form-select form-select-sm" name="tipo-comida">
-                <option ${comida.tipo_comida === 'Desayuno' ? 'selected' : ''}>Desayuno</option>
-                <option ${comida.tipo_comida === 'Almuerzo' ? 'selected' : ''}>Almuerzo</option>
-                <option ${comida.tipo_comida === 'Comida' ? 'selected' : ''}>Comida</option>
-                <option ${comida.tipo_comida === 'Merienda' ? 'selected' : ''}>Merienda</option>
-                <option ${comida.tipo_comida === 'Pre-entreno' ? 'selected' : ''}>Pre-entreno</option>
-                <option ${comida.tipo_comida === 'Post-entreno' ? 'selected' : ''}>Post-entreno</option>
-                <option ${comida.tipo_comida === 'Cena' ? 'selected' : ''}>Cena</option>
-                <option ${comida.tipo_comida === 'Pre-cama' ? 'selected' : ''}>Pre-cama</option>
+                <option value="Desayuno" ${tipoComidaCapitalizado === 'Desayuno' ? 'selected' : ''}>Desayuno</option>
+                <option value="Almuerzo" ${tipoComidaCapitalizado === 'Almuerzo' ? 'selected' : ''}>Almuerzo</option>
+                <option value="Comida" ${tipoComidaCapitalizado === 'Comida' ? 'selected' : ''}>Comida</option>
+                <option value="Merienda" ${tipoComidaCapitalizado === 'Merienda' ? 'selected' : ''}>Merienda</option>
+                <option value="Pre-entreno" ${tipoComidaCapitalizado === 'Pre-entreno' ? 'selected' : ''}>Pre-entreno</option>
+                <option value="Post-entreno" ${tipoComidaCapitalizado === 'Post-entreno' ? 'selected' : ''}>Post-entreno</option>
+                <option value="Cena" ${tipoComidaCapitalizado === 'Cena' ? 'selected' : ''}>Cena</option>
+                <option value="Pre-cama" ${tipoComidaCapitalizado === 'Pre-cama' ? 'selected' : ''}>Pre-cama</option>
+                <option value="Suplementacion" ${tipoComidaCapitalizado === 'Suplementacion' ? 'selected' : ''}>Suplementacion</option>
               </select>
               <input type="time" class="form-control form-control-sm" name="cantidad-alimentos" value="${comida.hora || '08:00'}">
             </div>

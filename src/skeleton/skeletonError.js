@@ -5,7 +5,7 @@ export function mostrarErrorGuardado(options = {}) {
     message = 'Ha ocurrido un error inesperado al guardar la dieta. Por favor, inténtalo de nuevo.',
     errorDetails = null,
     primaryButtonText = 'Intentar de nuevo',
-    secondaryButtonText = 'Cerrar',
+
     showDetails = true
   } = options;
   
@@ -44,9 +44,6 @@ export function mostrarErrorGuardado(options = {}) {
         ` : ''}
         
         <div class="error-footer">
-          <button class="error-btn error-btn-secondary" id="error-close">
-            <i class="bi bi-x-lg"></i> ${secondaryButtonText}
-          </button>
           <button class="error-btn error-btn-primary" id="error-retry">
             <i class="bi bi-arrow-clockwise"></i> ${primaryButtonText}
           </button>
@@ -61,49 +58,47 @@ export function mostrarErrorGuardado(options = {}) {
     overlay.classList.add('active');
     
     // Event listeners
-    const btnClose = document.getElementById('error-close');
+
     const btnRetry = document.getElementById('error-retry');
     const detailsToggle = document.getElementById('error-details-toggle');
     const detailsContent = document.getElementById('error-details-content');
     
     const cerrarModal = (resultado) => {
-      overlay.classList.remove('active');
-      setTimeout(() => {
+    overlay.classList.remove('active');
+    setTimeout(() => {
         overlay.remove();
         resolve(resultado);
-      }, 300);
+    }, 300);
     };
-    
-    btnClose.addEventListener('click', () => cerrarModal({ retry: false, close: true }));
+
     btnRetry.addEventListener('click', () => cerrarModal({ retry: true, close: false }));
     
     // Toggle de detalles del error
-    if (detailsToggle && detailsContent) {
-      detailsToggle.addEventListener('click', () => {
-        const isVisible = detailsContent.style.display !== 'none';
-        const icon = detailsToggle.querySelector('i');
-        
-        if (isVisible) {
-          detailsContent.style.display = 'none';
-          icon.className = 'bi bi-chevron-down';
-          detailsToggle.querySelector('span').textContent = 'Ver detalles del error';
-        } else {
-          detailsContent.style.display = 'block';
-          icon.className = 'bi bi-chevron-up';
-          detailsToggle.querySelector('span').textContent = 'Ocultar detalles';
-        }
-      });
+   if (detailsToggle && detailsContent) {
+  detailsToggle.addEventListener('click', () => {
+    const isVisible = detailsContent.style.display !== 'none';
+    const icon = detailsToggle.querySelector('i');
+    
+    if (isVisible) {
+      detailsContent.style.display = 'none';
+      icon.className = 'bi bi-chevron-down';
+      detailsToggle.querySelector('span').textContent = 'Ver detalles del error';
+    } else {
+      detailsContent.style.display = 'block';
+      icon.className = 'bi bi-chevron-up';
+      detailsToggle.querySelector('span').textContent = 'Ocultar detalles';
     }
+  });
+}
     
     // Cerrar con ESC
     const handleEsc = (e) => {
-      if (e.key === 'Escape') {
+    if (e.key === 'Escape') {
         cerrarModal({ retry: false, close: true });
         document.removeEventListener('keydown', handleEsc);
-      }
+    }
     };
     document.addEventListener('keydown', handleEsc);
-    
     // Cerrar al hacer click fuera
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) {

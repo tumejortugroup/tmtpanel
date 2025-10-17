@@ -43,7 +43,13 @@ export function agruparPorComida(data) {
       nombre_alimento_equivalente9: item.nombre_alimento_equivalente9,
       cantidad_equivalente9: item.cantidad_equivalente9
     });
-
+    // En agruparPorComida, después del push
+console.log('Objeto agrupado:', {
+  nombre: item.nombre_alimento,
+  eq4: item.id_alimento_equivalente4,
+  eq5: item.id_alimento_equivalente5, 
+  eq6: item.id_alimento_equivalente6
+});
     return acc;
   }, {});
 }

@@ -1,6 +1,6 @@
 
 
-import { getAlimentos } from '/src/dietas/modules/wizard/fetch/getAlimentos.js';
+import { getAlimentos } from '/src/dietas/modules/wizardBase/fetch/getAlimentos.js';
 
 export async function renderSelectAlimentos(selectId) {
   try {

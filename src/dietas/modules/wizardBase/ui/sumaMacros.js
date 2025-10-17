@@ -1,50 +1,117 @@
+// ===== ARCHIVO: sumaMacros.js =====
+
 import { getAlimentos } from "../fetch/getAlimentos.js";
 
 export let alimentosCache = [];
 
 export async function prepararSumaMacros() {
+
+  
   alimentosCache = await getAlimentos();
 
-  const filas = document.querySelectorAll(".table-dieta tbody tr");
 
-  filas.forEach(fila => {
-    const selects = fila.querySelectorAll('select[name="select-alimentos"]');
-    const input = fila.querySelector(".input-cantidad");
+  const contenedor = document.getElementById("tabla-container");
+  if (!contenedor) {
 
-    if (!selects.length || !input) return;
+    return;
+  }
 
-    // Agregar listener a TODOS los selects para recalcular cuando cambien
-    selects.forEach(select => {
-      select.addEventListener("change", recalcularTotales);
-    });
+
+
+  // Event delegation - escucha cambios en TODO el contenedor
+  contenedor.addEventListener("change", (e) => {
+
     
-    input.addEventListener("input", recalcularTotales);
+    const fila = e.target.closest("tr");
+    if (!fila) return;
+
+    // Solo recalcular si es el PRIMER select de alimentos o input de cantidad
+    const primerSelect = fila.querySelector('select[name="select-alimentos"]');
+    const esElPrimerSelect = e.target === primerSelect;
+    const esInputCantidad = e.target.classList.contains("input-cantidad");
+
+
+
+    if (esElPrimerSelect || esInputCantidad) {
+
+      recalcularSoloAlimentosPrincipales();
+    } else {
+      console.log("❌ Evento ignorado - no es primer select ni input cantidad");
+    }
   });
+
+  contenedor.addEventListener("input", (e) => {
+    console.log("📝 Evento input detectado en:", e.target.tagName, e.target.className);
+    if (e.target.classList.contains("input-cantidad")) {
+
+      recalcularSoloAlimentosPrincipales();
+    }
+  });
+
+
+
+  // Cálculo inicial
+  recalcularSoloAlimentosPrincipales();
 }
 
-function recalcularTotales() {
+function recalcularSoloAlimentosPrincipales() {
+  console.log("🔄 INICIANDO RECÁLCULO...");
+  
   let totalCalorias = 0;
   let totalProteinas = 0;
   let totalGrasas = 0;
   let totalHidratos = 0;
 
-  const filas = document.querySelectorAll(".table-dieta tbody tr");
+  const contenedor = document.getElementById("tabla-container");
+ 
 
-  filas.forEach(fila => {
-    // ✅ Solo obtener el PRIMER select (alimento principal)
+  // Diagnóstico completo
+  const todasLasTablas = contenedor.querySelectorAll("table");
+  const tablasConClase = contenedor.querySelectorAll(".table-dieta");
+  
+
+ 
+
+  // Buscar filas en TODAS las tablas (con o sin clase)
+  let todasLasFilas = [];
+  todasLasTablas.forEach((tabla, tablaIndex) => {
+    const filasTabla = tabla.querySelectorAll("tbody tr");
+  
+    todasLasFilas.push(...filasTabla);
+  });
+
+
+  // Filtrar filas válidas (que tengan select y input)
+  const filasValidas = Array.from(todasLasFilas).filter(fila => {
+    const tieneSelect = fila.querySelector('select[name="select-alimentos"]');
+    const tieneInput = fila.querySelector('.input-cantidad');
+    const esObservaciones = fila.querySelector('textarea');
+    return tieneSelect && tieneInput && !esObservaciones;
+  });
+
+
+
+  if (filasValidas.length === 0) {
+    actualizarInputsCalculados(0, 0, 0, 0);
+    return
+  }
+
+  filasValidas.forEach((fila, index) => {
     const selectPrincipal = fila.querySelector('select[name="select-alimentos"]');
     const input = fila.querySelector(".input-cantidad");
 
-    const cantidad = parseFloat(input?.value);
     const alimentoId = selectPrincipal?.value;
+    const cantidad = parseFloat(input?.value) || 0;
 
-    if (!alimentoId || isNaN(cantidad) || cantidad <= 0) return;
+
 
     const alimento = alimentosCache.find(a => a.id_alimento == alimentoId);
-    if (!alimento) return;
+    if (!alimento) {
+      
+      return;
+    }
 
     const factor = cantidad / 100;
-
     const calorias = parseFloat(alimento.calorias) || 0;
     const proteinas = parseFloat(alimento.proteinas) || 0;
     const grasas = parseFloat(alimento.grasas) || 0;
@@ -56,21 +123,39 @@ function recalcularTotales() {
     totalHidratos += hidratos * factor;
   });
 
-  // Actualizar el DOM
-  const caloriasEl = document.getElementById("table-caloriesDieta1");
-  const proteinasEl = document.getElementById("table-proteinDieta1");
-  const grasasEl = document.getElementById("table-fatDieta1");
-  const hidratosEl = document.getElementById("table-carbsDieta1");
 
-  if (caloriasEl) caloriasEl.value = `${totalCalorias.toFixed(1)} kcal`;
-  if (proteinasEl) proteinasEl.value = `${totalProteinas.toFixed(1)} gr`;
-  if (grasasEl) grasasEl.value = `${totalGrasas.toFixed(1)} gr`;
-  if (hidratosEl) hidratosEl.value = `${totalHidratos.toFixed(1)} gr`;
 
-  if (caloriasEl) compararYSombrear("table-caloriesDieta", "table-caloriesDieta1");
-  if (proteinasEl) compararYSombrear("table-proteinDieta", "table-proteinDieta1");
-  if (grasasEl) compararYSombrear("table-fatDieta", "table-fatDieta1");
-  if (hidratosEl) compararYSombrear("table-carbsDieta", "table-carbsDieta1");
+  actualizarInputsCalculados(totalCalorias, totalProteinas, totalGrasas, totalHidratos);
+}
+
+function actualizarInputsCalculados(calorias, proteinas, grasas, hidratos) {
+  const elementos = {
+    calorias: document.getElementById("table-caloriesDieta1"),
+    proteinas: document.getElementById("table-proteinDieta1"),
+    grasas: document.getElementById("table-fatDieta1"),
+    carbohidratos: document.getElementById("table-carbsDieta1")
+  };
+
+
+
+  if (elementos.calorias) {
+    elementos.calorias.value = `${calorias.toFixed(1)} kcal`;
+  }
+  if (elementos.proteinas) {
+    elementos.proteinas.value = `${proteinas.toFixed(1)} gr`;
+  }
+  if (elementos.grasas) {
+    elementos.grasas.value = `${grasas.toFixed(1)} gr`;
+  }
+  if (elementos.carbohidratos) {
+    elementos.carbohidratos.value = `${hidratos.toFixed(1)} gr`;  
+  }
+
+  // Comparar objetivo vs calculado
+  compararYSombrear("table-caloriesDieta", "table-caloriesDieta1");
+  compararYSombrear("table-proteinDieta", "table-proteinDieta1");
+  compararYSombrear("table-fatDieta", "table-fatDieta1");
+  compararYSombrear("table-carbsDieta", "table-carbsDieta1");
 }
 
 function compararYSombrear(idNecesario, idDieta) {
@@ -89,4 +174,9 @@ function compararYSombrear(idNecesario, idDieta) {
   } else {
     tdDieta.classList.remove("exceso-macro");
   }
+}
+
+export function configurarListenersParaNuevaTabla() {
+  console.log("🔄 configurarListenersParaNuevaTabla() llamada");
+  recalcularSoloAlimentosPrincipales();
 }

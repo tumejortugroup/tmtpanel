@@ -1,7 +1,7 @@
-import { actualizarGraficoMacronutrientes } from '/src/dietas/modules/wizard/ui/actualizarGrafico.js';
-import { getPeso } from '/src/dietas/modules/wizard/utils/pesoStore.js';
-import { getCaloriasObjetivo } from '/src/dietas/modules/wizard/utils/caloriasStore.js';
-import { getRatios } from '/src/dietas/modules/wizard/utils/ratiosStore.js'; // 👈 IMPORTAR
+import { actualizarGraficoMacronutrientes } from '/src/dietas/modules/wizardBase/ui/actualizarGrafico.js';
+import { getPeso } from '/src/dietas/modules/wizardBase/utils/pesoStore.js';
+import { getCaloriasObjetivo } from '/src/dietas/modules/wizardBase/utils/caloriasStore.js';
+import { getRatios } from '/src/dietas/modules/wizardBase/utils/ratiosStore.js'; // 👈 IMPORTAR
 
 export function updateTableAndChart() {
   const peso = getPeso();

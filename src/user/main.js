@@ -6,7 +6,10 @@ import { filtrarTabla } from "./modules/utils/filtrarTabla.js";
 import { cargarCentrosSelect } from "./modules/fetch/getCentros.js"; 
 import { cargarUltimoNumeroUsuario } from "./modules/fetch/getUltimoNumero.js";
 
+
 document.addEventListener("DOMContentLoaded", async () => {
+
+ 
   initCreateUserForm();
   await cargarUltimoNumeroUsuario();
   await listUser();

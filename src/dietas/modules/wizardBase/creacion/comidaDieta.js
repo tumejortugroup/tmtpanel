@@ -1,4 +1,4 @@
-import { obtenerIdDietaDesdeUrl } from '/src/dietas/modules/wizard/utils/params.js';
+import { obtenerIdDietaDesdeUrl } from '/src/dietas/modules/wizardBase/utils/params.js';
 
 export async function asociarComidasADieta(idComidasArray) {
   const idDieta = obtenerIdDietaDesdeUrl();
@@ -11,7 +11,6 @@ export async function asociarComidasADieta(idComidasArray) {
   // 👇 Extraer solo los IDs
   const idsSolo = idComidasArray.map(c => c.id_comida);
 
- 
 
   try {
     const token = localStorage.getItem("token");
@@ -32,7 +31,7 @@ export async function asociarComidasADieta(idComidasArray) {
 
 
   if (res.ok) {
-
+ 
 
       // 🔹 Abre nueva pestaña con la dieta
       window.open(`/dashboard/dietas/dieta.html?id_dieta=${idDieta}`, "_blank");
