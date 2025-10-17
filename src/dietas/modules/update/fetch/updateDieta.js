@@ -10,15 +10,16 @@ export async function actualizarDieta() {
     return;
   }
 
- 
-  // 🔥 CORREGIR: Usar los IDs correctos del HTML
-  const proteinElement = document.getElementById("table-proteinDieta1");
-  const fatElement = document.getElementById("table-fatDieta1");
-  const carbsElement = document.getElementById("table-carbsDieta1");
+  // 🔥 Obtener elementos de macros
+  const caloriesElement = document.getElementById("table-caloriesDieta");
+  const proteinElement = document.getElementById("table-proteinDieta");
+  const fatElement = document.getElementById("table-fatDieta");
+  const carbsElement = document.getElementById("table-carbsDieta");
 
-  if (!proteinElement || !fatElement || !carbsElement) {
+  if (!caloriesElement || !proteinElement || !fatElement || !carbsElement) {
     console.error("❌ No se encontraron los elementos de macros en el DOM.");
     console.log("Elementos encontrados:", {
+      calories: !!caloriesElement,
       protein: !!proteinElement,
       fat: !!fatElement,
       carbs: !!carbsElement
@@ -27,7 +28,12 @@ export async function actualizarDieta() {
     return;
   }
 
-  // 🔥 CORREGIR: Obtener valor de los inputs, no el textContent
+  // 🔥 Obtener valores y limpiar texto
+  const caloriasText = (caloriesElement.value || "0")
+    .replace(/gr|g|gramos|kcal/gi, "")
+    .replace(/,/g, ".")
+    .trim();
+
   const proteinasText = (proteinElement.value || "0")
     .replace(/gr|g|gramos|kcal/gi, "")
     .replace(/,/g, ".")
@@ -44,37 +50,42 @@ export async function actualizarDieta() {
     .trim();
 
   console.log("📊 Valores extraídos:", {
+    caloriasText,
     proteinasText,
     grasasText,
     carbohidratosText
   });
 
+  // 🔥 Convertir a números
+  const calorias = parseFloat(caloriasText);
   const proteinas = parseFloat(proteinasText);
   const grasas = parseFloat(grasasText);
   const carbohidratos = parseFloat(carbohidratosText);
 
-  if (isNaN(proteinas) || isNaN(grasas) || isNaN(carbohidratos)) {
+  if (isNaN(calorias) || isNaN(proteinas) || isNaN(grasas) || isNaN(carbohidratos)) {
     console.error("❌ Los valores de macros no son válidos:", {
+      calorias,
       proteinas,
       grasas,
       carbohidratos,
-      textos: { proteinasText, grasasText, carbohidratosText }
+      textos: { caloriasText, proteinasText, grasasText, carbohidratosText }
     });
     alert("❌ Los valores de macros no son válidos. Asegúrate de haber añadido alimentos a tu dieta.");
     return;
   }
 
-  // 🔥 CAMBIAR: Permitir valores 0 si no hay alimentos añadidos
-  if (proteinas < 0 || grasas < 0 || carbohidratos < 0) {
+  // 🔥 Validar que no sean negativos
+  if (calorias < 0 || proteinas < 0 || grasas < 0 || carbohidratos < 0) {
     console.error("❌ Los valores de macros no pueden ser negativos:", {
-      proteinas, grasas, carbohidratos
+      calorias, proteinas, grasas, carbohidratos
     });
     alert("❌ Los valores de macros no pueden ser negativos.");
     return;
   }
 
+  // 🔥 Preparar datos para enviar
   const data = {
-
+    calorias_dieta: calorias,
     proteinas_dieta: proteinas,
     grasas_dieta: grasas,
     carbohidratos_dieta: carbohidratos
@@ -96,13 +107,13 @@ export async function actualizarDieta() {
 
     if (response.ok && result.success) {
       console.log("✅ Dieta actualizada:", result);
-      alert("✅ Dieta actualizada correctamente.");
+
     } else {
       console.error("❌ Error al actualizar la dieta:", result);
-      alert(`❌ Hubo un error al actualizar la dieta: ${result.message || 'Error desconocido'}`);
+
     }
   } catch (error) {
     console.error("❌ Error en la petición:", error);
-    alert("❌ No se pudo conectar con el servidor.");
+
   }
 }
