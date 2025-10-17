@@ -136,21 +136,26 @@ export function generarCeldasEquivalentes(alimento, numEquivalentes, todosLosAli
 
 // 🔧 Generar fila completa
 export function generarFilaAlimento(alimento, categoria, numEquivalentes, todosLosAlimentos) {
+  // ✅ FIX: Generar opciones de categoría con values y selección correcta
+  const categorias = ['Proteina', 'Grasa', 'Carbohidrato', 'Fruta', 'Verdura', 'Otros'];
+  const opcionesCategoria = categorias.map(cat => {
+    const selected = categoria === cat ? 'selected' : '';
+    return `<option value="${cat}" ${selected}>${cat}</option>`;
+  }).join('');
+
+  // Filtrar alimentos por la categoría actual para el select principal
+  const alimentosCategoria = filtrarAlimentosPorCategoria(todosLosAlimentos, categoria);
+
   return `
     <tr>
       <td class="header-dieta px-1 py-0">
         <select class="form-select form-select-sm" name="select-categoria">
-          <option ${categoria === 'Proteina' ? 'selected' : ''}>Proteina</option>
-          <option ${categoria === 'Grasa' ? 'selected' : ''}>Grasa</option>
-          <option ${categoria === 'Carbohidrato' ? 'selected' : ''}>Carbohidrato</option>
-          <option ${categoria === 'Fruta' ? 'selected' : ''}>Fruta</option>
-          <option ${categoria === 'Verdura' ? 'selected' : ''}>Verdura</option>
-          <option ${categoria === 'Otros' ? 'selected' : ''}>Otros</option>
+          ${opcionesCategoria}
         </select>
       </td>
       <td class="px-1 py-0">
         <select name="select-alimentos" class="form-select form-select-sm" data-categoria="${categoria}">
-          ${generarOpcionesAlimentos(todosLosAlimentos, alimento)}
+          ${generarOpcionesAlimentos(alimentosCategoria, alimento)}
         </select>
       </td>
       <td class="px-1 py-0">
@@ -160,10 +165,16 @@ export function generarFilaAlimento(alimento, categoria, numEquivalentes, todosL
     </tr>
   `;
 }
-
 // 🔧 Generar tabla completa para una comida
 export function generarTablaComida(comida, numEquivalentes, todosLosAlimentos) {
   const categorias = ['Proteina', 'Carbohidrato', 'Grasa', 'Fruta', 'Verdura', 'Otros'];
+  
+  // ✅ FIX: Generar opciones de tipo comida con values y selección correcta
+  const tiposComida = ['Desayuno', 'Almuerzo', 'Comida', 'Merienda', 'Pre-entreno', 'Post-entreno', 'Cena', 'Pre-cama'];
+  const opcionesTipoComida = tiposComida.map(tipo => {
+    const selected = comida.tipo_comida === tipo ? 'selected' : '';
+    return `<option value="${tipo}" ${selected}>${tipo}</option>`;
+  }).join('');
   
   return `
     <table class="table table-striped mb-0 fs-7 table-dieta" role="grid">
@@ -172,14 +183,7 @@ export function generarTablaComida(comida, numEquivalentes, todosLosAlimentos) {
           <th colspan="${3 + (numEquivalentes * 2)}">
             <div class="d-flex justify-content-start gap-2 w-25">
               <select class="form-select form-select-sm" name="tipo-comida">
-                <option ${comida.tipo_comida === 'Desayuno' ? 'selected' : ''}>Desayuno</option>
-                <option ${comida.tipo_comida === 'Almuerzo' ? 'selected' : ''}>Almuerzo</option>
-                <option ${comida.tipo_comida === 'Comida' ? 'selected' : ''}>Comida</option>
-                <option ${comida.tipo_comida === 'Merienda' ? 'selected' : ''}>Merienda</option>
-                <option ${comida.tipo_comida === 'Pre-entreno' ? 'selected' : ''}>Pre-entreno</option>
-                <option ${comida.tipo_comida === 'Post-entreno' ? 'selected' : ''}>Post-entreno</option>
-                <option ${comida.tipo_comida === 'Cena' ? 'selected' : ''}>Cena</option>
-                <option ${comida.tipo_comida === 'Pre-cama' ? 'selected' : ''}>Pre-cama</option>
+                ${opcionesTipoComida}
               </select>
               <input type="time" class="form-control form-control-sm" name="cantidad-alimentos" value="${comida.hora || '08:00'}">
             </div>
