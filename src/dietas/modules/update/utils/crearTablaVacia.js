@@ -24,26 +24,16 @@ export function crearTablaVacia() {
   const btnsDiv = button.closest(".comida-btns");
   if (!btnsDiv) return;
 
-  // CAMBIO: Usar contenedor global desde el inicio
   const contenedorGlobal = document.getElementById("tabla-container");
   if (!contenedorGlobal) {
-    console.error("❌ No se encontró tabla-container global");
+    console.error("❌ No se encontró tabla-container");
     return;
   }
-
-  // DIAGNÓSTICO: Verificar estado antes de insertar en contenedor global
-  const tablasAntes = contenedorGlobal.querySelectorAll("table");
-  console.log("📊 Tablas ANTES de insertar en contenedor global:", tablasAntes.length);
-  tablasAntes.forEach((tabla, index) => {
-    console.log(`Tabla existente ${index}: ${tabla.className}`);
-  });
   
-  // Obtener alimentos disponibles
   const alimentos = window.__alimentosCache || [];
   
-  // Obtener el número de equivalentes de las tablas existentes
   const tablas = contenedorGlobal.querySelectorAll("table:not(#Suplementacion)");
-  let numEquivalentes = 1; // Default mínimo
+  let numEquivalentes = 1;
   
   if (tablas.length > 0) {
     const primeraFila = tablas[0].querySelector("thead tr:last-child");
@@ -55,29 +45,25 @@ export function crearTablaVacia() {
 
   console.log(`📊 Creando tabla con ${numEquivalentes} equivalentes`);
 
-  // Generar opciones de alimentos
   const opcionesAlimentos = generarOpcionesAlimentos(alimentos);
   
-  // Generar columnas dinámicas
   const columnasEquivalentes = Array(numEquivalentes).fill(0).map((_, index) => `
     <th>Alimento ${index + 1}</th>
     <th>gr</th>
   `).join('');
 
-  // Categorías
   const categorias = ['Proteina', 'Carbohidrato', 'Grasa', 'Fruta', 'Verdura', 'Otros'];
   
-  // Generar filas vacías
   const filasVacias = categorias.map(cat => `
     <tr>
       <td class="header-dieta px-1 py-0">
         <select class="form-select form-select-sm" name="select-categoria">
-          <option ${cat === 'Proteina' ? 'selected' : ''}>Proteina</option>
-          <option ${cat === 'Grasa' ? 'selected' : ''}>Grasa</option>
-          <option ${cat === 'Carbohidrato' ? 'selected' : ''}>Carbohidrato</option>
-          <option ${cat === 'Fruta' ? 'selected' : ''}>Fruta</option>
-          <option ${cat === 'Verdura' ? 'selected' : ''}>Verdura</option>
-          <option ${cat === 'Otros' ? 'selected' : ''}>Otros</option>
+          <option value="Proteina" ${cat === 'Proteina' ? 'selected' : ''}>Proteina</option>
+          <option value="Grasa" ${cat === 'Grasa' ? 'selected' : ''}>Grasa</option>
+          <option value="Carbohidrato" ${cat === 'Carbohidrato' ? 'selected' : ''}>Carbohidrato</option>
+          <option value="Fruta" ${cat === 'Fruta' ? 'selected' : ''}>Fruta</option>
+          <option value="Verdura" ${cat === 'Verdura' ? 'selected' : ''}>Verdura</option>
+          <option value="Otros" ${cat === 'Otros' ? 'selected' : ''}>Otros</option>
         </select>
       </td>
       <td class="px-1 py-0">
@@ -99,7 +85,6 @@ export function crearTablaVacia() {
     </tr>
   `).join('');
 
-  // Crear tabla HTML completa
   const tablaHTML = `
     <table class="table table-striped mb-0 fs-7 table-dieta" role="grid">
       <thead>
@@ -107,14 +92,15 @@ export function crearTablaVacia() {
           <th colspan="${3 + (numEquivalentes * 2)}">
             <div class="d-flex justify-content-start gap-2 w-25">
               <select class="form-select form-select-sm" name="tipo-comida">
-                <option>Desayuno</option>
-                <option>Almuerzo</option>
-                <option>Comida</option>
-                <option>Merienda</option>
-                <option>Pre-entreno</option>
-                <option>Post-entreno</option>
-                <option>Cena</option>
-                <option>Pre-cama</option>
+                <option value="Desayuno">Desayuno</option>
+                <option value="Almuerzo">Almuerzo</option>
+                <option value="Comida">Comida</option>
+                <option value="Merienda">Merienda</option>
+                <option value="Pre-entreno">Pre-entreno</option>
+                <option value="Post-entreno">Post-entreno</option>
+                <option value="Cena">Cena</option>
+                <option value="Pre-cama">Pre-cama</option>
+                <option value="Suplementacion">Suplementacion</option>
               </select>
               <input type="time" class="form-control form-control-sm" name="cantidad-alimentos" value="08:00">
             </div>
@@ -139,58 +125,27 @@ export function crearTablaVacia() {
     </table>
   `;
 
-  // Crear elemento temporal
   const temp = document.createElement('div');
   temp.innerHTML = tablaHTML;
   const nuevaTabla = temp.firstElementChild;
 
-  console.log("🔨 Nueva tabla creada:", nuevaTabla.className);
-
-  // CAMBIO: Insertar en el contenedor global
-  console.log("🎯 Insertando en contenedor global");
-
-  // Buscar dónde insertar dentro del contenedor global
   const tablaSuplementacion = contenedorGlobal.querySelector("#Suplementacion");
   const botonesGlobales = contenedorGlobal.querySelector(".comida-btns");
   
   if (tablaSuplementacion) {
     contenedorGlobal.insertBefore(nuevaTabla, tablaSuplementacion);
-    console.log("✅ Tabla insertada ANTES de suplementación en contenedor global");
+    console.log("✅ Tabla insertada ANTES de suplementación");
   } else if (botonesGlobales) {
     contenedorGlobal.insertBefore(nuevaTabla, botonesGlobales);
-    console.log("✅ Tabla insertada ANTES de botones en contenedor global");
+    console.log("✅ Tabla insertada ANTES de botones");
   } else {
     contenedorGlobal.appendChild(nuevaTabla);
-    console.log("✅ Tabla añadida al final del contenedor global");
+    console.log("✅ Tabla añadida al final");
   }
 
-  // DIAGNÓSTICO: Verificar estado después de insertar
-  const tablasDespues = contenedorGlobal.querySelectorAll("table");
-  console.log("📊 Tablas DESPUÉS de insertar en contenedor global:", tablasDespues.length);
-  tablasDespues.forEach((tabla, index) => {
-    console.log(`Tabla ${index}: ${tabla.className}`);
-  });
-
-  console.log("✅ Tabla insertada en el DOM");
-
-  // Agregar funcionalidad de cálculo de equivalencias
   agregarCalculoEquivalenciasATabla(nuevaTabla);
 
-  // Configurar listeners para suma de macros con delay
   setTimeout(async () => {
-    console.log("🔄 Configurando listeners después de crear tabla...");
-    
-    const tablasFinales = contenedorGlobal.querySelectorAll("table");
-    const tablasConClase = contenedorGlobal.querySelectorAll(".table-dieta");
-    
-    console.log("🔍 Verificación post-creación:");
-    console.log(`Total tablas: ${tablasFinales.length}`);
-    console.log(`Tablas con .table-dieta: ${tablasConClase.length}`);
-    
-    tablasFinales.forEach((tabla, index) => {
-      console.log(`Tabla ${index} en contenedor: ${tabla.className}`);
-    });
-    
     const { configurarListenersParaNuevaTabla } = await import('/src/dietas/modules/update/ui/sumaMacros.js');
     configurarListenersParaNuevaTabla();
   }, 200);
@@ -293,11 +248,9 @@ export function eliminarUltimaTabla() {
   console.log(`🗑️ Eliminando tabla. Había ${tablasNormales.length} tablas`);
   tablasNormales[tablasNormales.length - 1].remove();
   
-  // Verificar después de eliminar
   const tablasRestantes = contenedorGlobal.querySelectorAll("table");
   console.log(`📊 Tablas restantes: ${tablasRestantes.length}`);
   
-  // Recalcular después de eliminar
   setTimeout(async () => {
     const { configurarListenersParaNuevaTabla } = await import('/src/dietas/modules/update/ui/sumaMacros.js');
     configurarListenersParaNuevaTabla();

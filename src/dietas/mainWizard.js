@@ -5,6 +5,7 @@ import { actualizarDieta } from './modules/wizard/fetch/updateDieta.js';
 import { guardarDietaCompleta } from '/src/dietas/modules/wizard/creacion/guardarDieta.js';
 import { addColumns, removeColumns } from '/src/dietas/modules/wizard/ui/add-columns.js';
 import { cargarPlantillasCentro } from './modules/plantilla/fetch/fetchPlantilla.js';
+import { mostrarConfirmacionGuardado } from "/src/skeleton/skeletonConfirm.js";
 
 
 
@@ -27,10 +28,39 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await cargarPlantillasCentro();
   document.getElementById("guardar-dieta-btn").addEventListener("click", async () => {
+    const result = await mostrarConfirmacionGuardado();
+    
+    if (result.confirmed) {
+      const { progressController } = result;
+      
+      try {
 
-
-  await actualizarDieta(); // primero actualiza
-  await guardarDietaCompleta(); // luego crea y asocia comidas
-});
+        await actualizarDieta();
+        progressController.updateProgress(66);
+        
+        await guardarDietaCompleta();
+        progressController.updateProgress(100);
+        
+        progressController.complete();
+        
+      } catch (error) {
+        // Cerrar progress y mostrar error
+        progressController.close();
+        
+        const errorResult = await mostrarErrorGuardado({
+          title: '¡Error al guardar!',
+          message: 'No se pudieron guardar los cambios en la dieta.',
+          errorDetails: error.stack,
+          primaryButtonText: 'Reintentar',
+          secondaryButtonText: 'Cerrar'
+        });
+        
+        if (errorResult.retry) {
+          // Reiniciar todo el proceso
+          document.getElementById("guardar-dieta-btn").click();
+        }
+      }
+    }
+  });
   
 });

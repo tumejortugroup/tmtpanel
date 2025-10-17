@@ -9,6 +9,8 @@ import { actualizarDieta } from "/src/dietas/modules/update/fetch/updateDieta.js
 import { guardarDietaCompleta } from "/src/dietas/modules/update/creacion/guardarDieta.js"; // idem
 import { addColumns, removeColumns } from "./utils/addAlimentos.js";
 import { cargarPlantillasCentro } from '/src/dietas/modules/plantilla/fetch/fetchPlantilla.js';
+import { mostrarConfirmacionGuardado } from "/src/skeleton/skeletonConfirm.js";
+import { mostrarErrorGuardado } from "/src/skeleton/skeletonError.js";
 
 function borrarComidasDeDieta(data) {
   const ids = data.map(item => item.id_comida);
@@ -52,13 +54,41 @@ document.addEventListener("DOMContentLoaded", async () => {
   }, 300);
 
   document.getElementById("guardar-dieta-btn").addEventListener("click", async () => {
-    // Primero eliminamos las comidas actuales de la dieta
-    await borrarComidasDeDieta(data);
-
-    //  Luego actualizamos dieta (nombre, descripción, etc.)
-    await actualizarDieta();
-
-    //  Finalmente volvemos a crear las comidas y asociarlas
-    await guardarDietaCompleta();
-  });
+  const result = await mostrarConfirmacionGuardado();
+  
+  if (result.confirmed) {
+    const { progressController } = result;
+    
+    try {
+      // Proceso normal...
+      await borrarComidasDeDieta(data);
+      progressController.updateProgress(33);
+      
+      await actualizarDieta();
+      progressController.updateProgress(66);
+      
+      await guardarDietaCompleta();
+      progressController.updateProgress(100);
+      
+      progressController.complete();
+      
+    } catch (error) {
+      // Cerrar progress y mostrar error
+      progressController.close();
+      
+      const errorResult = await mostrarErrorGuardado({
+        title: '¡Error al guardar!',
+        message: 'No se pudieron guardar los cambios en la dieta.',
+        errorDetails: error.stack,
+        primaryButtonText: 'Reintentar',
+        secondaryButtonText: 'Cerrar'
+      });
+      
+      if (errorResult.retry) {
+        // Reiniciar todo el proceso
+        document.getElementById("guardar-dieta-btn").click();
+      }
+    }
+  }
+});
 });

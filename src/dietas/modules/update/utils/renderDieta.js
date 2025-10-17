@@ -3,11 +3,14 @@ import {
   filtrarAlimentosPorCategoria,
   generarOpcionesAlimentos,
   obtenerMaxEquivalentes,
-  generarTablaComida
+  generarTablaComida,
+  capitalizar
 } from './helpers.js';
 
 export async function renderDieta({ data, comidas }) {
   try {
+    console.log('🎨 Iniciando renderizado de dieta...');
+    
     // Rellenar nombre y descripción
     const nombreInput = document.getElementById("nombre-dieta");
     const descripcionTextarea = document.getElementById("descripcion-dieta");
@@ -20,30 +23,80 @@ export async function renderDieta({ data, comidas }) {
     // Obtener alimentos disponibles
     let alimentos = obtenerAlimentosDisponibles();
    
-    
     if (alimentos.length === 0) {
-      console.warn('No hay alimentos. Intentando cargar...');
+      console.warn('⚠️ No hay alimentos. Cargando...');
       const { renderSelectAlimentos } = await import('/src/dietas/modules/wizard/ui/renderAlimentos.js');
       await renderSelectAlimentos("select-alimentos");
       alimentos = obtenerAlimentosDisponibles();
-
     }
 
     const numEquivalentes = obtenerMaxEquivalentes(comidas);
+    console.log(`📊 Máximo de equivalentes: ${numEquivalentes}`);
     
     const contenedor = document.getElementById("tabla-container");
     
     if (!contenedor) {
-      console.error('Error: El elemento "tabla-container" no existe');
+      console.error('❌ No se encontró "tabla-container"');
       return;
     }
 
+    // Buscar tabla de suplementación existente
+    const tablaSuplementacion = contenedor.querySelector('#Suplementacion');
+
+    // Limpiar solo las tablas dinámicas (NO la de suplementación)
+    const tablasDinamicas = contenedor.querySelectorAll('.table-dieta');
+    tablasDinamicas.forEach(tabla => tabla.remove());
+
+    // ⚠️ VARIABLE TEMPORAL para guardar la nota de suplementación
+    let notaSupplementacion = '';
+
     // Generar tablas
-    contenedor.innerHTML = '';
-    Object.values(comidas).forEach(comida => {
+     Object.values(comidas).forEach(comida => {
+      const tipoComidaCapitalizado = capitalizar(comida.tipo_comida);
+      
+      // ✅ Si es suplementación, GUARDAR la nota para después
+      if (tipoComidaCapitalizado === 'Suplementacion') {
+        console.log('💊 Detectada suplementación...');
+        console.log('📝 Nota recibida:', comida.notas);
+        console.log('📝 Tipo de nota:', typeof comida.notas);
+        notaSupplementacion = comida.notas || '';
+        console.log('📝 Nota guardada:', notaSupplementacion);
+        return;
+      }
+      
+      // ✅ Para el resto de comidas, crear tabla normal
       const tablaHTML = generarTablaComida(comida, numEquivalentes, alimentos);
-      contenedor.insertAdjacentHTML('beforeend', tablaHTML);
+      
+      // Insertar ANTES de suplementación
+      if (tablaSuplementacion) {
+        tablaSuplementacion.insertAdjacentHTML('beforebegin', tablaHTML);
+      } else {
+        contenedor.insertAdjacentHTML('beforeend', tablaHTML);
+      }
+      
+      console.log(`✅ Tabla creada: ${tipoComidaCapitalizado}`);
     });
+
+   console.log('🔍 Intentando rellenar suplementación...');
+    console.log('📋 tablaSuplementacion existe:', !!tablaSuplementacion);
+    console.log('📝 notaSupplementacion:', `"${notaSupplementacion}"`);
+    console.log('📝 notaSupplementacion.trim():', `"${notaSupplementacion.trim()}"`);
+    console.log('📝 ¿Nota NO vacía?:', notaSupplementacion.trim() !== '');
+    
+    if (tablaSuplementacion) {
+      const textarea = tablaSuplementacion.querySelector('textarea');
+      console.log('📝 Textarea encontrado:', !!textarea);
+      
+      if (textarea) {
+        // ✅ QUITAR LA CONDICIÓN DE .trim() !== ''
+        textarea.value = notaSupplementacion;
+        console.log('✅ Suplementación cargada:', notaSupplementacion);
+      } else {
+        console.error('❌ No se encontró el textarea dentro de la tabla');
+      }
+    } else {
+      console.error('❌ No se encontró la tabla de suplementación');
+    }
 
     // Listener para cambios de categoría
     contenedor.addEventListener('change', (e) => {
@@ -56,29 +109,27 @@ export async function renderDieta({ data, comidas }) {
       }
     });
 
-    // NUEVA FUNCIONALIDAD: Agregar recálculo de equivalencias
+    // Agregar recálculo de equivalencias
     await agregarCalculoEquivalencias(contenedor);
 
-
+    console.log('✅ Renderizado completado');
 
   } catch (error) {
-    console.error('Error en renderDieta:', error);
+    console.error('❌ Error en renderDieta:', error);
   }
 }
 
-// 🔧 Nueva función para agregar cálculo automático de equivalencias
+
+// 🔧 Función para agregar cálculo automático de equivalencias
 async function agregarCalculoEquivalencias(contenedor) {
-  // Importar las funciones necesarias
   const { getEquivalencia } = await import('/src/dietas/modules/wizard/fetch/getEquivalencias.js');
   
-
-  const filas = contenedor.querySelectorAll(".table tbody tr:not(:last-child)"); 
+  const filas = contenedor.querySelectorAll(".table-dieta tbody tr:not(:last-child)"); 
   
   filas.forEach(fila => {
     const selectMacro = fila.querySelector("td select[name='select-categoria']");
     const inputCantidad = fila.querySelector(".input-cantidad");
     if (!selectMacro || !inputCantidad) return;
-
 
     const selects = fila.querySelectorAll("select[name='select-alimentos']");
     if (selects.length < 2) return;
@@ -86,7 +137,6 @@ async function agregarCalculoEquivalencias(contenedor) {
     const selectPrincipal = selects[0];
     const equivalentes = [];
 
-    // Recopilar pares de (select, td) para equivalencias
     for (let i = 1; i < selects.length; i++) {
       const td = selects[i].closest("td").nextElementSibling;
       if (td) {
@@ -100,7 +150,6 @@ async function agregarCalculoEquivalencias(contenedor) {
       const categoria = selectMacro.value?.toLowerCase();
 
       if (!idPrincipal || isNaN(cantidad) || !categoria) {
-        // Limpiar equivalencias si no hay datos válidos
         equivalentes.forEach(eq => {
           if (eq.td.tagName === 'TD') {
             eq.td.textContent = "";
@@ -109,27 +158,19 @@ async function agregarCalculoEquivalencias(contenedor) {
         return;
       }
 
-      // Limpiar todas las celdas de cantidad
       equivalentes.forEach(eq => {
         if (eq.td.tagName === 'TD') {
           eq.td.textContent = "";
         }
       });
 
-      // Calcular equivalencias para cada select que tenga valor
       for (const { select, td } of equivalentes) {
         if (!select.value || !td) continue;
         
         try {
           const eqVal = await getEquivalencia(idPrincipal, select.value, categoria, cantidad);
           if (td.tagName === 'TD') {
-            // ⬇️ CAMBIO: Redondear hacia arriba sin decimales
-            if (eqVal !== null) {
-              const valorRedondeado = Math.ceil(eqVal);
-              td.textContent = `${valorRedondeado}`;
-            } else {
-              td.textContent = "-";
-            }
+            td.textContent = eqVal !== null ? `${Math.ceil(eqVal)}` : "-";
           }
         } catch (error) {
           console.error('Error calculando equivalencia:', error);
@@ -140,19 +181,16 @@ async function agregarCalculoEquivalencias(contenedor) {
       }
     }
 
-    // Agregar eventos a todos los elementos relevantes
     [selectMacro, selectPrincipal, inputCantidad].forEach(el => {
       if (el) {
         el.addEventListener("change", calcular);
       }
     });
     
-    // Agregar evento input para cantidad
     if (inputCantidad) {
       inputCantidad.addEventListener("input", calcular);
     }
 
-    // Agregar eventos a selects de equivalencias
     equivalentes.forEach(({ select }) => {
       if (select) {
         select.addEventListener("change", calcular);
