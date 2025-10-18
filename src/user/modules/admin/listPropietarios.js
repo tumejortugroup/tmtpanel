@@ -63,7 +63,7 @@ export async function listPropietarios() {
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton${usuario.id_usuario}">
                 <li><a class="dropdown-item" href="/dashboard/user/user-update.html?id=${usuario.id_usuario}">Editar</a></li>
-                <li><a class="dropdown-item" href="#" data-nombre="${usuario.nombre}">Eliminar</a></li>
+                 <li><button class="dropdown-item btn-eliminar" data-nombre="${usuario.nombre}" data-id="${usuario.id_usuario}">Eliminar</button></li>
               </ul>
             </div>
           </div>

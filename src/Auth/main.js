@@ -2,6 +2,7 @@ import { initAuth } from './modules/auth.js';
 import { initLogout } from './modules/logout.js';
 import { checkSession } from './modules/check.js';
 import { getUserInfoFromToken } from './modules/jwt.js';
+import { mostrarSkeletonSpinner, ocultarSkeletonSpinner } from '/src/skeleton/skeletonSpinner.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const path = window.location.pathname;
@@ -12,19 +13,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (path.includes('/dashboard')) {
+        // ⬇️ MOSTRAR SPINNER
+        mostrarSkeletonSpinner({
+            title: 'Cargando',
+            subtitle: 'Preparando tu espacio de trabajo...'
+        });
+
         let asideRendered = false;
 
         // 1. Cargar ASIDE
-       const asideLoaded = fetch('/dashboard/aside.html')
+        const asideLoaded = fetch('/dashboard/aside.html')
             .then(res => {
                 if (!res.ok) throw new Error("No se pudo cargar aside.html");
                 return res.text();
             })
             .then(html => {
                 document.getElementById('aside').innerHTML = html;
-
             })
             .catch(err => console.error(err));
+
         // 2. Cargar NAVBAR
         const navbarLoaded = fetch('/dashboard/navbar.html')
             .then(res => res.text())
@@ -37,11 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 4. Verificamos sesión
             const token = await checkSession();
-            if (!token) return;
+            if (!token) {
+                ocultarSkeletonSpinner();
+                return;
+            }
 
             // 5. Obtenemos datos del usuario
             const user = getUserInfoFromToken(token);
-            if (!user) return;
+            if (!user) {
+                ocultarSkeletonSpinner();
+                return;
+            }
 
             const { nombre, rol, centro_id, id_usuario } = user;
 
@@ -49,9 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('nombre', nombre);
             localStorage.setItem('id_usuario', id_usuario);
             localStorage.setItem('rol', rol);
-            localStorage.setItem('centro_id', centro_id); 
+            localStorage.setItem('centro_id', centro_id);
 
-              window.dispatchEvent(new CustomEvent('dashboardReady', { 
+            window.dispatchEvent(new CustomEvent('dashboardReady', {
                 detail: { token, nombre, rol, centro_id, id_usuario }
             }));
 
@@ -86,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-           setTimeout(() => {
+            setTimeout(() => {
                 const nombreElems = document.querySelectorAll('.nombre-usuario');
                 const rolElems = document.querySelectorAll('.rol-usuario');
 
@@ -102,10 +115,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (rolElems.length > 0) {
                     rolElems.forEach(el => el.textContent = rol);
                 }
-                }, 100);
+            }, 100);
 
             // 9. Inicializar logout
             initLogout();
+
+            // ⬇️ OCULTAR SPINNER DESPUÉS DE 2 SEGUNDOS
+            setTimeout(() => {
+                ocultarSkeletonSpinner();
+            }, 1000);
+
+        }).catch(error => {
+            console.error('Error al cargar dashboard:', error);
+            ocultarSkeletonSpinner();
         });
     }
 });

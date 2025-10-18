@@ -37,7 +37,7 @@ export function initCreateUserFormAdmin() {
             { id: 'fname', nombre: 'Nombre' },
             { id: 'lname', nombre: 'Apellidos' },
             { id: 'email', nombre: 'Correo electrónico' },
-            { id: 'pass', nombre: 'Contraseña' }
+           
         ];
 
         const camposFaltantes = camposObligatorios.filter(campo => {

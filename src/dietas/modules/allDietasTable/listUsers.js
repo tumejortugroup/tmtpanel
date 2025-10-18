@@ -65,8 +65,11 @@ export async function listUser() {
 
       const rowHTML = `
         <tr data-id-usuario="${usuario.id_usuario}">
+          <td>${usuario.numero_usuario.substring(0, 3)}</td>
+          <td>${usuario.estado}</td>
           <td>${usuario.nombre}</td>
           <td>${usuario.apellidos}</td>
+
           <td class="nombre-dato">—</td>
           <td class="fecha-dato">—</td>
           <td>${selectHTML}</td>
