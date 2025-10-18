@@ -7,7 +7,7 @@ export async function guardarPlantillaCompleta() {
     // 1. Crear plantilla
     const id_plantilla = await crearPlantilla();
     if (!id_plantilla) {
-      alert("❌ No se pudo crear la plantilla.");
+
       return;
     }
 
@@ -15,7 +15,7 @@ export async function guardarPlantillaCompleta() {
     // 2. Crear comidas
     const comidas = await crearComidas();
     if (!comidas || !Array.isArray(comidas)) {
-      alert("❌ No se pudieron crear las comidas.");
+ 
       return;
     }
 
@@ -29,7 +29,7 @@ export async function guardarPlantillaCompleta() {
     // 3. Asociar comidas a la plantilla
     await asociarComidasAPlantilla(id_plantilla, idsComidas);
 
-    alert("✅ Plantilla completa guardada con éxito.");
+
   } catch (error) {
     console.error("❌ Error en guardarPlantillaCompleta:", error);
     alert("❌ Hubo un error al guardar la plantilla completa.");

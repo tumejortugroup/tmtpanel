@@ -324,17 +324,21 @@
                                 <option>25</option>
                                 </select>
                             </div>
+                             <div class="dataTables_length d-flex align-items-center gap-2" >
+                                <span>Dieta</span>
+                               <select id="dietas-anteriores" class="form-select form-select-sm w-auto">
+                                    <option value="">Ninguna</option>
+                                </select>
+                            </div>
+
+                             <div class="dataTables_length d-flex align-items-center gap-2" >
+                                <button>Control</button> 
+                            </div>
                         </div>
                     </div>
 
                      <div id="tabla-container">
             <!-- Las tablas se generarán aquí dinámicamente -->
-                    </div>
-
-
-
-
-
 
              <table id="Suplementacion" class="table table-striped mb-0 fs-7" role="grid"> 
                         <thead>
@@ -358,7 +362,15 @@
                                   
                          </tbody>
             </table>
-                                      
+                      
+                    </div>
+
+
+
+
+
+
+                            
                                       
                                     <div class="comida-btns d-flex mt-2 mb-2 ms-2 "> 
                                         <button onclick="eliminarUltimaTabla()" class="btn-ajuste  btn btn-primary btn-sm me-2">- Quitar comida</button>

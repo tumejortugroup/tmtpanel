@@ -11,6 +11,7 @@ import { addColumns, removeColumns } from "./utils/addAlimentos.js";
 import { cargarPlantillasCentro } from '/src/dietas/modules/plantilla/fetch/fetchPlantilla.js';
 import { mostrarConfirmacionGuardado } from "/src/skeleton/skeletonConfirm.js";
 import { mostrarErrorGuardado } from "/src/skeleton/skeletonError.js";
+import { obtenerDetalleDato } from '/src/dietas/modules/wizardBase/fetch/getPeso.js';
 
 function borrarComidasDeDieta(data) {
   const ids = data.map(item => item.id_comida);
@@ -30,6 +31,45 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!idDieta) {
     alert("Falta id_dieta en la URL");
     return;
+  }
+
+  // ⬇️ BOTÓN DE CONTROL
+  const btnControl = document.querySelector('.dataTables_length button');
+  if (btnControl && idDato) {
+    btnControl.addEventListener('click', async () => {
+      try {
+        console.log('🔍 Obteniendo id_usuario desde id_dato:', idDato);
+        
+        const detalle = await obtenerDetalleDato();
+        const idUsuario = detalle?.data?.id_usuario;
+        
+        if (!idUsuario) {
+          throw new Error('No se encontró id_usuario en los detalles del dato');
+        }
+        
+        console.log('✅ ID Usuario obtenido:', idUsuario);
+        
+        // Abrir en nueva pestaña
+        window.open(`/dashboard/controles/informe.html?id_usuario=${idUsuario}&id_dato=${idDato}`, '_blank');
+        
+      } catch (error) {
+        console.error('❌ Error:', error);
+        
+        await mostrarErrorGuardado({
+          title: 'Error al acceder al control',
+          message: 'No se pudo obtener la información del usuario para mostrar el control.',
+          errorDetails: error.message,
+          primaryButtonText: 'Entendido',
+          secondaryButtonText: null
+        });
+      }
+    });
+  } else if (btnControl && !idDato) {
+    // Si no hay id_dato, deshabilitar el botón
+    btnControl.disabled = true;
+    btnControl.title = 'No hay datos de control disponibles';
+    btnControl.style.opacity = '0.5';
+    btnControl.style.cursor = 'not-allowed';
   }
 
   // Botones de añadir comida y alimentos
@@ -96,8 +136,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Guardar: Siempre usa idDieta (destino) y los datos actuales mostrados
   document.getElementById("guardar-dieta-btn").addEventListener("click", async () => {
     const result = await mostrarConfirmacionGuardado({
-      title: idDieta2 ? '¿Guardar cambios?' : '¿Guardar cambios?',
-      
+      title: idDieta2 ? '¿Copiar plantilla a esta dieta?' : '¿Guardar cambios?',
+      message: idDieta2 
+        ? 'Se reemplazarán las comidas actuales con las de la dieta seleccionada.'
+        : 'Se guardarán todos los cambios realizados en la dieta.'
     });
     
     if (result.confirmed) {
@@ -134,7 +176,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             : 'No se pudieron guardar los cambios en la dieta.',
           errorDetails: error.stack,
           primaryButtonText: 'Reintentar',
-          secondaryButtonText: 'Cerrar'
+          secondaryButtonText: null
         });
         
         if (errorResult.retry) {

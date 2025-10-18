@@ -7,22 +7,31 @@ import {
   capitalizar
 } from './helpers.js';
 
-export async function renderPlantilla({ data, comidas }) {
+export async function renderDieta({ data, comidas, isPlantillaMode = false, idDietaDestino, idDietaPlantilla }) {
   try {
-    console.log('Iniciando renderizado de plantilla...');
+    console.log('Iniciando renderizado de dieta...');
+    console.log('Modo plantilla:', isPlantillaMode);
+    console.log('ID destino:', idDietaDestino);
+    console.log('ID plantilla:', idDietaPlantilla);
     
-    // Rellenar nombre (las plantillas solo tienen nombre, no descripción)
+    // Rellenar nombre y descripción (siempre de la dieta destino)
     const nombreInput = document.getElementById("nombre-dieta");
+    const descripcionTextarea = document.getElementById("descripcion-dieta");
 
     if (data && data.length > 0) {
-      if (nombreInput) nombreInput.value = data[0].nombre_plantilla || "";
+      if (nombreInput) {
+        nombreInput.value = data[0].nombre_dieta || "";
+      }
+      if (descripcionTextarea) {
+        descripcionTextarea.value = data[0].descripcion || "";
+      }
     }
 
     // Obtener alimentos disponibles
     let alimentos = obtenerAlimentosDisponibles();
    
     if (alimentos.length === 0) {
-      console.warn('No hay alimentos. Intentando cargar...');
+      console.warn('No hay alimentos. Cargando...');
       const { renderSelectAlimentos } = await import('/src/dietas/modules/wizard/ui/renderAlimentos.js');
       await renderSelectAlimentos("select-alimentos");
       alimentos = obtenerAlimentosDisponibles();
@@ -48,13 +57,13 @@ export async function renderPlantilla({ data, comidas }) {
     // Variable temporal para guardar la nota de suplementación
     let notaSupplementacion = '';
 
-    // Generar tablas usando los datos de comidas
+    // Generar tablas usando los datos de comidas (que pueden ser de la plantilla)
     Object.values(comidas).forEach(comida => {
       const tipoComidaCapitalizado = capitalizar(comida.tipo_comida);
       
       // Si es suplementación, GUARDAR la nota para después
       if (tipoComidaCapitalizado === 'Suplementacion') {
-        console.log('Detectada suplementacion en plantilla...');
+        console.log('Detectada suplementacion...');
         console.log('Nota recibida:', comida.notas);
         notaSupplementacion = comida.notas || '';
         console.log('Nota guardada:', notaSupplementacion);
@@ -71,13 +80,15 @@ export async function renderPlantilla({ data, comidas }) {
         contenedor.insertAdjacentHTML('beforeend', tablaHTML);
       }
       
-      console.log(`Tabla creada: ${tipoComidaCapitalizado}`);
+      console.log(`Tabla creada: ${tipoComidaCapitalizado}${isPlantillaMode ? ' (desde plantilla)' : ''}`);
     });
 
     // Rellenar suplementación
     console.log('Intentando rellenar suplementacion...');
     console.log('tablaSuplementacion existe:', !!tablaSuplementacion);
     console.log('notaSupplementacion:', `"${notaSupplementacion}"`);
+    console.log('notaSupplementacion.trim():', `"${notaSupplementacion.trim()}"`);
+    console.log('Nota NO vacia?:', notaSupplementacion.trim() !== '');
     
     if (tablaSuplementacion) {
       const textarea = tablaSuplementacion.querySelector('textarea');
@@ -107,22 +118,10 @@ export async function renderPlantilla({ data, comidas }) {
     // Agregar recálculo de equivalencias
     await agregarCalculoEquivalencias(contenedor);
 
-    console.log('Renderizado de plantilla completado');
-
-    // RECÁLCULO DE MACROS DESPUÉS DEL RENDERIZADO
-    requestAnimationFrame(async () => {
-      try {
-        console.log('🔄 Iniciando recálculo de macros después del render de plantilla...');
-        const { configurarListenersParaNuevaTabla } = await import('/src/dietas/modules/plantilla/ui/sumaMacros.js');
-        configurarListenersParaNuevaTabla();
-        console.log('✅ Recálculo de macros completado');
-      } catch (error) {
-        console.error('❌ Error al recalcular macros:', error);
-      }
-    });
+    console.log('Renderizado completado');
 
   } catch (error) {
-    console.error('Error en renderPlantilla:', error);
+    console.error('Error en renderDieta:', error);
   }
 }
 

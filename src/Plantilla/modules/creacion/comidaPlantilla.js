@@ -25,7 +25,7 @@ export async function asociarComidasAPlantilla(id_plantilla, idsComidas) {
     if (res.ok) {
 
     } else {
-      alert("❌ Error al asociar comidas: " + (data.error || res.status));
+      
     }
   } catch (error) {
     console.error("❌ Error de red en asociarComidasAPlantilla:", error);

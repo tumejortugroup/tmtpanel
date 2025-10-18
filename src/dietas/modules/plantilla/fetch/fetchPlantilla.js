@@ -30,15 +30,26 @@ export async function cargarPlantillasCentro() {
       return;
     }
 
+    // Obtener id_plantilla de la URL si existe
+    const params = new URLSearchParams(window.location.search);
+    const id_plantilla_actual = params.get("id_plantilla");
+
+    // Limpiar el select
     selectPlantillas.innerHTML = '<option value="">Ninguna</option>';
 
+    // Agregar todas las plantillas como opciones
     plantillas.forEach(plantilla => {
       const option = document.createElement('option');
       option.value = plantilla.id_plantilla;
       option.textContent = plantilla.nombre;
+      
+      // ⬇️ Seleccionar la plantilla si coincide con id_plantilla de la URL
+      if (id_plantilla_actual && plantilla.id_plantilla == id_plantilla_actual) {
+        option.selected = true;
+      }
+      
       selectPlantillas.appendChild(option);
     });
-
 
     // Event listener para capturar cambio de plantilla
     selectPlantillas.addEventListener('change', function() {
@@ -51,7 +62,15 @@ export async function cargarPlantillasCentro() {
         
         const nuevaURL = `/dashboard/dietas/wizardUpdatePlantilla.html?id_dieta=${idDieta}&id_dato=${idDato}&id_plantilla=${idPlantillaSeleccionada}`;
         
-
+        window.location.href = nuevaURL;
+      } else {
+        // Si selecciona "Ninguna", redirigir sin id_plantilla
+        const params = new URLSearchParams(window.location.search);
+        const idDieta = params.get('id_dieta');
+        const idDato = params.get('id_dato') || '';
+        
+        const nuevaURL = `/dashboard/dietas/wizardUpdatePlantilla.html?id_dieta=${idDieta}&id_dato=${idDato}`;
+        
         window.location.href = nuevaURL;
       }
     });

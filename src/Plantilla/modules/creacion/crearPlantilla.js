@@ -1,4 +1,4 @@
-let idPlantillaCreada = null; 
+import { mostrarErrorGuardado } from "/src/skeleton/skeletonError.js";
 
 export async function crearPlantilla() {
   const token = localStorage.getItem("token");
@@ -6,16 +6,30 @@ export async function crearPlantilla() {
   const id_centro = localStorage.getItem("centro_id");
 
   // Recuperar el valor del input
-  const nombre = document.getElementById("nplantilla").value.trim();
+  const nombreInput = document.getElementById("nplantilla");
+  const nombre = nombreInput?.value.trim();
 
   if (!token || !id_usuario || !id_centro) {
-    alert("❌ Faltan datos en el localStorage (token, usuario o centro). Inicia sesión nuevamente.");
-    return;
+    await mostrarErrorGuardado({
+      title: 'Datos faltantes',
+      message: 'Faltan datos de autenticación (token, usuario o centro). Por favor, inicia sesión nuevamente.',
+      primaryButtonText: 'Ir a login',
+      secondaryButtonText: 'Cerrar'
+    });
+    
+    throw new Error('Faltan datos de autenticación');
   }
 
   if (!nombre) {
-    alert("❌ El nombre de la plantilla es obligatorio.");
-    return;
+    await mostrarErrorGuardado({
+      title: 'Nombre requerido',
+      message: 'El nombre de la plantilla es obligatorio. Por favor, ingresa un nombre.',
+      primaryButtonText: 'Aceptar',
+      secondaryButtonText: null
+    });
+    
+    nombreInput?.focus();
+    throw new Error('Nombre de plantilla vacío');
   }
 
   const payload = {
@@ -35,25 +49,76 @@ export async function crearPlantilla() {
     });
 
     if (!res.ok) {
-      throw new Error(`❌ Error al crear la plantilla: HTTP ${res.status}`);
+      const errorText = await res.text();
+      let errorMessage = "No se pudo crear la plantilla en el servidor.";
+      
+      if (res.status === 400) {
+        errorMessage = "Los datos enviados no son válidos. Revisa la información ingresada.";
+      } else if (res.status === 409) {
+        errorMessage = "Ya existe una plantilla con ese nombre en tu centro.";
+      } else if (res.status === 401) {
+        errorMessage = "No tienes permisos para crear plantillas.";
+      } else if (res.status === 500) {
+        errorMessage = "Error interno del servidor. Inténtalo más tarde.";
+      }
+
+      const errorResult = await mostrarErrorGuardado({
+        title: 'Error al crear plantilla',
+        message: errorMessage,
+        errorDetails: `Error ${res.status}: ${res.statusText}\n\nRespuesta:\n${errorText}`,
+        primaryButtonText: 'Reintentar',
+        secondaryButtonText: 'Cancelar'
+      });
+
+      if (errorResult.retry) {
+        return await crearPlantilla();
+      }
+      
+      throw new Error(`Error HTTP ${res.status}: ${errorMessage}`);
     }
 
     const result = await res.json();
-    idPlantillaCreada = result.id; // ← guardamos el id en la variable global
+    const idPlantilla = result.id;
 
-    if (!idPlantillaCreada) {
-      throw new Error("❌ No se recibió ID de la plantilla creada.");
+    if (!idPlantilla) {
+      await mostrarErrorGuardado({
+        title: 'Error en respuesta',
+        message: 'El servidor no devolvió un ID de plantilla válido.',
+        errorDetails: JSON.stringify(result, null, 2),
+        primaryButtonText: 'Aceptar',
+        secondaryButtonText: null
+      });
+      
+      throw new Error("No se recibió ID de la plantilla creada");
     }
 
-   
+    console.log("✅ Plantilla creada con ID:", idPlantilla);
+    
+    // ⬇️ SIMPLEMENTE DEVOLVER EL ID
+    return idPlantilla;
 
-    // 👉 Aquí ya puedes usar idPlantillaCreada para lo que necesites a continuación
-    // Ejemplo:
-    // await asociarComidasAPlantilla(idPlantillaCreada, comidasSeleccionadas);
-
-    return idPlantillaCreada;
   } catch (error) {
     console.error("❌ Error al crear la plantilla:", error);
-    alert("❌ Hubo un error al crear la plantilla.");
+
+    if (error.message.includes('HTTP') || 
+        error.message.includes('autenticación') || 
+        error.message.includes('vacío') ||
+        error.message.includes('ID de la plantilla')) {
+      throw error;
+    }
+
+    const errorResult = await mostrarErrorGuardado({
+      title: 'Error de conexión',
+      message: 'No se pudo conectar con el servidor. Verifica tu conexión a internet.',
+      errorDetails: `${error.message}\n\n${error.stack}`,
+      primaryButtonText: 'Reintentar',
+      secondaryButtonText: 'Cancelar'
+    });
+
+    if (errorResult.retry) {
+      return await crearPlantilla();
+    }
+
+    throw error;
   }
 }

@@ -1,11 +1,10 @@
-import { generarPayloadComidas } from "./payloadComidas.js";
-
-export async function crearComidas() {
+ import { generarPayloadComidas } from "./payloadComidas.js";
+ export async function crearComidas() {
   const comidas = generarPayloadComidas();
 
   if (!comidas.length) {
     alert("⚠️ No hay comidas válidas para enviar.");
-    return [];
+    return;
   }
 
   try {
@@ -21,18 +20,14 @@ export async function crearComidas() {
 
     const data = await res.json();
 
-
-    if (res.ok && Array.isArray(data.data)) {
-
-      return data.data; // 👈 devolvemos solo el array [{id_comida:...}]
+    if (res.ok) {
+      return data; // [{ id_comida: ... }]
     } else {
       console.error("❌ Error al crear comidas:", data);
-
-      return [];
+      alert("Error al crear comidas.");
     }
   } catch (error) {
     console.error("❌ Error en fetch:", error);
-   
-    return [];
+    alert("Error de red al crear comidas.");
   }
 }

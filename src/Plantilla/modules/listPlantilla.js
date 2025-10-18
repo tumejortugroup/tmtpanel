@@ -1,4 +1,6 @@
 import { formatearFecha } from "/src/user/modules/utils/formatearFecha.js";
+import { mostrarConfirmacionGuardado } from "/src/skeleton/skeletonConfirm.js";
+import { mostrarErrorGuardado } from "/src/skeleton/skeletonError.js";
 
 export async function cargarPlantillasCentro() {
   const token = localStorage.getItem("token");
@@ -34,6 +36,17 @@ export async function cargarPlantillasCentro() {
 
     tbody.innerHTML = ""; // Limpiamos antes de insertar
 
+    if (plantillas.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="3" class="text-center text-muted py-4">
+            No hay plantillas creadas todavía
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
     plantillas.forEach(plantilla => {
       const rowHTML = `
         <tr>
@@ -57,37 +70,64 @@ export async function cargarPlantillasCentro() {
       tbody.insertAdjacentHTML("beforeend", rowHTML);
     });
 
-
-
-    // Event listener para eliminar plantillas
+    // ⬇️ Event listener CORREGIDO - ahora pasa ambos parámetros
     document.querySelectorAll('.eliminar-plantilla').forEach(btn => {
       btn.addEventListener('click', async function(e) {
         e.preventDefault();
         const idPlantilla = this.getAttribute('data-id');
         const nombrePlantilla = this.getAttribute('data-nombre');
         
-        if (confirm(`¿Estás seguro de eliminar la plantilla "${nombrePlantilla}"?`)) {
-          await eliminarPlantilla(idPlantilla);
-        }
+        // ⬇️ Llamar a la función con ambos parámetros
+        await eliminarPlantilla(idPlantilla, nombrePlantilla);
       });
     });
 
   } catch (error) {
     console.error("❌ Error al cargar las plantillas:", error.message);
+    
+    await mostrarErrorGuardado({
+      title: 'Error al cargar plantillas',
+      message: 'No se pudieron cargar las plantillas del centro.',
+      errorDetails: error.stack,
+      primaryButtonText: 'Reintentar',
+      secondaryButtonText: null
+    });
   }
 }
 
-async function eliminarPlantilla(idPlantilla) {
+async function eliminarPlantilla(idPlantilla, nombrePlantilla) {
+  // Mostrar confirmación de eliminación
+  const result = await mostrarConfirmacionGuardado({
+    title: '¿Eliminar plantilla?',
+    message: `¿Estás seguro de que quieres eliminar la plantilla "${nombrePlantilla}"? Esta acción no se puede deshacer.`,
+    confirmText: 'Sí, eliminar',
+    cancelText: 'Cancelar'
+  });
+
+  if (!result.confirmed) {
+    return; // Usuario canceló
+  }
+
+  const { progressController } = result;
   const token = localStorage.getItem("token");
   
   if (!token) {
-    console.warn("⚠️ No se encontró el token en localStorage.");
+    progressController.close();
+    
+    await mostrarErrorGuardado({
+      title: 'Error de autenticación',
+      message: 'No se encontró el token de autenticación. Por favor, inicia sesión nuevamente.',
+      primaryButtonText: 'Reintentar',
+      secondaryButtonText: null
+    });
     return;
   }
 
   const endpoint = `https://my.tumejortugroup.com/api/v1/plantillas/${idPlantilla}`;
   
   try {
+    progressController.updateProgress(50);
+    
     const response = await fetch(endpoint, {
       method: "DELETE",
       headers: {
@@ -97,16 +137,61 @@ async function eliminarPlantilla(idPlantilla) {
     });
 
     if (!response.ok) {
-      throw new Error(`❌ Error HTTP: ${response.status} - ${response.statusText}`);
+      const errorText = await response.text();
+      let errorMessage = "No se pudo eliminar la plantilla.";
+      
+      if (response.status === 404) {
+        errorMessage = "La plantilla no existe o ya fue eliminada.";
+      } else if (response.status === 401) {
+        errorMessage = "No tienes permisos para eliminar esta plantilla.";
+      } else if (response.status === 403) {
+        errorMessage = "No tienes autorización para eliminar esta plantilla.";
+      } else if (response.status === 500) {
+        errorMessage = "Error interno del servidor. Inténtalo más tarde.";
+      }
+
+      progressController.close();
+
+      const errorResult = await mostrarErrorGuardado({
+        title: 'Error al eliminar',
+        message: errorMessage,
+        errorDetails: `Error ${response.status}: ${response.statusText}\n\nRespuesta:\n${errorText}`,
+        primaryButtonText: 'Reintentar',
+        secondaryButtonText: null
+      });
+
+      if (errorResult.retry) {
+        await eliminarPlantilla(idPlantilla, nombrePlantilla);
+      }
+      return;
     }
 
-
+    progressController.updateProgress(100);
     
-    // Recargar la lista de plantillas
-    await cargarPlantillasCentro();
+    console.log(`✅ Plantilla "${nombrePlantilla}" eliminada correctamente`);
+    
+    progressController.complete();
+    
+    // Recargar la lista después de eliminar
+    setTimeout(async () => {
+      await cargarPlantillasCentro();
+    }, 1000);
     
   } catch (error) {
-    console.error("❌ Error al eliminar la plantilla:", error.message);
-    alert("Error al eliminar la plantilla. Por favor, intenta de nuevo.");
+    progressController.close();
+    
+    console.error("❌ Error al eliminar la plantilla:", error);
+    
+    const errorResult = await mostrarErrorGuardado({
+      title: 'Error de conexión',
+      message: 'No se pudo conectar con el servidor. Verifica tu conexión a internet.',
+      errorDetails: `${error.message}\n\n${error.stack}`,
+      primaryButtonText: 'Reintentar',
+      secondaryButtonText: null
+    });
+
+    if (errorResult.retry) {
+      await eliminarPlantilla(idPlantilla, nombrePlantilla);
+    }
   }
 }

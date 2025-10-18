@@ -6,35 +6,80 @@ import { guardarDietaCompleta } from '/src/dietas/modules/wizard/creacion/guarda
 import { addColumns, removeColumns } from '/src/dietas/modules/wizard/ui/add-columns.js';
 import { cargarPlantillasCentro } from './modules/plantilla/fetch/fetchPlantilla.js';
 import { mostrarConfirmacionGuardado } from "/src/skeleton/skeletonConfirm.js";
-
-
+import { mostrarErrorGuardado } from "/src/skeleton/skeletonError.js";
+import { obtenerDetalleDato } from '/src/dietas/modules/wizard/fetch/getPeso.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
-      window.duplicarUltimaTabla = duplicarUltimaTabla;
+  const params = new URLSearchParams(window.location.search);
+  const idDato = params.get("id_dato");
+
+  // ⬇️ BOTÓN DE CONTROL
+  const btnControl = document.querySelector('.dataTables_length button');
+  if (btnControl && idDato) {
+    btnControl.addEventListener('click', async () => {
+      try {
+        console.log('🔍 Obteniendo id_usuario desde id_dato:', idDato);
+        
+        const detalle = await obtenerDetalleDato();
+        const idUsuario = detalle?.data?.id_usuario;
+        
+        if (!idUsuario) {
+          throw new Error('No se encontró id_usuario en los detalles del dato');
+        }
+        
+        console.log('✅ ID Usuario obtenido:', idUsuario);
+        
+        // Abrir en nueva pestaña
+        window.open(`/dashboard/controles/informe.html?id_usuario=${idUsuario}&id_dato=${idDato}`, '_blank');
+        
+      } catch (error) {
+        console.error('❌ Error:', error);
+        
+        await mostrarErrorGuardado({
+          title: 'Error al acceder al control',
+          message: 'No se pudo obtener la información del usuario para mostrar el control.',
+          errorDetails: error.message,
+          primaryButtonText: 'Entendido',
+          secondaryButtonText: null
+        });
+      }
+    });
+  } else if (btnControl && !idDato) {
+    // Si no hay id_dato, deshabilitar el botón
+    btnControl.disabled = true;
+    btnControl.title = 'No hay datos de control disponibles';
+    btnControl.style.opacity = '0.5';
+    btnControl.style.cursor = 'not-allowed';
+  }
+
+  window.duplicarUltimaTabla = duplicarUltimaTabla;
   window.eliminarUltimaTabla = eliminarUltimaTabla;
 
   document.addEventListener("click", (e) => {
-  if (e.target.matches(".btn-add-columns")) {
-    addColumns(e.target);
-  }
-  if (e.target.matches(".btn-remove-columns")) {
-    removeColumns(e.target);
-  }
-});
-
+    if (e.target.matches(".btn-add-columns")) {
+      addColumns(e.target);
+    }
+    if (e.target.matches(".btn-remove-columns")) {
+      removeColumns(e.target);
+    }
+  });
 
   await ejecutarAutoAjuste();
   await tablaAlimentos();
-
   await cargarPlantillasCentro();
+
   document.getElementById("guardar-dieta-btn").addEventListener("click", async () => {
-    const result = await mostrarConfirmacionGuardado();
+    const result = await mostrarConfirmacionGuardado({
+      title: '¿Guardar cambios?',
+      message: 'Se guardarán todos los cambios realizados en la dieta.',
+      confirmText: 'Guardar',
+      cancelText: 'Cancelar'
+    });
     
     if (result.confirmed) {
       const { progressController } = result;
       
       try {
-
         await actualizarDieta();
         progressController.updateProgress(66);
         
@@ -44,23 +89,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         progressController.complete();
         
       } catch (error) {
-        // Cerrar progress y mostrar error
         progressController.close();
         
         const errorResult = await mostrarErrorGuardado({
-          title: '¡Error al guardar!',
+          title: 'Error al guardar',
           message: 'No se pudieron guardar los cambios en la dieta.',
           errorDetails: error.stack,
           primaryButtonText: 'Reintentar',
-          secondaryButtonText: 'Cerrar'
+          secondaryButtonText: null
         });
         
         if (errorResult.retry) {
-          // Reiniciar todo el proceso
           document.getElementById("guardar-dieta-btn").click();
         }
       }
     }
   });
-  
 });
