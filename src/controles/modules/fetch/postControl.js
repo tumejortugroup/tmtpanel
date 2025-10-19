@@ -101,17 +101,25 @@ export async function guardarControl() {
   const porcentaje_graso_perimetros = getFloat('grasa_perimetral', index);
   const porcentaje_graso_estimado_pliegues = getFloat('grasa_pliegues', index);
   const kg_grasa = getFloat('kg_grasa', index);
+  const peso_graso = getFloat('peso_graso', index); // ✅ AÑADIDO
   
   console.log('% Grasa (perímetros):', porcentaje_graso_perimetros);
   console.log('% Grasa (pliegues):', porcentaje_graso_estimado_pliegues);
   console.log('Kg grasa:', kg_grasa);
+  console.log('Peso graso (kg):', peso_graso); // ✅ AÑADIDO
 
-  console.log('\n=== 💪 MASA MAGRA ===');
+  console.log('\n=== 💪 MASA MAGRA Y MUSCULAR ===');
   const kg_masa_magra = getFloat('kg_masa_magra', index);
   const indice_masa_magra = getFloat('indice_masa_magra', index);
+  const porcentaje_masa_magra = getFloat('porcentaje_masa_magra', index); // ✅ AÑADIDO
+  const peso_muscular = getFloat('peso_muscular', index); // ✅ AÑADIDO
+  const porcentaje_masa_muscular = getFloat('porcentaje_masa_muscular', index); // ✅ AÑADIDO
   
   console.log('Kg masa magra:', kg_masa_magra);
   console.log('Índice masa magra:', indice_masa_magra);
+  console.log('% Masa magra:', porcentaje_masa_magra); // ✅ AÑADIDO
+  console.log('Peso muscular (kg):', peso_muscular); // ✅ AÑADIDO
+  console.log('% Masa muscular:', porcentaje_masa_muscular); // ✅ AÑADIDO
 
   console.log('\n=== 🦴 DIÁMETROS ÓSEOS (CM) ===');
   const humero_biepicondileo = getFloat('humero_bicondileo', index);
@@ -183,7 +191,11 @@ export async function guardarControl() {
     calorias_datos,
     carbohidratos_datos,
     grasas_datos,
-    proteinas_datos
+    proteinas_datos,
+    porcentaje_masa_magra, // ✅ Ahora definido
+    peso_muscular, // ✅ Ahora definido
+    peso_graso, // ✅ Ahora definido
+    porcentaje_masa_muscular // ✅ Ahora definido
   };
 
   console.log('\n=== 📦 OBJETO COMPLETO A ENVIAR ===');

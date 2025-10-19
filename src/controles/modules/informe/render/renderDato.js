@@ -215,8 +215,8 @@ function renderizarInforme(dato, historico) {
         <div>
           <div class="composicion-row">
             <span><strong>PESO GRASO:</strong></span>
-            <span>${formatearValor(dato.kg_grasa)} kg</span>
-            <span>${formatearValor(dato.porcentaje_graso_estimado_pliegue)}%</span>
+            <span>${formatearValor(dato.peso_graso)} kg</span>
+            <span>${formatearValor(dato.porcentaje_masa_magra)}%</span>
           </div>
           <div class="composicion-row">
             <span><strong>PESO OSEO ( ROCHA ):</strong></span>
