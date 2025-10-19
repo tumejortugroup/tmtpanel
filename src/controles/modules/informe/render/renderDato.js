@@ -323,7 +323,7 @@ function renderizarTablaProgresion(historico, idDatoActual) {
             <td>${row.kg_masa_magra || '-'}</td>
             <td>${row.peso_oseo_rocha || '-'}</td>
             <td>${row.indice_masa_magra || '-'}</td>
-            <td>${row.porcentaje_graso_estimado_pliegue || '-'}</td>
+            <td>${row.porcentaje_masa_magra || '-'}</td>
           </tr>
         `).join('')}
       </tbody>
