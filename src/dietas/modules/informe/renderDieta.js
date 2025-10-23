@@ -1,7 +1,7 @@
 import { agruparPorTipoComida } from './agruparComida.js';
 
 /* =====================
-   Botones flotantes Exportar/Imprimir (fuera de render)
+   Botones flotantes Exportar/Imprimir
    ===================== */
 function ensureExportButtons() {
   if (document.getElementById('export-buttons')) return;
@@ -27,37 +27,49 @@ function ensureExportButtons() {
 
   // Evento exportar PDF
   document.getElementById("btn-export-pdf").addEventListener("click", () => {
-    const element = document.getElementById("informe-dieta");
-    if (!element) return;
+    const el = document.getElementById("informe-dieta");
+    if (!el) return;
 
     if (typeof html2pdf === 'undefined') {
       console.error('html2pdf no está cargado. Asegúrate de incluir la librería en el HTML.');
       return;
     }
 
+    // 🔹 Ajustes para evitar salto de página inicial
+    el.style.marginTop = "20px";   // margen superior visible
+    el.style.paddingTop = "30px";  // espacio interno suave
+    el.style.background = "#fff";
+    el.style.width = "210mm";
+    el.style.minHeight = "297mm";
+    el.style.margin = "0 auto";
+
     const opt = {
-      margin:       0,
-      filename:     'informe-dieta.pdf',
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2 },
-      jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+      margin: [0, 0, 0, 0],
+      filename: 'informe-dieta.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, scrollY: 0, windowWidth: document.body.scrollWidth },
+      jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait' },
+      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
     };
-    html2pdf().set(opt).from(element).save();
+
+    setTimeout(() => {
+      html2pdf().set(opt).from(el).save();
+    }, 100);
   });
 }
 
 export function renderInformeDieta(data) {
   if (!Array.isArray(data) || !data.length) return;
 
-  // ====== Toolbar y botones (se aseguran una sola vez) ======
+  // ====== Toolbar y botones ======
   ensureEditorToolbar();
-  ensureExportButtons(); // 👈 ¡IMPORTANTE!
+  ensureExportButtons();
 
   const container = document.getElementById("informe-dieta");
   container.classList.add("a4-informe");
   container.innerHTML = "";
 
-  // 1) Header editable
+  // ====== Header ======
   const gen = data[0];
   const headerHTML = `
     <div class="informe-header" contenteditable="true">
@@ -81,7 +93,7 @@ export function renderInformeDieta(data) {
   `;
   container.insertAdjacentHTML("beforeend", headerHTML);
 
-  // 2) Agrupar y ordenar por hora
+  // ====== Agrupar comidas ======
   const comidasAgrupadas = agruparPorTipoComida(data);
   const comidasOrdenadas = Object.entries(comidasAgrupadas).sort(([_, itemsA], [__, itemsB]) => {
     const horaA = itemsA[0]?.hora ?? null;
@@ -92,37 +104,29 @@ export function renderInformeDieta(data) {
     return horaA.localeCompare(horaB);
   });
 
-  // 3) Bloques editables de comidas
+  // ====== Bloques ======
   for (const [tipo, items] of comidasOrdenadas) {
     const bloque = document.createElement("div");
     bloque.classList.add("bloque-comida");
-    bloque.setAttribute("contenteditable", "true"); // editable por usuario
+    bloque.setAttribute("contenteditable", "true");
 
     const hora = items[0]?.hora ? items[0].hora.slice(0, 5) : "—";
-    
-    // 👇 NUEVA LÓGICA: Verificar si es SUPLEMENTACION
     const esSuplementacion = tipo.toUpperCase() === "SUPLEMENTACION";
 
-    // Tabla de alimentos (solo si NO es suplementación)
     const tablaAlimentos = esSuplementacion ? "" : `
       <div class="bloque-tabla">
         <table class="tabla-comida">
-          <thead>
-            <tr><th>Alimento</th></tr>
-          </thead>
+          <thead><tr><th>Alimento</th></tr></thead>
           <tbody>
             ${items.map(item => {
               const alimentos = [];
               alimentos.push(`${item.nombre_alimento || '—'} (${item.cantidad ? item.cantidad + ' g' : '—'})`);
-              if (item.nombre_alimento_equivalente && item.cantidad_equivalente) {
+              if (item.nombre_alimento_equivalente && item.cantidad_equivalente)
                 alimentos.push(`${item.nombre_alimento_equivalente} (${item.cantidad_equivalente} g)`);
-              }
-              if (item.nombre_alimento_equivalente1 && item.cantidad_equivalente1) {
+              if (item.nombre_alimento_equivalente1 && item.cantidad_equivalente1)
                 alimentos.push(`${item.nombre_alimento_equivalente1} (${item.cantidad_equivalente1} g)`);
-              }
-              if (item.nombre_alimento_equivalente3 && item.cantidad_equivalente3) {
+              if (item.nombre_alimento_equivalente3 && item.cantidad_equivalente3)
                 alimentos.push(`${item.nombre_alimento_equivalente3} (${item.cantidad_equivalente3} g)`);
-              }
               return `<tr><td>${alimentos.join(" / ")}</td></tr>`;
             }).join('')}
           </tbody>
@@ -130,7 +134,6 @@ export function renderInformeDieta(data) {
       </div>
     `;
 
-    // Observaciones (si hay)
     const notasUnicas = [...new Set(items.filter(i => i.notas).map(i => i.notas))];
     const observaciones = notasUnicas.length > 0
       ? `
@@ -141,7 +144,6 @@ export function renderInformeDieta(data) {
       `
       : "";
 
-    // Composición del bloque
     bloque.innerHTML = `
       <div class="bloque-header">
         <h5>${tipo.toUpperCase()}</h5>
@@ -153,7 +155,7 @@ export function renderInformeDieta(data) {
     container.appendChild(bloque);
   }
 
-  // 4) Notas generales editables
+  // ====== Notas ======
   const notasHTML = `
     <div class="informe-notas mt-4" contenteditable="true">
       <p class="text-success fw-bold mb-1">
@@ -171,6 +173,9 @@ export function renderInformeDieta(data) {
     </div>
   `;
   container.insertAdjacentHTML("beforeend", notasHTML);
+
+  // 🔹 Reenlazar botones si se renderiza dinámicamente
+  wireExportButtons();
 }
 
 /* =====================
@@ -186,22 +191,18 @@ function ensureEditorToolbar() {
     display:flex; gap:6px; align-items:center;
     margin:10px auto; max-width:210mm; padding:8px 10px;
     border:1px solid #e5e5e5; border-radius:8px;
-    background:#fafafa; position:sticky; top:8px; z-index:5; align-item:center; justify-content:center;
+    background:#fafafa; position:sticky; top:8px; z-index:5; justify-content:center;
   `;
 
   toolbar.innerHTML = `
-    <button type="button" data-cmd="bold" style="padding:6px 10px;border:1px solid #ccc;border-radius:6px;background:#f6f6f6;cursor:pointer;"><b>B</b></button>
-    <button type="button" data-cmd="italic" style="padding:6px 10px;border:1px solid #ccc;border-radius:6px;background:#f6f6f6;cursor:pointer;"><i>I</i></button>
-    <button type="button" data-cmd="underline" style="padding:6px 10px;border:1px solid #ccc;border-radius:6px;background:#f6f6f6;cursor:pointer;"><u>U</u></button>
-    <button type="button" data-cmd="removeFormat" title="Quitar formato" style="padding:6px 10px;border:1px solid #ccc;border-radius:6px;background:#f6f6f6;cursor:pointer;">Clear</button>
+    <button type="button" data-cmd="bold">B</button>
+    <button type="button" data-cmd="italic"><i>I</i></button>
+    <button type="button" data-cmd="underline"><u>U</u></button>
+    <button type="button" data-cmd="removeFormat">Clear</button>
     <span style="margin-left:10px;font-size:12px;color:#666;">Color</span>
-    <input id="colorPicker" type="color" value="#333333" style="height:28px;width:36px;border:1px solid #ccc;border-radius:4px;background:#fff;cursor:pointer;" />
+    <input id="colorPicker" type="color" value="#333333" />
     <span style="margin-left:10px;font-size:12px;color:#666;">Resaltado</span>
-    <input id="hilitePicker" type="color" value="#ffff00" style="height:28px;width:36px;border:1px solid #ccc;border-radius:4px;background:#fff;cursor:pointer;" />
-    <button type="button" data-cmd="insertUnorderedList" title="Lista" style="padding:6px 10px;border:1px solid #ccc;border-radius:6px;background:#f6f6f6;cursor:pointer;">• List</button>
-    <button type="button" data-cmd="justifyLeft" title="Alinear izq." style="padding:6px 10px;border:1px solid #ccc;border-radius:6px;background:#f6f6f6;cursor:pointer;">⟸</button>
-    <button type="button" data-cmd="justifyCenter" title="Centrar" style="padding:6px 10px;border:1px solid #ccc;border-radius:6px;background:#f6f6f6;cursor:pointer;">⇔</button>
-    <button type="button" data-cmd="justifyRight" title="Alinear der." style="padding:6px 10px;border:1px solid #ccc;border-radius:6px;background:#f6f6f6;cursor:pointer;">⟹</button>
+    <input id="hilitePicker" type="color" value="#ffff00" />
   `;
 
   const informe = document.getElementById('informe-dieta');
@@ -212,7 +213,6 @@ function ensureEditorToolbar() {
   }
 
   let savedRange = null;
-
   document.addEventListener('selectionchange', () => {
     const sel = window.getSelection();
     if (!sel || sel.rangeCount === 0) return;
@@ -250,21 +250,13 @@ function ensureEditorToolbar() {
   hilitePicker?.addEventListener('input', (e) => {
     restoreSelection();
     const ok = document.execCommand('hiliteColor', false, e.target.value);
-    if (!ok) {
-      document.execCommand('backColor', false, e.target.value);
-    }
+    if (!ok) document.execCommand('backColor', false, e.target.value);
   });
 }
 
-// === Exponer helpers al HTML inline (tu toolbar con onclick="...") ===
-window.format = function (cmd) {
-  document.execCommand(cmd, false, null);
-};
-window.formatColor = function (color) {
-  document.execCommand('foreColor', false, color);
-};
-
-// === Enlazar botones Exportar/Imprimir por ID ===
+/* =====================
+   Wire Export Buttons
+   ===================== */
 function wireExportButtons() {
   const btnPrint = document.getElementById('btn-print');
   const btnPDF   = document.getElementById('btn-export-pdf');
@@ -284,23 +276,29 @@ function wireExportButtons() {
         return;
       }
 
+      // 🔹 Evita salto de página inicial
+      el.style.marginTop = "20px";   // margen superior visible
+      el.style.paddingTop = "30px";  // espacio interno suave
+      el.style.background = "#fff";
+      el.style.width = "210mm";
+      el.style.minHeight = "297mm";
+      el.style.margin = "0 auto";
+
       const opt = {
-        margin: 0,
+        margin: [0, 0, 0, 0],
         filename: 'informe-dieta.pdf',
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        html2canvas: { scale: 2, useCORS: true, scrollY: 0, windowWidth: document.body.scrollWidth },
+        jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
       };
-      html2pdf().set(opt).from(el).save();
+
+      setTimeout(() => {
+        html2pdf().set(opt).from(el).save();
+      }, 100);
     });
     btnPDF.dataset.bound = '1';
   }
 }
 
-// Enlazar una vez que el DOM esté listo
 document.addEventListener('DOMContentLoaded', wireExportButtons);
-
-// Por si renderizas el informe después de cargar, vuelve a enlazar
-// (deja esta línea AL FINAL de tu función renderInformeDieta):
-// -> wireExportButtons();
-
