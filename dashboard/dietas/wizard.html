@@ -93,91 +93,74 @@
         <!--Nav End-->
       </div>
       <div class="conatiner-fluid content-inner mt-n5 py-0">
-<div class="row">
-   <div class="col-lg-3">
-            <div class="card" data-aos="fade-up" data-aos-delay="900">
-               <div class="flex-wrap card-header d-flex justify-content-between">
-                  <div class="header-title">
-                     <h5 class="card-title">Auto ajuste</h5>            
-                  </div>   
-               </div>
-               <div class="card-body">
-                  <div class="flex-wrap d-flex align-items-center justify-content-between">
-                    <div class="myChart">
-                        <svg width="200" height="200" viewBox="0 0 200 200">
+<div class="row align-items-stretch">
+   <div class="col-lg-3 d-flex">
+    
+<div class="card aos-init aos-animate flex-fill" data-aos="fade-up" data-aos-delay="900">
+  <div class="flex-wrap card-header d-flex justify-content-between">
+    <div class="header-title">
+      <h5 class="card-title">Auto ajuste</h5>
+    </div>
+  </div>
 
-                            <circle id="circle-carbs"
-                                    cx="100" cy="100" r="70"
-                                    fill="transparent"
-                                    stroke="#4bc7d2" stroke-width="10"
-                                    stroke-linecap="round"
-                                    stroke-dasharray="440"
-                                    stroke-dashoffset="440"
-                                    transform="rotate(-90 100 100)" />
+  <div class="card-body p-3">
+    <div class="row align-items-center text-center text-md-start">
+      
+      <!-- 🟦 Gráfica -->
+      <div class="col-12 col-md-7 d-flex justify-content-center p-0">
+        <div class="myChart" style="max-width:180px;">
+          <svg width="100%" height="100%" viewBox="0 0 200 200">
+            <circle id="circle-carbs" cx="100" cy="100" r="70" fill="transparent" stroke="#4bc7d2" stroke-width="10" stroke-linecap="round" transform="rotate(-90 100 100)"></circle>
+            <circle id="circle-fat" cx="100" cy="100" r="55" fill="transparent" stroke="#ff9800" stroke-width="10" stroke-linecap="round" transform="rotate(-90 100 100)"></circle>
+            <circle id="circle-protein" cx="100" cy="100" r="85" fill="transparent" stroke="#3a57e8" stroke-width="10" stroke-linecap="round" transform="rotate(-90 100 100)"></circle>
+          </svg>
+        </div>
+      </div>
 
-
-                            <circle id="circle-fat"
-                                    cx="100" cy="100" r="55"
-                                    fill="transparent"
-                                    stroke="#ff9800" stroke-width="10"
-                                    stroke-linecap="round"
-                                    stroke-dasharray="345"
-                                    stroke-dashoffset="345"
-                                    transform="rotate(-90 100 100)" />
-
-                            <!-- PROTEINAS -->
-                            <circle id="circle-protein"
-                                    cx="100" cy="100" r="85"
-                                    fill="transparent"
-                                    stroke="#3a57e8" stroke-width="10"
-                                    stroke-linecap="round"
-                                    stroke-dasharray="534"
-                                    stroke-dashoffset="534"
-                                    transform="rotate(-90 100 100)" />   
-                        </svg>
-                    </div>
-                     <div class="d-grid gap col-md-4 col-lg-4">
-                       <div class="d-grid gap col-md-4 col-lg-4">
-                        <div class="d-flex align-items-start">
-                            <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#3a57e8">
-                                <g><circle cx="12" cy="12" r="8" fill="#3a57e8"></circle></g>
-                            </svg>
-                            <div class="ms-3">
-                                <span class="text-gray">Proteínas</span>
-                                <h6 id="table-protein"></h6>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-start">
-                            <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#4bc7d2">
-                                <g><circle cx="12" cy="12" r="8" fill="#4bc7d2"></circle></g>
-                            </svg>
-                            <div class="ms-3">
-                                <span class="text-gray">Carbs.</span>
-                                <h6 id="table-carbs" ></h6>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-start">
-                            <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#ff9800">
-                                <g><circle cx="12" cy="12" r="8" fill="#ff9800"></circle></g>
-                            </svg>
-                            <div class="ms-3">
-                            <span class="text-gray">Grasas</span>
-                            <h6 id="table-fat" ></h6>
-                            </div>
-                        </div>
-                        </div>
-
-                     </div>
-                  </div>
-               </div> 
-
+      <!-- 🟧 Etiquetas -->
+      <div class="col-12 col-md-5 mt-3 mt-md-0">
+        <div class="d-grid gap-2">
+          
+          <div class="d-flex align-items-start">
+            <svg class="mt-1 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#3a57e8">
+              <circle cx="12" cy="12" r="8" fill="#3a57e8"></circle>
+            </svg>
+            <div class="ms-2">
+              <span class="text-gray">Proteínas</span>
+              <h6 id="table-protein" class="mb-0"></h6>
             </div>
+          </div>
+
+          <div class="d-flex align-items-start">
+            <svg class="mt-1 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#4bc7d2">
+              <circle cx="12" cy="12" r="8" fill="#4bc7d2"></circle>
+            </svg>
+            <div class="ms-2">
+              <span class="text-gray">Carbs.</span>
+              <h6 id="table-carbs" class="mb-0"></h6>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start">
+            <svg class="mt-1 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#ff9800">
+              <circle cx="12" cy="12" r="8" fill="#ff9800"></circle>
+            </svg>
+            <div class="ms-2">
+              <span class="text-gray">Grasas</span>
+              <h6 id="table-fat" class="mb-0"></h6>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
         </div>    
 
-        <div class="col-lg-3">
-                <div class="card">
+        <div class="col-lg-3 d-flex">
+                <div class="card flex-fill">
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <div class="d-flex align-items-center">
@@ -195,17 +178,17 @@
                             <div class="form-group mb-2">
                                 <label class="form-label">Proteínas/kg</label>
                                 <div class="input-group">
-                                    <button id="btn-decrease-protein" class="btn btn-light border"  type="button" >-</button>
+                                    <button id="btn-decrease-protein" class="btn btn-light border"  type="button" onclick="decrement(this)">-</button>
                                     <span id="protein-value" class="form-control text-center"></span>
-                                    <button id="btn-increase-protein" class="btn btn-light border" type="button" >+</button>
+                                    <button id="btn-increase-protein" class="btn btn-light border" type="button" onclick="increment(this)">+</button>
                                 </div>
                             </div>
                             <div class="form-group mb-2">
                                 <label class="form-label">Grasas/kg</label>
                                 <div class="input-group">
-                                    <button id="btn-decrease-fat"  class="btn btn-light border"  type="button" >-</button>
+                                    <button id="btn-decrease-fat"  class="btn btn-light border"  type="button" onclick="decrement(this)">-</button>
                                     <span id="fat-value" class="form-control text-center">-</span>
-                                    <button id="btn-increase-fat" class="btn btn-light border" type="button" >+</button>
+                                    <button id="btn-increase-fat" class="btn btn-light border" type="button" onclick="increment(this)">+</button>
                                 </div>
                             </div>
                         </form>
@@ -213,8 +196,8 @@
                 </div>
             </div>
 
-            <div class="col-lg-3">
-                <div class="card">
+            <div class="col-lg-3 d-flex">
+                <div class="card flex-fill">
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <div class="d-flex align-items-center">
@@ -253,8 +236,8 @@
                 </div>
             </div>
             
-            <div class="col-lg-3">
-         <div class="card">
+            <div class="col-lg-3 d-flex">
+                <div class="card flex-fill">
             <div class="card-body">
                <h4 class="counter mb-3"  id="table-calories" style="visibility: visible;"> Kcal</h4>
                <div class="mt-3">
