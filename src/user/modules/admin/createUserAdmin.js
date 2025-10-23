@@ -72,7 +72,7 @@ export function initCreateUserFormAdmin() {
 
         // Mostrar confirmación antes de crear
         const result = await mostrarConfirmacionGuardado({
-            title: '¿Crear usuario?',
+            title: 'Crear usuario',
             message: `¿Estás seguro de crear el usuario ${formData.nombre} ${formData.apellidos}?`,
             confirmText: 'Crear usuario',
             cancelText: 'Cancelar'

@@ -39,7 +39,7 @@ export function initDeleteUser() {
 
         // Mostrar confirmación antes de eliminar
         const result = await mostrarConfirmacionGuardado({
-            title: '¿Eliminar usuario?',
+            title: 'Eliminar usuario',
             message: `¿Estás seguro de eliminar permanentemente al usuario "${nombre}"? Esta acción no se puede deshacer.`,
             confirmText: 'Eliminar',
             cancelText: 'Cancelar'

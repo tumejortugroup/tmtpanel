@@ -234,24 +234,140 @@ export async function guardarControl() {
     console.log('✅ ID dato recibido:', id_dato);
 
     const informeUrl = `/dashboard/controles/informe.html?id_usuario=${idUsuario}&id_dato=${id_dato}`;
-      
-    const modalResult = await Swal.fire({
-      title: 'Control guardado con éxito',
-      text: 'Elige qué quieres hacer:',
-      icon: 'success',
-      showCancelButton: true,
-      showDenyButton: true,
-      confirmButtonText: 'Hacer dieta',
-      denyButtonText: 'Ver control',
-      cancelButtonText: 'Seguiré luego',
-      customClass: {
-        actions: 'd-flex flex-column gap-2 w-100 px-4 pb-3',
-        confirmButton: 'btn btn-primary w-100',
-        denyButton: 'btn btn-outline-primary w-100',
-        cancelButton: 'btn bg-transparent text-gray-normal w-100'
-      },
-      buttonsStyling: false,
-    });
+
+    if (!document.getElementById('swal-custom-styles')) {
+  const style = document.createElement('style');
+  style.id = 'swal-custom-styles';
+  style.textContent = `
+    /* === POPUP BASE === */
+    .swal2-popup.swal2-modal {
+      background: #fff !important;
+      border-radius: 20px !important;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.4) !important;
+      padding: 40px;
+      max-width: 480px !important;
+      width: 90% !important;
+    }
+
+    /* === TITULO === */
+    .swal2-title {
+      font-size: 24px !important;
+      font-weight: 600 !important;
+      color: #1a1a1a !important;
+      margin: 0 0 12px 0 !important;
+      text-align: center !important;
+    }
+
+    /* === TEXTO === */
+    .swal2-html-container {
+      font-size: 16px !important;
+      color: #666 !important;
+      margin: 0 0 12px 0 !important;
+      text-align: center !important;
+      line-height: 1.45 !important;
+    }
+
+    /* === ICONO === */
+    .swal2-icon {
+      margin: 0 auto 18px auto !important;
+      transform: scale(0.9);
+    }
+
+    /* === FONDO OSCURO CON BLUR === */
+    .swal2-container {
+      backdrop-filter: blur(6px) !important;
+      background: rgba(0,0,0,0.8) !important;
+    }
+
+    /* === BOTONES EN FILA === */
+    .swal2-actions {
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: 10px !important;
+      width: 100% !important;
+      margin-top: 24px !important;
+    }
+
+    .swal2-confirm,
+    .swal2-deny,
+    .swal2-cancel {
+      flex: 1 1 auto !important;
+      border-radius: 12px !important;
+      padding: 12px 18px !important;
+      font-size: 16px !important;
+      font-weight: 600 !important;
+      transition: all 0.2s ease !important;
+      min-width: 0 !important;
+      padding: 14px 24px !important;
+    }
+
+    /* === ESTILOS DE CADA BOTÓN === */
+    .swal2-confirm {
+      background: linear-gradient(135deg, #92721b 0%, #d2a528 100%) !important;
+      color: white !important;
+      border: none !important;
+      box-shadow: 0 4px 16px rgba(146,114,27,0.3);
+    }
+
+    .swal2-deny {
+      background: transparent !important;
+      color: #92721b !important;
+      border: 2px solid #d2a528 !important;
+    }
+
+    .swal2-cancel {
+      background: #f1f3f5 !important;
+      color: #495057 !important;
+      border: none !important;
+    }
+
+    /* === EFECTOS HOVER === */
+    .swal2-confirm:hover,
+    .swal2-deny:hover,
+    .swal2-cancel:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .swal2-confirm:active,
+    .swal2-deny:active,
+    .swal2-cancel:active {
+      transform: translateY(0);
+    }
+
+    /* === ANIMACIONES === */
+    .swal2-show-custom { animation: slideUp 0.35s ease forwards; }
+    .swal2-hide-custom { animation: slideDown 0.25s ease forwards; }
+
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to   { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes slideDown {
+      from { transform: translateY(0); opacity: 1; }
+      to   { transform: translateY(20px); opacity: 0; }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+
+      const modalResult = await Swal.fire({
+  title: 'Control guardado con éxito',
+  text: 'Elige qué quieres hacer ahora.',
+  icon: 'success',
+  showCancelButton: true,
+  showDenyButton: true,
+  confirmButtonText: 'Hacer dieta',
+  denyButtonText: 'Ver control',
+  cancelButtonText: 'Seguiré luego',
+  buttonsStyling: false,
+  showClass: { popup: 'swal2-show-custom' },
+  hideClass: { popup: 'swal2-hide-custom' }
+});
+
+
 
     if (modalResult.isConfirmed) {
       const id_dieta = await crearDieta(idUsuario, id_dato);

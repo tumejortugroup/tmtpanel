@@ -1,6 +1,6 @@
 export function mostrarConfirmacionGuardado(options = {}) {
   const {
-    title = '¿Realizar cambios?',
+    title = 'Realizar cambios',
     message = '¿Estás seguro de realizar los cambios?',
     confirmText = 'Guardar',
     cancelText = 'Cancelar'
@@ -263,7 +263,7 @@ function inyectarEstilosGuardado() {
     }
     
     .save-btn-primary {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #92721b 0%, #d2a528 100%);
       color: white;
       box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
     }
@@ -282,7 +282,7 @@ function inyectarEstilosGuardado() {
       width: 80px;
       height: 80px;
       margin: 0 auto 20px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #92721b 0%, #d2a528 100%);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -333,7 +333,7 @@ function inyectarEstilosGuardado() {
     
     .progress-fill {
       height: 100%;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg,  #92721b 0%, #d2a528 100%);
       border-radius: 8px;
       transition: width 0.3s ease;
       width: 0%;

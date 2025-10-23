@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const result = await mostrarConfirmacionGuardado({
-      title: '¿Crear plantilla?',
+      title: 'Crear plantilla',
       message: `Se creará la plantilla "${nombrePlantilla}" con las comidas y alimentos configurados.`,
       confirmText: 'Crear plantilla',
       cancelText: 'Cancelar'

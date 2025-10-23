@@ -38,7 +38,7 @@ export function toggleStatus() {
 
         // Mostrar confirmación antes de cambiar estado
         const result = await mostrarConfirmacionGuardado({
-            title: '¿Cambiar estado de usuario?',
+            title: 'Cambiar estado de usuario',
             message: `¿Estás seguro de cambiar el estado de "${nombre}" a ${nuevoEstado}?`,
             confirmText: 'Cambiar estado',
             cancelText: 'Cancelar'

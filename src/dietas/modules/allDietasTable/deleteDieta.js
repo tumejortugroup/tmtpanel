@@ -57,7 +57,7 @@ export function initDeleteDieta() {
 async function eliminarDieta(idDieta, nombreDieta, row, selectedOption) {
   // Mostrar confirmación de eliminación
   const result = await mostrarConfirmacionGuardado({
-    title: '¿Eliminar dieta?',
+    title: 'Eliminar dieta',
     message: `¿Estás seguro de que quieres eliminar la dieta "${nombreDieta}"? Esta acción no se puede deshacer.`,
     confirmText: 'Sí, eliminar',
     cancelText: 'Cancelar'

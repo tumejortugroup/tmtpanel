@@ -1,49 +1,52 @@
 
-    <!doctype html>
-    <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Lista centros</title>
-        
-        <!-- Favicon -->
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>TMT Panel</title>
+      
+      <!-- Favicon -->
+      <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon/favicon.ico" />
+      
+      <!-- Library / Plugin Css Build -->
+      <link rel="stylesheet" href="/assets/css/core/libs.min.css" />
+      
+      <!-- Aos Animation Css -->
+      <link rel="stylesheet" href="/assets/vendor/aos/dist/aos.css" />
+      
+      <!-- Hope Ui Design System Css -->
+      <link rel="stylesheet" href="/assets/css/hope-ui.min.css?v=2.0.0" />
+      
+      <!-- Custom Css -->
+      <link rel="stylesheet" href="/assets/css/custom.min.css?v=2.0.0" />
+      
+      <!-- Dark Css -->
+      <link rel="stylesheet" href="/assets/css/dark.min.css"/>
+      
+      <!-- Customizer Css -->
+      <link rel="stylesheet" href="/assets/css/customizer.min.css" />
+      
+      <!-- RTL Css -->
+      <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
 
-        <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
-        <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
-        <link rel="shortcut icon" href="/assets/images/favicons/favicon.ico">
-        
-        <!-- Library / Plugin Css Build -->
-        <link rel="stylesheet" href="/assets/css/core/libs.min.css" />
-        
-        
-        <!-- Hope Ui Design System Css -->
-        <link rel="stylesheet" href="/assets/css/hope-ui.min.css?v=2.0.0" />
-        
-        <!-- Custom Css -->
-        <link rel="stylesheet" href="/assets/css/custom.min.css?v=2.0.0" />
-        
-        <!-- Dark Css -->
-        <link rel="stylesheet" href="/assets/css/dark.min.css"/>
-        
-        <!-- Customizer Css -->
-        <link rel="stylesheet" href="/assets/css/customizer.min.css" />
-        
-        <!-- RTL Css -->
-        <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
-        <link rel="stylesheet" href="/assets/css/controles/controles.css"/>
-        
-        
-    </head>
-    <body class="  ">
-        <!-- loader Start -->
-        <div id="loading">
-        <div class="loader simple-loader">
-            <div class="loader-body"></div>
-        </div>    </div>
-        <!-- loader END -->
-        <aside class="sidebar sidebar-default sidebar-white sidebar-base navs-rounded-all ">
+      <!-- Boostrap Icons -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    
+     
+      
+  </head>
+  <body class="  ">
+
+
+    <!-- loader Start -->
+    <div id="loading">
+      <div class="loader simple-loader">
+          <div class="loader-body"></div>
+      </div>    </div>
+    <!-- loader END -->
+   
+    <aside class="sidebar sidebar-default sidebar-white sidebar-base navs-rounded-all ">
         <div class="sidebar-header d-flex align-items-center justify-content-start">
           
             <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
@@ -59,14 +62,35 @@
         <div id="aside"></div>
     
         
-      </aside>   <main class="main-content backside">
-        <div class="position-relative iq-banner">
-            <!--Nav Start-->
-            <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar navbar-dark">
+      </aside>    <main class="main-content">
+      <div class="position-relative iq-banner">
+        <!--Nav Start-->
+        <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
         
-            </nav>          <!-- Nav Header Component Start -->
-          
-        </div>
+        </nav>          <!-- Nav Header Component Start -->
+          <div class="iq-navbar-header" style="height: 215px;">
+              <div class="container-fluid iq-container">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="flex-wrap d-flex justify-content-between align-items-center">
+                              <div>
+                                     <h1>¡Hola, <span class="nombre-usuario"></span>!</h1>
+                                  <p>Recuerda, estás cambiando la vida de la gente a a mejor.</p>
+                              </div>
+                              <a href="/dashboard/centros/add-centro.html" class="btn btn-link btn-soft-light">
+                                      <i class="bi bi-plus-circle icon-20"></i>
+                                       Añadir Centro
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="iq-header-img">
+                  <img src="/assets/images/dashboard/top-header6.png" alt="header" class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX">
+              </div>
+          </div>          <!-- Nav Header Component End -->
+        <!--Nav End-->
+      </div>
         <div class="conatiner-fluid content-inner mt-n5 py-0">
 <div>
   <div class="row">
@@ -74,12 +98,12 @@
       <div class="card">
         <div class="card-header d-flex justify-content-between">
         <div class="header-title">
-            <h4 class="card-title">Lista de clientes</h4>
+            <h4 class="card-title">Lista de centros</h4>
         </div>
         </div>
         <div class="card-body px-0">
             <div class="table-responsive">
-                   <table id="user-list-table" class="table table-striped table-hover table-sm w-100 text-center"  data-bs-toggle="data-table">
+                  <table id="user-list-table" class="table table-striped table-hover table-sm w-100 text-center"  data-bs-toggle="data-table">
                      <thead>
                         <tr class="ligth">
                             <th>Centro</th>
@@ -95,14 +119,14 @@
                         </tr>
 
                         <tr>
-                            <td><input class="input-dataTable" type="text" name="" id=""></td>
-                            <td><input class="input-dataTable" type="text" name="" id=""></td>
-                            <td><input class="input-dataTable" type="text" name="" id=""></td>
-                            <td><input class="input-dataTable" type="number" name="" id=""></td>
-                            <td><input class="input-dataTable" type="text" name="" id=""></td>
-                            <td><input class="input-dataTable" type="text" name="" id=""></td>
-                            <td><input class="input-dataTable" type="text" name="" id=""></td>
-                            <td><input class="input-dataTable" type="number" name="" id=""></td>
+                            <td><input class="form-control form-control-sm" type="text" name="" id=""></td>
+                            <td><input class="form-control form-control-sm" type="text" name="" id=""></td>
+                            <td><input class="form-control form-control-sm" type="text" name="" id=""></td>
+                            <td><input class="form-control form-control-sm" type="number" name="" id=""></td>
+                            <td><input class="form-control form-control-sm" type="text" name="" id=""></td>
+                            <td><input class="form-control form-control-sm" type="text" name="" id=""></td>
+                            <td><input class="form-control form-control-sm" type="text" name="" id=""></td>
+                            <td><input class="form-control form-control-sm" type="number" name="" id=""></td>
                             <td></td>
                         </tr>
                      </thead>
@@ -130,18 +154,18 @@
         
         <!-- Footer Section Start -->
         <footer class="footer">
-            <div class="footer-body">
-                <ul class="left-panel list-inline mb-0 p-0">
-                  
-                </ul>
-                <div class="right-panel">
-                   
-                    <span class="">
-                        
-                    </span><a href="https://iqonic.design/"><img src="/assets/images/dashboard/iconos/logo-footer.webp" width="220" height="60" alt=""></a>
-                </div>
-            </div>
-        </footer>
+          <div class="footer-body">
+              <ul class="left-panel list-inline mb-0 p-0" style="display: none;">
+                  <li class="list-inline-item"><a href="../dashboard/extra/privacy-policy.html">Política de privacidad</a></li>
+                  <li class="list-inline-item"><a href="../dashboard/extra/terms-of-service.html">Términos de Uso</a></li>
+              </ul>
+              <div class="right-panel">
+                  ©<script>document.write(new Date().getFullYear())</script> TMT GROUP PANEL DE CONTROL
+                  <span class="">
+                  </span> by <a href="">Grinos Life Nutrition</a>.
+              </div>
+          </div>
+      </footer>
 
         <template>
 

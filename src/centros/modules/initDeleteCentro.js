@@ -35,7 +35,7 @@ export function initDeleteCentro() {
 
     // Mostrar confirmación antes de eliminar
     const result = await mostrarConfirmacionGuardado({
-      title: '¿Eliminar centro?',
+      title: 'Eliminar centro',
       message: `¿Estás seguro de eliminar permanentemente el centro "${nombre}"? Esta acción no se puede deshacer.`,
       confirmText: 'Sí, eliminar',
       cancelText: 'Cancelar'

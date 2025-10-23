@@ -29,49 +29,29 @@ export async function cargarListaControles() {
 
     result.data.forEach(control => {
       const li = document.createElement('li');
-      li.className = 'd-flex align-items-center justify-content-between px-2';
+      const isPreselected = primeros4.includes(control);
 
-      // Label con checkbox
-      const label = document.createElement('label');
-      label.className = 'dropdown-item m-0 flex-grow-1';
-      label.style.cursor = 'pointer';
-
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.className = 'control-checkbox me-2';
-      checkbox.style.cursor = 'pointer';
-      checkbox.value = control.nombre;
-      if (primeros4.includes(control)) checkbox.checked = true;
-
-      label.appendChild(checkbox);
-      label.appendChild(document.createTextNode(control.nombre ?? '(Sin nombre)'));
-
-      // Botón "Ver" estilo texto
-      const btnVer = document.createElement('a');
-      btnVer.href = `/dashboard/controles/control.html?nombre=${encodeURIComponent(control.nombre ?? '')}`;
-      btnVer.textContent = 'Ver';
-      btnVer.className = 'text-primary ms-2';
-      btnVer.style.fontSize = '13px';
-      btnVer.style.textDecoration = 'none';
-      btnVer.addEventListener('click', e => e.stopPropagation()); // evita cierre del dropdown al pulsar
-
-      li.appendChild(label);
-      li.appendChild(btnVer);
+      li.innerHTML = `
+        <label class="dropdown-item" style="cursor: pointer;">
+          <input type="checkbox" class="control-checkbox" style="cursor: pointer;" value="${control.nombre}" ${isPreselected ? 'checked' : ''}>
+          ${control.nombre ?? '(Sin nombre)'}
+        </label>
+      `;
       lista.appendChild(li);
     });
 
-    // Botón principal existente
+    // botón ya existe en el HTML
     const boton = document.getElementById('ver-controles');
     boton.addEventListener('click', () => {
       cargarControlesSeleccionados();
-
-      // Cierra el dropdown
+      // cierra el dropdown
       const dropdown = bootstrap.Dropdown.getInstance(document.getElementById('btnControlDrop'));
       if (dropdown) dropdown.hide();
     });
 
     // Evitar que se cierre al marcar checkboxes
-    lista.addEventListener('click', (e) => {
+    const ul = document.getElementById('lista-controles');
+    ul.addEventListener('click', (e) => {
       const label = e.target.closest('label.dropdown-item');
       if (label) {
         e.stopPropagation();
@@ -81,7 +61,6 @@ export async function cargarListaControles() {
       }
     });
 
-    // Mantener el dropdown abierto al interactuar
     const triggerBtn = document.getElementById('btnControlDrop');
     if (triggerBtn) {
       triggerBtn.setAttribute('data-bs-auto-close', 'outside');

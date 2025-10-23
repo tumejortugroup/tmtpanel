@@ -98,7 +98,7 @@ export async function cargarPlantillasCentro() {
 async function eliminarPlantilla(idPlantilla, nombrePlantilla) {
   // Mostrar confirmación de eliminación
   const result = await mostrarConfirmacionGuardado({
-    title: '¿Eliminar plantilla?',
+    title: 'Eliminar plantilla',
     message: `¿Estás seguro de que quieres eliminar la plantilla "${nombrePlantilla}"? Esta acción no se puede deshacer.`,
     confirmText: 'Sí, eliminar',
     cancelText: 'Cancelar'

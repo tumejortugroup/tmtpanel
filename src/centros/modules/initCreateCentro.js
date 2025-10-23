@@ -59,7 +59,7 @@ export function initCreateCentroForm() {
 
     // Mostrar confirmación antes de crear
     const result = await mostrarConfirmacionGuardado({
-      title: '¿Crear centro?',
+      title: 'Crear centro',
       message: `¿Estás seguro de crear el centro "${formData.nombre}"?`,
       confirmText: 'Crear centro',
       cancelText: 'Cancelar'

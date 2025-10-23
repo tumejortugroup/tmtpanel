@@ -95,7 +95,7 @@ if (btnControl && idDato) {
 
   document.getElementById("guardar-dieta-btn").addEventListener("click", async () => {
     const result = await mostrarConfirmacionGuardado({
-      title: '¿Guardar cambios?',
+      title: 'Guardar cambios',
       message: 'Se guardarán todos los cambios realizados en la dieta.',
       confirmText: 'Guardar',
       cancelText: 'Cancelar'

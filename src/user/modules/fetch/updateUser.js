@@ -51,7 +51,7 @@ export async function actualizarUsuario(id) {
 
     // Mostrar confirmación antes de actualizar
     const result = await mostrarConfirmacionGuardado({
-        title: '¿Actualizar usuario?',
+        title: 'Actualizar usuario',
         message: `¿Estás seguro de actualizar la información del usuario ${data.nombre} ${data.apellidos}?`,
         confirmText: 'Actualizar',
         cancelText: 'Cancelar'
