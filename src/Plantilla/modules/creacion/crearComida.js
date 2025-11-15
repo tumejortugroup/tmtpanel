@@ -4,7 +4,7 @@ export async function crearComidas() {
   const comidas = generarPayloadComidas();
 
   if (!comidas.length) {
-    alert("⚠️ No hay comidas válidas para enviar.");
+
     return [];
   }
 

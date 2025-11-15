@@ -48,7 +48,7 @@ export async function cargarListaControles() {
 
       // Botón "Ver" estilo texto
       const btnVer = document.createElement('a');
-      btnVer.href = `/dashboard/controles/control.html?nombre=${encodeURIComponent(control.nombre ?? '')}`;
+      btnVer.href = `/dashboard/controles/informe.html?id_usuario=${idUsuario}&id_dato=${control.id_dato}`;
       btnVer.textContent = 'Ver';
       btnVer.className = 'text-primary ms-2';
       btnVer.style.fontSize = '13px';

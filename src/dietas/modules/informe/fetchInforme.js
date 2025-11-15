@@ -5,7 +5,7 @@ export async function fetchInformeDieta(idDieta) {
 
   if (!token) {
     console.error("Token no encontrado");
-    alert("Sesión expirada. Por favor, inicia sesión nuevamente.");
+
     return;
   }
 
@@ -36,11 +36,11 @@ export async function fetchInformeDieta(idDieta) {
       renderInformeDieta(result.data);
     } else {
       console.error("Respuesta sin datos:", result);
-      alert("No se pudo cargar el informe de la dieta");
+
     }
 
   } catch (error) {
     console.error("Error al obtener informe de dieta:", error);
-    alert("Error al cargar el informe. Intenta nuevamente.");
+
   }
 }

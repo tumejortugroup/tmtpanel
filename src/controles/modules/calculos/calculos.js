@@ -10,11 +10,13 @@ import {
   bmrKatchMcArdle,
   bmrPromedio
 } from '../formulas/bmr.js';
+
 import {
   grasaPorPerimetros,
   grasaPorPliegues,
   sumaPliegues
 } from '../formulas/grasa.js';
+
 import {
   pesoOseoRocha,
   pesoResidual,
@@ -22,9 +24,12 @@ import {
   calcularMasaMagraYGrasa,
   indiceMasaMagra,
   complexionOsea,
-   pesoMuscular,    
-  pesoGraso
+  pesoMuscular,     // ← modelo CIENTÍFICO (pero no se usará)
+  pesoGraso,
+  porcentajeMuscularRegla3,   // ← AÑADIDO
+  pesoMuscularVersionPDF      // ← AÑADIDO
 } from '../formulas/composicion.js';
+
 import { calcularTDEE, ajustarTDEE } from '../formulas/tdee.js';
 import { calcularMacronutrientes } from '../formulas/macros.js';
 
@@ -44,7 +49,6 @@ export function calcularTodo(index = 0) {
     cadera: getFloat('cadera', index)
   });
 
-  // ✅ CORRECCIÓN: Añadir tríceps a los pliegues
   const pliegues = {
     triceps: getFloat('triceps', index),
     subescapular: getFloat('subescapular', index),
@@ -53,8 +57,9 @@ export function calcularTodo(index = 0) {
     muslo_pliegue: getFloat('muslo_pliegue', index)
   };
 
-  const grasaPliegues = grasaPorPliegues({ genero, pliegues });
+  const grasaPliegues = grasaPorPliegues({ genero, pliegues, edad });
   const suma = sumaPliegues(pliegues);
+
   const porcentajeGraso = grasaPliegues || grasaPerimetral;
 
   const datos = { peso, altura, edad, genero, porcentajeGraso };
@@ -74,45 +79,55 @@ export function calcularTodo(index = 0) {
   setValue('bmr_katch', bmrKatchMcArdle(datos), index);
   setValue('bmr_promedio', bmrPromedio(datos), index);
 
-  // ✅ CORRECCIÓN: Usar humero_biepicondileo en lugar de muneca_estiloideo
+  // Peso óseo (Rocha)
   const pesoOseo = pesoOseoRocha({
     altura,
-    humero_biepicondileo: getFloat('humero_bicondileo', index),  // ← CORREGIDO
+    muneca_estiloideo: getFloat('muneca_estiloideo', index),
+    humero_biepicondileo: getFloat('humero_bicondileo', index),
     femur_bicondileo: getFloat('femur_bicondileo', index)
   });
 
   setValue('peso_oseo_rocha', pesoOseo, index);
+  const porcentajeOseo = (pesoOseo / peso) * 100;
+  setValue('porcentaje_oseo', porcentajeOseo, index);
 
+  // Peso residual (NO lo usa el PDF, pero se deja para compatibilidad)
   const { kg: pr, porcentaje: prPct } = pesoResidual(peso, genero);
   setValue('peso_residual', pr, index);
   setValue('porcentaje_residual', prPct * 100, index);
 
+  // Agua corporal
   const { ext, pExt, int, pInt } = pesoExtraIntracelular(peso, genero);
   setValue('peso_extracelular', ext, index);
   setValue('porcentaje_extracelular', pExt * 100, index);
   setValue('peso_intracelular', int, index);
   setValue('porcentaje_intracelular', pInt * 100, index);
 
+  // Masa magra y masa grasa
   const { masaMagra, grasa } = calcularMasaMagraYGrasa(peso, porcentajeGraso);
   setValue('kg_masa_magra', masaMagra, index);
   setValue('kg_grasa', grasa, index);
   setValue('indice_masa_magra', indiceMasaMagra(masaMagra, altura), index);
   setValue('porcentaje_masa_magra', (masaMagra / peso) * 100, index);
 
-// ✅ Peso muscular
-  const { kg: kgMuscular, porcentaje: pctMuscular } = pesoMuscular({
-    masaMagra,
-    pesoOseo,
-    pesoTotal: peso
-  });
-  setValue('peso_muscular', kgMuscular, index);
-  setValue('porcentaje_masa_muscular', pctMuscular, index);
+  /* ----------------------------------------------------
+     🔥 MODELO EXACTO DEL PDF (Regla de 3)
+     % muscular = 100 − (% graso + % óseo)
+     kg muscular = pesoTotal × %muscular
+  ---------------------------------------------------- */
 
-  // ✅ Peso graso
+  const pctMuscularPDF = porcentajeMuscularRegla3(peso, porcentajeGraso, pesoOseo);
+  setValue('porcentaje_masa_muscular', pctMuscularPDF, index);
+
+  const kgMuscularPDF = pesoMuscularVersionPDF(peso, pctMuscularPDF);
+  setValue('peso_muscular', kgMuscularPDF, index);
+
+  // Peso graso tradicional
   const { kg: kgGraso, porcentaje: pctGraso } = pesoGraso(peso, porcentajeGraso);
   setValue('peso_graso', kgGraso, index);
   setValue('porcentaje_graso', pctGraso, index);
 
+  // Complexión
   const complexion = complexionOsea({
     altura,
     muñeca: getFloat('muneca_estiloideo', index)

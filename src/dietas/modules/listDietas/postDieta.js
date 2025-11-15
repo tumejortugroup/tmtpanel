@@ -65,7 +65,7 @@ export async function crearDieta(id_usuario, id_dato) {
     }
 
 
-    alert("✅ Dieta creada y asignada con éxito.");
+
     window.location.href = `/dashboard/dietas/wizard.html?id_dieta=${id_dieta}&id_dato=${id_dato}`;
 
   } catch (error) {

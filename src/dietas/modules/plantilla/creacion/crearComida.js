@@ -3,7 +3,7 @@
   const comidas = generarPayloadComidas();
 
   if (!comidas.length) {
-    alert("⚠️ No hay comidas válidas para enviar.");
+
     return;
   }
 
@@ -24,10 +24,10 @@
       return data; // [{ id_comida: ... }]
     } else {
       console.error("❌ Error al crear comidas:", data);
-      alert("Error al crear comidas.");
+
     }
   } catch (error) {
     console.error("❌ Error en fetch:", error);
-    alert("Error de red al crear comidas.");
+    alert("Error de red ");
   }
 }

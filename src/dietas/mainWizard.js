@@ -13,44 +13,47 @@ document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const idDato = params.get("id_dato");
 
-  // ⬇️ BOTÓN DE CONTROL
-  const btnControl = document.querySelector('.dataTables_length button');
-  if (btnControl && idDato) {
-    btnControl.addEventListener('click', async () => {
-      try {
-        console.log('🔍 Obteniendo id_usuario desde id_dato:', idDato);
-        
-        const detalle = await obtenerDetalleDato();
-        const idUsuario = detalle?.data?.id_usuario;
-        
-        if (!idUsuario) {
-          throw new Error('No se encontró id_usuario en los detalles del dato');
-        }
-        
-        console.log('✅ ID Usuario obtenido:', idUsuario);
-        
-        // Abrir en nueva pestaña
-        window.open(`/dashboard/controles/informe.html?id_usuario=${idUsuario}&id_dato=${idDato}`, '_blank');
-        
-      } catch (error) {
-        console.error('❌ Error:', error);
-        
-        await mostrarErrorGuardado({
-          title: 'Error al acceder al control',
-          message: 'No se pudo obtener la información del usuario para mostrar el control.',
-          errorDetails: error.message,
-          primaryButtonText: 'Entendido',
-          secondaryButtonText: null
-        });
+  const btnControl2 = document.querySelector('.btn-ver-control');
+
+if (btnControl2 && idDato) {
+
+  btnControl2.addEventListener('click', async () => {
+    try {
+      console.log('🔍 Obteniendo id_usuario desde id_dato:', idDato);
+
+      const detalle = await obtenerDetalleDato();
+      const idUsuario = detalle?.data?.id_usuario;
+
+      if (!idUsuario) {
+        throw new Error('No se encontró id_usuario en los detalles del dato');
       }
-    });
-  } else if (btnControl && !idDato) {
-    // Si no hay id_dato, deshabilitar el botón
-    btnControl.disabled = true;
-    btnControl.title = 'No hay datos de control disponibles';
-    btnControl.style.opacity = '0.5';
-    btnControl.style.cursor = 'not-allowed';
-  }
+
+      console.log('✅ ID Usuario obtenido:', idUsuario);
+
+      // MISMA RUTA QUE TU FUNCIÓN ORIGINAL
+      window.open(`/dashboard/controles/informe.html?id_usuario=${idUsuario}&id_dato=${idDato}`, '_blank');
+
+    } catch (error) {
+      console.error('❌ Error:', error);
+
+      await mostrarErrorGuardado({
+        title: 'Error al acceder al control',
+        message: 'No se pudo obtener la información del usuario para mostrar el control.',
+        errorDetails: error.message,
+        primaryButtonText: 'Entendido',
+        secondaryButtonText: null
+      });
+    }
+  });
+
+} else if (btnControl2 && !idDato) {
+
+  btnControl2.disabled = true;
+  btnControl2.title = 'No hay datos de control disponibles';
+  btnControl2.style.opacity = '0.5';
+  btnControl2.style.cursor = 'not-allowed';
+
+}
 
   window.duplicarUltimaTabla = duplicarUltimaTabla;
   window.eliminarUltimaTabla = eliminarUltimaTabla;

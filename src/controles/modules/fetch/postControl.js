@@ -50,20 +50,14 @@ export async function guardarControl() {
   const peso_residual = getFloat('peso_residual', index);
   const porcentaje_residual = getFloat('porcentaje_residual', index);
   
-  console.log('Peso óseo Rocha:', peso_oseo_rocha);
-  console.log('Peso residual:', peso_residual);
-  console.log('% Residual:', porcentaje_residual);
 
   console.log('\n=== 💧 AGUA CORPORAL ===');
   const peso_extracelular = getFloat('peso_extracelular', index);
   const porcentaje_extracelular = getFloat('porcentaje_extracelular', index);
   const peso_intracelular = getFloat('peso_intracelular', index);
   const porcentaje_intracelular = getFloat('porcentaje_intracelular', index);
-  
-  console.log('Peso extracelular:', peso_extracelular);
-  console.log('% Extracelular:', porcentaje_extracelular);
-  console.log('Peso intracelular:', peso_intracelular);
-  console.log('% Intracelular:', porcentaje_intracelular);
+  const porcentaje_oseo = getFloat('porcentaje_oseo', index);
+ 
 
   console.log('\n=== 📏 PERÍMETROS (CM) ===');
   const imc = getFloat('imc', index);
@@ -74,39 +68,21 @@ export async function guardarControl() {
   const cadera = getFloat('cadera', index);
   const muslo = getFloat('muslo', index);
   
-  console.log('IMC:', imc);
-  console.log('Cuello:', cuello);
-  console.log('Brazo:', brazo);
-  console.log('Cintura:', cintura);
-  console.log('Abdomen:', abdomen);
-  console.log('Cadera:', cadera);
-  console.log('Muslo:', muslo);
 
-  console.log('\n=== 📐 PLIEGUES (MM) ===');
+
   const triceps = getFloat('triceps', index);
   const subescapular = getFloat('subescapular', index);
   const abdomen_pliegue = getFloat('abdomen_pliegue', index);
   const supra_iliaco = getFloat('supra_iliaco', index);
   const muslo_pliegue = getFloat('muslo_pliegue', index);
   const suma_pliegues = getFloat('suma_pliegues', index);
-  
-  console.log('Tríceps:', triceps);
-  console.log('Subescapular:', subescapular);
-  console.log('Abdomen:', abdomen_pliegue);
-  console.log('Suprailiaco:', supra_iliaco);
-  console.log('Muslo:', muslo_pliegue);
-  console.log('Suma pliegues:', suma_pliegues);
 
-  console.log('\n=== 🧈 GRASA CORPORAL ===');
+
   const porcentaje_graso_perimetros = getFloat('grasa_perimetral', index);
   const porcentaje_graso_estimado_pliegues = getFloat('grasa_pliegues', index);
   const kg_grasa = getFloat('kg_grasa', index);
   const peso_graso = getFloat('peso_graso', index); // ✅ AÑADIDO
   
-  console.log('% Grasa (perímetros):', porcentaje_graso_perimetros);
-  console.log('% Grasa (pliegues):', porcentaje_graso_estimado_pliegues);
-  console.log('Kg grasa:', kg_grasa);
-  console.log('Peso graso (kg):', peso_graso); // ✅ AÑADIDO
 
   console.log('\n=== 💪 MASA MAGRA Y MUSCULAR ===');
   const kg_masa_magra = getFloat('kg_masa_magra', index);
@@ -195,7 +171,8 @@ export async function guardarControl() {
     porcentaje_masa_magra, // ✅ Ahora definido
     peso_muscular, // ✅ Ahora definido
     peso_graso, // ✅ Ahora definido
-    porcentaje_masa_muscular // ✅ Ahora definido
+    porcentaje_masa_muscular,
+    porcentaje_oseo // ✅ Ahora definido
   };
 
   console.log('\n=== 📦 OBJETO COMPLETO A ENVIAR ===');
@@ -372,26 +349,26 @@ export async function guardarControl() {
     if (modalResult.isConfirmed) {
       const id_dieta = await crearDieta(idUsuario, id_dato);
       if (id_dieta) {
-        alert("✅ Dieta creada y asignada con éxito.");
+
         window.open(informeUrl, '_blank');
         window.location.href = `/dashboard/dietas/wizard.html?id_dieta=${id_dieta}&id_dato=${id_dato}`;
       }
     } else if (modalResult.isDenied) {
       const id_dieta = await crearDieta(idUsuario, id_dato);
       if (id_dieta) {
-        alert("✅ Dieta creada con éxito.");
+
         window.location.href = `/dashboard/controles/informe.html?id_usuario=${idUsuario}&id_dato=${id_dato}`;
       }
     } else if (modalResult.dismiss === Swal.DismissReason.cancel) {
       const id_dieta = await crearDieta(idUsuario, id_dato);
       if (id_dieta) {
-        alert("✅ Dieta creada con éxito.");
+
         window.open(informeUrl, '_blank');
         window.location.href = '/dashboard/index.html';
       }
     }
   } catch (err) {
     console.error('❌ Error en la petición POST:', err);
-    alert('Error de red al guardar el control.');
+
   }
 }

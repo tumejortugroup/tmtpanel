@@ -4,69 +4,78 @@ import { round } from '../utils/math.js';
 
 /**
  * Calcula el peso óseo según la fórmula de Rocha (von Döbeln modificada)
- * Fórmula: 3.02 × (h² × r × R × 400)^0.712
- * donde r y R son los RADIOS (diámetro/2) del húmero y fémur
- * 
- * @param {Object} datos
- * @param {number} datos.altura - Altura en metros (ej: 1.75) o cm (175)
- * @param {number} datos.humero_biepicondileo - Diámetro del húmero en cm
- * @param {number} datos.femur_bicondileo - Diámetro del fémur en cm
- * @returns {number} Peso óseo en kg
  */
-export function pesoOseoRocha({ altura, humero_biepicondileo, femur_bicondileo }) {
-  if (!altura || !humero_biepicondileo || !femur_bicondileo) return 0;
-  
-  // Asegurar que altura está en metros
-  const h = altura > 3 ? altura / 100 : altura;
-  
-  // ✅ CLAVE: Calcular RADIOS (diámetro/2) y convertir a metros
-  const r = (humero_biepicondileo / 2) / 100;  // Radio húmero en metros
-  const R = (femur_bicondileo / 2) / 100;      // Radio fémur en metros
+export function pesoOseoRocha({
+  altura,
+  humero_biepicondileo,
+  femur_bicondileo,
+  muneca_estiloideo,
+}) {
+  if (!altura || !femur_bicondileo) return 0;
 
-  // Fórmula de Rocha usando radios
-  const base = h * h * r * R * 400;
+  const hRaw = parseFloat(altura);
+  if (!hRaw || hRaw <= 0) return 0;
+  const h = hRaw > 3 ? hRaw / 100 : hRaw;
+
+  const dmOrigen = muneca_estiloideo ?? humero_biepicondileo;
+  if (!dmOrigen) return 0;
+
+  const DMcm = parseFloat(dmOrigen);
+  const DFcm = parseFloat(femur_bicondileo);
+
+  if (!DMcm || !DFcm || DMcm <= 0 || DFcm <= 0) return 0;
+
+  const DM = DMcm / 100;
+  const DF = DFcm / 100;
+
+  const base = h * h * DM * DF * 400;
   const pesoOseo = 3.02 * Math.pow(base, 0.712);
-  
+
   return round(pesoOseo, 2);
 }
+
 /**
- * Calcula el peso residual según porcentajes anatómicos estándar
- * Hombres: 24.1% | Mujeres: 20.9%
- * 
- * @param {number} peso - Peso total en kg
- * @param {string} genero - "hombre" o "mujer"
- * @returns {Object} { kg, porcentaje }
+ * Peso residual (NO usado en el PDF pero lo dejo intacto)
  */
 export function pesoResidual(peso, genero) {
-  if (!peso) return { kg: 0, porcentaje: 0 };
-  
-  // ✅ CORRECCIÓN: Usar porcentajes correctos según literatura científica
-  const esHombre = genero === 'hombre';
-  const porcentaje = esHombre ? 0.241 : 0.209; // 24.1% hombres, 20.9% mujeres
+  if (!peso || !genero) return { kg: 0, porcentaje: 0 };
+
+  let porcentaje;
+
+  if (genero === "hombre") {
+    porcentaje = 0.60;  // 60%
+  } else if (genero === "mujer") {
+    porcentaje = 0.50;  // 50%
+  } else {
+    return { kg: 0, porcentaje: 0 };
+  }
+
   const kg = peso * porcentaje;
-  
-  return { 
-    kg: round(kg, 2), 
-    porcentaje: round(porcentaje, 4)
+
+  return {
+    kg: round(kg, 2),
+    porcentaje: round(porcentaje, 2) // para mostrar 60 o 50
   };
 }
 
+
 /**
- * Calcula peso de agua extracelular e intracelular
- * Según modelo de composición corporal 5 componentes
- * 
- * @param {number} peso - Peso total en kg
- * @param {string} genero - "hombre" o "mujer"
- * @returns {Object} { ext, pExt, int, pInt }
+ * Agua extracelular e intracelular (fracciones)
  */
 export function pesoExtraIntracelular(peso, genero) {
-  if (!peso) return { ext: 0, pExt: 0, int: 0, pInt: 0 };
+  if (!peso || !genero) return { ext: 0, pExt: 0, int: 0, pInt: 0 };
   
-  const esHombre = genero === 'hombre';
+  let pctExt, pctInt;
 
-  // Porcentajes aproximados según literatura
-  const pctExt = esHombre ? 0.20 : 0.167; // 20% hombres, 16.7% mujeres
-  const pctInt = esHombre ? 0.40 : 0.334; // 40% hombres, 33.4% mujeres
+  if (genero === 'hombre') {
+    pctExt = 0.20;
+    pctInt = 0.40;
+  } else if (genero === 'mujer') {
+    pctExt = 0.167;
+    pctInt = 0.334;
+  } else {
+    return { ext: 0, pExt: 0, int: 0, pInt: 0 };
+  }
 
   const ext = peso * pctExt;
   const int = peso * pctInt;
@@ -80,16 +89,14 @@ export function pesoExtraIntracelular(peso, genero) {
 }
 
 /**
- * Calcula masa magra y grasa a partir del peso total y porcentaje graso
- * 
- * @param {number} peso - Peso total en kg
- * @param {number} porcentajeGraso - Porcentaje de grasa corporal
- * @returns {Object} { masaMagra, grasa }
+ * Masa magra y grasa
  */
 export function calcularMasaMagraYGrasa(peso, porcentajeGraso) {
   if (!peso || porcentajeGraso == null) return { masaMagra: 0, grasa: 0 };
+
   const kgGrasa = peso * (porcentajeGraso / 100);
   const masaMagra = peso - kgGrasa;
+
   return { 
     masaMagra: round(masaMagra, 2), 
     grasa: round(kgGrasa, 2) 
@@ -97,16 +104,11 @@ export function calcularMasaMagraYGrasa(peso, porcentajeGraso) {
 }
 
 /**
- * Calcula el índice de masa magra (FFMI)
- * 
- * @param {number} kgMasaMagra - Kilogramos de masa magra
- * @param {number} altura - Altura en metros
- * @returns {number} Índice de masa magra
+ * FFMI
  */
 export function indiceMasaMagra(kgMasaMagra, altura) {
   if (!kgMasaMagra || !altura) return 0;
   
-  // ✅ CORRECCIÓN: Asegurar que altura está en metros
   const h = altura > 3 ? altura / 100 : altura;
   const imm = kgMasaMagra / (h * h);
   
@@ -114,24 +116,17 @@ export function indiceMasaMagra(kgMasaMagra, altura) {
 }
 
 /**
- * Calcula el peso muscular y su porcentaje
- * Método mejorado: Peso Muscular = Masa Magra - Peso Óseo - Agua extracelular
- * Simplificado: Peso Muscular ≈ 54% del peso corporal (hombres activos)
- * 
- * @param {Object} datos
- * @param {number} datos.masaMagra - Masa magra total en kg
- * @param {number} datos.pesoOseo - Peso óseo en kg
- * @param {number} datos.pesoTotal - Peso corporal total en kg
- * @returns {Object} { kg, porcentaje }
+ * ❌ MODELO CIENTÍFICO (no usado por el PDF)
+ * pesoMuscular = masaMagra - pesoOseo
  */
 export function pesoMuscular({ masaMagra, pesoOseo, pesoTotal }) {
   if (!masaMagra || !pesoOseo || !pesoTotal) {
     return { kg: 0, porcentaje: 0 };
   }
 
-  // ✅ CORRECCIÓN: Masa muscular = Masa magra - Peso óseo
-  // El componente residual y agua ya están fuera de la masa magra
-  const kg = masaMagra - pesoOseo;
+  let kg = masaMagra - pesoOseo;
+  if (kg < 0) kg = 0;
+
   const porcentaje = (kg / pesoTotal) * 100;
 
   return {
@@ -141,11 +136,7 @@ export function pesoMuscular({ masaMagra, pesoOseo, pesoTotal }) {
 }
 
 /**
- * Calcula el peso graso y su porcentaje
- * 
- * @param {number} pesoTotal - Peso corporal total en kg
- * @param {number} porcentajeGraso - Porcentaje de grasa corporal
- * @returns {Object} { kg, porcentaje }
+ * Peso graso
  */
 export function pesoGraso(pesoTotal, porcentajeGraso) {
   if (!pesoTotal || porcentajeGraso == null) {
@@ -161,20 +152,47 @@ export function pesoGraso(pesoTotal, porcentajeGraso) {
 }
 
 /**
- * Calcula el índice de complexión ósea.
- * Fórmula: altura (cm) / circunferencia muñeca (cm)
- * 
- * @param {Object} datos
- * @param {number} datos.altura - Altura en cm
- * @param {number} datos.muñeca - Circunferencia de muñeca en cm
- * @returns {number|null} Índice redondeado o null si faltan datos
+ * Complexión ósea
  */
-export function complexionOsea({ altura, muñeca }) {
-  if (!altura || !muñeca) return null;
-
-  const h = parseFloat(altura);
+export function complexionOsea({ muñeca }) {
   const m = parseFloat(muñeca);
+  if (!m) return null;
 
-  const indice = h / m;
-  return round(indice, 2);
+  if (m <= 5.10) return 10.5;
+  if (m <= 5.25) return 10.7;
+  if (m <= 5.45) return 10.6;
+  if (m <= 5.65) return 10.8;
+
+  return 11.0; // para muñecas más grandes
+}
+
+
+/* -------------------------------------------------------------
+   NUEVO — MODELO EXACTO DEL PDF (REGLA DE 3)
+------------------------------------------------------------- */
+
+/**
+ * % muscular = 100 − (% graso + % óseo)
+ * EXACTAMENTE como lo hace el PDF.
+ */
+export function porcentajeMuscularRegla3(pesoTotal, porcentajeGraso, pesoOseo) {
+  if (!pesoTotal || porcentajeGraso == null || !pesoOseo) {
+    return 0;
+  }
+
+  const porcentajeOseo = (pesoOseo / pesoTotal) * 100;
+  const porcentajeMuscular = 100 - (porcentajeGraso + porcentajeOseo);
+
+  return round(porcentajeMuscular, 2);
+}
+
+/**
+ * Peso muscular versión PDF:
+ * kg = pesoTotal * (% muscular / 100)
+ */
+export function pesoMuscularVersionPDF(pesoTotal, porcentajeMuscular) {
+  if (!pesoTotal || porcentajeMuscular == null) return 0;
+
+  const kg = pesoTotal * (porcentajeMuscular / 100);
+  return round(kg, 2);
 }

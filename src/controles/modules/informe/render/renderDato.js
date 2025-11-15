@@ -81,34 +81,34 @@ function renderizarInforme(dato, historico) {
           <div class="medida-row">
             <span><strong>CUELLO:</strong></span>
             <span>${formatearValor(dato.cuello)} cm</span>
-            <span>-</span>
+          
           </div>
           <div class="medida-row">
             <span><strong>BRAZO:</strong></span>
             <span>${formatearValor(dato.brazo)} cm</span>
-            <span>-</span>
+          
           </div>
           <div class="medida-row">
             <span><strong>CINTURA:</strong></span>
             <span>${formatearValor(dato.cintura)} cm</span>
-            <span>-</span>
+      
           </div>
         </div>
         <div>
           <div class="medida-row">
             <span><strong>ABDOMEN:</strong></span>
             <span>${formatearValor(dato.abdomen)} cm</span>
-            <span>-</span>
+           
           </div>
           <div class="medida-row">
             <span><strong>CADERA:</strong></span>
             <span>${formatearValor(dato.cadera)} cm</span>
-            <span>-</span>
+            
           </div>
           <div class="medida-row">
             <span><strong>MUSLO:</strong></span>
             <span>${formatearValor(dato.muslo)} cm</span>
-            <span>-</span>
+         
           </div>
         </div>
       </div>
@@ -140,7 +140,7 @@ function renderizarInforme(dato, historico) {
           <div class="medida-row">
             <span><strong>ABDOMEN:</strong></span>
             <span>${formatearValor(dato.abdomen_pliegue)} mm</span>
-            <span>-</span>
+            
           </div>
         </div>
         <div>
@@ -153,8 +153,7 @@ function renderizarInforme(dato, historico) {
             <span>${formatearValor(dato.muslo_pliegue)} mm</span>
           </div>
           <div class="medida-row">
-            <span>-</span>
-            <span>-</span>
+          
           </div>
         </div>
       </div>
@@ -216,17 +215,17 @@ function renderizarInforme(dato, historico) {
           <div class="composicion-row">
             <span><strong>PESO GRASO:</strong></span>
             <span>${formatearValor(dato.peso_graso)} kg</span>
-            <span>${formatearValor(dato.porcentaje_masa_magra)}%</span>
+            <span>${formatearValor(dato.porcentaje_graso_estimado_pliegues)}%</span>
           </div>
           <div class="composicion-row">
             <span><strong>PESO OSEO ( ROCHA ):</strong></span>
             <span>${formatearValor(dato.peso_oseo_rocha)} kg</span>
-            <span>${formatearValor(dato.complex_osea)}%</span>
+            <span>${formatearValor(dato.porcentaje_oseo)}%</span>
           </div>
           <div class="composicion-row">
             <span><strong>PESO MUSCULAR:</strong></span>
-            <span>${formatearValor(dato.kg_masa_magra)} kg</span>
-            <span>${calcularPorcentajeMuscular(dato)}%</span>
+            <span>${formatearValor(dato.peso_muscular)} kg</span>
+            <span>${formatearValor(dato.porcentaje_masa_muscular)}%</span>
           </div>
         </div>
         <div>
@@ -319,11 +318,11 @@ function renderizarTablaProgresion(historico, idDatoActual) {
           <tr class="${row.id_dato == idDatoActual ? 'destacado' : ''}">
             <td>${row.fecha || '-'}</td>
             <td>${row.peso || '-'}</td>
-            <td>${row.kg_grasa || '-'}</td>
-            <td>${row.kg_masa_magra || '-'}</td>
+            <td>${row.peso_graso|| '-'}</td>
+            <td>${row.peso_muscular|| '-'}</td>
             <td>${row.peso_oseo_rocha || '-'}</td>
             <td>${row.indice_masa_magra || '-'}</td>
-            <td>${row.porcentaje_masa_magra || '-'}</td>
+            <td>${row.porcentaje_graso_estimado_pliegues || '-'}</td>
           </tr>
         `).join('')}
       </tbody>
@@ -452,10 +451,7 @@ function wireExportButtons() {
     const el = document.getElementById('informe-dieta');
     if (!el) return;
 
-    if (typeof html2pdf === 'undefined') {
-      alert('No se encontró html2pdf. Asegúrate de cargar la librería ANTES de este script.');
-      return;
-    }
+   
 
     // Forzar estilo A4 centrado
     el.style.width = "210mm";

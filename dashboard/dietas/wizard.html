@@ -299,23 +299,42 @@
             <div class="card-body p-0">
                 <div id="" class="table-responsive mt-4">
                     <div class="row align-items-center  mt-2 mb-2 ms-2">
-                        <div class="col-md-6">
-                            <div class="dataTables_length d-flex align-items-center gap-2" id="datatable_length">
-                                <span>Plantilla:</span>
-                                <select name="datatable_length" aria-controls="datatable" class="form-select form-select-sm w-auto">
-                                <option>Ninguna</option>
+                       <div class="col-md-4">
+
+                            <!-- Fila 1 -->
+                            <div class="row align-items-center g-2" id="datatable_length"> 
+                              <div class="col-auto text-end" style="width: 80px;">
+                                <span>Plantilla</span>
+                              </div>
+                              <div class="col">
+                                <select name="datatable_length" class="form-select form-select-sm"> 
+                                  <option value="">Ninguna</option>
+                               
                                 </select>
+                              </div>
                             </div>
-                             <div class="dataTables_length d-flex align-items-center gap-2" >
+
+                            <!-- Fila 2 -->
+                            <div class="row align-items-center g-2 mt-1">
+                              <div class="col-auto text-end" style="width: 80px;">
                                 <span>Dieta</span>
-                               <select id="dietas-anteriores" class="form-select form-select-sm w-auto">
-                                    <option value="">Ninguna</option>
+                              </div>
+                              <div class="col">
+                                <select id="dietas-anteriores" class="form-select form-select-sm">
+                                  <option value="">Ninguna</option>
                                 </select>
+                              </div>
                             </div>
-                             <div class="dataTables_length d-flex align-items-center gap-2" >
-                                <button>Control</button> 
+
+                            <!-- Fila 3 -->
+                            <div class="row align-items-center g-2 mt-1">
+                              <div class="col-auto text-end" style="width: 80px;"></div>
+                              <div class="col">
+                                <button class="btn btn-outline-primary btn-sm w-100 btn-ver-control">Ver Control</button>
+                              </div>
                             </div>
-                        </div>
+
+                          </div>
                     </div>
                   <table  class="table table-striped mb-0 fs-7 table-dieta " role="grid"> 
                         <thead>

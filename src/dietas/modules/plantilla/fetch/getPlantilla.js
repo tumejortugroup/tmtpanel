@@ -2,7 +2,7 @@ export async function getPlantilla(idPlantilla) {
   const token = localStorage.getItem("token");
 
   if (!token) {
-    alert("❌ Token no encontrado. Inicia sesión.");
+
     return null;
   }
 

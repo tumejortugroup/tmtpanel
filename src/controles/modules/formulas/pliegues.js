@@ -4,11 +4,16 @@
  * Comprueba si todos los pliegues necesarios están disponibles
  */
 export function plieguesCompletos({ subescapular, abdomen_pliegue, supra_iliaco, muslo_pliegue }) {
+  const s = parseFloat(subescapular);
+  const a = parseFloat(abdomen_pliegue);
+  const si = parseFloat(supra_iliaco);
+  const m = parseFloat(muslo_pliegue);
+
   return (
-    subescapular > 0 &&
-    abdomen_pliegue > 0 &&
-    supra_iliaco > 0 &&
-    muslo_pliegue > 0
+    s > 0 &&
+    a > 0 &&
+    si > 0 &&
+    m > 0
   );
 }
 

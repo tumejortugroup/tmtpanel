@@ -4,7 +4,7 @@ export async function asociarComidasADieta(idComidasArray) {
   const idDieta = obtenerIdDietaDesdeUrl();
 
   if (!idDieta || !idComidasArray.length) {
-    alert("❌ Falta ID de dieta o lista de comidas.");
+    alert("❌ .");
     return;
   }
 
@@ -40,11 +40,11 @@ export async function asociarComidasADieta(idComidasArray) {
       window.location.href = "/dashboard/index.html";
     } else {
       console.error("❌ Error al asociar comidas:", data);
-      alert("Error al asociar comidas a la dieta.");
+     
     }
   } catch (error) {
     console.error("❌ Error de red:", error);
-    alert("Error de red al asociar comidas.");
+    
   }
 }
 
