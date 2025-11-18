@@ -79,18 +79,20 @@ export function initCreateCentroForm() {
           },
           body: JSON.stringify(formData)
         });
+   console.log(response.status);
+console.log(await response.text());
 
         progressController.updateProgress(70);
 
         if (response.ok) {
   progressController.updateProgress(100);
   
-  // Esperar 300ms antes de mostrar el check
+
   await new Promise(resolve => setTimeout(resolve, 300));
   
   progressController.complete();
 
-  // Esperar 2 segundos para ver el check
+
   await new Promise(resolve => setTimeout(resolve, 2000));
   
   window.location.href = "/dashboard/index.html";
