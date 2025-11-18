@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 - Página no encontrada | TMT Panel</title>
+  <meta name="description" content="La página que buscas no existe. Vuelve al dashboard."/>
+
+  <!-- Favicon (usa el tuyo si tienes) -->
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon"/>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+    :root {
+      --bg: #0f0f1a;
+      --text: #e2e8f0;
+      --accent: #6366f1;
+      --card: #1e1e2e;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+    }
+
+    .container {
+      text-align: center;
+      max-width: 560px;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 9rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #6366f1, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      color: #e2e8f0;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      opacity: 0.8;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    a.btn {
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #5a5ce0;
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid #444;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .illustration {
+      font-size: 6rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 6rem; }
+      h2 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="illustration">¯\_(ツ)_/¯</div>
+    <h1>404</h1>
+    <h2>¡Ups! Página no encontrada</h2>
+    <p>La página que estás buscando no existe o fue movida.<br>Vuelve al dashboard o explora desde ahí.</p>
+
+    <div class="buttons">
+      <a href="/dashboard/" class="btn btn-primary">Ir al Dashboard</a>
+      <a href="/" class="btn btn-secondary">Página principal</a>
+    </div>
+  </div>
+
+</body>
+</html>
