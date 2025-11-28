@@ -52,7 +52,7 @@ export async function renderTablaEquivalencias() {
         
         // ⬇️ CAMBIO: Redondear hacia arriba sin decimales
         if (eqVal !== null) {
-          const valorRedondeado = Math.ceil(eqVal);
+          const valorRedondeado = Math.round(eqVal * 2) / 2;
           td.textContent = `${valorRedondeado} g`;
         } else {
           td.textContent = "-";

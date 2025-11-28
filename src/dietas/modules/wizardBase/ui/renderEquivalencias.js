@@ -43,16 +43,16 @@ export async function renderTablaEquivalencias() {
 
       if (!idPrincipal || isNaN(cantidad) || !categoria) return;
 
-      // limpiar todas las celdas
+
       equivalentes.forEach(eq => (eq.td.textContent = ""));
 
       for (const { select, td } of equivalentes) {
         if (!select.value) continue;
         const eqVal = await getEquivalencia(idPrincipal, select.value, categoria, cantidad);
         
-        // ⬇️ CAMBIO: Redondear hacia arriba sin decimales
+       
         if (eqVal !== null) {
-          const valorRedondeado = Math.ceil(eqVal);
+          const valorRedondeado = Math.round(eqVal * 2) / 2;
           td.textContent = `${valorRedondeado} g`;
         } else {
           td.textContent = "-";

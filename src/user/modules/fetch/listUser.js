@@ -86,7 +86,7 @@ export async function listUser() {
         : dietaData;
     
     const dietaUrl = dietaInfo && dietaInfo.id_dieta
-        ? `/dashboard/dietas/wizardUpdate.html?id_dieta=${dietaInfo.id_dieta}&id_dato=${dietaInfo.id_dato}`
+        ? `/dashboard/dietas/wizard.html?id_dieta=${dietaInfo.id_dieta}&id_dato=${dietaInfo.id_dato}`
         : `/dashboard/controles/control.html?id=${usuario.id_usuario}`;
 
 

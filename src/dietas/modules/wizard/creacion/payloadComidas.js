@@ -62,7 +62,6 @@ export function generarPayloadComidas() {
           }
         }
       }
-console.log('hohahaha')
       // Solo agregar equivalentes si hay al menos uno
       if (Object.keys(equivalentes).length > 0) {
         alimento.equivalentes = [equivalentes];
