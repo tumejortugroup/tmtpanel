@@ -31,7 +31,6 @@ export async function cargarListaControles() {
       const li = document.createElement('li');
       li.className = 'd-flex align-items-center justify-content-between px-2';
 
-      // Label con checkbox
       const label = document.createElement('label');
       label.className = 'dropdown-item m-0 flex-grow-1';
       label.style.cursor = 'pointer';
@@ -46,31 +45,49 @@ export async function cargarListaControles() {
       label.appendChild(checkbox);
       label.appendChild(document.createTextNode(control.nombre ?? '(Sin nombre)'));
 
-      // Botón "Ver" estilo texto
       const btnVer = document.createElement('a');
       btnVer.href = `/dashboard/controles/informe.html?id_usuario=${idUsuario}&id_dato=${control.id_dato}`;
       btnVer.textContent = 'Ver';
       btnVer.className = 'text-primary ms-2';
       btnVer.style.fontSize = '13px';
       btnVer.style.textDecoration = 'none';
-      btnVer.addEventListener('click', e => e.stopPropagation()); // evita cierre del dropdown al pulsar
+      btnVer.addEventListener('click', e => e.stopPropagation());
 
       li.appendChild(label);
       li.appendChild(btnVer);
       lista.appendChild(li);
     });
 
-    // Botón principal existente
-    const boton = document.getElementById('ver-controles');
-    boton.addEventListener('click', () => {
+    const contenedorBoton = document.createElement('div');
+    contenedorBoton.className = 'px-3 pb-2';
+
+    const btnMostrar = document.createElement('button');
+    btnMostrar.textContent = 'Mostrar';
+    btnMostrar.id = 'btn-mostrar-controles';
+    btnMostrar.className = 'btn btn-primary w-100 mt-2';
+
+    btnMostrar.addEventListener('click', () => {
       cargarControlesSeleccionados();
 
-      // Cierra el dropdown
+
       const dropdown = bootstrap.Dropdown.getInstance(document.getElementById('btnControlDrop'));
       if (dropdown) dropdown.hide();
     });
 
-    // Evitar que se cierre al marcar checkboxes
+    contenedorBoton.appendChild(btnMostrar);
+
+
+    lista.appendChild(contenedorBoton);
+
+
+
+    const boton = document.getElementById('ver-controles');
+    boton.addEventListener('click', () => {
+      cargarControlesSeleccionados();
+      const dropdown = bootstrap.Dropdown.getInstance(document.getElementById('btnControlDrop'));
+      if (dropdown) dropdown.hide();
+    });
+
     lista.addEventListener('click', (e) => {
       const label = e.target.closest('label.dropdown-item');
       if (label) {
@@ -81,7 +98,6 @@ export async function cargarListaControles() {
       }
     });
 
-    // Mantener el dropdown abierto al interactuar
     const triggerBtn = document.getElementById('btnControlDrop');
     if (triggerBtn) {
       triggerBtn.setAttribute('data-bs-auto-close', 'outside');
