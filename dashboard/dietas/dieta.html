@@ -20,7 +20,7 @@
       width: 210mm;
       min-height: 297mm;
       margin: 0 auto 20px;
-      padding: 20mm;
+      padding-top: 5mm;
       background: white;
       box-sizing: border-box;
       font-family: 'Inter', sans-serif;
@@ -76,17 +76,22 @@
 }
 
 
+.informe-header {
+  width: 100%;
 
-    /* 🧾 Encabezado general */
-    .informe-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 
-    .informe-header div {
-      width: 48%;
-    }
+  display: flex;
+  gap: 20px; /* mejor que justify-content */
+  align-items: flex-start;
+}
+
+.informe-header > div {
+  flex: 1;
+}
 
     .informe-header p {
       margin: 3px 0;
