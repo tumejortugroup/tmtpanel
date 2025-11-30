@@ -1,8 +1,9 @@
 // src/dietas/modules/wizard/tablaAlimentos.js
+
 import { renderSelectAlimentos } from '/src/dietas/modules/plantilla/ui/renderAlimentos.js';
 import { renderTablaEquivalencias } from '/src/dietas/modules/plantilla/ui/renderEquivalencias.js';
 import { prepararSumaMacros } from '/src/dietas/modules/plantilla/ui/sumaMacros.js';
-
+import { capitalizar } from './utils/helpers.js';
 
 export async function tablaAlimentos(comidas = null) {
 

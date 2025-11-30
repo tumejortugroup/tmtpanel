@@ -23,7 +23,7 @@ export async function renderDieta({ data, comidas }) {
     if (alimentos.length === 0) {
       console.warn("⚠ No hay alimentos en memoria → cargando desde backend...");
 
-      const { getAlimentos } = await import("/src/dietas/modules/update/fetch/getAlimentos.js");
+      const { getAlimentos } = await import("/src/dietas/modules/wizardBase/fetch/getAlimentos.js");
       window.__alimentosCache = await getAlimentos();
 
       alimentos = window.__alimentosCache;
@@ -64,7 +64,7 @@ export async function renderDieta({ data, comidas }) {
       const tabla = contenedor.querySelector(".table-dieta:last-of-type");
 
       if (tabla) {
-        const { renderSelectAlimentos } = await import("/src/dietas/modules/update/ui/renderAlimentos.js");
+        const { renderSelectAlimentos } = await import("/src/dietas/modules/wizardBase/ui/renderAlimentos.js");
 
         tabla.querySelectorAll("tbody tr").forEach(fila => {
           const catSel = fila.querySelector("select[name='select-categoria']");

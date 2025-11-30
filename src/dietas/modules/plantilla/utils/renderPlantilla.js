@@ -11,196 +11,159 @@ export async function renderPlantilla({ data, comidas }) {
   try {
     console.log('Iniciando renderizado de plantilla...');
     
-    // Rellenar nombre (las plantillas solo tienen nombre, no descripción)
     const nombreInput = document.getElementById("nombre-dieta");
-
-    if (data && data.length > 0) {
-      if (nombreInput) nombreInput.value = data[0].nombre_plantilla || "";
+    if (data && data.length > 0 && nombreInput) {
+      nombreInput.value = data[0].nombre_plantilla || "";
     }
 
-    // Obtener alimentos disponibles
+    // ====================================
+    // ALIMENTOS CACHE
+    // ====================================
     let alimentos = obtenerAlimentosDisponibles();
    
     if (alimentos.length === 0) {
-      console.warn('No hay alimentos. Intentando cargar...');
-      const { renderSelectAlimentos } = await import('/src/dietas/modules/wizard/ui/renderAlimentos.js');
-      await renderSelectAlimentos("select-alimentos");
-      alimentos = obtenerAlimentosDisponibles();
+      console.warn("⚠ No hay alimentos en memoria → cargando desde backend...");
+
+      const { getAlimentos } = await import("/src/dietas/modules/plantilla/fetch/getAlimentos.js");
+      window.__alimentosCache = await getAlimentos();
+
+      alimentos = window.__alimentosCache;
+      console.log("📦 Alimentos cargados:", alimentos.length);
     }
 
     const numEquivalentes = obtenerMaxEquivalentes(comidas);
-    console.log(`Maximo de equivalentes: ${numEquivalentes}`);
-    
     const contenedor = document.getElementById("tabla-container");
-    
-    if (!contenedor) {
-      console.error('No se encontro "tabla-container"');
-      return;
-    }
+    if (!contenedor) return;
 
-    // Buscar tabla de suplementación existente
     const tablaSuplementacion = contenedor.querySelector('#Suplementacion');
 
-    // Limpiar solo las tablas dinámicas (NO la de suplementación)
-    const tablasDinamicas = contenedor.querySelectorAll('.table-dieta');
-    tablasDinamicas.forEach(tabla => tabla.remove());
+    contenedor.querySelectorAll('.table-dieta').forEach(t => t.remove());
 
-    // Variable temporal para guardar la nota de suplementación
     let notaSupplementacion = '';
 
-    // Generar tablas usando los datos de comidas
-    Object.values(comidas).forEach(comida => {
+    // ================================
+    // GENERAR TABLAS
+    // ================================
+    for (const comida of Object.values(comidas)) {
+
       const tipoComidaCapitalizado = capitalizar(comida.tipo_comida);
-      
-      // Si es suplementación, GUARDAR la nota para después
+
+      // Suplementación se hace después
       if (tipoComidaCapitalizado === 'Suplementacion') {
-        console.log('Detectada suplementacion en plantilla...');
-        console.log('Nota recibida:', comida.notas);
         notaSupplementacion = comida.notas || '';
-        console.log('Nota guardada:', notaSupplementacion);
-        return;
+        continue;
       }
-      
-      // Para el resto de comidas, crear tabla normal
+
       const tablaHTML = generarTablaComida(comida, numEquivalentes, alimentos);
-      
-      // Insertar ANTES de suplementación
+
       if (tablaSuplementacion) {
         tablaSuplementacion.insertAdjacentHTML('beforebegin', tablaHTML);
       } else {
         contenedor.insertAdjacentHTML('beforeend', tablaHTML);
       }
-      
-      console.log(`Tabla creada: ${tipoComidaCapitalizado}`);
-    });
 
-    // Rellenar suplementación
-    console.log('Intentando rellenar suplementacion...');
-    console.log('tablaSuplementacion existe:', !!tablaSuplementacion);
-    console.log('notaSupplementacion:', `"${notaSupplementacion}"`);
-    
-    if (tablaSuplementacion) {
-      const textarea = tablaSuplementacion.querySelector('textarea');
-      console.log('Textarea encontrado:', !!textarea);
-      
-      if (textarea) {
-        textarea.value = notaSupplementacion;
-        console.log('Suplementacion cargada:', notaSupplementacion);
-      } else {
-        console.error('No se encontro el textarea dentro de la tabla');
+      // =========================================
+      // 🔥🔥🔥 AQUI VIENE LA PIEZA QUE FALTABA 🔥🔥🔥
+      //   → Igual que en wizardBase
+      //   → ESTO PINTA EL PRIMER SELECT
+      // =========================================
+      const tabla = contenedor.querySelector(".table-dieta:last-of-type");
+
+      if (tabla) {
+        const { renderSelectAlimentos } = await import("/src/dietas/modules/plantilla/ui/renderAlimentos.js");
+
+        tabla.querySelectorAll("tbody tr").forEach(fila => {
+          const catSel = fila.querySelector("select[name='select-categoria']");
+          const alSel = fila.querySelector("select[name='select-alimentos']");
+          if (!catSel || !alSel) return;
+
+          const alimentoActual = comida.alimentos.find(
+            a => capitalizar(a.categoria) === catSel.value.trim()
+          );
+
+          renderSelectAlimentos(alSel, catSel.value.trim(), alimentoActual);
+        });
       }
-    } else {
-      console.error('No se encontro la tabla de suplementacion');
+      // =========================================
+      // FIN DE LA PIEZA QUE FALTABA
+      // =========================================
     }
 
-    // Listener para cambios de categoría
-    contenedor.addEventListener('change', (e) => {
-      if (e.target.name === 'select-categoria') {
-        const fila = e.target.closest('tr');
-        const selectAlimentos = fila.querySelector('select[name="select-alimentos"]');
-        const nuevaCategoria = e.target.value;
-        const alimentosCategoria = filtrarAlimentosPorCategoria(alimentos, nuevaCategoria);
-        selectAlimentos.innerHTML = generarOpcionesAlimentos(alimentosCategoria);
-      }
-    });
+    // ================================
+    // SUPLEMENTACION
+    // ================================
+    if (tablaSuplementacion) {
+      const textarea = tablaSuplementacion.querySelector("textarea");
+      if (textarea) textarea.value = notaSupplementacion;
+    }
 
-    // Agregar recálculo de equivalencias
-    await agregarCalculoEquivalencias(contenedor);
+    // ================================
+    // LISTENER CAMBIO DE CATEGORÍA
+    // ================================
+ 
 
     console.log('Renderizado de plantilla completado');
-
-    // RECÁLCULO DE MACROS DESPUÉS DEL RENDERIZADO
-    requestAnimationFrame(async () => {
-      try {
-        console.log('🔄 Iniciando recálculo de macros después del render de plantilla...');
-        const { configurarListenersParaNuevaTabla } = await import('/src/dietas/modules/plantilla/ui/sumaMacros.js');
-        configurarListenersParaNuevaTabla();
-        console.log('✅ Recálculo de macros completado');
-      } catch (error) {
-        console.error('❌ Error al recalcular macros:', error);
-      }
-    });
 
   } catch (error) {
     console.error('Error en renderPlantilla:', error);
   }
 }
 
-// Función para agregar cálculo automático de equivalencias
+
+// ================================
+// CÁLCULO DE EQUIVALENCIAS
+// ================================
 async function agregarCalculoEquivalencias(contenedor) {
   const { getEquivalencia } = await import('/src/dietas/modules/wizard/fetch/getEquivalencias.js');
-  
-  const filas = contenedor.querySelectorAll(".table-dieta tbody tr:not(:last-child)"); 
-  
+
+  const filas = contenedor.querySelectorAll(".table-dieta tbody tr:not(:last-child)");
+
   filas.forEach(fila => {
-    const selectMacro = fila.querySelector("td select[name='select-categoria']");
+    const selectMacro = fila.querySelector("select[name='select-categoria']");
     const inputCantidad = fila.querySelector(".input-cantidad");
+
     if (!selectMacro || !inputCantidad) return;
 
     const selects = fila.querySelectorAll("select[name='select-alimentos']");
     if (selects.length < 2) return;
 
     const selectPrincipal = selects[0];
-    const equivalentes = [];
 
-    for (let i = 1; i < selects.length; i++) {
-      const td = selects[i].closest("td").nextElementSibling;
-      if (td) {
-        equivalentes.push({ select: selects[i], td });
-      }
-    }
+    const equivalentes = [...selects].slice(1).map(sel => ({
+      select: sel,
+      td: sel.closest("td").nextElementSibling
+    }));
 
     async function calcular() {
       const idPrincipal = selectPrincipal.value;
       const cantidad = parseFloat(inputCantidad.value);
       const categoria = selectMacro.value?.toLowerCase();
 
-      if (!idPrincipal || isNaN(cantidad) || !categoria) {
-        equivalentes.forEach(eq => {
-          if (eq.td.tagName === 'TD') {
-            eq.td.textContent = "";
-          }
-        });
+      if (!idPrincipal || isNaN(cantidad)) {
+        equivalentes.forEach(eq => eq.td.textContent = "");
         return;
       }
 
-      equivalentes.forEach(eq => {
-        if (eq.td.tagName === 'TD') {
-          eq.td.textContent = "";
-        }
-      });
-
       for (const { select, td } of equivalentes) {
-        if (!select.value || !td) continue;
-        
+        if (!select.value) continue;
+
         try {
           const eqVal = await getEquivalencia(idPrincipal, select.value, categoria, cantidad);
-          if (td.tagName === 'TD') {
-            td.textContent = eqVal !== null ? `${Math.ceil(eqVal)}` : "-";
-          }
-        } catch (error) {
-          console.error('Error calculando equivalencia:', error);
-          if (td.tagName === 'TD') {
-            td.textContent = "-";
-          }
+          td.textContent = eqVal !== null ? Math.ceil(eqVal) : "-";
+        } catch {
+          td.textContent = "-";
         }
       }
     }
 
     [selectMacro, selectPrincipal, inputCantidad].forEach(el => {
-      if (el) {
-        el.addEventListener("change", calcular);
-      }
+      el.addEventListener("change", calcular);
     });
-    
-    if (inputCantidad) {
-      inputCantidad.addEventListener("input", calcular);
-    }
+
+    inputCantidad.addEventListener("input", calcular);
 
     equivalentes.forEach(({ select }) => {
-      if (select) {
-        select.addEventListener("change", calcular);
-      }
+      select.addEventListener("change", calcular);
     });
   });
 }

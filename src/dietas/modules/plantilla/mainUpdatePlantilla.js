@@ -2,7 +2,6 @@ import { getPlantilla } from "./fetch/getPlantilla.js";
 import { getDieta } from "./fetch/getDieta.js";
 import { agruparPorComida } from "./utils/agruparComida.js";
 import { renderPlantilla } from "./utils/renderPlantilla.js";
-import { renderDieta } from "./utils/renderDieta.js";
 import { tablaAlimentos } from "/src/dietas/modules/plantilla/tablaAlimentos.js";
 import { ejecutarAutoAjuste } from '/src/dietas/modules/plantilla/autoAjuste.js';
 import { crearTablaVacia, eliminarUltimaTabla } from "./utils/crearTablaVacia.js";
@@ -47,10 +46,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const btnControl2 = document.querySelector('.btn-ver-control');
 
   if (btnControl2 && idDato) {
-
     btnControl2.addEventListener('click', async () => {
       try {
-        console.log('🔍 Obteniendo id_usuario desde id_dato:', idDato);
         const detalle = await obtenerDetalleDato();
         const idUsuario = detalle?.data?.id_usuario;
 
@@ -62,7 +59,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
 
       } catch (error) {
-        console.error('❌ Error:', error);
         await mostrarErrorGuardado({
           title: 'Error al acceder al control',
           message: 'No se pudo obtener la información del usuario.',
@@ -120,9 +116,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
   } else {
-
-    console.log('🔹 MODO DIETA → cargando dieta normal');
-
     dataDieta = await getDieta(idDieta);
     if (!dataDieta) return;
 
@@ -143,7 +136,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   setTimeout(async () => {
     console.log("⏳ Ejecutando tablaAlimentos después del render...");
-    await tablaAlimentos();
+    await tablaAlimentos();  // ← *** AQUÍ ES DONDE SE PINTA EL PRIMER SELECT CORRECTAMENTE ***
   }, 80);
 
   // -------------------------------------------
