@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
+
   // --- Botón Ver Control ---
   const btnControl2 = document.querySelector('.btn-ver-control');
 

@@ -1,6 +1,4 @@
-
-
-import { getAlimentos } from '/src/dietas/modules/plantilla/fetch/getAlimentos.js';
+import { getAlimentos } from '/src/Plantilla/modules/update/fetch/getAlimentos.js';
 
 
 
@@ -53,6 +51,9 @@ export async function renderSelectAlimentos(
         return;
       }
 
+      console.log("---------------------------------------------------");
+      console.log("🎯 Procesando SELECT:", select);
+      console.log("---------------------------------------------------");
 
       // Resetear
       select.innerHTML = '<option value="">Seleccionar</option>';
@@ -93,10 +94,12 @@ export async function renderSelectAlimentos(
         option.textContent = a.nombre;
 
         // Seleccionar automáticamente el alimento correcto
-        if (alimentoSeleccionado && a.id_alimento == alimentoSeleccionado.id_alimento) {
-          console.log("✔ Preseleccionando alimento:", a.nombre);
-          option.selected = true;
-        }
+       if (alimentoSeleccionado 
+    && a.id_alimento == (alimentoSeleccionado.id_alimento ?? alimentoSeleccionado)) {
+
+    console.log("✔ Preseleccionando alimento:", a.nombre);
+    option.selected = true;
+}
 
         select.appendChild(option);
       });

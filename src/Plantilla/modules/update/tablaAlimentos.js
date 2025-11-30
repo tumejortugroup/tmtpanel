@@ -1,7 +1,10 @@
-// src/dietas/modules/wizardBase/tablaAlimentos.js
-import { renderSelectAlimentos } from '/src/dietas/modules/wizardBase/ui/renderAlimentos.js';
-import { renderTablaEquivalencias } from '/src/dietas/modules/wizardBase/ui/renderEquivalencias.js';
-import { prepararSumaMacros } from '/src/dietas/modules/wizardBase/ui/sumaMacros.js';
+// ===========================================================
+//  tablaAlimentos.js — UPDATE (VERSIÓN CORREGIDA DEFINITIVA)
+// ===========================================================
+
+import { renderSelectAlimentos } from "/src/Plantilla/modules/update/ui/renderAlimentos.js";
+import { renderTablaEquivalencias } from "/src/Plantilla/modules/update/ui/renderEquivalencias.js";
+import { capitalizar } from "./utils/helpers.js";
 
 export async function tablaAlimentos(comidas = null) {
 
@@ -60,7 +63,7 @@ export async function tablaAlimentos(comidas = null) {
   });
 
   await renderTablaEquivalencias();
-  await prepararSumaMacros();
+ 
 
   console.log("🟩 tablaAlimentos completado");
 }

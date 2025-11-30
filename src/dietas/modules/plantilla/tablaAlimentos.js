@@ -3,47 +3,65 @@ import { renderSelectAlimentos } from '/src/dietas/modules/plantilla/ui/renderAl
 import { renderTablaEquivalencias } from '/src/dietas/modules/plantilla/ui/renderEquivalencias.js';
 import { prepararSumaMacros } from '/src/dietas/modules/plantilla/ui/sumaMacros.js';
 
-export async function tablaAlimentos() {
 
+export async function tablaAlimentos(comidas = null) {
 
+  console.log("🔥 tablaAlimentos ejecutada");
 
-  // Esperar a que las tablas estén realmente en el DOM
-  await new Promise(resolve => setTimeout(resolve, 50));
+  await new Promise(res => setTimeout(res, 70));
 
-  // 1️⃣ Para cada fila de alimentos...
   document.querySelectorAll("select[name='select-categoria']").forEach(async selectCategoria => {
 
-    const categoriaInicial = selectCategoria.value?.trim() || null;
-  
-
-    // 1.1️⃣ Buscar el select de alimentos en la MISMA FILA
     const fila = selectCategoria.closest("tr");
-    if (!fila) {
-      console.warn("⚠ No se encontró fila para categoría:", selectCategoria);
-      return;
-    }
+    if (!fila) return;
 
     const selectAlimentos = fila.querySelector("select[name='select-alimentos']");
-    if (!selectAlimentos) {
-      console.warn("⚠ No se encontró select-alimentos en la misma fila.");
-      return;
+    if (!selectAlimentos) return;
+
+    // ❌ NO BLOQUEAR INICIALIZACIÓN
+    // if (selectAlimentos.dataset.init === "1") return;
+
+    let categoriaReal = selectCategoria.value?.trim() || null;
+    let alimentoActual = null;
+
+    if (comidas) {
+      const tipoComida = fila.closest(".table-dieta")
+        ?.querySelector("select[name='tipo-comida']")
+        ?.value;
+
+      const comidaData = Object.values(comidas).find(
+        c => capitalizar(c.tipo_comida) === capitalizar(tipoComida)
+      );
+
+      if (comidaData) {
+        alimentoActual = comidaData.alimentos.find(
+          a => capitalizar(a.categoria) === capitalizar(selectCategoria.value.trim())
+        );
+
+        if (alimentoActual?.categoria) {
+          categoriaReal = alimentoActual.categoria;
+        }
+      }
     }
 
-    // 1.2️⃣ Render inicial
-    await renderSelectAlimentos(selectAlimentos, categoriaInicial);
+    console.log(`🟦 FILA → categoríaReal: ${categoriaReal} | alimentoActual:`, alimentoActual);
 
-    // 1.3️⃣ Listener para cambios en esta fila
-    selectCategoria.addEventListener("change", async (e) => {
-      const categoria = e.target.value?.trim() || null;
+    await renderSelectAlimentos(selectAlimentos, categoriaReal, alimentoActual);
 
-      await renderSelectAlimentos(selectAlimentos, categoria);
+    // ❌ NO MARCAR INIT AQUÍ
+    // selectAlimentos.dataset.init = "1";
+
+    selectCategoria.addEventListener("change", async e => {
+      const nuevaCat = e.target.value?.trim() || null;
+      console.log("🔄 Cambio categoría →", nuevaCat);
+
+      await renderSelectAlimentos(selectAlimentos, nuevaCat);
     });
 
   });
 
-
   await renderTablaEquivalencias();
   await prepararSumaMacros();
 
-
+  console.log("🟩 tablaAlimentos completado");
 }

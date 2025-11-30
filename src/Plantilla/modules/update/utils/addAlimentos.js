@@ -1,4 +1,4 @@
-import { renderSelectAlimentos } from '/src/dietas/modules/update/ui/renderAlimentos.js';
+import { renderSelectAlimentos } from '/src/Plantilla/modules/update/ui/renderAlimentos.js';
 
 // 🔧 Obtener alimentos desde el cache
 function obtenerAlimentosDisponibles() {

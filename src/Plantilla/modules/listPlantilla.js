@@ -59,7 +59,7 @@ export async function cargarPlantillasCentro() {
                   <i class="bi bi-three-dots-vertical"></i>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton${plantilla.id_plantilla}">
-                  <li><a class="dropdown-item" href="/dashboard/dietas/updatePlantilla.html?id=${plantilla.id_plantilla}">Editar</a></li>
+                  <li><a class="dropdown-item" href="/dashboard/dietas/updatePlantilla.html?id_plantilla=${plantilla.id_plantilla}">Editar</a></li>
                   <li><a class="dropdown-item eliminar-plantilla" href="#" data-id="${plantilla.id_plantilla}" data-nombre="${plantilla.nombre}">Eliminar</a></li>
                 </ul>
               </div>

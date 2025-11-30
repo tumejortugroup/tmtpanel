@@ -60,7 +60,7 @@ function crearPagina(headerReal = null) {
   footer.style.display = "flex";
   footer.style.alignItems = "center";
   footer.style.justifyContent = "center";
-  footer.innerText = "TU MEJOR TU — Informe Nutricional";
+ 
 
   /* WRAPPER */
   const wrapper = document.createElement("div");

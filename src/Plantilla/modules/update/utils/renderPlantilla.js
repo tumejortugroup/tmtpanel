@@ -8,49 +8,49 @@ import {
 } from './helpers.js';
 
 
-export async function renderDieta({ data, comidas }) {
+
+export async function renderPlantilla({ data, comidas }) {
   try {
-    console.log("🎨 Renderizando dieta UPDATE...");
+    console.log("🎨 Renderizando PLANTILLA UPDATE...");
 
     const contenedor = document.getElementById("tabla-container");
     if (!contenedor) return;
 
-    // ------------------------------
-    //  ALIMENTOS DEL SISTEMA
-    // ------------------------------
+    // ---------------------------------------
+    //     1. CARGAR ALIMENTOS DEL SISTEMA
+    // ---------------------------------------
     let alimentos = obtenerAlimentosDisponibles();
 
-    // 🛠️ FIX IMPORTANTE: cargar alimentos si aún no hay cache
     if (alimentos.length === 0) {
-      console.warn("⚠ No hay alimentos en memoria → cargando desde backend...");
+      console.warn("⚠ No hay alimentos en memoria → cargando backend...");
 
-      const { getAlimentos } = await import("/src/dietas/modules/update/fetch/getAlimentos.js");
+      const { getAlimentos } = await import("/src/Plantilla/modules/update/fetch/getAlimentos.js");
       window.__alimentosCache = await getAlimentos();
 
       alimentos = window.__alimentosCache;
       console.log("📦 Alimentos cargados:", alimentos.length);
     }
 
-    // Calcular equivalentes
+    // Calcular equivalentes máximos
     const numEquivalentes = obtenerMaxEquivalentes(comidas);
 
-    // Tabla de suplementación fija
+    // Suplementación
     const tablaSuplementacion = contenedor.querySelector("#Suplementacion");
 
-    // Limpiar tablas anteriores
+    // Limpiar render previo
     contenedor.querySelectorAll(".table-dieta").forEach(t => t.remove());
 
-    let notaSupplementacion = "";
+    let notaSuplementacion = "";
 
-    // ------------------------------
-    //  CREAR TABLAS
-    // ------------------------------
+    // ---------------------------------------
+    //     2. CREAR TABLAS POR CADA COMIDA
+    // ---------------------------------------
     for (const comida of Object.values(comidas)) {
 
       const tipo = capitalizar(comida.tipo_comida);
 
       if (tipo === "Suplementacion") {
-        notaSupplementacion = comida.notas || "";
+        notaSuplementacion = comida.notas || "";
         continue;
       }
 
@@ -62,10 +62,11 @@ export async function renderDieta({ data, comidas }) {
         contenedor.insertAdjacentHTML("beforeend", html);
       }
 
+      // Selección de alimentos
       const tabla = contenedor.querySelector(".table-dieta:last-of-type");
 
       if (tabla) {
-        const { renderSelectAlimentos } = await import("/src/dietas/modules/update/ui/renderAlimentos.js");
+        const { renderSelectAlimentos } = await import("/src/Plantilla/modules/update/ui/renderAlimentos.js");
 
         tabla.querySelectorAll("tbody tr").forEach(fila => {
           const catSel = fila.querySelector("select[name='select-categoria']");
@@ -73,26 +74,27 @@ export async function renderDieta({ data, comidas }) {
 
           if (!catSel || !alSel) return;
 
-          const alimentoActual = comida.alimentos.find(
-            a => capitalizar(a.categoria) === catSel.value.trim()
-          );
+   const alimentoActual = comida.alimentos.find(
+  a => a.id_alimento == alSel.dataset.id_alimento
+);
+
 
           renderSelectAlimentos(alSel, catSel.value.trim(), alimentoActual);
         });
       }
     }
 
-    // ------------------------------
-    //  SUPLEMENTACIÓN
-    // ------------------------------
+    // ---------------------------------------
+    //     3. RENDERIZAR SUPLEMENTACIÓN
+    // ---------------------------------------
     if (tablaSuplementacion) {
       const textarea = tablaSuplementacion.querySelector("textarea");
-      if (textarea) textarea.value = notaSupplementacion;
+      if (textarea) textarea.value = notaSuplementacion;
     }
 
-    // ------------------------------
-    //  CAMBIO DINÁMICO DE CATEGORÍA
-    // ------------------------------
+    // ---------------------------------------
+    //     4. CAMBIO DINÁMICO DE CATEGORÍA
+    // ---------------------------------------
     contenedor.addEventListener("change", e => {
       if (e.target.name === "select-categoria") {
         const fila = e.target.closest("tr");
@@ -105,12 +107,19 @@ export async function renderDieta({ data, comidas }) {
       }
     });
 
-    console.log("✅ Renderizado completado correctamente");
+    // ---------------------------------------
+    //     5. ACTIVAR CÁLCULO DE EQUIVALENCIAS
+    // ---------------------------------------
+    await agregarCalculoEquivalencias(contenedor);
+
+    console.log("✅ Renderizado de plantilla completado");
 
   } catch (err) {
-    console.error("❌ Error en renderDieta:", err);
+    console.error("❌ Error en renderPlantilla:", err);
   }
 }
+
+
 
 // 🔧 Función para agregar cálculo automático de equivalencias
 async function agregarCalculoEquivalencias(contenedor) {
