@@ -1,25 +1,18 @@
-function generarOpcionesAlimentos(alimentos, alimentoSeleccionado = null) {
-  let opciones = '<option value="">Alimentos</option>';
-  
-  if (!alimentos || alimentos.length === 0) {
-    return opciones;
-  }
-  
-  alimentos.forEach(alimento => {
-    const id = alimento.id_alimento;
-    const nombre = alimento.nombre;
-    const selected = alimentoSeleccionado && 
-      (id == alimentoSeleccionado.id_alimento) ? 'selected' : '';
-    
-    opciones += `<option value="${id}" ${selected}>${nombre}</option>`;
-  });
-  
-  return opciones;
+import { renderSelectAlimentos } from '/src/dietas/modules/wizard/ui/renderAlimentos.js';
+
+// 🔧 Obtener alimentos desde cache
+function obtenerAlimentosDisponibles() {
+  return window.__alimentosCache || [];
+}
+
+// 🔧 Generar opciones (solo placeholder)
+function generarOpcionesAlimentosPlaceholder() {
+  return `<option value="">Alimentos</option>`;
 }
 
 export function crearTablaVacia() {
   console.log("🏗️ Creando tabla vacía...");
-  
+
   const button = event.target;
   const btnsDiv = button.closest(".comida-btns");
   if (!btnsDiv) return;
@@ -29,12 +22,10 @@ export function crearTablaVacia() {
     console.error("❌ No se encontró tabla-container");
     return;
   }
-  
-  const alimentos = window.__alimentosCache || [];
-  
+
   const tablas = contenedorGlobal.querySelectorAll("table:not(#Suplementacion)");
   let numEquivalentes = 1;
-  
+
   if (tablas.length > 0) {
     const primeraFila = tablas[0].querySelector("thead tr:last-child");
     if (primeraFila) {
@@ -45,15 +36,13 @@ export function crearTablaVacia() {
 
   console.log(`📊 Creando tabla con ${numEquivalentes} equivalentes`);
 
-  const opcionesAlimentos = generarOpcionesAlimentos(alimentos);
-  
   const columnasEquivalentes = Array(numEquivalentes).fill(0).map((_, index) => `
     <th>Alimento ${index + 1}</th>
     <th>gr</th>
   `).join('');
 
   const categorias = ['Proteina', 'Carbohidrato', 'Grasa', 'Fruta', 'Verdura', 'Otros'];
-  
+
   const filasVacias = categorias.map(cat => `
     <tr>
       <td class="header-dieta px-1 py-0">
@@ -66,18 +55,21 @@ export function crearTablaVacia() {
           <option value="Otros" ${cat === 'Otros' ? 'selected' : ''}>Otros</option>
         </select>
       </td>
+      
       <td class="px-1 py-0">
-        <select name="select-alimentos" class="form-select form-select-sm" data-categoria="${cat}">
-          ${opcionesAlimentos}
+        <select name="select-alimentos" class="form-select form-select-sm">
+          ${generarOpcionesAlimentosPlaceholder()}
         </select>
       </td>
+
       <td class="px-1 py-0">
         <input class="form-control form-control-sm input-cantidad" type="text" value="">
       </td>
+
       ${Array(numEquivalentes).fill(0).map(() => `
         <td class="px-1 py-0">
           <select name="select-alimentos" class="form-select form-select-sm">
-            ${opcionesAlimentos}
+            ${generarOpcionesAlimentosPlaceholder()}
           </select>
         </td>
         <td class="px-1 py-0"></td>
@@ -102,7 +94,7 @@ export function crearTablaVacia() {
                 <option value="Pre-cama">Pre-cama</option>
                 <option value="Suplementacion">Suplementacion</option>
               </select>
-              <input type="time" class="form-control form-control-sm" name="cantidad-alimentos" value="08:00">
+              <input type="time" class="form-control form-control-sm" value="08:00">
             </div>
           </th>
         </tr>
@@ -113,8 +105,10 @@ export function crearTablaVacia() {
           ${columnasEquivalentes}
         </tr>
       </thead>
+
       <tbody>
         ${filasVacias}
+
         <tr>
           <td class="header-dieta px-1 py-0">Observaciones</td>
           <td colspan="${2 + (numEquivalentes * 2)}">
@@ -129,49 +123,82 @@ export function crearTablaVacia() {
   temp.innerHTML = tablaHTML;
   const nuevaTabla = temp.firstElementChild;
 
+  // Insertar tabla
   const tablaSuplementacion = contenedorGlobal.querySelector("#Suplementacion");
   const botonesGlobales = contenedorGlobal.querySelector(".comida-btns");
-  
+
   if (tablaSuplementacion) {
     contenedorGlobal.insertBefore(nuevaTabla, tablaSuplementacion);
-    console.log("✅ Tabla insertada ANTES de suplementación");
   } else if (botonesGlobales) {
     contenedorGlobal.insertBefore(nuevaTabla, botonesGlobales);
-    console.log("✅ Tabla insertada ANTES de botones");
   } else {
     contenedorGlobal.appendChild(nuevaTabla);
-    console.log("✅ Tabla añadida al final");
   }
 
+  // ✔ FILTRAR SELECTS RECIÉN CREADOS SEGÚN SU CATEGORÍA
+  console.log("🔵 Aplicando filtros a selects de nueva tabla...");
+
+  const filas = nuevaTabla.querySelectorAll("tbody tr:not(:last-child)");
+
+  filas.forEach(fila => {
+    const selectCategoria = fila.querySelector("select[name='select-categoria']");
+    const categoria = selectCategoria?.value?.trim() || null;
+
+    console.log("   ➤ Fila detectada categoría:", categoria);
+
+    const selectsAlimento = fila.querySelectorAll("select[name='select-alimentos']");
+
+    selectsAlimento.forEach(select => {
+      // limpiar
+      select.innerHTML = '<option value="">Alimentos</option>';
+      // rellenar filtrado
+      renderSelectAlimentos(select, categoria);
+    });
+
+    // listener por si cambia la categoría
+    selectCategoria.addEventListener("change", e => {
+      const nuevaCat = e.target.value.trim();
+      console.log("   🔄 Cambio categoría →", nuevaCat);
+
+      selectsAlimento.forEach(select => {
+        select.innerHTML = '<option value="">Alimentos</option>';
+        renderSelectAlimentos(select, nuevaCat);
+      });
+    });
+  });
+
+  // Recalcular equivalencias
   agregarCalculoEquivalenciasATabla(nuevaTabla);
 
   setTimeout(async () => {
     const { configurarListenersParaNuevaTabla } = await import('/src/dietas/modules/update/ui/sumaMacros.js');
     configurarListenersParaNuevaTabla();
   }, 200);
+
+  console.log("✅ Tabla creada correctamente");
 }
 
+// ----------------------------
+//  CÁLCULO DE EQUIVALENCIAS
+// ----------------------------
 async function agregarCalculoEquivalenciasATabla(tabla) {
   const { getEquivalencia } = await import('/src/dietas/modules/wizard/fetch/getEquivalencias.js');
-  
+
   const filas = tabla.querySelectorAll("tbody tr:not(:last-child)");
-  
+
   filas.forEach(fila => {
     const selectMacro = fila.querySelector("td select[name='select-categoria']");
     const inputCantidad = fila.querySelector(".input-cantidad");
-    if (!selectMacro || !inputCantidad) return;
-
     const selects = fila.querySelectorAll("select[name='select-alimentos']");
-    if (selects.length < 1) return;
+
+    if (!selectMacro || !inputCantidad || selects.length < 1) return;
 
     const selectPrincipal = selects[0];
     const equivalentes = [];
 
     for (let i = 1; i < selects.length; i++) {
       const td = selects[i].closest("td").nextElementSibling;
-      if (td) {
-        equivalentes.push({ select: selects[i], td });
-      }
+      if (td) equivalentes.push({ select: selects[i], td });
     }
 
     async function calcular() {
@@ -180,51 +207,32 @@ async function agregarCalculoEquivalenciasATabla(tabla) {
       const categoria = selectMacro.value?.toLowerCase();
 
       if (!idPrincipal || isNaN(cantidad) || !categoria) {
-        equivalentes.forEach(eq => {
-          if (eq.td.tagName === 'TD') {
-            eq.td.textContent = "";
-          }
-        });
+        equivalentes.forEach(eq => eq.td.textContent = "");
         return;
       }
 
-      equivalentes.forEach(eq => {
-        if (eq.td.tagName === 'TD') {
-          eq.td.textContent = "";
-        }
-      });
-
       for (const { select, td } of equivalentes) {
-        if (!select.value || !td) continue;
-        
+        if (!select.value) {
+          td.textContent = "";
+          continue;
+        }
+
         try {
           const eqVal = await getEquivalencia(idPrincipal, select.value, categoria, cantidad);
-          if (td.tagName === 'TD') {
-            td.textContent = eqVal !== null ? `${Math.ceil(eqVal)}` : "-";
-          }
-        } catch (error) {
-          console.error('Error calculando equivalencia:', error);
-          if (td.tagName === 'TD') {
-            td.textContent = "-";
-          }
+          td.textContent = eqVal !== null ? `${Math.ceil(eqVal)}` : "-";
+        } catch {
+          td.textContent = "-";
         }
       }
     }
 
     [selectMacro, selectPrincipal, inputCantidad].forEach(el => {
-      if (el) {
-        el.addEventListener("change", calcular);
-      }
+      el?.addEventListener("change", calcular);
     });
-    
-    if (inputCantidad) {
-      inputCantidad.addEventListener("input", calcular);
-    }
+    inputCantidad?.addEventListener("input", calcular);
 
     equivalentes.forEach(({ select }) => {
-      if (select) {
-        select.addEventListener("change", calcular);
-      }
+      select?.addEventListener("change", calcular);
     });
   });
 }
@@ -245,12 +253,8 @@ export function eliminarUltimaTabla() {
     return;
   }
 
-  console.log(`🗑️ Eliminando tabla. Había ${tablasNormales.length} tablas`);
   tablasNormales[tablasNormales.length - 1].remove();
-  
-  const tablasRestantes = contenedorGlobal.querySelectorAll("table");
-  console.log(`📊 Tablas restantes: ${tablasRestantes.length}`);
-  
+
   setTimeout(async () => {
     const { configurarListenersParaNuevaTabla } = await import('/src/dietas/modules/update/ui/sumaMacros.js');
     configurarListenersParaNuevaTabla();

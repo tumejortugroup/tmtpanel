@@ -2,34 +2,43 @@
 
 import { getAlimentos } from '/src/dietas/modules/plantilla/fetch/getAlimentos.js';
 
-export async function renderSelectAlimentos(selectId) {
+export async function renderSelectAlimentos(selectElementOrName, categoria = null) {
   try {
-    // Cachear alimentos en window
-    if (!window.__alimentosCache) {
-      const alimentos = await getAlimentos();
 
-      if (!Array.isArray(alimentos)) {
-        throw new Error("La respuesta del backend no es una lista.");
-      }
+    // Aceptar directamente un <select> DOM o un string name=""
+    let selects = [];
 
-      window.__alimentosCache = alimentos;
+    if (typeof selectElementOrName === "string") {
+      selects = document.querySelectorAll(`select[name='${selectElementOrName}']`);
+    } else {
+      selects = [selectElementOrName];
     }
 
-    const alimentos = window.__alimentosCache;
+    console.log("🔵 Render alimentos → Categoría:", categoria);
 
-    const selects = document.querySelectorAll(`select[name='${selectId}']`);
-    
-    selects.forEach(select => {
-      // ⚡ Solo rellenamos si está vacío (solo tiene el placeholder)
-      if (select.options.length > 1) return;
+    let alimentos = [];
 
-      // Asegurar placeholder
-      if (select.options.length === 0) {
-        const placeholder = document.createElement("option");
-        placeholder.value = "";
-        placeholder.textContent = "Seleccionar";
-        select.appendChild(placeholder);
+    if (!categoria) {
+      console.log("🟡 Sin categoría: usar cache general");
+      if (!window.__alimentosCache) {
+        window.__alimentosCache = await getAlimentos();
       }
+      alimentos = window.__alimentosCache;
+    } else {
+      console.log("🟢 Con categoría:", categoria, "→ cargar filtrados");
+      alimentos = await getAlimentos(categoria);
+    }
+
+    selects.forEach(select => {
+
+      console.log("🔽 Rellenando select:", select);
+
+      // Limpiar y reponer placeholder
+      select.innerHTML = "";
+      const placeholder = document.createElement("option");
+      placeholder.value = "";
+      placeholder.textContent = "Seleccionar";
+      select.appendChild(placeholder);
 
       alimentos.forEach(alimento => {
         const option = document.createElement("option");
@@ -37,8 +46,11 @@ export async function renderSelectAlimentos(selectId) {
         option.textContent = alimento.nombre;
         select.appendChild(option);
       });
+
+      console.log("✅ Select filtrado con", alimentos.length, "alimentos");
     });
+
   } catch (error) {
     console.error("❌ Error al renderizar alimentos:", error);
   }
-}
+};

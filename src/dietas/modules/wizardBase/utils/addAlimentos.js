@@ -108,71 +108,87 @@ export async function addColumns() {
   const alimentos = obtenerAlimentosDisponibles();
 
   tables.forEach(table => {
+
     const headerRow = table.querySelector("thead tr:last-child");
     if (!headerRow) return;
 
     const currentCols = headerRow.children.length;
-    if (currentCols >= 21) {
-      console.warn("⚠️ Ya hay el máximo de columnas (9 equivalencias)");
-      return;
+    if (currentCols >= 21) return;
+
+    // ---------------------------------------
+    // ⭐️ CORRECCIÓN → ACTUALIZAR TODOS LOS COLSPAN
+    // ---------------------------------------
+
+    // 1️⃣ PRIMERA FILA DEL THEAD (colspan del título)
+    const theadTop = table.querySelector("thead tr:first-child th[colspan]");
+    if (theadTop) {
+      const colspan = parseInt(theadTop.getAttribute("colspan")) || currentCols;
+      theadTop.setAttribute("colspan", colspan + 2);
     }
 
-    // 🔥 ACTUALIZAR COLSPAN ANTES DE AÑADIR COLUMNAS
-    // 1. Primera fila del thead (donde está el select de tipo de comida)
-    const firstHeaderTh = table.querySelector("thead tr:first-child th[colspan]");
-    if (firstHeaderTh) {
-      const colspanActual = parseInt(firstHeaderTh.getAttribute("colspan")) || currentCols;
-      firstHeaderTh.setAttribute("colspan", colspanActual + 2);
+    // 2️⃣ FILA DE OBSERVACIONES (última del tbody)
+    const observaciones = table.querySelector("tbody tr:last-child td[colspan]");
+    if (observaciones) {
+      const colspanBody = parseInt(observaciones.getAttribute("colspan")) || (currentCols - 1);
+      observaciones.setAttribute("colspan", colspanBody + 2);
     }
 
-    // 2. Fila de observaciones en tbody
-    const observacionesTd = table.querySelector("tbody tr:last-child td[colspan]");
-    if (observacionesTd) {
-      const colspanActual = parseInt(observacionesTd.getAttribute("colspan")) || (currentCols - 1);
-      observacionesTd.setAttribute("colspan", colspanActual + 2);
-    }
-
-    // Calcular el número de equivalencia
-    const numEquivalentes = Math.floor((currentCols - 3) / 2) + 1;
-
-    // --- Añadir cabeceras ---
+    // ---------------------------------------
+    //   AÑADIR NUEVAS CABECERAS
+    // ---------------------------------------
     const thEq = document.createElement("th");
-    thEq.textContent = `Alimento ${numEquivalentes}`;
+    thEq.textContent = "Alimento";
     headerRow.appendChild(thEq);
 
     const thCantidad = document.createElement("th");
-    thCantidad.textContent = "gr";
+    thCantidad.textContent = "Gr";
     headerRow.appendChild(thCantidad);
 
-    // --- Añadir celdas en cada fila del tbody ---
+    // ---------------------------------------
+    //   AÑADIR COLUMNAS EN CADA FILA
+    // ---------------------------------------
     const bodyRows = table.querySelectorAll("tbody tr");
-    bodyRows.forEach(row => {
-      if (row.querySelector("textarea")) return;
 
+    bodyRows.forEach(row => {
+      if (row.querySelector("textarea")) return; // Saltar fila de Observaciones
+
+      // --- crear TD alimento ---
       const tdEq = document.createElement("td");
       tdEq.classList.add("px-1", "py-0");
+
       const select = document.createElement("select");
       select.name = "select-alimentos";
       select.classList.add("form-select", "form-select-sm");
-      select.innerHTML = generarOpcionesAlimentos(alimentos);
+
+      // ⭐️ DETECTAR LA CATEGORÍA DE ESTA FILA
+      const selectCategoria = row.querySelector("select[name='select-categoria']");
+      const categoria = selectCategoria?.value?.trim() || null;
+
+      console.log("🟦 NUEVA COLUMNA → CATEGORÍA DETECTADA:", categoria);
+
+      // ⭐️ RELLENAR EL SELECT POR CATEGORÍA
+      renderSelectAlimentos(select, categoria);
+
       tdEq.appendChild(select);
 
+      // --- crear TD gramos ---
       const tdCantidad = document.createElement("td");
       tdCantidad.classList.add("px-1", "py-0");
       tdCantidad.textContent = "";
 
+      // insertar al final
       row.appendChild(tdEq);
       row.appendChild(tdCantidad);
     });
   });
 
-  // 👇 IMPORTANTE: Limpiar marca de eventos y reaplicar
-  const todasLasFilas = document.querySelectorAll(".table-dieta tbody tr:not(:last-child)");
-  todasLasFilas.forEach(fila => {
-    fila.dataset.eventosAgregados = 'false';
-  });
+  // ---------------------------------------
+  //   REENGANCHAR EVENTOS DE EQUIVALENCIA
+  // ---------------------------------------
+  const filas = document.querySelectorAll(".table-dieta tbody tr:not(:last-child)");
+  filas.forEach(fila => (fila.dataset.eventosAgregados = "false"));
 
-  for (const fila of todasLasFilas) {
+  for (const fila of filas) {
     await agregarEventosEquivalenciaFila(fila);
   }
 }

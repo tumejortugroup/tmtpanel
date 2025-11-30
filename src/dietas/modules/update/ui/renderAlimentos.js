@@ -1,44 +1,81 @@
-
-
+// src/dietas/modules/update/ui/renderAlimentos.js
 import { getAlimentos } from '/src/dietas/modules/update/fetch/getAlimentos.js';
 
-export async function renderSelectAlimentos(selectId) {
+export async function renderSelectAlimentos(selectOrName, categoria = null) {
   try {
-    // Cachear alimentos en window
+
+    // 🟦 Cache global
     if (!window.__alimentosCache) {
       const alimentos = await getAlimentos();
-
-      if (!Array.isArray(alimentos)) {
-        throw new Error("La respuesta del backend no es una lista.");
-      }
-
+      if (!Array.isArray(alimentos)) throw new Error("Formato inválido del backend.");
       window.__alimentosCache = alimentos;
     }
 
     const alimentos = window.__alimentosCache;
 
-    const selects = document.querySelectorAll(`select[name='${selectId}']`);
-    
-    selects.forEach(select => {
-      // ⚡ Solo rellenamos si está vacío (solo tiene el placeholder)
-      if (select.options.length > 1) return;
+    // 🟦 Normalizar selects
+    let selects = [];
 
-      // Asegurar placeholder
-      if (select.options.length === 0) {
-        const placeholder = document.createElement("option");
-        placeholder.value = "";
-        placeholder.textContent = "Seleccionar";
-        select.appendChild(placeholder);
+    // Caso 1 → me pasan un <select>
+    if (selectOrName instanceof HTMLElement) {
+      selects = [selectOrName];
+    }
+
+    // Caso 2 → me pasan un string: "select-alimentos"
+    else if (typeof selectOrName === "string") {
+      selects = document.querySelectorAll(`select[name='${selectOrName}']`);
+    }
+
+    // Caso incorrecto
+    else {
+      console.warn("renderSelectAlimentos: parámetro inválido:", selectOrName);
+      return;
+    }
+
+    selects.forEach(select => {
+
+      // Seguridad extra → evitar crash si es un objeto raro
+      if (!(select instanceof HTMLSelectElement)) {
+        console.warn("⚠ Select inválido ignorado:", select);
+        return;
       }
 
-      alimentos.forEach(alimento => {
+      // 🟦 Limpiar select
+      select.innerHTML = "";
+
+      // Placeholder
+      const placeholder = document.createElement("option");
+      placeholder.value = "";
+      placeholder.textContent = "Seleccionar";
+      select.appendChild(placeholder);
+
+      // 🟦 Filtrar alimentos según categoría
+      let lista = alimentos;
+
+      if (categoria) {
+        const cat = categoria.toLowerCase();
+        lista = alimentos.filter(a => a.categoria?.toLowerCase() === cat);
+
+        console.log(
+          `🔎 Filtrando categoría (${categoria}) → ${lista.length} alimentos`
+        );
+      }
+
+      // Si categoría vacía o sin coincidencias → todos
+      if (!categoria || lista.length === 0) {
+        lista = alimentos;
+      }
+
+      // Añadir alimentos al select
+      lista.forEach(alimento => {
         const option = document.createElement("option");
         option.value = alimento.id_alimento;
         option.textContent = alimento.nombre;
         select.appendChild(option);
       });
     });
+
   } catch (error) {
-    console.error("❌ Error al renderizar alimentos:", error);
+    console.error("❌ Error renderizando alimentos:", error);
   }
 }

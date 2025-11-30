@@ -19,16 +19,17 @@ function borrarComidasDeDieta(data) {
   const dataArray = Array.isArray(data) ? data : [data];
   const ids = dataArray.map(item => item.id_comida).filter(id => id);
   const idsUnicas = [...new Set(ids)];
-  
+
   if (idsUnicas.length === 0) {
     console.warn('⚠️ No hay IDs de comidas para borrar');
     return Promise.resolve();
   }
-  
+
   return eliminarComidas(idsUnicas);
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+
   const params = new URLSearchParams(window.location.search);
   const idDieta = params.get("id_dieta");
   const idPlantilla = params.get("id_plantilla");
@@ -39,180 +40,181 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  // --- Captura del segundo botón "Ver Control" ---
-const btnControl2 = document.querySelector('.btn-ver-control');
+  // -------------------------------------------
+  // BOTÓN VER CONTROL
+  // -------------------------------------------
 
-if (btnControl2 && idDato) {
+  const btnControl2 = document.querySelector('.btn-ver-control');
 
-  btnControl2.addEventListener('click', async () => {
-    try {
-      console.log('🔍 Obteniendo id_usuario desde id_dato:', idDato);
+  if (btnControl2 && idDato) {
 
-      const detalle = await obtenerDetalleDato();
-      const idUsuario = detalle?.data?.id_usuario;
+    btnControl2.addEventListener('click', async () => {
+      try {
+        console.log('🔍 Obteniendo id_usuario desde id_dato:', idDato);
+        const detalle = await obtenerDetalleDato();
+        const idUsuario = detalle?.data?.id_usuario;
 
-      if (!idUsuario) {
-        throw new Error('No se encontró id_usuario en los detalles del dato');
+        if (!idUsuario) throw new Error('No se encontró id_usuario');
+
+        window.open(
+          `/dashboard/controles/informe.html?id_usuario=${idUsuario}&id_dato=${idDato}`,
+          '_blank'
+        );
+
+      } catch (error) {
+        console.error('❌ Error:', error);
+        await mostrarErrorGuardado({
+          title: 'Error al acceder al control',
+          message: 'No se pudo obtener la información del usuario.',
+          errorDetails: error.message
+        });
       }
+    });
 
-      console.log('✅ ID Usuario obtenido:', idUsuario);
+  } else if (btnControl2) {
+    btnControl2.disabled = true;
+    btnControl2.title = 'No hay datos disponibles';
+    btnControl2.style.opacity = '0.5';
+    btnControl2.style.cursor = 'not-allowed';
+  }
 
-      // MISMA RUTA QUE TU FUNCIÓN ORIGINAL
-      window.open(`/dashboard/controles/informe.html?id_usuario=${idUsuario}&id_dato=${idDato}`, '_blank');
+  // -------------------------------------------
+  // BOTONES AÑADIR / QUITAR ALIMENTOS
+  // -------------------------------------------
 
-    } catch (error) {
-      console.error('❌ Error:', error);
-
-      await mostrarErrorGuardado({
-        title: 'Error al acceder al control',
-        message: 'No se pudo obtener la información del usuario para mostrar el control.',
-        errorDetails: error.message,
-        primaryButtonText: 'Entendido',
-        secondaryButtonText: null
-      });
-    }
-  });
-
-} else if (btnControl2 && !idDato) {
-
-  btnControl2.disabled = true;
-  btnControl2.title = 'No hay datos de control disponibles';
-  btnControl2.style.opacity = '0.5';
-  btnControl2.style.cursor = 'not-allowed';
-
-}
-
-
-  // BOTONES DE AÑADIR COMIDA Y ALIMENTOS
   document.getElementById("btn-add-column")?.addEventListener("click", addColumns);
   document.getElementById("btn-remove-column")?.addEventListener("click", removeColumns);
+
   window.crearTablaVacia = crearTablaVacia;
   window.eliminarUltimaTabla = eliminarUltimaTabla;
 
   await ejecutarAutoAjuste(idDieta);
-  await tablaAlimentos();
   await cargarPlantillasCentro();
+
+  // -------------------------------------------
+  // CARGA DE DATOS
+  // -------------------------------------------
 
   let dataDieta;
   let dataComidas;
   let comidas;
-  let dataOriginalDestino; // Para guardar los datos originales de la dieta
+  let dataOriginalDestino;
 
-  // Detectar si hay plantilla seleccionada
   if (idPlantilla) {
-    console.log('🔹 MODO: Cargar plantilla en dieta existente');
-    console.log('📊 Macros y datos desde dieta:', idDieta);
-    console.log('🍽️ Comidas desde plantilla:', idPlantilla);
-    
+
+    console.log('🔹 MODO PLANTILLA → cargando plantilla en dieta');
+
     dataDieta = await getDieta(idDieta);
-    
-    if (!dataDieta) {
-      console.error('❌ No se pudo cargar la dieta');
+    if (!dataDieta) return;
 
-      return;
-    }
-
-    // Guardar datos originales para el borrado
     dataOriginalDestino = dataDieta;
-    
-    dataComidas = await getPlantilla(idPlantilla);
-    
-    if (!dataComidas) {
-      console.error('❌ No se pudo cargar la plantilla');
 
-      return;
-    }
-    
+    dataComidas = await getPlantilla(idPlantilla);
+    if (!dataComidas) return;
+
     comidas = agruparPorComida(dataComidas);
-    
-    await renderPlantilla({ 
+
+    await renderPlantilla({
       data: dataComidas,
       comidas
     });
-    
+
   } else {
-    console.log('🔹 MODO: Cargar dieta normal');
-    console.log('📊 Todo desde dieta:', idDieta);
-    
+
+    console.log('🔹 MODO DIETA → cargando dieta normal');
+
     dataDieta = await getDieta(idDieta);
-    
-    if (!dataDieta) {
-      console.error('❌ No se pudo cargar la dieta');
+    if (!dataDieta) return;
 
-      return;
-    }
-
-    // Guardar datos originales para el borrado
     dataOriginalDestino = dataDieta;
-    
+
     const dataArray = Array.isArray(dataDieta) ? dataDieta : [dataDieta];
-    
     comidas = agruparPorComida(dataArray);
-    
-    await renderDieta({ 
+
+    await renderDieta({
       data: dataArray,
-      comidas 
+      comidas
     });
   }
 
+  // -------------------------------------------
+  // EJECUTAR tablaAlimentos DESPUÉS DEL RENDER
+  // -------------------------------------------
+
+  setTimeout(async () => {
+    console.log("⏳ Ejecutando tablaAlimentos después del render...");
+    await tablaAlimentos();
+  }, 80);
+
+  // -------------------------------------------
+  // SUMA DE MACROS
+  // -------------------------------------------
+
+  setTimeout(async () => {
+    const { prepararSumaMacros } =
+      await import('/src/dietas/modules/update/ui/sumaMacros.js');
+
+    console.log("🔄 Configurando suma de macros…");
+    await prepararSumaMacros();
+  }, 200);
+
+  // -------------------------------------------
+  // GUARDAR DIETA
+  // -------------------------------------------
+
   document.getElementById("guardar-dieta-btn").addEventListener("click", async () => {
+
     const result = await mostrarConfirmacionGuardado({
-      title: idPlantilla ? '¿Aplicar plantilla a la dieta?' : '¿Guardar cambios?',
-      message: idPlantilla 
-        ? 'Se reemplazarán las comidas actuales de la dieta con las de la plantilla seleccionada.'
+      title: idPlantilla ? '¿Aplicar plantilla?' : '¿Guardar cambios?',
+      message: idPlantilla
+        ? 'Se reemplazarán las comidas actuales con las de la plantilla.'
         : 'Se guardarán los cambios realizados en la dieta.'
     });
-    
-    if (result.confirmed) {
-      const { progressController } = result;
-      
-      try {
-        // Borrar las comidas existentes en la dieta destino
-        console.log("🗑️ Borrando comidas existentes de dieta destino:", idDieta);
-        
-        if (dataOriginalDestino && Array.isArray(dataOriginalDestino) && dataOriginalDestino.length > 0) {
-          await borrarComidasDeDieta(dataOriginalDestino);
-        } else if (dataOriginalDestino) {
-          await borrarComidasDeDieta([dataOriginalDestino]);
-        }
-        progressController.updateProgress(33);
-        
-        // Actualizar información de la dieta (nombre, descripción, macros)
-        console.log("📝 Actualizando información de dieta:", idDieta);
-        await actualizarDieta();
-        progressController.updateProgress(66);
-        
-        // Guardar las nuevas comidas (las que están en pantalla)
-        console.log("💾 Guardando nuevas comidas en dieta:", idDieta);
-        await guardarDietaCompleta();
-        progressController.updateProgress(100);
-        
-        progressController.complete();
-        
-        // Recargar la página sin id_plantilla para ver los cambios guardados
-        if (idPlantilla) {
-          setTimeout(() => {
-            window.location.href = `/dashboard/dietas/wizardUpdatePlantilla.html?id_dieta=${idDieta}&id_dato=${idDato || ''}`;
-          }, 1500);
-        }
-        
-      } catch (error) {
-        progressController.close();
-        
-        const errorResult = await mostrarErrorGuardado({
-          title: 'Error al guardar',
-          message: idPlantilla 
-            ? 'No se pudo aplicar la plantilla a la dieta.'
-            : 'No se pudieron guardar los cambios en la dieta.',
-          errorDetails: error.stack,
-          primaryButtonText: 'Reintentar',
-          secondaryButtonText: null
-        });
-        
-        if (errorResult.retry) {
-          document.getElementById("guardar-dieta-btn").click();
-        }
+
+    if (!result.confirmed) return;
+
+    const { progressController } = result;
+
+    try {
+
+      console.log("🗑️ Borrando comidas existentes…");
+      await borrarComidasDeDieta(dataOriginalDestino);
+      progressController.updateProgress(33);
+
+      console.log("📝 Actualizando información general…");
+      await actualizarDieta();
+      progressController.updateProgress(66);
+
+      console.log("💾 Guardando nuevas comidas…");
+      await guardarDietaCompleta();
+      progressController.updateProgress(100);
+
+      progressController.complete();
+
+      if (idPlantilla) {
+        setTimeout(() => {
+          window.location.href =
+            `/dashboard/dietas/wizardUpdatePlantilla.html?id_dieta=${idDieta}&id_dato=${idDato || ''}`;
+        }, 1500);
+      }
+
+    } catch (error) {
+
+      progressController.close();
+
+      const errorResult = await mostrarErrorGuardado({
+        title: 'Error al guardar',
+        message: idPlantilla
+          ? 'No se pudo aplicar la plantilla.'
+          : 'No se pudieron guardar los cambios.',
+        errorDetails: error.stack,
+        primaryButtonText: 'Reintentar'
+      });
+
+      if (errorResult.retry) {
+        document.getElementById("guardar-dieta-btn").click();
       }
     }
   });
+
 });

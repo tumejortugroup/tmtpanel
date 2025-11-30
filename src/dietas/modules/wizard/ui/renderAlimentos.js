@@ -1,44 +1,105 @@
+// ===========================================================
+//  renderAlimentos.js — versión COMPLETA y CORREGIDA
+// ===========================================================
 
+import { getAlimentos } from "/src/dietas/modules/wizard/fetch/getAlimentos.js";
 
-import { getAlimentos } from '/src/dietas/modules/wizard/fetch/getAlimentos.js';
+let alimentosCache = [];
 
-export async function renderSelectAlimentos(selectId) {
-  try {
-    // Cachear alimentos en window
-    if (!window.__alimentosCache) {
-      const alimentos = await getAlimentos();
+// ===========================================================
+// 🔵 Cargar alimentos una sola vez
+// ===========================================================
+async function cargarAlimentos() {
+    if (alimentosCache.length > 0) return alimentosCache;
 
-      if (!Array.isArray(alimentos)) {
-        throw new Error("La respuesta del backend no es una lista.");
-      }
+    alimentosCache = await getAlimentos();
+    console.log("🟦 Cache alimentos cargado:", alimentosCache.length);
 
-      window.__alimentosCache = alimentos;
+    return alimentosCache;
+}
+
+// ===========================================================
+// 🟣 Detectar categoría REAL desde la fila
+// ===========================================================
+function detectarCategoria(select, categoriaManual) {
+    let categoriaDetectada = categoriaManual || null;
+
+    const fila = select.closest("tr");
+    if (!fila) return null;
+
+    // 1️⃣ Si viene pasada manualmente (addColumns)
+    if (categoriaDetectada) return categoriaDetectada;
+
+    // 2️⃣ Si existe un select HTML real
+    const selectCategoria = fila.querySelector("select[name='select-categoria']");
+    if (selectCategoria) {
+        categoriaDetectada = selectCategoria.value?.trim();
+        if (categoriaDetectada) return categoriaDetectada;
     }
 
-    const alimentos = window.__alimentosCache;
+    // 3️⃣ Si la fila tiene un atributo data-categoria
+    if (fila.dataset.categoria) {
+        return fila.dataset.categoria.trim();
+    }
 
-    const selects = document.querySelectorAll(`select[name='${selectId}']`);
-    
-    selects.forEach(select => {
-      // ⚡ Solo rellenamos si está vacío (solo tiene el placeholder)
-      if (select.options.length > 1) return;
+    // 4️⃣ Si la celda del macro tiene data-categoria
+    const macroData = fila.querySelector("[data-categoria]");
+    if (macroData) {
+        return macroData.dataset.categoria.trim();
+    }
 
-      // Asegurar placeholder
-      if (select.options.length === 0) {
-        const placeholder = document.createElement("option");
-        placeholder.value = "";
-        placeholder.textContent = "Seleccionar";
-        select.appendChild(placeholder);
-      }
+    // 5️⃣ Último recurso → leer texto del macro (Proteína, Grasa…)
+    const tdMacro = fila.querySelector("td.header-dieta");
+    if (tdMacro) {
+        const txt = tdMacro.textContent.trim();
+        if (txt) return txt;
+    }
 
-      alimentos.forEach(alimento => {
-        const option = document.createElement("option");
-        option.value = alimento.id_alimento;
-        option.textContent = alimento.nombre;
-        select.appendChild(option);
-      });
-    });
-  } catch (error) {
-    console.error("❌ Error al renderizar alimentos:", error);
-  }
+    return null;
+}
+
+// ===========================================================
+// 🟡 Filtrar alimentos por categoría
+// ===========================================================
+function filtrarPorCategoria(alimentos, categoria) {
+    if (!categoria) return alimentos;
+
+    const cat = categoria.toLowerCase();
+
+    const filtrados = alimentos.filter(a =>
+        a.categoria?.toLowerCase() === cat
+    );
+
+    console.log(`🔎 Filtrando por categoría: ${categoria}  →  ${filtrados.length}  alimentos`);
+    return filtrados;
+}
+
+// ===========================================================
+// 🟢 Llenar un select concreto
+// ===========================================================
+export async function renderSelectAlimentos(select, categoriaManual = null) {
+    const alimentos = await cargarAlimentos();
+
+    // Detectar categoría real
+    const categoria = detectarCategoria(select, categoriaManual);
+
+    // Filtrar alimentos
+    const alimentosFiltrados = filtrarPorCategoria(alimentos, categoria);
+
+    // Renderizar opciones
+    select.innerHTML = `<option value="">Seleccionar</option>` +
+        alimentosFiltrados
+            .map(a => `<option value="${a.id_alimento}">${a.nombre}</option>`)
+            .join("");
+}
+
+// ===========================================================
+// 🟩 Rellenar TODOS los selects
+// ===========================================================
+export async function renderSelectAlimentosGlobal(selector = "select[name='select-alimentos']") {
+    const selects = document.querySelectorAll(selector);
+
+    for (const select of selects) {
+        await renderSelectAlimentos(select);
+    }
 }
