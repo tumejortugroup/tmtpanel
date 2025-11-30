@@ -1,11 +1,9 @@
 import { renderSelectAlimentos } from '/src/dietas/modules/wizard/ui/renderAlimentos.js';
 
-// 🔧 Obtener alimentos desde cache
 function obtenerAlimentosDisponibles() {
   return window.__alimentosCache || [];
 }
 
-// 🔧 Generar opciones (solo placeholder)
 function generarOpcionesAlimentosPlaceholder() {
   return `<option value="">Alimentos</option>`;
 }
