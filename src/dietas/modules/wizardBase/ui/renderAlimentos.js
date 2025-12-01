@@ -22,7 +22,7 @@ export async function renderSelectAlimentos(selectOrName, categoria = null, alim
 
     selects.forEach(select => {
 
-      // 🔥🔥🔥 LA LÍNEA QUE SALVA TODO 🔥🔥🔥
+
       if (select.options.length > 1) return;
 
       // Asegurar placeholder

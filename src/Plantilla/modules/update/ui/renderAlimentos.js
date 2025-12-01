@@ -44,7 +44,7 @@ export async function renderSelectAlimentos(
     // ===========================
     // PROCESAR CADA SELECT
     // ===========================
-    selects.forEach(select => {
+        selects.forEach(select => {
 
       if (!(select instanceof HTMLSelectElement)) {
         console.warn("⚠ Ignorando un select que NO es HTMLSelectElement:", select);
@@ -55,8 +55,16 @@ export async function renderSelectAlimentos(
       console.log("🎯 Procesando SELECT:", select);
       console.log("---------------------------------------------------");
 
-      // Resetear
+      // ⛔ LÓGICA IDENTICA AL UPDATE
+      // Si el select ya tiene opciones → NO volver a renderizarlo
+      if (select.options.length > 1) {
+        console.log("⛔ Select ya inicializado → no se repinta:", select);
+        return;
+      }
+
+      // Inicializar con placeholder
       select.innerHTML = '<option value="">Seleccionar</option>';
+
 
       // ===========================
       // FILTRADO POR CATEGORIA

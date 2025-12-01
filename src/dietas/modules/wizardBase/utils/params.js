@@ -5,7 +5,7 @@ export function obtenerIdDietaDesdeUrl() {
 }
 
 
-/***Captar control de la URL */
+
 
 export function obtenerDatoDesdeUrl() {
   const params = new URLSearchParams(window.location.search);

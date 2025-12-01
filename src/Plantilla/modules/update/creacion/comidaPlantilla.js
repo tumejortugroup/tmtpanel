@@ -1,4 +1,4 @@
-import { obtenerIdDietaDesdeUrl } from '/src/dietas/modules/update/utils/params.js';
+import { obtenerIdPlantillaDesdeUrl } from '/src/Plantilla/modules/update/utils/params.js';
 
 export async function asociarComidasAPlantilla(id_plantilla, idsComidas) {
 

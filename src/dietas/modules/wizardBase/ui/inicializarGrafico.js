@@ -20,8 +20,8 @@ export function inicializarGrafico() {
       }]
     },
     options: {
-    responsive: false, // 👈 importante
-    maintainAspectRatio: false, // 👈 permite tamaño libre
+    responsive: false, 
+    maintainAspectRatio: false, 
     plugins: {
       legend: { position: 'top' },
       datalabels: {
