@@ -32,11 +32,81 @@
 
       <!-- Boostrap Icons -->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
 
      
       
   </head>
+  <style>
+/* --- Evitar que la tabla recorte el menú --- */
+.table-responsive {
+    overflow: visible !important;
+}
+
+table {
+    overflow: visible !important;
+}
+
+td {
+    overflow: visible !important;
+    position: relative;
+}
+
+/* --- Contenedor del menú --- */
+.menu-acciones {
+    position: relative;
+    display: inline-block;
+}
+
+/* --- Botón de los tres puntos --- */
+.btn-acciones {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* --- El menú desplegable --- */
+.acciones-lista {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 5px 0;
+    min-width: 150px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 999999 !important;
+
+    /* 🔥 ESTO ES LO QUE HACE QUE LOS BOTONES SE ALINEEN VERTICALMENTE */
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* --- Estilos de cada botón del menú --- */
+.accion-item {
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.accion-item:hover {
+    background: #f2f2f2;
+}
+
+/* --- Ocultar menú --- */
+.oculto {
+    display: none;
+}
+
+
+  </style>
   <body class="  ">
 
 

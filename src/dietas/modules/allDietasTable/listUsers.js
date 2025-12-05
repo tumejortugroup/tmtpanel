@@ -76,21 +76,22 @@ export async function listUser() {
           <td>
 
          <div class="flex align-items-center list-user-action justify-content-center">
-          <div class="dropdown">
-            <button class="btn btn-sm btn-icon" type="button" id="" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-three-dots-vertical"></i>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="">
-              <li><button class="dropdown-item btn-ver-control">Ver Control</button></li>
-              <li><button class="dropdown-item btn-ver-dieta">Ver Dieta</button></li>
-              <li><button class="dropdown-item btn-editar-dieta">Editar Dieta</button></li>
-              <li><button class="dropdown-item btn-eliminar">Eliminar Dieta</button></li>
-            </ul>
+         <div class="menu-acciones">
+            <button class="btn-acciones">⋮</button>
+
+            <div class="acciones-lista oculto">
+              <button class="accion-item btn-ver-control">Ver Control</button>
+              <button class="accion-item btn-ver-dieta">Ver Dieta</button>
+              <button class="accion-item btn-editar-dieta">Editar Dieta</button>
+              <button class="accion-item btn-eliminar">Eliminar Dieta</button>
+            </div>
           </div>
+
         </div>
 
+
           
-            
+    
           </td>
         </tr>
       `;

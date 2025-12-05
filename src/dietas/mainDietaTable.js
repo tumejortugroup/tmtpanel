@@ -11,3 +11,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 
+document.addEventListener("click", function(e) {
+  if (e.target.classList.contains("btn-acciones")) {
+    const menu = e.target.nextElementSibling;
+    menu.classList.toggle("oculto");
+  } else {
+    document.querySelectorAll(".acciones-lista").forEach(m => m.classList.add("oculto"));
+  }
+});

@@ -20,44 +20,40 @@ export function asignarEventoSelectDieta(rowElement, token) {
         if (fechaDatoTd) fechaDatoTd.textContent = data.fecha_creacion?.split(' ')[0] || '—';
       }
 
-      // 🔗 Actualizar botones directos
-      const verBtn = rowElement.querySelector('.list-user-action:last-child .btn-ver-dieta');
-      if (verBtn) verBtn.href = `/dashboard/dietas/dieta.html?id_dieta=${idDieta}`;
+      /* ------------------------------------------
+         🔗 ACTUALIZAR BOTONES DEL NUEVO MENÚ
+      ------------------------------------------- */
 
-      const editarBtn = rowElement.querySelector('.list-user-action:last-child .btn-editar-dieta');
-      if (editarBtn) editarBtn.href = `/dashboard/dietas/wizardUpdate.html?id_dieta=${idDieta}&id_dato=${data?.id_dato || ""}`;
-
-      // 🔗 Actualizar botones del dropdown
-      const dropdownVerControl = rowElement.querySelector('.dropdown-menu .btn-ver-control');
-      if (dropdownVerControl) {
-        dropdownVerControl.onclick = () => {
-          // Obtener el id_usuario de la fila
-          const idUsuario = rowElement.querySelector('[data-id-usuario]')?.dataset.idUsuario || 
-                            rowElement.dataset.idUsuario || 
-                            rowElement.querySelector('td:first-child')?.textContent.trim();
-          
+      // Botón "Ver Control"
+      const btnVerControl = rowElement.querySelector('.acciones-lista .btn-ver-control');
+      if (btnVerControl) {
+        btnVerControl.onclick = () => {
+          const idUsuario = rowElement.dataset.idUsuario;
           window.location.href = `/dashboard/controles/informe.html?id_usuario=${idUsuario}&id_dato=${data?.id_dato || ""}`;
         };
       }
 
-      const dropdownVerDieta = rowElement.querySelector('.dropdown-menu .btn-ver-dieta');
-      if (dropdownVerDieta) {
-        dropdownVerDieta.onclick = () => {
+      // Botón "Ver Dieta"
+      const btnVerDieta = rowElement.querySelector('.acciones-lista .btn-ver-dieta');
+      if (btnVerDieta) {
+        btnVerDieta.onclick = () => {
           window.location.href = `/dashboard/dietas/dieta.html?id_dieta=${idDieta}`;
         };
       }
 
-      const dropdownEditarDieta = rowElement.querySelector('.dropdown-menu .btn-editar-dieta');
-      if (dropdownEditarDieta) {
-        dropdownEditarDieta.onclick = () => {
+      // Botón "Editar Dieta"
+      const btnEditarDieta = rowElement.querySelector('.acciones-lista .btn-editar-dieta');
+      if (btnEditarDieta) {
+        btnEditarDieta.onclick = () => {
           window.location.href = `/dashboard/dietas/wizardUpdate.html?id_dieta=${idDieta}&id_dato=${data?.id_dato || ""}`;
         };
       }
 
-      const dropdownEliminar = rowElement.querySelector('.dropdown-menu .btn-eliminar');
-      if (dropdownEliminar) {
-        dropdownEliminar.setAttribute('data-id', idDieta);
-        dropdownEliminar.setAttribute('data-nombre', data?.nombre_dato || 'Dieta');
+      // Botón "Eliminar Dieta"
+      const btnEliminar = rowElement.querySelector('.acciones-lista .btn-eliminar');
+      if (btnEliminar) {
+        btnEliminar.setAttribute('data-id', idDieta);
+        btnEliminar.setAttribute('data-nombre', data?.nombre_dato || 'Dieta');
       }
 
     } catch (err) {
@@ -65,6 +61,7 @@ export function asignarEventoSelectDieta(rowElement, token) {
     }
   }
 
+  // Cuando cambia el select → actualizar info
   selectDieta.addEventListener('change', e => {
     const idDieta = e.target.value;
     if (idDieta) {
@@ -75,8 +72,9 @@ export function asignarEventoSelectDieta(rowElement, token) {
       if (nombreDatoTd) nombreDatoTd.textContent = '—';
       if (fechaDatoTd) fechaDatoTd.textContent = '—';
 
-      const dropdownBtns = rowElement.querySelectorAll('.dropdown-menu button');
-      dropdownBtns.forEach(btn => btn.onclick = null);
+      // Desactivar botones
+      const buttons = rowElement.querySelectorAll('.acciones-lista button');
+      buttons.forEach(btn => btn.onclick = null);
     }
   });
 }
