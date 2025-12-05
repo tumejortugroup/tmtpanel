@@ -43,7 +43,7 @@ export async function listClientes() {
                 <tr>
                     <td>${usuario.centro}</td>
                     <td>
-                        <span class="badge ${usuario.estado?.toLowerCase() === 'activo' ? 'bg-success' : 'bg-secondary'} badge-estado" data-nombre="${usuario.nombre}">
+                        <span style="cursor: pointer;" class="badge ${usuario.estado?.toLowerCase() === 'activo' ? 'bg-success' : 'bg-secondary'} badge-estado" data-nombre="${usuario.nombre}">
                             ${usuario.estado}
                         </span>
 
