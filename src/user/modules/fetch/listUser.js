@@ -105,19 +105,51 @@ export async function listUser() {
                     <td class="text-truncate">${usuario.correo}</td>
                     <td class="text-truncate">${formatearFecha(usuario.fecha_creacion)}</td>
                     <td>
-                        <div class="flex align-items-center list-user-action justify-content-center">
-                            <div class="dropdown">
-                                <button class="btn btn-sm btn-icon" type="button" id="dropdownMenuButton${usuario.id_usuario}" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="bi bi-three-dots-vertical"></i>
-                                </button>
-                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton${usuario.id_usuario}">
-                                      <li><button class="dropdown-item" onclick="window.location.href='/dashboard/controles/control.html?id=${usuario.id_usuario}'">Control</button></li>
-                                      <li><button class="dropdown-item" onclick="window.location.href='${dietaUrl}'">Dieta</button></li>
-                                      <li><button class="dropdown-item" onclick="window.location.href='/dashboard/user/user-update.html?id=${usuario.id_usuario}'">Editar</button></li>
-                                      <li><button class="dropdown-item btn-eliminar" data-nombre="${usuario.nombre}" data-id="${usuario.id_usuario}">Eliminar</button></li>
-                                  </ul>
-                            </div>
+                    <div class="flex align-items-center list-user-action justify-content-center">
+                        <div class="dropdown">
+                            <button 
+                                class="btn btn-sm btn-icon" 
+                                type="button" 
+                                id="dropdownMenuButton${usuario.id_usuario}" 
+                                data-bs-toggle="dropdown" 
+                                aria-expanded="false"
+                            >
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </button>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton${usuario.id_usuario}">
+                                <li>
+                                    <button class="dropdown-item"
+                                            onclick="window.location.href='/dashboard/controles/control.html?id=${usuario.id_usuario}'">
+                                        Control
+                                    </button>
+                                </li>
+
+                                <li>
+                                    <button class="dropdown-item"
+                                            onclick="window.location.href='${dietaUrl}'">
+                                        Dieta
+                                    </button>
+                                </li>
+
+                                <li>
+                                    <button class="dropdown-item"
+                                            onclick="window.location.href='/dashboard/user/user-update.html?id=${usuario.id_usuario}'">
+                                        Editar
+                                    </button>
+                                </li>
+
+                                <li>
+                                    <button class="dropdown-item btn-eliminar"
+                                            data-nombre="${usuario.nombre}"
+                                            data-id="${usuario.id_usuario}">
+                                        Eliminar
+                                    </button>
+                                </li>
+                            </ul>
                         </div>
+                    </div>
+
                     </td>
                 </tr>
             `;

@@ -29,19 +29,20 @@ export async function tablaAlimentos() {
 
     // ✅ RENDERIZAR TODOS LOS SELECTS DE ESTA FILA
     const selectsAlimentos = fila.querySelectorAll("select[name='select-alimentos']");
-    selectsAlimentos.forEach(async select => {
-      await renderSelectAlimentos(select, categoriaInicial);
-    });
+    for (const select of selectsAlimentos) {
+  await renderSelectAlimentos(select, categoriaInicial);
+}
+
 
     // Si existe select-categoria, actualizar todo al cambiar
     if (selectCategoria) {
-      selectCategoria.addEventListener("change", async (e) => {
-        const nuevaCat = e.target.value;
+     selectCategoria.addEventListener("change", async (e) => {
+  const nuevaCat = e.target.value;
 
-        selectsAlimentos.forEach(async select => {
-          await renderSelectAlimentos(select, nuevaCat);
-        });
-      });
+  for (const select of selectsAlimentos) {
+    await renderSelectAlimentos(select, nuevaCat);
+  }
+});
     }
   }
 

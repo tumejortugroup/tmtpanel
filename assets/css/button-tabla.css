@@ -1,0 +1,105 @@
+.table-responsive,
+table,
+td {
+    overflow: visible !important;
+}
+
+/* --- Dropdown de usuarios --- */
+.dropdown-menu {
+    z-index: 999999 !important;
+    overflow: visible !important;
+    min-width: 150px;
+    padding: 0;
+    border-radius: 6px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+}
+
+/* Estilo de cada opción */
+.dropdown-menu .dropdown-item {
+    padding: 10px 15px;
+    white-space: nowrap; /* evitar saltos de línea */
+}
+
+/* Hover bonito */
+.dropdown-menu .dropdown-item:hover {
+    background-color: #f1f1f1;
+}
+
+/* Botón de tres puntos */
+.btn.btn-sm.btn-icon {
+    padding: 4px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.table-responsive {
+    overflow: visible !important;
+}
+
+table {
+    overflow: visible !important;
+}
+
+td {
+    overflow: visible !important;
+    position: relative;
+}
+
+
+.menu-acciones {
+    position: relative;
+    display: inline-block;
+}
+
+.btn-acciones {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.acciones-lista {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 5px 0;
+    min-width: 150px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 999999 !important;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.accion-item {
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.accion-item:hover {
+    background: #f2f2f2;
+}
+
+.oculto {
+    display: none;
+}
+
+.dropdown-menu {
+    z-index: 999999 !important;
+    overflow: visible !important;
+}
+
+
+.dropdown-menu .dropdown-item {
+    white-space: nowrap;
+}
