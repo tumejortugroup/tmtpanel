@@ -90,24 +90,7 @@ export async function listUser() {
         </div>
 
           
-            <div class="flex align-items-center list-user-action" style="display:none;">
-              <a class="btn btn-sm btn-icon btn-editar-dieta" 
-                data-bs-toggle="tooltip" 
-                title="Editar" href="#">
-                <span class="btn-inner">✏️</span>
-              </a>
-
-              <a class="btn btn-sm btn-icon btn-eliminar-dieta" 
-                data-nombre="${usuario.nombre}" 
-                title="Eliminar" href="#">
-                <span class="btn-inner">🗑️</span>
-              </a>
-
-              <a class="btn btn-sm btn-icon btn-ver-dieta" 
-                title="Ver Dieta" href="#">
-                <span class="btn-inner">👁️</span>
-              </a>
-            </div>
+            
           </td>
         </tr>
       `;
